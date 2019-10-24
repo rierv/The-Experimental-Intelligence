@@ -12,6 +12,7 @@ public class JellyBone : MonoBehaviour {
 
 	SphereCollider coreCollider;
 	Vector3 localPos;
+	float defaultDrag;
 
 	void Awake() {
 		core = FindObjectOfType<JellyCore>();
@@ -19,6 +20,7 @@ public class JellyBone : MonoBehaviour {
 		collider = GetComponent<SphereCollider>();
 		rigidbody.drag = JellyCore.drag;
 		baseRotation = rigidbody.rotation;
+		defaultDrag = rigidbody.drag;
 	}
 
 	void FixedUpdate() {
@@ -29,10 +31,10 @@ public class JellyBone : MonoBehaviour {
 			}
 		} else {
 			if (state == FlapperState.gaseous) {
-				rigidbody.AddForce(Physics.gravity * -2);
+				rigidbody.AddForce(Physics.gravity * -JellyCore.gaseousAntiGravity);
 			}
 			Vector3 force = (core.transform.position - transform.position) * JellyCore.cohesion;
-			force.y = Mathf.Clamp(force.y, -JellyCore.maxFallingForce, float.MaxValue);
+			force.y = Mathf.Clamp(force.y, Physics.gravity.y, float.MaxValue);
 			rigidbody.AddForce(force);
 
 			rigidbody.MoveRotation(baseRotation);
@@ -43,30 +45,30 @@ public class JellyBone : MonoBehaviour {
 
 	public void SetState(FlapperState newState) {
 		state = newState;
-		switch (state) {
-			case FlapperState.jelly:
-				rigidbody.constraints = RigidbodyConstraints.None;
-				if (coreCollider) {
-					coreCollider.enabled = false;
-				}
-				break;
-			case FlapperState.solid:
-				rigidbody.constraints = RigidbodyConstraints.FreezeAll;
-				if (!isRoot) {
-					if (!coreCollider) {
-						coreCollider = core.gameObject.AddComponent<SphereCollider>();
-						coreCollider.radius = collider.radius;
-					} else {
-						coreCollider.enabled = true;
-					}
-					coreCollider.center = transform.localRotation * collider.center + transform.localPosition;
-					Debug.Log(name + " -> " + transform.rotation * collider.center);
+		if (state == FlapperState.jelly || state == FlapperState.gaseous) {
+			rigidbody.constraints = RigidbodyConstraints.None;
+			if (coreCollider) {
+				coreCollider.enabled = false;
+			}
+		} else { // solid
+			rigidbody.constraints = RigidbodyConstraints.FreezeAll;
+			if (!isRoot) {
+				if (!coreCollider) {
+					coreCollider = core.gameObject.AddComponent<SphereCollider>();
+					coreCollider.radius = collider.radius;
 				} else {
-					localPos = transform.position - core.transform.position;
+					coreCollider.enabled = true;
 				}
-				break;
-			case FlapperState.gaseous:
-				break;
+				coreCollider.center = transform.localRotation * collider.center + transform.localPosition;
+				Debug.Log(name + " -> " + transform.rotation * collider.center);
+			} else {
+				localPos = transform.position - core.transform.position;
+			}
+		}
+		if (state == FlapperState.gaseous) {
+			rigidbody.drag = JellyCore.gaseousDrag;
+		} else {
+			rigidbody.drag = defaultDrag;
 		}
 	}
 }
