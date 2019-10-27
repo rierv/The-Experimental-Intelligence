@@ -12,7 +12,6 @@ public class JellyBone : MonoBehaviour {
 
 	SphereCollider coreCollider;
 	Vector3 localPos;
-	float defaultDrag;
 
 	void Awake() {
 		core = FindObjectOfType<JellyCore>();
@@ -20,7 +19,6 @@ public class JellyBone : MonoBehaviour {
 		collider = GetComponent<SphereCollider>();
 		rigidbody.drag = JellyCore.drag;
 		baseRotation = rigidbody.rotation;
-		defaultDrag = rigidbody.drag;
 	}
 
 	void FixedUpdate() {
@@ -40,7 +38,7 @@ public class JellyBone : MonoBehaviour {
 			rigidbody.MoveRotation(baseRotation);
 		}
 
-		rigidbody.drag = JellyCore.drag;
+		//rigidbody.drag = JellyCore.drag;
 	}
 
 	public void SetState(FlapperState newState) {
@@ -59,16 +57,15 @@ public class JellyBone : MonoBehaviour {
 				} else {
 					coreCollider.enabled = true;
 				}
-				coreCollider.center = transform.localRotation * collider.center + transform.localPosition;
-				Debug.Log(name + " -> " + transform.rotation * collider.center);
+				coreCollider.center = transform.localRotation * collider.center + transform.position - core.transform.position;
 			} else {
 				localPos = transform.position - core.transform.position;
 			}
 		}
-		if (state == FlapperState.gaseous) {
+		/*if (state == FlapperState.gaseous) {
 			rigidbody.drag = JellyCore.gaseousDrag;
 		} else {
-			rigidbody.drag = defaultDrag;
-		}
+			rigidbody.drag = JellyCore.drag;
+		}*/
 	}
 }

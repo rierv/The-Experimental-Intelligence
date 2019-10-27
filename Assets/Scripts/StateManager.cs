@@ -14,15 +14,21 @@ public class StateManager : MonoBehaviour {
 	public FlapperState state;
 	public float gaseousPush = 3;
 	public float gaseousMass = 0.5f;
+	[Space]
+	public GameObject mesh;
+	public GameObject[] gasParticles;
 
 	JellyBone[] bones;
 	Rigidbody rigidbody;
 	float defaultMass;
+	SphereCollider collider;
 
 	void Awake() {
 		bones = FindObjectsOfType<JellyBone>();
 		rigidbody = GetComponent<Rigidbody>();
 		defaultMass = rigidbody.mass;
+		collider = GetComponent<SphereCollider>();
+		SetState(FlapperState.jelly);
 	}
 
 	void Update() {
@@ -53,11 +59,23 @@ public class StateManager : MonoBehaviour {
 		foreach (JellyBone b in bones) {
 			b.SetState(state);
 		}
-		if (newState == FlapperState.gaseous) {
+		if (state == FlapperState.gaseous) {
 			rigidbody.mass = gaseousMass;
 			rigidbody.AddForce(Vector3.up * gaseousPush, ForceMode.Impulse);
+			/*foreach (JellyBone bone in FindObjectsOfType<JellyBone>()) {
+				bone.GetComponent<Rigidbody>().AddForce(Vector3.up * gaseousPush, ForceMode.Impulse);
+			}*/
+			mesh.SetActive(false);
+			foreach (GameObject go in gasParticles) {
+				go.SetActive(true);
+			}
 		} else {
 			rigidbody.mass = defaultMass;
+			mesh.SetActive(true);
+			foreach (GameObject go in gasParticles) {
+				go.SetActive(false);
+			}
 		}
+		collider.enabled = (state != FlapperState.solid);
 	}
 }
