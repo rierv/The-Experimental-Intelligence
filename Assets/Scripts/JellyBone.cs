@@ -19,6 +19,11 @@ public class JellyBone : MonoBehaviour {
 		collider = GetComponent<SphereCollider>();
 		rigidbody.drag = JellyCore.drag;
 		baseRotation = rigidbody.rotation;
+
+		if (!isRoot) {
+			coreCollider = core.gameObject.AddComponent<SphereCollider>();
+			coreCollider.radius = collider.radius;
+		}
 	}
 
 	void FixedUpdate() {
@@ -51,12 +56,7 @@ public class JellyBone : MonoBehaviour {
 		} else { // solid
 			rigidbody.constraints = RigidbodyConstraints.FreezeAll;
 			if (!isRoot) {
-				if (!coreCollider) {
-					coreCollider = core.gameObject.AddComponent<SphereCollider>();
-					coreCollider.radius = collider.radius;
-				} else {
-					coreCollider.enabled = true;
-				}
+				coreCollider.enabled = true;
 				coreCollider.center = transform.localRotation * collider.center + transform.position - core.transform.position;
 			} else {
 				localPos = transform.position - core.transform.position;
