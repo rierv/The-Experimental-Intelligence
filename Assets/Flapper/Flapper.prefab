@@ -420,9 +420,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   force: 30
   speed: 5
-  jumpForce: 13
-  toShrinkWait: 0.23
-  stopShrinkWait: 0.33
+  jumpForce: 23
+  toShrinkWait: 0.3
+  stopShrinkWait: 0.4
   jumpingWait: 1
   Up: {fileID: 1650412426688054141}
   Down: {fileID: 1650412427280877092}
@@ -754,6 +754,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4381454792350094727, guid: d5c85d381fb2c7a48a6fbf1c97a8b987,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a10951ebd5eb1ba4cb56ad3cf31845d1, type: 2}
     - target: {fileID: 100028, guid: d5c85d381fb2c7a48a6fbf1c97a8b987, type: 3}
       propertyPath: m_Layer
       value: 9
@@ -778,11 +783,6 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
-    - target: {fileID: 4381454792350094727, guid: d5c85d381fb2c7a48a6fbf1c97a8b987,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: a10951ebd5eb1ba4cb56ad3cf31845d1, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d5c85d381fb2c7a48a6fbf1c97a8b987, type: 3}
 --- !u!4 &1650412427489319893 stripped
