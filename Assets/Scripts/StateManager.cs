@@ -10,7 +10,7 @@ public enum FlapperState {
 
 public class StateManager : MonoBehaviour {
 	public float temperature;
-	public float temperatureChangeRate = 1;
+	public float temperatureChangeDuration = 10;
 	public FlapperState state;
 	public float gaseousPush = 3;
 	public float gaseousMass = 0.5f;
@@ -20,6 +20,7 @@ public class StateManager : MonoBehaviour {
 	public Material gas;
 	public Material solid;
 	public GameObject[] gasParticles;
+	public ParticleSystem gasParticle;
 
 	JellyBone[] bones;
 	Rigidbody rigidbody;
@@ -43,18 +44,18 @@ public class StateManager : MonoBehaviour {
 		if (state == FlapperState.gaseous) {
 			rigidbody.AddForce(Physics.gravity * -JellyCore.gaseousAntiGravity);
 		}
-		if (temperature >= 10) {
+		if (temperature > 0.5) {
 			SetState(FlapperState.gaseous);
-		} else if (temperature <= -10) {
+		} else if (temperature < -0.5) {
 			SetState(FlapperState.solid);
 		}
 		if (temperature > 0) {
-			temperature = Mathf.Clamp(temperature - Time.deltaTime * temperatureChangeRate, 0, float.MaxValue);
+			temperature = Mathf.Clamp(temperature - Time.deltaTime / temperatureChangeDuration, 0, float.MaxValue);
 			if (temperature <= 0) {
 				SetState(FlapperState.jelly);
 			}
 		} else if (temperature < 0) {
-			temperature = Mathf.Clamp(temperature + Time.deltaTime * temperatureChangeRate, float.MinValue, 0);
+			temperature = Mathf.Clamp(temperature + Time.deltaTime / temperatureChangeDuration, float.MinValue, 0);
 			if (temperature >= 0) {
 				SetState(FlapperState.jelly);
 			}
@@ -62,6 +63,9 @@ public class StateManager : MonoBehaviour {
 	}
 
 	public void SetState(FlapperState newState) {
+		if (newState == state) {
+			return;
+		}
 		Debug.Log("New state: " + newState);
 		state = newState;
 		foreach (JellyBone b in bones) {
@@ -74,16 +78,18 @@ public class StateManager : MonoBehaviour {
 				bone.GetComponent<Rigidbody>().AddForce(Vector3.up * gaseousPush, ForceMode.Impulse);
 			}*/
 			//mesh.SetActive(false);
-			foreach (GameObject go in gasParticles) {
+			/*foreach (GameObject go in gasParticles) {
 				go.SetActive(true);
-			}
+			}*/
+			gasParticle.Play();
 			meshRenderer.material = gas;
 		} else {
 			rigidbody.mass = defaultMass;
 			//mesh.SetActive(true);
-			foreach (GameObject go in gasParticles) {
+			/*foreach (GameObject go in gasParticles) {
 				go.SetActive(false);
-			}
+			}*/
+			gasParticle.Stop();
 			if (state == FlapperState.solid) {
 				meshRenderer.material = solid;
 			} else {

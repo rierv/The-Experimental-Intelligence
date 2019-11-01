@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class TemperatureSource : MonoBehaviour {
-	[Range(-10, 10)]
+	[Range(-1, 1)]
 	public int variation;
 
 	private void OnTriggerEnter(Collider other) {
