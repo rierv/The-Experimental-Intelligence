@@ -28,14 +28,18 @@ public class ThrowObjects : MonoBehaviour
 
         obj.GetComponent<ThrowableObject>().enabled = false;
         if (Input.GetAxis("Horizontal") * Vector3.right + Input.GetAxis("Vertical") * Vector3.forward != Vector3.zero)
-            obj.GetComponent<Rigidbody>().AddForce((Input.GetAxis("Horizontal") * Vector3.right + Input.GetAxis("Vertical") * Vector3.forward+Vector3.up/2) * 1000);
+            obj.GetComponent<Rigidbody>().AddForce((Input.GetAxis("Horizontal") * Vector3.right + Input.GetAxis("Vertical") * Vector3.forward+Vector3.up/2.5f) * 3000);
         else
-            obj.GetComponent<Rigidbody>().AddForce(Vector3.up * 1000);
+            obj.GetComponent<Rigidbody>().AddForce(Vector3.up * 2500);
         obj = null;
 
         yield return new WaitForSeconds(0.2f);
         
         objBoxCollider.enabled = true;
+        if(obj)obj.GetComponent<ThrowableObject>().enabled = false;
+        obj = null;
+        objBoxCollider = null;
+
     }
     private void OnTriggerEnter(Collider other)
     {
