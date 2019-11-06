@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1650412426641883344}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Flapper
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -340,9 +340,10 @@ GameObject:
   - component: {fileID: 1650412428068302602}
   - component: {fileID: 1650412428068302614}
   - component: {fileID: 139324025}
+  - component: {fileID: 109752012}
   m_Layer: 9
   m_Name: CORE
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -420,8 +421,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   force: 30
   speed: 5
-  jumpForce: 13
-  doubleJumpMultiplier: 1.5
+  jumpForce: 30
+  doubleJumpMultiplier: 1.3
   toShrinkWait: 0.3
   stopShrinkWait: 0.4
   jumpingWait: 1
@@ -460,6 +461,18 @@ MonoBehaviour:
   - {fileID: 3866305632072024334}
   - {fileID: 3866305631328968683}
   gasParticle: {fileID: 1837976439}
+--- !u!75 &109752012
+ConstantForce:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1650412428068302601}
+  m_Enabled: 1
+  m_Force: {x: 0, y: -25, z: 0}
+  m_RelativeForce: {x: 0, y: -25, z: 0}
+  m_Torque: {x: 0, y: 0, z: 0}
+  m_RelativeTorque: {x: 0, y: 0, z: 0}
 --- !u!198 &1837976439
 ParticleSystem:
   m_ObjectHideFlags: 0
