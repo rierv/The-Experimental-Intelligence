@@ -9,7 +9,7 @@ public class ButtonScript : MonoBehaviour
     public GameObject myButton;
     public GameObject triggeredObject;
     private Rigidbody rigidbody;
-    private bool isButtonActivated = false;
+    public bool isButtonActivated = false;
 
     //private Vector3 iceCubeForce = new Vector3(10f, 0f, 0f);
     #endregion
@@ -21,7 +21,7 @@ public class ButtonScript : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Player") || LayerMask.LayerToName(other.gameObject.layer) == "Movable")
         {
@@ -51,8 +51,7 @@ public class ButtonScript : MonoBehaviour
     {
         if(isButtonActivated)
         {
-            //triggeredObject.GetComponent<Rigidbody>().AddForce(iceCubeForce);
-            //Keep doing the action on the triggered GameObject
+            triggeredObject.GetComponent<I_Activable>().Activate();
         }
 
     }
