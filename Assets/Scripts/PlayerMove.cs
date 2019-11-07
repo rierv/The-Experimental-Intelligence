@@ -79,7 +79,7 @@ public class PlayerMove : MonoBehaviour {
 	}
 
 	void updateShrink() {
-		float _const = 3 + shrinkage / 3;
+		float _const = 6 + shrinkage / 3;
 
 		Up.MovePosition(Up.position + Vector3.down * shrinkage * _const * Time.deltaTime);
 		Down.MovePosition(Down.position + Vector3.up * shrinkage * _const * Time.deltaTime);
