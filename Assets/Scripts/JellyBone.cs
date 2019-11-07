@@ -94,15 +94,15 @@ public class JellyBone : MonoBehaviour {
 		if (Vector3.Distance(core.transform.position, transform.position) > 2.5f) {
 			if (Physics.Raycast(transform.position + Vector3.down, (core.transform.position - transform.position).normalized, out hit, 1, layerMask)
 				//CAN BE REMOVED
-				//|| Physics.Raycast(transform.position + Vector3.up, (core.transform.position - transform.position).normalized, out hit, 1, layerMask)
-				//|| Physics.Raycast(transform.position + Vector3.left, (core.transform.position - transform.position).normalized, out hit, 1, layerMask)
-				//|| Physics.Raycast(transform.position + Vector3.right, (core.transform.position - transform.position).normalized, out hit, 1, layerMask)
-				//|| Physics.Raycast(transform.position + Vector3.back, (core.transform.position - transform.position).normalized, out hit, 1, layerMask)
-				//|| Physics.Raycast(transform.position + Vector3.forward, (core.transform.position - transform.position).normalized, out hit, 1, layerMask)
+				|| Physics.Raycast(transform.position + Vector3.up, (core.transform.position - transform.position).normalized, out hit, 1, layerMask)
+				|| Physics.Raycast(transform.position + Vector3.left, (core.transform.position - transform.position).normalized, out hit, 1, layerMask)
+				|| Physics.Raycast(transform.position + Vector3.right, (core.transform.position - transform.position).normalized, out hit, 1, layerMask)
+				|| Physics.Raycast(transform.position + Vector3.back, (core.transform.position - transform.position).normalized, out hit, 1, layerMask)
+				|| Physics.Raycast(transform.position + Vector3.forward, (core.transform.position - transform.position).normalized, out hit, 1, layerMask)
 				) {
 
 				lastGoodPosition.y = Mathf.Abs(lastGoodPosition.y);
-				Vector3 force = (lastGoodPosition + Vector3.up * 4f) * JellyCore.cohesion / 6;
+				Vector3 force = (lastGoodPosition + Vector3.up * 6f) * JellyCore.cohesion / 7;
 				Debug.DrawRay(transform.position, lastGoodPosition * 10, Color.red, 20, true);
 				Debug.DrawRay(transform.position, Vector3.up * 10, Color.green, 20, true);
 				rigidbody.AddForce(force);
