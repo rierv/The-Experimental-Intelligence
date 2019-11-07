@@ -35,10 +35,7 @@ public class ThrowObjects : MonoBehaviour
 
         yield return new WaitForSeconds(0.2f);
         
-        objBoxCollider.enabled = true;
-        if(obj)obj.GetComponent<ThrowableObject>().enabled = false;
-        obj = null;
-        objBoxCollider = null;
+        
 
     }
     private void OnTriggerEnter(Collider other)
@@ -49,6 +46,16 @@ public class ThrowObjects : MonoBehaviour
             obj = other.gameObject;
             objBoxCollider = obj.GetComponent<BoxCollider>();
             objBoxCollider.enabled = false;
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.layer == 12 && obj != null)
+        {
+            objBoxCollider.enabled = true;
+            obj.GetComponent<ThrowableObject>().enabled = false;
+            obj = null;
+            objBoxCollider = null;
         }
     }
 }
