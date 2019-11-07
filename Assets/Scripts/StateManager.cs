@@ -29,7 +29,7 @@ public class StateManager : MonoBehaviour {
 	SkinnedMeshRenderer meshRenderer;
 
 	void Awake() {
-		bones = FindObjectsOfType<JellyBone>();
+		bones = GetComponentInParent<FlapperCore>().GetComponentsInChildren<JellyBone>();
 		rigidbody = GetComponent<Rigidbody>();
 		defaultMass = rigidbody.mass;
 		collider = GetComponent<SphereCollider>();
@@ -74,7 +74,7 @@ public class StateManager : MonoBehaviour {
 		if (state == FlapperState.gaseous) {
 			rigidbody.mass = gaseousMass;
 			rigidbody.AddForce(Vector3.up * gaseousPush, ForceMode.Impulse);
-			/*foreach (JellyBone bone in FindObjectsOfType<JellyBone>()) {
+			/*foreach (JellyBone bone in bones) {
 				bone.GetComponent<Rigidbody>().AddForce(Vector3.up * gaseousPush, ForceMode.Impulse);
 			}*/
 			//mesh.SetActive(false);
