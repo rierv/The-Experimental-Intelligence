@@ -103,7 +103,7 @@ public class JellyBone : MonoBehaviour {
 
 				lastGoodPosition.y = Mathf.Abs(lastGoodPosition.y);
 				Vector3 force = (lastGoodPosition + Vector3.up * 6f) * JellyCore.cohesion / 7;
-				Debug.DrawRay(transform.position, lastGoodPosition * 10, Color.red, 20, true);
+				Debug.DrawRay(transform.position, (lastGoodPosition + Vector3.up * 6f) * 10, Color.red, 20, true);
 				Debug.DrawRay(transform.position, Vector3.up * 10, Color.green, 20, true);
 				rigidbody.AddForce(force);
 			}

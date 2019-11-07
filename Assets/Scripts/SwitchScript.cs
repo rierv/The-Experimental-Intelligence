@@ -12,6 +12,9 @@ public partial class SwitchScript : MonoBehaviour
     private int switchState = (int) SwitchState.NonActive;
     Vector3 currentRotation;
     Vector3 platformVelocity = new Vector3(0f, 0f, 1f);
+    Vector3 validPos;
+    public float yOffset = 1;
+    public GameObject handle;
     #endregion
     // Start is called before the first frame update
 
@@ -31,12 +34,27 @@ public partial class SwitchScript : MonoBehaviour
             gameObject.transform.localRotation = Quaternion.Euler(currentRotation);
         }
     }
+    
     // Update is called once per frame
     private void FixedUpdate()
     {
-        currentRotation = gameObject.transform.localRotation.eulerAngles;
+        
+        currentRotation = gameObject.transform.rotation.eulerAngles;
         currentRotation.x = ClampAngle(currentRotation.x, -maxRotation, maxRotation);
-        gameObject.transform.localRotation = Quaternion.Euler(currentRotation);
+        gameObject.transform.rotation = Quaternion.Euler(currentRotation);
+        
+        transform.LookAt(transform.position+new Vector3(0, -handle.transform.localPosition.z, handle.transform.localPosition.y));
+        Debug.DrawRay(transform.position, handle.transform.localPosition * 10, Color.red, 20, true);
+
+
+        if (handle.transform.localPosition.z > 1)
+            handle.transform.localPosition = validPos;
+        else if (handle.transform.localPosition.z < -1)
+            handle.transform.localPosition = validPos;
+        else
+            validPos = handle.transform.localPosition;
+
+
         if (currentRotation.x > 25 && currentRotation.x < 50)
         {
             ActivateFirstFunction();
