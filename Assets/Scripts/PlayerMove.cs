@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMove : MonoBehaviour {
-	public float force = 10;
 	public float speed = 5;
 	public float jumpForce = 1;
 	public float doubleJumpMultiplier = 1.5f;
+	public float fallingBoost = 1;
 	[Space]
 	public float toShrinkWait = 0.7f;
 	public float stopShrinkWait = 2f;
@@ -32,6 +32,10 @@ public class PlayerMove : MonoBehaviour {
 
 		if (Input.GetButtonDown("Jump") && !shrinking && !jumping && shrinkage < 2) {
 			Shrink();
+		}
+
+		if (rigidbody.velocity.y < -0.1f) {
+			rigidbody.AddForce(Vector3.up * -fallingBoost, ForceMode.Acceleration);
 		}
 		//if (!shrinking) shrinkage = 0;
 	}

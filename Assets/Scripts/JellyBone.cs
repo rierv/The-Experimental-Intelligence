@@ -5,6 +5,7 @@ using UnityEngine;
 public class JellyBone : MonoBehaviour {
 	public bool isRoot;
 	JellyCore core;
+	Rigidbody coreRigidbody;
 	Rigidbody rigidbody;
 	SphereCollider collider;
 	Quaternion baseRotation;
@@ -17,6 +18,7 @@ public class JellyBone : MonoBehaviour {
 
 	void Awake() {
 		core = GetComponentInParent<FlapperCore>().GetComponentInChildren<JellyCore>();
+		coreRigidbody = core.GetComponent<Rigidbody>();
 		rigidbody = GetComponent<Rigidbody>();
 		collider = GetComponent<SphereCollider>();
 		rigidbody.drag = JellyCore.drag;
@@ -28,6 +30,7 @@ public class JellyBone : MonoBehaviour {
 		}
 	}
 
+	float lastCoreSpeedY;
 	void FixedUpdate() {
 		if (state == FlapperState.solid) {
 			if (isRoot) {
@@ -38,9 +41,14 @@ public class JellyBone : MonoBehaviour {
 			if (state == FlapperState.gaseous) {
 				rigidbody.AddForce(Physics.gravity * -JellyCore.gaseousAntiGravity);
 			}
+			float acceleration = (coreRigidbody.velocity.y - lastCoreSpeedY) / Time.fixedDeltaTime;
 			Vector3 force = (core.transform.position - transform.position) * JellyCore.cohesion;
-			force.y = Mathf.Clamp(force.y, Physics.gravity.y, float.MaxValue);
-			rigidbody.AddForce(force);
+			if (acceleration < -0.1f) {
+				// limit acceleration only when falling
+				force.y = Mathf.Clamp(force.y, acceleration, float.MaxValue);
+			}
+			rigidbody.AddForce(force, ForceMode.Acceleration);
+			lastCoreSpeedY = coreRigidbody.velocity.y;
 
 			rigidbody.MoveRotation(baseRotation);
 			CheckCorePosition();
@@ -84,17 +92,17 @@ public class JellyBone : MonoBehaviour {
 
 
 		if (Vector3.Distance(core.transform.position, transform.position) > 2.5f) {
-			if (Physics.Raycast(transform.position + Vector3.down, (core.transform.position -transform.position).normalized, out hit, 1, layerMask)
-                //CAN BE REMOVED
-                //|| Physics.Raycast(transform.position + Vector3.up, (core.transform.position - transform.position).normalized, out hit, 1, layerMask)
-                //|| Physics.Raycast(transform.position + Vector3.left, (core.transform.position - transform.position).normalized, out hit, 1, layerMask)
-                //|| Physics.Raycast(transform.position + Vector3.right, (core.transform.position - transform.position).normalized, out hit, 1, layerMask)
-                //|| Physics.Raycast(transform.position + Vector3.back, (core.transform.position - transform.position).normalized, out hit, 1, layerMask)
-                //|| Physics.Raycast(transform.position + Vector3.forward, (core.transform.position - transform.position).normalized, out hit, 1, layerMask)
-                ) {
-                
-                lastGoodPosition.y = Mathf.Abs(lastGoodPosition.y);
-				Vector3 force = (lastGoodPosition+Vector3.up*4f) * JellyCore.cohesion/6;
+			if (Physics.Raycast(transform.position + Vector3.down, (core.transform.position - transform.position).normalized, out hit, 1, layerMask)
+				//CAN BE REMOVED
+				//|| Physics.Raycast(transform.position + Vector3.up, (core.transform.position - transform.position).normalized, out hit, 1, layerMask)
+				//|| Physics.Raycast(transform.position + Vector3.left, (core.transform.position - transform.position).normalized, out hit, 1, layerMask)
+				//|| Physics.Raycast(transform.position + Vector3.right, (core.transform.position - transform.position).normalized, out hit, 1, layerMask)
+				//|| Physics.Raycast(transform.position + Vector3.back, (core.transform.position - transform.position).normalized, out hit, 1, layerMask)
+				//|| Physics.Raycast(transform.position + Vector3.forward, (core.transform.position - transform.position).normalized, out hit, 1, layerMask)
+				) {
+
+				lastGoodPosition.y = Mathf.Abs(lastGoodPosition.y);
+				Vector3 force = (lastGoodPosition + Vector3.up * 4f) * JellyCore.cohesion / 6;
 				Debug.DrawRay(transform.position, lastGoodPosition * 10, Color.red, 20, true);
 				Debug.DrawRay(transform.position, Vector3.up * 10, Color.green, 20, true);
 				rigidbody.AddForce(force);
