@@ -83,23 +83,32 @@ public class JellyBone : MonoBehaviour {
 
 
 
-		if (transform.position.magnitude > 4f) {
-			if (Physics.Raycast(core.transform.position + transform.localPosition + Vector3.up, -transform.localPosition.normalized, out hit, transform.localPosition.magnitude, layerMask)) {
-				// We hit a non-player object!
-				//if (Physics.Raycast(transform.position, (core.transform.position - transform.position).normalized, out hit, Mathf.Infinity) && hit.collider.gameObject.layer != 9)
-				//{
-				Vector3 force = (lastGoodPosition) * JellyCore.cohesion;
+		if (Vector3.Distance(core.transform.position, transform.position) > 2.5f) {
+			if ((Physics.Raycast(transform.position + Vector3.down, (core.transform.position -transform.position).normalized, out hit, 1, layerMask)
+                //CAN BE REMOVED
+                //&& Physics.Raycast(transform.position + Vector3.down, -(core.transform.position - transform.position).normalized, out hit, (core.transform.position - transform.position).magnitude, layerMask))
+                //|| Physics.Raycast(transform.position + Vector3.up, (core.transform.position - transform.position).normalized, out hit, (core.transform.position - transform.position).magnitude, layerMask)
+                //|| Physics.Raycast(transform.position + Vector3.left, (core.transform.position - transform.position).normalized, out hit, (core.transform.position - transform.position).magnitude, layerMask)
+                //|| Physics.Raycast(transform.position + Vector3.right, (core.transform.position - transform.position).normalized, out hit, (core.transform.position - transform.position).magnitude, layerMask)
+                //|| Physics.Raycast(transform.position + Vector3.back, (core.transform.position - transform.position).normalized, out hit, (core.transform.position - transform.position).magnitude, layerMask)
+                //|| Physics.Raycast(transform.position + Vector3.forward, (core.transform.position - transform.position).normalized, out hit, (core.transform.position - transform.position).magnitude, layerMask)
+                )) {
+                // We hit a non-player object!
+                //if (Physics.Raycast(transform.position, (core.transform.position - transform.position).normalized, out hit, Mathf.Infinity) && hit.collider.gameObject.layer != 9)
+                //{
+                lastGoodPosition.y = Mathf.Abs(lastGoodPosition.y);
+				Vector3 force = (lastGoodPosition+Vector3.up) * JellyCore.cohesion/4;
 				//force.y = Mathf.Clamp(force.y, Physics.gravity.y, float.MaxValue);
 				//rigidbody.AddForce(force);
 				Debug.Log(transform.localPosition);
-				Debug.DrawRay(core.transform.position + transform.localPosition, lastGoodPosition * 10, Color.red, 20, true);
-				Debug.DrawRay(core.transform.position + transform.localPosition / 10, Vector3.up * 10, Color.green, 20, true);
+				Debug.DrawRay(transform.position, lastGoodPosition * 10, Color.red, 20, true);
+				Debug.DrawRay(transform.position, Vector3.up * 10, Color.green, 20, true);
 
 				rigidbody.AddForce(force);
 				Debug.Log("strong");
 			}
-		} else if (transform.position.magnitude < 0.5f) {
-			lastGoodPosition = -transform.localPosition;
+		} else if (Vector3.Distance(core.transform.position, transform.position) < 1f) {
+			lastGoodPosition = (core.transform.position - transform.position);
 			lastGoodPosition = lastGoodPosition.normalized;
 
 			//Debug.Log(lastGoodPosition);
