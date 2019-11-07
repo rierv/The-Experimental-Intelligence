@@ -41,16 +41,14 @@ public class StateManager : MonoBehaviour {
 	}
 
 	void Update() {
-		if (state == FlapperState.gaseous) {
-			rigidbody.AddForce(Physics.gravity * -JellyCore.gaseousAntiGravity);
-		}
-		if (temperature > 0.5) {
+		if (temperature == 1) {
 			SetState(FlapperState.gaseous);
-		} else if (temperature < -0.5) {
+		} else if (temperature == -1) {
 			SetState(FlapperState.solid);
 		}
 		if (temperature > 0) {
 			temperature = Mathf.Clamp(temperature - Time.deltaTime / temperatureChangeDuration, 0, float.MaxValue);
+			rigidbody.AddForce(Physics.gravity * -JellyCore.gaseousAntiGravity);
 			if (temperature <= 0) {
 				SetState(FlapperState.jelly);
 			}
@@ -63,9 +61,9 @@ public class StateManager : MonoBehaviour {
 	}
 
 	public void SetState(FlapperState newState) {
-		if (newState == state) {
+		/*if (newState == state) {
 			return;
-		}
+		}*/
 		Debug.Log("New state: " + newState);
 		state = newState;
 		foreach (JellyBone b in bones) {

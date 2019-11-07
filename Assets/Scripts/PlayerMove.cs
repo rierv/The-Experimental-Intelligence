@@ -14,12 +14,14 @@ public class PlayerMove : MonoBehaviour {
 	public Rigidbody Up, Down, Left, Front, Right, Back;
 
 	Rigidbody rigidbody;
+	StateManager stateManager;
 	bool jumping, shrinking = false;
 	int shrinkage = 0;
 	int shrinking_counter = 0;
 
 	void Awake() {
 		rigidbody = GetComponent<Rigidbody>();
+		stateManager = GetComponent<StateManager>();
 		jumping = false;
 	}
 
@@ -29,7 +31,7 @@ public class PlayerMove : MonoBehaviour {
 		if (shrinking_counter > 0) updateShrink();
 
 		if (Input.GetButtonDown("Jump") && !shrinking && !jumping && shrinkage < 2) {
-			Shrink();//rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+			Shrink();
 		}
 		//if (!shrinking) shrinkage = 0;
 	}
@@ -55,12 +57,13 @@ public class PlayerMove : MonoBehaviour {
 		yield return new WaitForSeconds(stopShrinkWait + shrinkage * 0.02f);
 		if (!shrinking) {
 			jumping = true;
-			if (shrinkage == 1) {
-				rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-			} else {
-				rigidbody.AddForce(Vector3.up * jumpForce * doubleJumpMultiplier, ForceMode.Impulse);
+			if (stateManager.state != FlapperState.gaseous) {
+				if (shrinkage == 1) {
+					rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.VelocityChange);
+				} else {
+					rigidbody.AddForce(Vector3.up * jumpForce * doubleJumpMultiplier, ForceMode.VelocityChange);
+				}
 			}
-			//rigidbody.AddForce((Vector3.up * jumpForce * shrinkage)/3, ForceMode.Impulse);
 			shrinkage = 0;
 			StartCoroutine(Jumping());
 		}
