@@ -81,14 +81,14 @@ public class PlayerMove : MonoBehaviour {
 
 	void updateShrink() {
         float high;
-        high = _const + shrinkage / 3;
+        high = _const + shrinkage*5;
         if(reverseShrink) high = -high;
-		Down.MovePosition(Down.position + Vector3.down * shrinkage * high * Time.deltaTime);
-		Up.MovePosition(Up.position + Vector3.up * shrinkage * high * Time.deltaTime);
-		Left.MovePosition(Left.position + Vector3.left * shrinkage * high * Time.deltaTime);
-		Right.MovePosition(Right.position + Vector3.right * shrinkage * high * Time.deltaTime);
-		Front.MovePosition(Front.position + Vector3.forward * shrinkage * high * Time.deltaTime);
-		Back.MovePosition(Back.position + Vector3.back * shrinkage * high * Time.deltaTime);
+		//Down.MovePosition(Down.position + Vector3.down * shrinkage * -high * Time.deltaTime);
+		//Up.MovePosition(Up.position + Vector3.up * shrinkage * -high/4 * Time.deltaTime);
+		Left.MovePosition(Left.position + Vector3.left  * high * Time.deltaTime);
+		Right.MovePosition(Right.position + Vector3.right  * high * Time.deltaTime);
+		Front.MovePosition(Front.position + Vector3.forward  * high * Time.deltaTime);
+		Back.MovePosition(Back.position + Vector3.back  * high * Time.deltaTime);
 		shrinking_counter--;
 	}
 }
