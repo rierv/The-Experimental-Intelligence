@@ -18,8 +18,8 @@ public class PlayerMove : MonoBehaviour {
 	bool jumping, shrinking = false;
 	int shrinkage = 0;
 	int shrinking_counter = 0;
-
-	void Awake() {
+    public float _const;
+    void Awake() {
 		rigidbody = GetComponent<Rigidbody>();
 		stateManager = GetComponent<StateManager>();
 		jumping = false;
@@ -30,7 +30,7 @@ public class PlayerMove : MonoBehaviour {
 
 		if (shrinking_counter > 0) updateShrink();
 
-		if (Input.GetButtonDown("Jump") && !shrinking && !jumping && shrinkage < 2) {
+		if (Input.GetButtonDown("Jump") && !shrinking && !jumping) {
 			Shrink();
 		}
 
@@ -47,7 +47,7 @@ public class PlayerMove : MonoBehaviour {
 		StartCoroutine(toShrink());
 		StartCoroutine(stopShrink());
 
-		if (shrinkage == 4) shrinkage = 3;
+		if (shrinkage == 2) shrinkage = 1;
 		//if (shrinking_counter == 0 && shrinking && (Left.transform.position - rigidbody.position).magnitude < 0.285) shrinking = false;
 		//Debug.Log((Left.transform.position - rigidbody.position).magnitude);
 	}
@@ -79,14 +79,15 @@ public class PlayerMove : MonoBehaviour {
 	}
 
 	void updateShrink() {
-		float _const = 6 + shrinkage / 3;
-
-		Up.MovePosition(Up.position + Vector3.down * shrinkage * _const * Time.deltaTime);
-		Down.MovePosition(Down.position + Vector3.up * shrinkage * _const * Time.deltaTime);
-		Left.MovePosition(Left.position + Vector3.left * shrinkage * _const * Time.deltaTime);
-		Right.MovePosition(Right.position + Vector3.right * shrinkage * _const * Time.deltaTime);
-		Front.MovePosition(Front.position + Vector3.forward * shrinkage * _const * Time.deltaTime);
-		Back.MovePosition(Back.position + Vector3.back * shrinkage * _const * Time.deltaTime);
+        float high;
+        high = _const + shrinkage / 3;
+        high = -high;
+		Down.MovePosition(Down.position + Vector3.down * shrinkage * high * Time.deltaTime);
+		Up.MovePosition(Up.position + Vector3.up * shrinkage * high * Time.deltaTime);
+		Left.MovePosition(Left.position + Vector3.left * shrinkage * high * Time.deltaTime);
+		Right.MovePosition(Right.position + Vector3.right * shrinkage * high * Time.deltaTime);
+		Front.MovePosition(Front.position + Vector3.forward * shrinkage * high * Time.deltaTime);
+		Back.MovePosition(Back.position + Vector3.back * shrinkage * high * Time.deltaTime);
 		shrinking_counter--;
 	}
 }

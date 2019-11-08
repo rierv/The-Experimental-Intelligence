@@ -1587,7 +1587,22 @@ PrefabInstance:
     - target: {fileID: 1650412428068302614, guid: 7fd10ec0c1708c3458fb091fd7d1d232,
         type: 3}
       propertyPath: fallingBoost
-      value: 70
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 1650412428068302614, guid: 7fd10ec0c1708c3458fb091fd7d1d232,
+        type: 3}
+      propertyPath: stopShrinkWait
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1650412428068302614, guid: 7fd10ec0c1708c3458fb091fd7d1d232,
+        type: 3}
+      propertyPath: _const
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1650412428068302614, guid: 7fd10ec0c1708c3458fb091fd7d1d232,
+        type: 3}
+      propertyPath: toShrinkWait
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1650412427489282021, guid: 7fd10ec0c1708c3458fb091fd7d1d232,
         type: 3}
