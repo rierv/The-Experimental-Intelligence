@@ -45,6 +45,7 @@ public partial class SwitchScript : MonoBehaviour
         
         transform.LookAt(transform.position+new Vector3(0, -handle.transform.localPosition.z, handle.transform.localPosition.y));
         Debug.DrawRay(transform.position, handle.transform.localPosition * 10, Color.red, 20, true);
+        Debug.DrawRay(transform.position, transform.forward * 10, Color.blue, 20, true);
 
 
         if (handle.transform.localPosition.z > 1)
