@@ -434,8 +434,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 7
-  jumpForce: 10
-  doubleJumpMultiplier: 1.6
+  jumpForce: 12
+  doubleJumpMultiplier: 1.333
   fallingBoost: 60
   toShrinkWait: 0.24
   stopShrinkWait: 0.44
@@ -447,7 +447,7 @@ MonoBehaviour:
   Right: {fileID: 1650412427982576131}
   Back: {fileID: 1650412428263982085}
   reverseShrink: 0
-  _const: 5
+  _const: 4
 --- !u!114 &139324025
 MonoBehaviour:
   m_ObjectHideFlags: 0
