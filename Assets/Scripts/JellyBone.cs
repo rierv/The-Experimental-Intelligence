@@ -91,30 +91,25 @@ public class JellyBone : MonoBehaviour {
 
 
 
-		if (Vector3.Distance(core.transform.position, transform.position) > 2.5f) {
-			if (Physics.Raycast(transform.position + Vector3.down, (core.transform.position - transform.position).normalized, out hit, 1, layerMask)
+		if (Vector3.Distance(core.transform.position, transform.position) > 1.7f) {
+			if (Physics.Raycast(transform.position + Vector3.down, (core.transform.position - transform.position).normalized, out hit, 0.5f, layerMask)
 				//CAN BE REMOVED
-				|| Physics.Raycast(transform.position + Vector3.up, (core.transform.position - transform.position).normalized, out hit, 1, layerMask)
-				|| Physics.Raycast(transform.position + Vector3.left, (core.transform.position - transform.position).normalized, out hit, 1, layerMask)
-				|| Physics.Raycast(transform.position + Vector3.right, (core.transform.position - transform.position).normalized, out hit, 1, layerMask)
-				|| Physics.Raycast(transform.position + Vector3.back, (core.transform.position - transform.position).normalized, out hit, 1, layerMask)
-				|| Physics.Raycast(transform.position + Vector3.forward, (core.transform.position - transform.position).normalized, out hit, 1, layerMask)
+				|| Physics.Raycast(transform.position + Vector3.up, (core.transform.position - transform.position).normalized, out hit, 0.5f, layerMask)
+				|| Physics.Raycast(transform.position + Vector3.left, (core.transform.position - transform.position).normalized, out hit, 0.5f, layerMask)
+				|| Physics.Raycast(transform.position + Vector3.right, (core.transform.position - transform.position).normalized, out hit, 0.5f, layerMask)
+				|| Physics.Raycast(transform.position + Vector3.back, (core.transform.position - transform.position).normalized, out hit, 0.5f, layerMask)
+				|| Physics.Raycast(transform.position + Vector3.forward, (core.transform.position - transform.position).normalized, out hit, 0.5f, layerMask)
 				) {
-                //Vector3 tmpGoodPosition = -lastGoodPosition;
+                Debug.Log(lastGoodPosition);
+                Debug.DrawRay(transform.position, Vector3.up * 10, Color.green, 20, true);
+                transform.LookAt(transform.position+lastGoodPosition);
+                rigidbody.AddForce((transform.forward*2+ Vector3.up*7), ForceMode.Acceleration);
+                Debug.DrawRay(transform.position, (transform.forward * 2 + Vector3.up * 4) * 200f, Color.red, 20, true);
 
-                //tmpGoodPosition.y = Mathf.Abs(tmpGoodPosition.y);
-				//Vector3 force = (tmpGoodPosition * 8f + Vector3.up * 8f) * JellyCore.cohesion / 6;
-				Debug.DrawRay(transform.position, (tmpGoodPosition * 8f + Vector3.up * 5f) * 10, Color.red, 20, true);
-				Debug.DrawRay(transform.position, Vector3.up * 10, Color.green, 20, true);
-                //rigidbody.AddForce(force);
-                transform.LookAt();
-			}
-		} else if (Vector3.Distance(core.transform.position, transform.position) < 1f) {
+            }
+        } else if (Vector3.Distance(core.transform.position, transform.position) < 0.75f) {
 			lastGoodPosition = (core.transform.position - transform.position);
-			lastGoodPosition = lastGoodPosition.normalized;
-
-			//Debug.Log(lastGoodPosition);
-		}
+ 		}
 
 
 	}
