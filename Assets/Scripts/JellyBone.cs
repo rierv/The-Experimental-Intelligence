@@ -100,12 +100,14 @@ public class JellyBone : MonoBehaviour {
 				|| Physics.Raycast(transform.position + Vector3.back, (core.transform.position - transform.position).normalized, out hit, 1, layerMask)
 				|| Physics.Raycast(transform.position + Vector3.forward, (core.transform.position - transform.position).normalized, out hit, 1, layerMask)
 				) {
+                //Vector3 tmpGoodPosition = -lastGoodPosition;
 
-				lastGoodPosition.y = Mathf.Abs(lastGoodPosition.y);
-				Vector3 force = (lastGoodPosition + Vector3.up * 6f) * JellyCore.cohesion / 7;
-				Debug.DrawRay(transform.position, (lastGoodPosition + Vector3.up * 6f) * 10, Color.red, 20, true);
+                //tmpGoodPosition.y = Mathf.Abs(tmpGoodPosition.y);
+				//Vector3 force = (tmpGoodPosition * 8f + Vector3.up * 8f) * JellyCore.cohesion / 6;
+				Debug.DrawRay(transform.position, (tmpGoodPosition * 8f + Vector3.up * 5f) * 10, Color.red, 20, true);
 				Debug.DrawRay(transform.position, Vector3.up * 10, Color.green, 20, true);
-				rigidbody.AddForce(force);
+                //rigidbody.AddForce(force);
+                transform.LookAt();
 			}
 		} else if (Vector3.Distance(core.transform.position, transform.position) < 1f) {
 			lastGoodPosition = (core.transform.position - transform.position);
