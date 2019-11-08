@@ -75,13 +75,21 @@ public class PlayerMove : MonoBehaviour {
 	}
 
 	IEnumerator Jumping() {
-		yield return new WaitForSeconds(jumpingWait);
+        float high;
+        high = _const *100;
+        if (reverseShrink) high = -high;
+        Left.AddForce(Left.position + Vector3.down * high);
+        Right.AddForce(Right.position + Vector3.down * high);
+        Front.AddForce(Front.position + Vector3.down * high);
+        Back.AddForce(Back.position + Vector3.down * high );
+        //shrinking_counter--;
+        yield return new WaitForSeconds(jumpingWait);
 		jumping = false;
 	}
 
 	void updateShrink() {
         float high;
-        high = _const + shrinkage*5;
+        high = _const + shrinkage*7;
         if(reverseShrink) high = -high;
 		//Down.MovePosition(Down.position + Vector3.down * shrinkage * -high * Time.deltaTime);
 		//Up.MovePosition(Up.position + Vector3.up * shrinkage * -high/4 * Time.deltaTime);

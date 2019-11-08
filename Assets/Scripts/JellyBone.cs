@@ -91,7 +91,7 @@ public class JellyBone : MonoBehaviour {
 
 
 
-		if (Vector3.Distance(core.transform.position, transform.position) > 1.7f) {
+		if (Vector3.Distance(core.transform.position, transform.position) > 2.5f) {
 			if (Physics.Raycast(transform.position + Vector3.down, (core.transform.position - transform.position).normalized, out hit, 0.5f, layerMask)
 				//CAN BE REMOVED
 				|| Physics.Raycast(transform.position + Vector3.up, (core.transform.position - transform.position).normalized, out hit, 0.5f, layerMask)
@@ -100,16 +100,18 @@ public class JellyBone : MonoBehaviour {
 				|| Physics.Raycast(transform.position + Vector3.back, (core.transform.position - transform.position).normalized, out hit, 0.5f, layerMask)
 				|| Physics.Raycast(transform.position + Vector3.forward, (core.transform.position - transform.position).normalized, out hit, 0.5f, layerMask)
 				) {
-                Debug.Log(lastGoodPosition);
                 Debug.DrawRay(transform.position, Vector3.up * 10, Color.green, 20, true);
-                transform.LookAt(transform.position+lastGoodPosition);
-                rigidbody.AddForce((transform.forward*2+ Vector3.up*7), ForceMode.Acceleration);
-                Debug.DrawRay(transform.position, (transform.forward * 2 + Vector3.up * 4) * 200f, Color.red, 20, true);
-
+                
+                rigidbody.AddForce((Vector3.up*10), ForceMode.Acceleration);
+                //Debug.Log(lastGoodPosition);
+                //transform.LookAt(transform.position + lastGoodPosition);
+                //rigidbody.AddForce((transform.forward * 10), ForceMode.Acceleration);
+                //Debug.DrawRay(transform.position, (transform.forward * 2 + Vector3.up * 4) * 200f, Color.red, 20, true);
+                //continues in elseif
             }
-        } else if (Vector3.Distance(core.transform.position, transform.position) < 0.75f) {
+        } /*else if (Vector3.Distance(core.transform.position, transform.position) < 0.75f) {
 			lastGoodPosition = (core.transform.position - transform.position);
- 		}
+ 		}*/
 
 
 	}
