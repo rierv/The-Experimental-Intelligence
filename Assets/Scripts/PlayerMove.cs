@@ -12,8 +12,9 @@ public class PlayerMove : MonoBehaviour {
 	public float stopShrinkWait = 2f;
 	public float jumpingWait = 1f;
 	public Rigidbody Up, Down, Left, Front, Right, Back;
+    public bool reverseShrink;
 
-	Rigidbody rigidbody;
+    Rigidbody rigidbody;
 	StateManager stateManager;
 	bool jumping, shrinking = false;
 	int shrinkage = 0;
@@ -47,7 +48,7 @@ public class PlayerMove : MonoBehaviour {
 		StartCoroutine(toShrink());
 		StartCoroutine(stopShrink());
 
-		if (shrinkage == 2) shrinkage = 1;
+		if (shrinkage == 3) shrinkage = 2;
 		//if (shrinking_counter == 0 && shrinking && (Left.transform.position - rigidbody.position).magnitude < 0.285) shrinking = false;
 		//Debug.Log((Left.transform.position - rigidbody.position).magnitude);
 	}
@@ -81,7 +82,7 @@ public class PlayerMove : MonoBehaviour {
 	void updateShrink() {
         float high;
         high = _const + shrinkage / 3;
-        high = -high;
+        if(reverseShrink) high = -high;
 		Down.MovePosition(Down.position + Vector3.down * shrinkage * high * Time.deltaTime);
 		Up.MovePosition(Up.position + Vector3.up * shrinkage * high * Time.deltaTime);
 		Left.MovePosition(Left.position + Vector3.left * shrinkage * high * Time.deltaTime);
