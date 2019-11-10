@@ -42,7 +42,14 @@ public class ThrowObjects : MonoBehaviour
     {
         if (other.gameObject.layer == 12&&obj==null)
         {
-            other.gameObject.GetComponent<ThrowableObject>().enabled = true;
+            ThrowableObject th;
+            th = other.gameObject.GetComponent<ThrowableObject>();
+            th.enabled = true;
+            if (th.isHandle)
+            {
+                transform.parent.SetParent(other.gameObject.transform);
+                GetComponent<Rigidbody>().velocity = Vector3.zero;
+            }
             obj = other.gameObject;
             objBoxCollider = obj.GetComponent<BoxCollider>();
             objBoxCollider.enabled = false;
@@ -50,11 +57,20 @@ public class ThrowObjects : MonoBehaviour
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.layer == 12 && obj != null)
+        if (other.gameObject.layer == 12 && obj != null
+            
+            &&false)
         {
-            objBoxCollider.enabled = true;
-            obj.GetComponent<ThrowableObject>().enabled = false;
+            ThrowableObject th;
+            th = other.gameObject.GetComponent<ThrowableObject>();
+            th.enabled = false;
+            if (th.isHandle)
+            {
+                transform.parent.SetParent(null);
+            }
             obj = null;
+            objBoxCollider.enabled = true;
+
             objBoxCollider = null;
         }
     }
