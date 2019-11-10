@@ -87,6 +87,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isRoot: 1
+  state: 0
 --- !u!54 &1650412426688054141
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -129,6 +130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isRoot: 0
+  state: 0
 --- !u!54 &1650412427982576131
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -171,6 +173,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isRoot: 0
+  state: 0
 --- !u!54 &1650412426689106580
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -213,6 +216,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isRoot: 0
+  state: 0
 --- !u!54 &1650412428202199701
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -255,6 +259,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isRoot: 0
+  state: 0
 --- !u!54 &1650412428263982085
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -297,6 +302,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isRoot: 0
+  state: 0
 --- !u!54 &1650412427280877092
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -339,6 +345,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isRoot: 0
+  state: 0
 --- !u!1 &1650412428068302601
 GameObject:
   m_ObjectHideFlags: 0
@@ -403,7 +410,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.4
+  m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1650412428068302602
 MonoBehaviour:
@@ -5538,7 +5545,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: a10951ebd5eb1ba4cb56ad3cf31845d1, type: 2}
+      objectReference: {fileID: 2100000, guid: 27761f53ad45a46409e79c1d42996c4b, type: 2}
     - target: {fileID: 100028, guid: d5c85d381fb2c7a48a6fbf1c97a8b987, type: 3}
       propertyPath: m_Layer
       value: 9

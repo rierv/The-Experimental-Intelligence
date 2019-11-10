@@ -44,7 +44,7 @@ public class ThrowableObject : MonoBehaviour
             
             if (isHandle)
             {
-                coreRB.MovePosition(transform.position);
+                //coreRB.MovePosition(transform.position);
                 //coreRB.AddRelativeForce((Input.GetAxis("Horizontal") * Vector3.right + Input.GetAxis("Vertical") * Vector3.forward));
                 //rigidbody.MovePosition();
                 //coreRB.useGravity = false;
