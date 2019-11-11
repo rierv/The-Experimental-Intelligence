@@ -5,7 +5,7 @@ using UnityEngine;
 public partial class SwitchScript : MonoBehaviour
 {
     #region Attributes
-    public GameObject gameObject;
+    public GameObject switchBase;
     public GameObject targetObject;
     private float minRotation = 315;
     private float maxRotation = 45;
@@ -31,7 +31,7 @@ public partial class SwitchScript : MonoBehaviour
             {
                 currentRotation.x = minRotation;
             }
-            gameObject.transform.localRotation = Quaternion.Euler(currentRotation);
+            switchBase.transform.localRotation = Quaternion.Euler(currentRotation);
         }
     }
     
@@ -39,13 +39,12 @@ public partial class SwitchScript : MonoBehaviour
     private void FixedUpdate()
     {
         
-        currentRotation = gameObject.transform.rotation.eulerAngles;
+        currentRotation = switchBase.transform.rotation.eulerAngles;
         currentRotation.x = ClampAngle(currentRotation.x, -maxRotation, maxRotation);
-        gameObject.transform.rotation = Quaternion.Euler(currentRotation);
+        switchBase.transform.rotation = Quaternion.Euler(currentRotation);
         
         transform.LookAt(transform.position+new Vector3(0, -handle.transform.localPosition.z, handle.transform.localPosition.y));
-        Debug.DrawRay(transform.position, handle.transform.localPosition * 10, Color.red, 20, true);
-        Debug.DrawRay(transform.position, transform.forward * 10, Color.blue, 20, true);
+
 
 
         if (handle.transform.localPosition.z > 1)
@@ -88,6 +87,8 @@ public partial class SwitchScript : MonoBehaviour
     private void ActivateFirstFunction()
     {
         switchState = (int) SwitchState.ActiveFirst;
+        Debug.DrawRay(transform.position, handle.transform.localPosition * 10, Color.red, 20, true);
+        Debug.DrawRay(transform.position, transform.forward * 10, Color.blue, 20, true);
     }
 
     private void ActivateSecondFunction()
