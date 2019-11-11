@@ -12,13 +12,15 @@ public class PlayerMove : MonoBehaviour {
 	public float stopShrinkWait = 2f;
 	public float jumpingWait = 1f;
 	public Rigidbody Up, Down, Left, Front, Right, Back;
+	public bool reverseShrink;
+	public float maxFallingSpeedForJumping = 0.5f;
 
 	Rigidbody rigidbody;
 	StateManager stateManager;
 	bool jumping, shrinking = false;
 	int shrinkage = 0;
 	int shrinking_counter = 0;
-
+	public float _const;
 	void Awake() {
 		rigidbody = GetComponent<Rigidbody>();
 		stateManager = GetComponent<StateManager>();
@@ -30,7 +32,7 @@ public class PlayerMove : MonoBehaviour {
 
 		if (shrinking_counter > 0) updateShrink();
 
-		if (Input.GetButtonDown("Jump") && !shrinking && !jumping && shrinkage < 2) {
+		if (Input.GetButtonDown("Jump") && !shrinking && !jumping) {
 			Shrink();
 		}
 
@@ -47,7 +49,7 @@ public class PlayerMove : MonoBehaviour {
 		StartCoroutine(toShrink());
 		StartCoroutine(stopShrink());
 
-		if (shrinkage == 4) shrinkage = 3;
+		if (shrinkage == 3) shrinkage = 2;
 		//if (shrinking_counter == 0 && shrinking && (Left.transform.position - rigidbody.position).magnitude < 0.285) shrinking = false;
 		//Debug.Log((Left.transform.position - rigidbody.position).magnitude);
 	}
@@ -61,7 +63,7 @@ public class PlayerMove : MonoBehaviour {
 		yield return new WaitForSeconds(stopShrinkWait + shrinkage * 0.02f);
 		if (!shrinking) {
 			jumping = true;
-			if (stateManager.state != FlapperState.gaseous) {
+			if (stateManager.state != FlapperState.gaseous && rigidbody.velocity.y > -maxFallingSpeedForJumping) {
 				if (shrinkage == 1) {
 					rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.VelocityChange);
 				} else {
@@ -74,19 +76,28 @@ public class PlayerMove : MonoBehaviour {
 	}
 
 	IEnumerator Jumping() {
+		float high;
+		high = _const * 100;
+		if (reverseShrink) high = -high;
+		Left.AddForce(Left.position + Vector3.down * high);
+		Right.AddForce(Right.position + Vector3.down * high);
+		Front.AddForce(Front.position + Vector3.down * high);
+		Back.AddForce(Back.position + Vector3.down * high);
+		//shrinking_counter--;
 		yield return new WaitForSeconds(jumpingWait);
 		jumping = false;
 	}
 
 	void updateShrink() {
-		float _const = 6 + shrinkage / 3;
-
-		Up.MovePosition(Up.position + Vector3.down * shrinkage * _const * Time.deltaTime);
-		Down.MovePosition(Down.position + Vector3.up * shrinkage * _const * Time.deltaTime);
-		Left.MovePosition(Left.position + Vector3.left * shrinkage * _const * Time.deltaTime);
-		Right.MovePosition(Right.position + Vector3.right * shrinkage * _const * Time.deltaTime);
-		Front.MovePosition(Front.position + Vector3.forward * shrinkage * _const * Time.deltaTime);
-		Back.MovePosition(Back.position + Vector3.back * shrinkage * _const * Time.deltaTime);
+		float high;
+		high = _const + shrinkage * 7;
+		if (reverseShrink) high = -high;
+		//Down.MovePosition(Down.position + Vector3.down * shrinkage * -high * Time.deltaTime);
+		//Up.MovePosition(Up.position + Vector3.up * shrinkage * -high/4 * Time.deltaTime);
+		Left.MovePosition(Left.position + Vector3.left * high * Time.deltaTime);
+		Right.MovePosition(Right.position + Vector3.right * high * Time.deltaTime);
+		Front.MovePosition(Front.position + Vector3.forward * high * Time.deltaTime);
+		Back.MovePosition(Back.position + Vector3.back * high * Time.deltaTime);
 		shrinking_counter--;
 	}
 }

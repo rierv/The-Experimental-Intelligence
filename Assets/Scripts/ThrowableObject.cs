@@ -15,15 +15,17 @@ public class ThrowableObject : MonoBehaviour
 
     Vector3 lastGoodPosition;
 
+    public bool isHandle;
+    Rigidbody coreRB;
 
-    void Awake()
+    void Start()
     {
         core = FindObjectOfType<JellyCore>();
         rigidbody = GetComponent<Rigidbody>();
         collider = GetComponent<BoxCollider>();
         rigidbody.drag = JellyCore.drag;
         baseRotation = rigidbody.rotation;
-        
+        coreRB = core.GetComponent<Rigidbody>();
         
     }
 
@@ -38,17 +40,25 @@ public class ThrowableObject : MonoBehaviour
         }
         else
         {
-            if (state == FlapperState.gaseous)
+            
+            
+            if (isHandle)
             {
-                rigidbody.AddForce(Physics.gravity * -JellyCore.gaseousAntiGravity);
+                //coreRB.MovePosition(transform.position);
+                //coreRB.AddRelativeForce((Input.GetAxis("Horizontal") * Vector3.right + Input.GetAxis("Vertical") * Vector3.forward));
+                //rigidbody.MovePosition();
+                //coreRB.useGravity = false;
             }
-            Vector3 force = (core.transform.position - transform.position) * JellyCore.cohesion/2;
-            force.y = Mathf.Clamp(force.y, Physics.gravity.y, float.MaxValue);
-            rigidbody.AddForce(force);
+            else
+            {
+                Vector3 force = (core.transform.position - transform.position) * JellyCore.cohesion * 5;
+                force.y = Mathf.Clamp(force.y, Physics.gravity.y, float.MaxValue);
+                rigidbody.AddForce(force);
 
-            rigidbody.MoveRotation(baseRotation);
+                rigidbody.MoveRotation(baseRotation);
+            }
         }
-
+        
         //rigidbody.drag = JellyCore.drag;
     }
 }
