@@ -9,11 +9,15 @@ public enum JumpType {
 }
 public class PlayerMove : MonoBehaviour {
 	public float speed = 5;
+	[Space]
 	public float jumpForce = 1;
 	public float doubleJumpMultiplier = 1.5f;
-	public float fallingBoost = 1;
 	public float maxFallingSpeedForJumping = 0.5f;
 	public float jumpingWait = 1f;
+	public float fallingBoost = 1;
+	[Space]
+	public float gaseousFloatUpForce = 1;
+	public float gaseousShrinkDownForce = 1;
 	[Space]
 	public JumpType jumpType;
 	[Header("Dilate Shrink")]
@@ -53,8 +57,16 @@ public class PlayerMove : MonoBehaviour {
 
 		if (shrinking_counter > 0) updateShrink();
 
-		if (Input.GetButtonDown("Jump") && !shrinking && !jumping) {
-			Shrink();
+		if (stateManager.state == FlapperState.gaseous) {
+			if (Input.GetButton("Jump")) {
+				rigidbody.MovePosition(rigidbody.position + (Vector3.up * -gaseousShrinkDownForce * Time.deltaTime));
+			} else {
+				rigidbody.MovePosition(rigidbody.position + (Vector3.up * gaseousFloatUpForce * Time.deltaTime));
+			}
+		} else {
+			if (Input.GetButtonDown("Jump") && !shrinking && !jumping) {
+				Shrink();
+			}
 		}
 
 		if (rigidbody.velocity.y < -0.1f) {
