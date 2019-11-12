@@ -39,7 +39,8 @@ public class PlayerMove : MonoBehaviour {
 
 	Rigidbody rigidbody;
 	StateManager stateManager;
-	bool jumping, shrinking = false;
+	public bool jumping, shrinking = false;
+    public bool can_move=true;
 	int shrinkage = 0;
 	int shrinking_counter = 0;
 	void Awake() {
@@ -49,7 +50,7 @@ public class PlayerMove : MonoBehaviour {
 	}
 
 	void Update() {
-		rigidbody.MovePosition(rigidbody.position + (Input.GetAxis("Horizontal") * Vector3.right + Input.GetAxis("Vertical") * Vector3.forward) * speed * Time.deltaTime);
+		if(can_move) rigidbody.MovePosition(rigidbody.position + (Input.GetAxis("Horizontal") * Vector3.right + Input.GetAxis("Vertical") * Vector3.forward) * speed * Time.deltaTime);
 
 		if (shrinking_counter > 0) updateShrink();
 
