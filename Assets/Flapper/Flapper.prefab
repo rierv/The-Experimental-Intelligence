@@ -426,7 +426,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cohesion: 90
   _drag: 3
-  _gaseousAntiGravity: 0.37
+  _gaseousAntiGravity: 1.1
   _gaseousDrag: 0.6
 --- !u!114 &1650412428068302614
 MonoBehaviour:
@@ -444,17 +444,32 @@ MonoBehaviour:
   jumpForce: 12
   doubleJumpMultiplier: 1.333
   fallingBoost: 60
+  maxFallingSpeedForJumping: 0.5
+  jumpingWait: 0.7
+  gaseousFloatUpForce: 5
+  gaseousShrinkDownForce: 2.8
+  jumpType: 0
   toShrinkWait: 0.24
   stopShrinkWait: 0.44
-  jumpingWait: 0.7
+  bonesForce: 0
+  bonesForceUp: 0
+  toShrinkWait1: 0.7
+  stopShrinkWait1: 2
+  bonesForce1: 0
+  bonesForceUp1: 0
+  toShrinkWait2: 0.7
+  stopShrinkWait2: 2
+  bonesForce2: 0
+  bonesForceUp2: 0
   Up: {fileID: 1650412426688054141}
   Down: {fileID: 1650412427280877092}
   Left: {fileID: 1650412428202199701}
   Front: {fileID: 1650412426689106580}
   Right: {fileID: 1650412427982576131}
   Back: {fileID: 1650412428263982085}
-  reverseShrink: 0
-  _const: 4
+  jumping: 0
+  shrinking: 0
+  canMove: 1
 --- !u!114 &139324025
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -470,7 +485,7 @@ MonoBehaviour:
   temperature: 0
   temperatureChangeDuration: 5
   state: 0
-  gaseousPush: 6.92
+  gaseousPush: 0
   gaseousMass: 0.5
   mesh: {fileID: 9091541795451801898}
   jelly: {fileID: 2100000, guid: a10951ebd5eb1ba4cb56ad3cf31845d1, type: 2}

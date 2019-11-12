@@ -48,7 +48,6 @@ public class StateManager : MonoBehaviour {
 		}
 		if (temperature > 0) {
 			temperature = Mathf.Clamp(temperature - Time.deltaTime / temperatureChangeDuration, 0, float.MaxValue);
-			rigidbody.AddForce(Physics.gravity * -JellyCore.gaseousAntiGravity);
 			if (temperature <= 0) {
 				SetState(FlapperState.jelly);
 			}
@@ -70,7 +69,6 @@ public class StateManager : MonoBehaviour {
 			b.SetState(state);
 		}
 		if (state == FlapperState.gaseous) {
-			rigidbody.mass = gaseousMass;
 			rigidbody.AddForce(Vector3.up * gaseousPush, ForceMode.Impulse);
 			/*foreach (JellyBone bone in bones) {
 				bone.GetComponent<Rigidbody>().AddForce(Vector3.up * gaseousPush, ForceMode.Impulse);
@@ -94,6 +92,7 @@ public class StateManager : MonoBehaviour {
 				meshRenderer.material = jelly;
 			}
 		}
+		rigidbody.useGravity = state != FlapperState.gaseous;
 		collider.enabled = (state != FlapperState.solid);
 	}
 }

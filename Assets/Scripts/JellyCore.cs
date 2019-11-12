@@ -9,11 +9,8 @@ public class JellyCore : MonoBehaviour {
 	public static float drag;
 	public float _drag = 1;
 
-	/*public static float maxFallingForce;
-	public float _maxFallingForce = 10;*/
-
-	public static float gaseousAntiGravity;
-	public float _gaseousAntiGravity = 0.4f;
+	/*public static float gaseousAntiGravity;
+	public float _gaseousAntiGravity = 0.4f;*/
 
 	public static float gaseousDrag;
 	public float _gaseousDrag = 0.8f;
@@ -25,8 +22,7 @@ public class JellyCore : MonoBehaviour {
 	void OnValidate() {
 		cohesion = _cohesion;
 		drag = _drag;
-		//maxFallingForce = _maxFallingForce;
-		gaseousAntiGravity = _gaseousAntiGravity;
+		//gaseousAntiGravity = _gaseousAntiGravity;
 		gaseousDrag = _gaseousDrag;
 	}
 }

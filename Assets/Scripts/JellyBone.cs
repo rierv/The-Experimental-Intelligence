@@ -39,9 +39,9 @@ public class JellyBone : MonoBehaviour {
 				transform.rotation = core.transform.rotation;
 			}
 		} else {
-			if (state == FlapperState.gaseous) {
+			/*if (state == FlapperState.gaseous) {
 				rigidbody.AddForce(Physics.gravity * -JellyCore.gaseousAntiGravity);
-			}
+			}*/
 			float acceleration = (coreRigidbody.velocity.y - lastCoreSpeedY) / Time.fixedDeltaTime;
 			Vector3 force = (core.transform.position - transform.position) * JellyCore.cohesion;
 			if (acceleration < -0.1f) {
@@ -56,6 +56,7 @@ public class JellyBone : MonoBehaviour {
 		}
 
 		//rigidbody.drag = JellyCore.drag;
+		rigidbody.useGravity = state != FlapperState.gaseous;
 	}
 
 	public void SetState(FlapperState newState) {
