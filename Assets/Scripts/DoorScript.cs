@@ -2,35 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DoorScript : MonoBehaviour
+public class DoorScript : MonoBehaviour, I_Activable
 {
     #region Attributes
-    public GameObject door;
-    private Vector3 doorVelocity = new Vector3(0f, 2f, 0f);
-    private float doorPositionY;
+    public Vector3 upperLockerPosition;
+    public Vector3 lowerLockerPosition;
+    private bool isActive = false;
     #endregion
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("Player"))
-        {
-            door.GetComponent<Rigidbody>().velocity = doorVelocity;
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.CompareTag("Player"))
-        {
-            door.GetComponent<Rigidbody>().velocity = -doorVelocity;
-        }
-    }
 
     private void FixedUpdate()
     {
-        /*doorPositionY = door.GetComponent<Rigidbody>().position.y;
-        if (doorPositionY == -2.5 || doorPositionY == 2.5)
-        {
-            door.GetComponent<Rigidbody>().velocity = Vector3.zero;
-        }*/
+        if (isActive && Vector3.Distance(transform.position, upperLockerPosition) > Time.fixedDeltaTime)
+            transform.position = Vector3.MoveTowards(transform.position, upperLockerPosition, Time.fixedDeltaTime);
+        else if(!isActive && Vector3.Distance(transform.position, lowerLockerPosition) > Time.fixedDeltaTime)
+            transform.position = Vector3.MoveTowards(transform.position, lowerLockerPosition, Time.fixedDeltaTime);
+    }
+
+    public void Activate()
+    {
+        isActive = true;
     }
 }

@@ -6,23 +6,17 @@ using UnityEngine;
 public class TimeLimitedButtonScript : MonoBehaviour
 {
     #region Attributes
-    public GameObject myButton;
     public GameObject triggeredObject;
-    private Rigidbody rigidbody;
     private bool isButtonActivated = false;
     private float buttonTime = 1.0f;
     private float currentTimeLeft;
-
-    //private Vector3 iceCubeForce = new Vector3(5f, 0f, 0f);
-    private Vector3 buttonForce = new Vector3(0f, -10f, 0f);
+    private Vector3 buttonForce = new Vector3(0f, -1.5f, 0f);
+    public float maxY;
+    public float minY;
+    private Vector3 currentPosition;
+    private float clampedY;
     #endregion
 
-
-    private void Start()
-    {
-        rigidbody = myButton.GetComponent<Rigidbody>();
-        
-    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -43,9 +37,17 @@ public class TimeLimitedButtonScript : MonoBehaviour
         currentTimeLeft = buttonTime;
     }
 
+    private void Update()
+    {
+        currentPosition = this.transform.position;
+        clampedY = Mathf.Clamp(currentPosition.y, minY, maxY);
+        currentPosition.y = clampedY;
+        this.transform.position = currentPosition;
+    }
     private void FixedUpdate()
     {
-        if(isButtonActivated)
+
+        if (isButtonActivated)
         {
             if(currentTimeLeft <= 0f)
             {
@@ -53,10 +55,9 @@ public class TimeLimitedButtonScript : MonoBehaviour
             }
             else
             {
-                rigidbody.AddForce(buttonForce);
+                this.gameObject.GetComponent<Rigidbody>().AddForce(buttonForce);
                 currentTimeLeft -= Time.fixedDeltaTime;
-                //triggeredObject.GetComponent<Rigidbody>().AddForce(iceCubeForce);
-                //Keep doing the action on the triggered GameObject
+                triggeredObject.GetComponent<I_Activable>().Activate();
             }
 
         }

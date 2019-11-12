@@ -6,20 +6,15 @@ using UnityEngine;
 public class ButtonScript : MonoBehaviour
 {
     #region Attributes
-    public GameObject myButton;
     public GameObject triggeredObject;
-    private Rigidbody rigidbody;
-    public bool isButtonActivated = false;
-
-    //private Vector3 iceCubeForce = new Vector3(10f, 0f, 0f);
+    private bool isButtonActivated = false;
+    public float maxY;
+    public float minY;
+    private Vector3 currentPosition;
+    private float clampedY;
     #endregion
 
 
-    private void Start()
-    {
-        rigidbody = myButton.GetComponent<Rigidbody>();
-        
-    }
 
     private void OnTriggerStay(Collider other)
     {
@@ -47,13 +42,20 @@ public class ButtonScript : MonoBehaviour
         isButtonActivated = true;
     }
 
+    private void Update()
+    {
+        currentPosition = this.transform.position;
+        clampedY = Mathf.Clamp(currentPosition.y, minY, maxY);
+        currentPosition.y = clampedY;
+        this.transform.position = currentPosition;
+    }
+
     private void FixedUpdate()
     {
-        if(isButtonActivated)
+        if (isButtonActivated)
         {
             triggeredObject.GetComponent<I_Activable>().Activate();
         }
-
     }
 
 }
