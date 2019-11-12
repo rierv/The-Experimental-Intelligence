@@ -426,7 +426,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cohesion: 90
   _drag: 3
-  _gaseousAntiGravity: 1.1
   _gaseousDrag: 0.6
 --- !u!114 &1650412428068302614
 MonoBehaviour:
@@ -443,24 +442,24 @@ MonoBehaviour:
   speed: 7
   jumpForce: 12
   doubleJumpMultiplier: 1.333
-  fallingBoost: 60
   maxFallingSpeedForJumping: 0.5
-  jumpingWait: 0.7
+  jumpingWait: 0.5
+  fallingBoost: 60
   gaseousFloatUpForce: 5
   gaseousShrinkDownForce: 2.8
   jumpType: 0
   toShrinkWait: 0.24
   stopShrinkWait: 0.44
-  bonesForce: 0
-  bonesForceUp: 0
-  toShrinkWait1: 0.7
-  stopShrinkWait1: 2
-  bonesForce1: 0
-  bonesForceUp1: 0
-  toShrinkWait2: 0.7
-  stopShrinkWait2: 2
-  bonesForce2: 0
-  bonesForceUp2: 0
+  bonesForce: 10
+  bonesForceUp: -2
+  toShrinkWait1: 0.24
+  stopShrinkWait1: 0.44
+  bonesForce1: 10
+  bonesForceUp1: 10
+  toShrinkWait2: 0
+  stopShrinkWait2: 0.24
+  bonesForce2: 10
+  bonesForceUp2: 10
   Up: {fileID: 1650412426688054141}
   Down: {fileID: 1650412427280877092}
   Left: {fileID: 1650412428202199701}

@@ -43,7 +43,7 @@ public class RopeRoot : MonoBehaviour
         th.fifthRigidbody = CopySource[2].gameObject.GetComponent<Rigidbody>();
         th.enabled = false;
         th.isHandle = true;
-        CopySource[13].gameObject.layer = 12;
+        CopySource[12].gameObject.layer = 12;
 
         GameObject trigger = new GameObject();
         trigger.transform.parent = CopySource[12];
