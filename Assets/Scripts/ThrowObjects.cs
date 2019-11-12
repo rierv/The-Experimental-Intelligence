@@ -36,6 +36,10 @@ public class ThrowObjects : MonoBehaviour
         if (th.isHandle)
         {
             transform.parent.SetParent(null);
+            this.GetComponent<PlayerMove>().can_move = true;
+            this.GetComponent<PlayerMove>().shrinking = false;
+            this.GetComponent<Rigidbody>().AddForce(Vector3.up * 7000+ (Input.GetAxis("Horizontal") * Vector3.right + Input.GetAxis("Vertical") * Vector3.forward) * 2000);
+
         }
         obj = null;
         //objBoxCollider.enabled = true;
@@ -52,20 +56,16 @@ public class ThrowObjects : MonoBehaviour
     {
         if (other.gameObject.layer == 14&&obj==null)
         {
-            
+            Debug.Log("cisono");
             th = other.transform.parent.gameObject.GetComponent<ThrowableObject>();
             th.enabled = true;
             if (th.isHandle)
             {
                 transform.parent.SetParent(other.transform.parent.gameObject.transform);
                 GetComponent<Rigidbody>().velocity = Vector3.zero;
-                ConfigurableJoint jnt = other.transform.parent.gameObject.AddComponent<ConfigurableJoint>();
-                jnt.connectedBody = this.gameObject.GetComponent<Rigidbody>();
-                jnt.xMotion = ConfigurableJointMotion.Limited;
-                jnt.yMotion = ConfigurableJointMotion.Limited;
-                jnt.zMotion = ConfigurableJointMotion.Limited;
-                jnt.targetPosition = transform.position;
+                this.GetComponent<PlayerMove>().can_move = false;
                 obj = other.transform.parent.gameObject;
+                this.GetComponent<PlayerMove>().shrinking = true;
 
             }
             //objBoxCollider = obj.GetComponent<BoxCollider>();
@@ -81,6 +81,10 @@ public class ThrowObjects : MonoBehaviour
             if (th.isHandle)
             {
                 transform.parent.SetParent(null);
+                this.GetComponent<PlayerMove>().can_move = true;
+                this.GetComponent<PlayerMove>().shrinking = false;
+                //this.GetComponent<Rigidbody>().AddForce(Vector3.up * 5000000);
+
             }
             obj = null;
             //objBoxCollider.enabled = true;
