@@ -13,36 +13,35 @@ public class PlayerMove : MonoBehaviour {
 	public float doubleJumpMultiplier = 1.5f;
 	public float fallingBoost = 1;
 	public float maxFallingSpeedForJumping = 0.5f;
+	public float jumpingWait = 1f;
 	[Space]
 	public JumpType jumpType;
 	[Header("Dilate Shrink")]
 	public float toShrinkWait = 0.7f;
 	public float stopShrinkWait = 2f;
-	public float jumpingWait = 1f;
 	public float bonesForce;
 	public float bonesForceUp;
 	[Header("Shrink")]
 	public float toShrinkWait1 = 0.7f;
 	public float stopShrinkWait1 = 2f;
-	public float jumpingWait1 = 1f;
 	public float bonesForce1;
 	public float bonesForceUp1;
 	[Header("Dilate")]
 	public float toShrinkWait2 = 0.7f;
 	public float stopShrinkWait2 = 2f;
-	public float jumpingWait2 = 1f;
 	public float bonesForce2;
 	public float bonesForceUp2;
 	[Space]
 	public Rigidbody Up;
 	public Rigidbody Down, Left, Front, Right, Back;
+	public bool jumping, shrinking = false;
+	public bool canMove = true;
 
 	Rigidbody rigidbody;
 	StateManager stateManager;
-	public bool jumping, shrinking = false;
-    public bool can_move=true;
 	int shrinkage = 0;
 	int shrinking_counter = 0;
+
 	void Awake() {
 		rigidbody = GetComponent<Rigidbody>();
 		stateManager = GetComponent<StateManager>();
@@ -50,7 +49,7 @@ public class PlayerMove : MonoBehaviour {
 	}
 
 	void Update() {
-		if(can_move) rigidbody.MovePosition(rigidbody.position + (Input.GetAxis("Horizontal") * Vector3.right + Input.GetAxis("Vertical") * Vector3.forward) * speed * Time.deltaTime);
+		if (canMove) rigidbody.MovePosition(rigidbody.position + (Input.GetAxis("Horizontal") * Vector3.right + Input.GetAxis("Vertical") * Vector3.forward) * speed * Time.deltaTime);
 
 		if (shrinking_counter > 0) updateShrink();
 
@@ -71,7 +70,7 @@ public class PlayerMove : MonoBehaviour {
 		StartCoroutine(toShrink());
 		StartCoroutine(stopShrink());
 
-		if (shrinkage == 3) shrinkage = 2;
+		//if (shrinkage == 3) shrinkage = 2;
 		//if (shrinking_counter == 0 && shrinking && (Left.transform.position - rigidbody.position).magnitude < 0.285) shrinking = false;
 		//Debug.Log((Left.transform.position - rigidbody.position).magnitude);
 	}
@@ -101,7 +100,7 @@ public class PlayerMove : MonoBehaviour {
 				break;
 		}
 		yield return new WaitForSeconds(wait + shrinkage * 0.02f);
-		if (!shrinking) {
+		if (!shrinking && !jumping) {
 			jumping = true;
 			if (stateManager.state != FlapperState.gaseous && rigidbody.velocity.y > -maxFallingSpeedForJumping) {
 				if (shrinkage == 1) {
@@ -130,16 +129,7 @@ public class PlayerMove : MonoBehaviour {
 		Front.AddForce(Front.position + Vector3.down * high);
 		Back.AddForce(Back.position + Vector3.down * high);*/
 		//shrinking_counter--;
-		float wait = jumpingWait;
-		switch (jumpType) {
-			case JumpType.Shrink:
-				wait = jumpingWait1;
-				break;
-			case JumpType.Dilate:
-				wait = jumpingWait2;
-				break;
-		}
-		yield return new WaitForSeconds(wait);
+		yield return new WaitForSeconds(jumpingWait);
 		jumping = false;
 	}
 

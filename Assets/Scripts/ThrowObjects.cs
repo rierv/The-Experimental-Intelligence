@@ -36,7 +36,7 @@ public class ThrowObjects : MonoBehaviour
         if (th.isHandle)
         {
             transform.parent.SetParent(null);
-            this.GetComponent<PlayerMove>().can_move = true;
+            this.GetComponent<PlayerMove>().canMove = true;
             this.GetComponent<PlayerMove>().shrinking = false;
             this.GetComponent<Rigidbody>().AddForce(Vector3.up * 700+ (Input.GetAxis("Horizontal") * Vector3.right + Input.GetAxis("Vertical") * Vector3.forward) * 200);
 
@@ -63,7 +63,7 @@ public class ThrowObjects : MonoBehaviour
             {
                 transform.parent.SetParent(other.transform.parent.gameObject.transform);
                 GetComponent<Rigidbody>().velocity = Vector3.zero;
-                this.GetComponent<PlayerMove>().can_move = false;
+                this.GetComponent<PlayerMove>().canMove = false;
                 obj = other.transform.parent.gameObject;
                 this.GetComponent<PlayerMove>().shrinking = true;
 
@@ -81,7 +81,7 @@ public class ThrowObjects : MonoBehaviour
             if (th.isHandle)
             {
                 transform.parent.SetParent(null);
-                this.GetComponent<PlayerMove>().can_move = true;
+                this.GetComponent<PlayerMove>().canMove = true;
                 this.GetComponent<PlayerMove>().shrinking = false;
                 //this.GetComponent<Rigidbody>().AddForce(Vector3.up * 5000000);
 
