@@ -56,7 +56,7 @@ public class ThrowableObject : MonoBehaviour
 
                 core.transform.position = this.transform.position;
                 coreRB.AddForce( Vector3.up * 50 );
-                rigidbody.AddForce(Vector3.down * 500 * Time.deltaTime);
+                //rigidbody.AddForce(Vector3.down * 500 * Time.deltaTime);
 
             }
             else
@@ -69,6 +69,5 @@ public class ThrowableObject : MonoBehaviour
             }
         }
         
-        //rigidbody.drag = JellyCore.drag;
     }
 }

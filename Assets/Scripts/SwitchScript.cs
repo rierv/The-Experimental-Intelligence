@@ -18,6 +18,10 @@ public partial class SwitchScript : MonoBehaviour
     #endregion
     // Start is called before the first frame update
 
+    private void Start()
+    {
+        handle.GetComponent<ThrowableObject>().parentBodies.Add(handle.GetComponent<Rigidbody>());
+    }
 
     private void OnCollisionExit(Collision collision)
     {
@@ -67,7 +71,7 @@ public partial class SwitchScript : MonoBehaviour
         {
             DeactivateFunction();
         }
-        switch (switchState)
+        /*switch (switchState)
         {
             case 1:
                 targetObject.GetComponent<Rigidbody>().isKinematic = false;
@@ -81,7 +85,7 @@ public partial class SwitchScript : MonoBehaviour
                 targetObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
                 targetObject.GetComponent<Rigidbody>().isKinematic = true;
                 break;
-        }
+        }*/
     }
 
     private void ActivateFirstFunction()
