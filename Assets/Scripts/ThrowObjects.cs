@@ -7,6 +7,7 @@ public class ThrowObjects : MonoBehaviour
     GameObject obj=null;
     BoxCollider objBoxCollider;
     ThrowableObject th;
+    public float strenght=500f;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,9 +17,9 @@ public class ThrowObjects : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(obj && Input.GetButtonDown("Jump"))
+
+        if (obj && Input.GetButtonDown("Jump"))
         {
-            
             StartCoroutine(Throw());
 
         }
@@ -35,10 +36,17 @@ public class ThrowObjects : MonoBehaviour
         th.enabled = false;
         if (th.isHandle)
         {
+
             transform.parent.SetParent(null);
             this.GetComponent<PlayerMove>().canMove = true;
             this.GetComponent<PlayerMove>().shrinking = false;
-            this.GetComponent<Rigidbody>().AddForce(Vector3.up * 700+ (Input.GetAxis("Horizontal") * Vector3.right + Input.GetAxis("Vertical") * Vector3.forward) * 200);
+            this.GetComponent<Rigidbody>().AddForce(Vector3.up * strenght + (Input.GetAxis("Horizontal") * Vector3.right + Input.GetAxis("Vertical") * Vector3.forward) * strenght*1.5f);
+
+        }
+        else
+        {
+            Debug.Log("ueue");
+            th.GetComponent<Rigidbody>().AddForce(Vector3.up * strenght + (Input.GetAxis("Horizontal") * Vector3.right + Input.GetAxis("Vertical") * Vector3.forward) * strenght*2);
 
         }
         obj = null;
@@ -59,20 +67,21 @@ public class ThrowObjects : MonoBehaviour
             Debug.Log("cisono");
             th = other.transform.parent.gameObject.GetComponent<ThrowableObject>();
             th.enabled = true;
+            obj = other.transform.parent.gameObject;
+
             if (th.isHandle)
             {
                 transform.parent.SetParent(other.transform.parent.gameObject.transform);
-                GetComponent<Rigidbody>().velocity = Vector3.zero;
+                //GetComponent<Rigidbody>().velocity = Vector3.zero;
+                other.transform.parent.gameObject.GetComponent<Rigidbody>().AddForce((Input.GetAxis("Horizontal") * Vector3.right + Input.GetAxis("Vertical") * Vector3.forward + Vector3.down / 2) * 100000 * Time.deltaTime);
                 this.GetComponent<PlayerMove>().canMove = false;
-                obj = other.transform.parent.gameObject;
-                this.GetComponent<PlayerMove>().shrinking = true;
 
             }
             //objBoxCollider = obj.GetComponent<BoxCollider>();
             //objBoxCollider.enabled = false;
         }
     }
-    private void OnTriggerExit(Collider other)
+    /*private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.layer == 14 && obj != null&&false)
         {
@@ -91,5 +100,5 @@ public class ThrowObjects : MonoBehaviour
 
             objBoxCollider = null;
         }
-    }
+    }*/
 }

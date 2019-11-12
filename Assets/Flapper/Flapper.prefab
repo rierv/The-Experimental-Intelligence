@@ -453,12 +453,12 @@ MonoBehaviour:
   bonesForceUp: -8
   toShrinkWait1: 0.04
   stopShrinkWait1: 0.24
-  bonesForce1: -8
-  bonesForceUp1: -8
+  bonesForce1: 2
+  bonesForceUp1: 2
   toShrinkWait2: 0
   stopShrinkWait2: 0.2
-  bonesForce2: 8
-  bonesForceUp2: -8
+  bonesForce2: 2
+  bonesForceUp2: 2
   Up: {fileID: 1650412426688054141}
   Down: {fileID: 1650412427280877092}
   Left: {fileID: 1650412428202199701}
@@ -509,6 +509,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1a3c0d9154f86444b265c2092fe510d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  strenght: 500
 --- !u!198 &1837976439
 ParticleSystem:
   m_ObjectHideFlags: 0
