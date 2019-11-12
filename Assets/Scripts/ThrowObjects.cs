@@ -38,7 +38,7 @@ public class ThrowObjects : MonoBehaviour
             transform.parent.SetParent(null);
             this.GetComponent<PlayerMove>().can_move = true;
             this.GetComponent<PlayerMove>().shrinking = false;
-            this.GetComponent<Rigidbody>().AddForce(Vector3.up * 7000+ (Input.GetAxis("Horizontal") * Vector3.right + Input.GetAxis("Vertical") * Vector3.forward) * 2000);
+            this.GetComponent<Rigidbody>().AddForce(Vector3.up * 700+ (Input.GetAxis("Horizontal") * Vector3.right + Input.GetAxis("Vertical") * Vector3.forward) * 200);
 
         }
         obj = null;

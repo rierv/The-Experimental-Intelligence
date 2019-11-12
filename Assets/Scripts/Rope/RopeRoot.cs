@@ -37,9 +37,10 @@ public class RopeRoot : MonoBehaviour
         CopySource[12].gameObject.GetComponent<SphereCollider>().enabled = false;
         CopySource[13].gameObject.GetComponent<SphereCollider>().enabled = false;
         CopySource[14].gameObject.GetComponent<SphereCollider>().enabled = false;
-        th.secondRigidbody = CopySource[10].gameObject.GetComponent<Rigidbody>();
-        th.thirdRigidbody = CopySource[7].gameObject.GetComponent<Rigidbody>();
-        th.forthRigidbody = CopySource[4].gameObject.GetComponent<Rigidbody>();
+        th.secondRigidbody = CopySource[12].gameObject.GetComponent<Rigidbody>();
+        th.thirdRigidbody = CopySource[9].gameObject.GetComponent<Rigidbody>();
+        th.forthRigidbody = CopySource[5].gameObject.GetComponent<Rigidbody>();
+        th.fifthRigidbody = CopySource[2].gameObject.GetComponent<Rigidbody>();
         th.enabled = false;
         th.isHandle = true;
         CopySource[13].gameObject.layer = 12;

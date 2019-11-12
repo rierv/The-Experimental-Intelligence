@@ -18,7 +18,7 @@ public class ThrowableObject : MonoBehaviour
     public bool isHandle;
     Rigidbody coreRB;
 
-    public Rigidbody secondRigidbody, thirdRigidbody, forthRigidbody;
+    public Rigidbody secondRigidbody, thirdRigidbody, forthRigidbody, fifthRigidbody;
 
     void Start()
     {
@@ -50,13 +50,16 @@ public class ThrowableObject : MonoBehaviour
                 //coreRB.AddRelativeForce((Input.GetAxis("Horizontal") * Vector3.right + Input.GetAxis("Vertical") * Vector3.forward));
                 //rigidbody.MovePosition();
                 //coreRB.useGravity = false;
-                secondRigidbody.AddForce((Input.GetAxis("Horizontal") * Vector3.right + Input.GetAxis("Vertical") * Vector3.forward) * 150000 * Time.deltaTime);
-                thirdRigidbody.AddForce((Input.GetAxis("Horizontal") * Vector3.right + Input.GetAxis("Vertical") * Vector3.forward) * 140000 * Time.deltaTime);
-                forthRigidbody.AddForce((Input.GetAxis("Horizontal") * Vector3.right + Input.GetAxis("Vertical") * Vector3.forward) * 120000 * Time.deltaTime);
+                secondRigidbody.AddForce((Input.GetAxis("Horizontal") * Vector3.right + Input.GetAxis("Vertical") * Vector3.forward + Vector3.down / 2) * 50000 * Time.deltaTime);
+                thirdRigidbody.AddForce((Input.GetAxis("Horizontal") * Vector3.right + Input.GetAxis("Vertical") * Vector3.forward + Vector3.down / 2) * 50000 * Time.deltaTime);
+                forthRigidbody.AddForce((Input.GetAxis("Horizontal") * Vector3.right + Input.GetAxis("Vertical") * Vector3.forward + Vector3.down / 2) * 50000 * Time.deltaTime);
+                fifthRigidbody.AddForce((Input.GetAxis("Horizontal") * Vector3.right + Input.GetAxis("Vertical") * Vector3.forward + Vector3.down / 2) * 50000 * Time.deltaTime);
                 rigidbody.AddForce(Vector3.down * 500 * Time.deltaTime);
 
-                rigidbody.AddForce((Input.GetAxis("Horizontal") * Vector3.right + Input.GetAxis("Vertical") * Vector3.forward) * 200000 * Time.deltaTime);
+                rigidbody.AddForce((Input.GetAxis("Horizontal") * Vector3.right + Input.GetAxis("Vertical") * Vector3.forward + Vector3.down / 2) * 50000 * Time.deltaTime);
                 core.transform.position = this.transform.position;
+                coreRB.AddForce( Vector3.up * 50 );
+
             }
             else
             {
