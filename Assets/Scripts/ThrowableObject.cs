@@ -17,9 +17,14 @@ public class ThrowableObject : MonoBehaviour
 
     public bool isHandle;
     Rigidbody coreRB;
+    public float SpineStrenght = 50000f;
+    public List<Rigidbody> parentBodies;
+    Vector3 startPos;
+    private void Awake()
+    {
+        parentBodies = new List<Rigidbody>();
 
-    public Rigidbody secondRigidbody, thirdRigidbody, forthRigidbody, fifthRigidbody;
-
+    }
     void Start()
     {
         core = FindObjectOfType<JellyCore>();
@@ -28,7 +33,7 @@ public class ThrowableObject : MonoBehaviour
         rigidbody.drag = JellyCore.drag;
         baseRotation = rigidbody.rotation;
         coreRB = core.GetComponent<Rigidbody>();
-        
+        startPos = transform.position;
     }
 
     void FixedUpdate()
@@ -46,19 +51,16 @@ public class ThrowableObject : MonoBehaviour
             
             if (isHandle)
             {
-                //coreRB.MovePosition(transform.position);
-                //coreRB.AddRelativeForce((Input.GetAxis("Horizontal") * Vector3.right + Input.GetAxis("Vertical") * Vector3.forward));
-                //rigidbody.MovePosition();
-                //coreRB.useGravity = false;
-                secondRigidbody.AddForce((Input.GetAxis("Horizontal") * Vector3.right + Input.GetAxis("Vertical") * Vector3.forward + Vector3.down / 2) * 50000 * Time.deltaTime);
-                thirdRigidbody.AddForce((Input.GetAxis("Horizontal") * Vector3.right + Input.GetAxis("Vertical") * Vector3.forward + Vector3.down / 2) * 50000 * Time.deltaTime);
-                forthRigidbody.AddForce((Input.GetAxis("Horizontal") * Vector3.right + Input.GetAxis("Vertical") * Vector3.forward + Vector3.down / 2) * 50000 * Time.deltaTime);
-                fifthRigidbody.AddForce((Input.GetAxis("Horizontal") * Vector3.right + Input.GetAxis("Vertical") * Vector3.forward + Vector3.down / 2) * 50000 * Time.deltaTime);
-                rigidbody.AddForce(Vector3.down * 500 * Time.deltaTime);
 
-                rigidbody.AddForce((Input.GetAxis("Horizontal") * Vector3.right + Input.GetAxis("Vertical") * Vector3.forward + Vector3.down / 2) * 50000 * Time.deltaTime);
+                foreach (Rigidbody bone in parentBodies)
+                {
+                    bone.AddForce((Input.GetAxis("Horizontal") * Vector3.right + Input.GetAxis("Vertical") * Vector3.forward + Vector3.down / 2) * (SpineStrenght / ((coreRB.transform.position - startPos).magnitude + 1)) * Time.deltaTime);
+
+
+                }
                 core.transform.position = this.transform.position;
                 coreRB.AddForce( Vector3.up * 50 );
+                //rigidbody.AddForce(Vector3.down * 500 * Time.deltaTime);
 
             }
             else
@@ -71,6 +73,5 @@ public class ThrowableObject : MonoBehaviour
             }
         }
         
-        //rigidbody.drag = JellyCore.drag;
     }
 }

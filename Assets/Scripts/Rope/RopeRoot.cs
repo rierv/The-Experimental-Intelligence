@@ -7,7 +7,8 @@ public class RopeRoot : MonoBehaviour
 {
 
     public float RigidbodyMass = 1f;
-    public float ColliderRadius = 0.1f;
+    public float ColliderRadius = 0.0005f;
+    public float ColliderHeight = 0.001f;
     public float JointSpring = 0.1f;
     public float JointDamper = 5f;
     public Vector3 RotationOffset;
@@ -31,24 +32,27 @@ public class RopeRoot : MonoBehaviour
         
         ThrowableObject th = CopySource[12].gameObject.AddComponent<ThrowableObject>();
 
-        CopySource[9].gameObject.GetComponent<SphereCollider>().enabled = false;
-        CopySource[10].gameObject.GetComponent<SphereCollider>().enabled = false;
-        CopySource[11].gameObject.GetComponent<SphereCollider>().enabled = false;
-        CopySource[12].gameObject.GetComponent<SphereCollider>().enabled = false;
-        CopySource[13].gameObject.GetComponent<SphereCollider>().enabled = false;
-        CopySource[14].gameObject.GetComponent<SphereCollider>().enabled = false;
-        th.secondRigidbody = CopySource[12].gameObject.GetComponent<Rigidbody>();
-        th.thirdRigidbody = CopySource[9].gameObject.GetComponent<Rigidbody>();
-        th.forthRigidbody = CopySource[5].gameObject.GetComponent<Rigidbody>();
-        th.fifthRigidbody = CopySource[2].gameObject.GetComponent<Rigidbody>();
+        CopySource[9].gameObject.GetComponent<CapsuleCollider>().enabled = false;
+        CopySource[10].gameObject.GetComponent<CapsuleCollider>().enabled = false;
+        CopySource[11].gameObject.GetComponent<CapsuleCollider>().enabled = false;
+        CopySource[12].gameObject.GetComponent<CapsuleCollider>().enabled = false;
+        CopySource[13].gameObject.GetComponent<CapsuleCollider>().enabled = false;
+        CopySource[14].gameObject.GetComponent<CapsuleCollider>().enabled = false;
+        th.parentBodies = new List<Rigidbody>();
+        foreach(Transform bone in CopySource)
+        {
+            
+            th.parentBodies.Add(bone.gameObject.GetComponent<Rigidbody>());
+        }
+        Debug.Log(th.parentBodies.Count);
         th.enabled = false;
         th.isHandle = true;
         CopySource[12].gameObject.layer = 12;
 
         GameObject trigger = new GameObject();
         trigger.transform.parent = CopySource[12];
-        SphereCollider sc = trigger.AddComponent<SphereCollider>();
-        sc.radius *= 1.2f;
+        CapsuleCollider sc = trigger.AddComponent<CapsuleCollider>();
+        sc.radius *= 1.8f;
         sc.isTrigger = true;
         trigger.layer = 14;
         
@@ -69,10 +73,10 @@ public class RopeRoot : MonoBehaviour
             childRigidbody.mass = RigidbodyMass;
 
             //collider
-            var collider = representative.gameObject.AddComponent<SphereCollider>();
+            var collider = representative.gameObject.AddComponent<CapsuleCollider>();
             collider.center = Vector3.zero;
             collider.radius = ColliderRadius;
-
+            collider.height = ColliderHeight;
             //DistanceJoint
             var joint = representative.gameObject.AddComponent<RopeJoint>();
             joint.ConnectedRigidbody = parent;
