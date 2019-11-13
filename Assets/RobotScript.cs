@@ -31,7 +31,7 @@ public class RobotScript : MonoBehaviour
         wheel.Rotate(0f, 0f, rotationScale * positionDifference, Space.Self);
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionStay(Collision collision)
     {
         /*if(collision.gameObject.CompareTag("Player"){
          * if(flapperState == "Solid")
