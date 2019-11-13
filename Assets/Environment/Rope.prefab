@@ -233,7 +233,7 @@ Transform:
   m_GameObject: {fileID: 3111648143769503677}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
   m_LocalPosition: {x: -0, y: 0.25, z: 0}
-  m_LocalScale: {x: 2.5, y: 2.5, z: 50}
+  m_LocalScale: {x: 27.77, y: 58.86, z: 88.57}
   m_Children: []
   m_Father: {fileID: 3224978489566176682}
   m_RootOrder: 1
@@ -299,8 +299,8 @@ SkinnedMeshRenderer:
   m_BlendShapeWeights: []
   m_RootBone: {fileID: 121334863323612312}
   m_AABB:
-    m_Center: {x: 0, y: 0.0052684625, z: 0}
-    m_Extent: {x: 0.00025745193, y: 0.0049999976, z: 0.00025745187}
+    m_Center: {x: 0, y: 0.006815553, z: 0}
+    m_Extent: {x: 0.00025745193, y: 0.006692434, z: 0.00025745187}
   m_DirtyAABB: 0
 --- !u!1 &3398145727359963068
 GameObject:
@@ -513,8 +513,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7525606549279015212}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: 14.9, y: -10.54, z: 6.34}
-  m_LocalScale: {x: 500, y: 500, z: 1000}
+  m_LocalPosition: {x: 14.9, y: -13.9, z: 6.34}
+  m_LocalScale: {x: 1000, y: 1000, z: 1000}
   m_Children:
   - {fileID: 121334863323612312}
   m_Father: {fileID: 3224978489566176682}
@@ -536,7 +536,7 @@ MonoBehaviour:
   ColliderRadius: 0.01
   ColliderHeight: 0.7
   JointSpring: 0
-  JointDamper: 6
+  JointDamper: 5
   RotationOffset: {x: 0, y: 0, z: 0}
   PositionOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &7576631455690826731

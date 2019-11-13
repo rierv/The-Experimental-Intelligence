@@ -17,7 +17,7 @@ public class ThrowableObject : MonoBehaviour
 
     public bool isHandle;
     Rigidbody coreRB;
-
+    public float SpineStrenght = 50000f;
     public List<Rigidbody> parentBodies;
     Vector3 startPos;
     private void Awake()
@@ -51,9 +51,13 @@ public class ThrowableObject : MonoBehaviour
             
             if (isHandle)
             {
-                
-                foreach (Rigidbody bone in parentBodies) bone.AddForce((Input.GetAxis("Horizontal") * Vector3.right + Input.GetAxis("Vertical") * Vector3.forward + Vector3.down / 2) * (200000 / ((coreRB.transform.position-startPos).magnitude+1)) * Time.deltaTime);
 
+                foreach (Rigidbody bone in parentBodies)
+                {
+                    bone.AddForce((Input.GetAxis("Horizontal") * Vector3.right + Input.GetAxis("Vertical") * Vector3.forward + Vector3.down / 2) * (SpineStrenght / ((coreRB.transform.position - startPos).magnitude + 1)) * Time.deltaTime);
+
+
+                }
                 core.transform.position = this.transform.position;
                 coreRB.AddForce( Vector3.up * 50 );
                 //rigidbody.AddForce(Vector3.down * 500 * Time.deltaTime);
