@@ -8,7 +8,7 @@ public class TimeLimitedButtonScript : MonoBehaviour
     #region Attributes
     public GameObject triggeredObject;
     private bool isButtonActivated = false;
-    private float buttonTime = 1.0f;
+    public float buttonTime;
     private float currentTimeLeft;
     private Vector3 buttonForce = new Vector3(0f, -1.5f, 0f);
     public float maxY;

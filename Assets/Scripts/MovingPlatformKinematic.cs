@@ -93,7 +93,6 @@ public class MovingPlatformKinematic : MonoBehaviour
 
     private void ChangeDirection()
     {
-        Debug.Log("Change Dir");
         direction = !direction;
         isPlatformMoving = false;
         platformTimer = platformStopTime;
