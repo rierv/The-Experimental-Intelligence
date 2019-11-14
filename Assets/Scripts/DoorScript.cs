@@ -44,4 +44,7 @@ public class DoorScript : MonoBehaviour, I_Activable {
 	}
 
 	public void Deactivate() { }
+
+    public void Activate(bool twoFunctions)
+    { }
 }

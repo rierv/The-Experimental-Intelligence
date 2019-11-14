@@ -7,11 +7,12 @@ public partial class SwitchScript : MonoBehaviour
     #region Attributes
     public GameObject switchBase;
     public GameObject targetObject;
-    private float minRotation = 270;
-    private float maxRotation = 90;
-    private int switchState = (int) SwitchState.NonActive;
+    private float maxRotation = 90f;
+    private float firstMinRotation; //Min rotation to activate first function
+    private float firstMaxRotation; //Max rotation to activate first function; note this is necessary since angles are between 0 and 360
+    private float secondMinRotation;
+    private float secondMaxRotation;
     Vector3 currentRotation;
-    Vector3 platformVelocity = new Vector3(0f, 0f, 1f);
     Vector3 validPos;
     public float yOffset = 1;
     public GameObject handle;
@@ -21,22 +22,10 @@ public partial class SwitchScript : MonoBehaviour
     private void Start()
     {
         handle.GetComponent<ThrowableObject>().parentBodies.Add(handle.GetComponent<Rigidbody>());
-    }
-
-    private void OnCollisionExit(Collision collision)
-    {
-        if(collision.gameObject.CompareTag("Player"))
-        {
-            if(currentRotation.x > 25 && currentRotation.x < 50)
-            {
-                currentRotation.x = maxRotation;
-            }
-            else if(currentRotation.x > 310 && currentRotation.x < 335)
-            {
-                currentRotation.x = minRotation;
-            }
-            switchBase.transform.localRotation = Quaternion.Euler(currentRotation);
-        }
+        firstMaxRotation = maxRotation;
+        firstMinRotation = maxRotation / 2;
+        secondMinRotation = 360 - firstMaxRotation;
+        secondMaxRotation = 360 - firstMinRotation;
     }
 
     // Update is called once per frame
@@ -62,58 +51,25 @@ public partial class SwitchScript : MonoBehaviour
             validPos = handle.transform.localPosition;
 
 
-
-        currentRotation.x = ClampAngle(currentRotation.x, -maxRotation, maxRotation);
-
-        if (currentRotation.x > 25 && currentRotation.x < 50)
+        if (currentRotation.x > firstMinRotation && currentRotation.x < firstMaxRotation)
         {
             ActivateFirstFunction();
         }
-        else if (currentRotation.x > 310 && currentRotation.x < 335)
+        else if (currentRotation.x > secondMinRotation && currentRotation.x < secondMaxRotation)
         {
             ActivateSecondFunction();
         }
-        else
-        {
-            DeactivateFunction();
-        }
-        /*switch (switchState)
-        {
-            case 1:
-                targetObject.GetComponent<Rigidbody>().isKinematic = false;
-                targetObject.GetComponent<Rigidbody>().velocity = platformVelocity;
-                break;
-            case 2:
-                targetObject.GetComponent<Rigidbody>().isKinematic = false;
-                targetObject.GetComponent<Rigidbody>().velocity = -platformVelocity;
-                break;
-            default:
-                targetObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
-                targetObject.GetComponent<Rigidbody>().isKinematic = true;
-                break;
-        }*/
-    }
-    private void FixedUpdate()
-    {
-        
-        
+
     }
 
     private void ActivateFirstFunction()
     {
-        switchState = (int) SwitchState.ActiveFirst;
-        Debug.DrawRay(transform.position, handle.transform.localPosition * 10, Color.red, 20, true);
-        Debug.DrawRay(transform.position, transform.forward * 10, Color.blue, 20, true);
+        targetObject.GetComponent<I_Activable>().Activate(true);
     }
 
     private void ActivateSecondFunction()
     {
-        switchState = (int) SwitchState.ActiveSecond;
-    }
-
-    private void DeactivateFunction()
-    {
-        switchState = (int) SwitchState.NonActive;
+        targetObject.GetComponent<I_Activable>().Activate(false);
     }
 
     public enum SwitchState
@@ -121,12 +77,5 @@ public partial class SwitchScript : MonoBehaviour
         NonActive,
         ActiveFirst,
         ActiveSecond
-    }
-
-    public static float ClampAngle(float angle, float from, float to)
-    {
-        if (angle < 0f) angle = 360 + angle;
-        if (angle > 180f) return Mathf.Max(angle, 360 + from);
-        return Mathf.Min(angle, to);
     }
 }
