@@ -8,5 +8,9 @@ public class CubeScript : MonoBehaviour, I_Activable {
 		GetComponent<Rigidbody>().AddForce(force);
 	}
 
-	public void Deactivate() { }
+    public void Activate(bool twoFunctions)
+    {
+    }
+
+    public void Deactivate() { }
 }

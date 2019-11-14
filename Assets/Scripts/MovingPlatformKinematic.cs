@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MovingPlatformKinematic : MonoBehaviour {
 	#region Attributes
-	public float speed = 10;
+	public float speed = 5;
 	public Vector3[] targets; //Constraint: targets.Length >= 2
 
 	Rigidbody platform;
@@ -50,13 +50,9 @@ public class MovingPlatformKinematic : MonoBehaviour {
 			if (Vector3.Distance(platform.transform.position, targets[targetsIndex]) < Time.fixedDeltaTime * speed) {
 				//Update the current target and if necessary change the direction (forward/backward route)
 				if (direction && (targetsIndex < (targetsLength - 1))) {
-					Debug.Log(targetsIndex);
 					targetsIndex++;
-					Debug.Log(targetsIndex);
 				} else if (!direction && (targetsIndex > 0)) {
-					Debug.Log(targetsIndex);
 					targetsIndex--;
-					Debug.Log(targetsIndex);
 				} else
 					ChangeDirection();
 			}

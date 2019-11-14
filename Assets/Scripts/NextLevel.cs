@@ -20,4 +20,8 @@ public class NextLevel : MonoBehaviour, I_Activable {
 	public void Deactivate() {
 		isActive = false;
 	}
+
+    public void Activate(bool twoFunctions)
+    {
+    }
 }
