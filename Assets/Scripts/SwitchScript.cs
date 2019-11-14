@@ -16,6 +16,12 @@ public partial class SwitchScript : MonoBehaviour
     Vector3 validPos;
     public float yOffset = 1;
     public GameObject handle;
+    public float maxInclination = 2f;
+    public bool comingBackToVerticalPos = true;
+    public bool vertical = true;
+    public bool horizontal = true;
+    bool bonesActive = true;
+    public GameObject pointer;
     #endregion
     // Start is called before the first frame update
 
@@ -35,20 +41,84 @@ public partial class SwitchScript : MonoBehaviour
 
         if (handle.GetComponent<ThrowableObject>().isActiveAndEnabled)
         {
-            transform.LookAt(transform.position + new Vector3(0, handle.transform.localPosition.z, handle.transform.localPosition.y) + (- Input.GetAxis("Vertical") * Vector3.up*5));
+            if (bonesActive)
+            {
+                SphereCollider[] bones = GameObject.Find("Root").GetComponentsInChildren<SphereCollider>();
+                foreach (SphereCollider bone in bones)
+                {
+                    bone.enabled = false;
+                    bone.gameObject.GetComponent<Rigidbody>().isKinematic = true;
+                }
+                bonesActive = false;
+            }
+            float x = Input.GetAxis("Horizontal");
+            float y = Input.GetAxis("Vertical");
+            //WITHOUT POINTER
+            /*
+            if (vertical && horizontal)
+            {
+                if (Mathf.Abs(Input.GetAxis("Vertical")) - Mathf.Abs(Input.GetAxis("Horizontal"))  > 0)
+                {
+                    if (Input.GetAxis("Vertical") > 0) transform.LookAt(transform.position + Vector3.forward + (Input.GetAxis("Horizontal") * Vector3.right - Input.GetAxis("Vertical") * Vector3.up * maxInclination) );
+                    else transform.LookAt(transform.position + Vector3.forward + (Input.GetAxis("Horizontal") * -Vector3.right - Input.GetAxis("Vertical") * Vector3.up * maxInclination) );
+                }
+                else if (Mathf.Abs(Input.GetAxis("Vertical")) - Mathf.Abs(Input.GetAxis("Horizontal")) < 0)
+                {
+                    if (Input.GetAxis("Horizontal") > 0) transform.LookAt(transform.position + Vector3.right + (-Input.GetAxis("Horizontal") * Vector3.up * maxInclination + Input.GetAxis("Vertical") * Vector3.forward));
+                    else transform.LookAt(transform.position + Vector3.right + (Input.GetAxis("Horizontal") * -Vector3.up * maxInclination - Input.GetAxis("Vertical") * Vector3.forward) );
+                }
+            }
+            else if (horizontal) transform.LookAt(transform.position + Vector3.right - Input.GetAxis("Horizontal") * Vector3.up * maxInclination);
+            else if (vertical) transform.LookAt(transform.position + Vector3.forward - Input.GetAxis("Vertical") * Vector3.up * maxInclination);
+
+        }*/
+            if (y != 0 || x != 0)
+                if (vertical && horizontal)
+                    if (Mathf.Abs(y) - Mathf.Abs(x) > 0)
+                        if (y > 0)
+                            if (x > 0)
+                                pointer.transform.LookAt(transform.position + Vector3.forward + (x * Vector3.right - (x + y) * Vector3.up * maxInclination));
+                            else
+                                pointer.transform.LookAt(transform.position + Vector3.forward + (x * Vector3.right - (-x + y) * Vector3.up * maxInclination));
+                        else
+                            if (x > 0)
+                                pointer.transform.LookAt(transform.position + Vector3.forward + (x * -Vector3.right - (-x + y) * Vector3.up * maxInclination));
+
+                            else
+                                pointer.transform.LookAt(transform.position + Vector3.forward + (x * -Vector3.right - (x + y) * Vector3.up * maxInclination));
+                    else
+                        if (x > 0)
+                            if (y > 0)
+                                pointer.transform.LookAt(transform.position + Vector3.right + (-(x+ y) * Vector3.up * maxInclination + y * Vector3.forward));
+                            else
+                                pointer.transform.LookAt(transform.position + Vector3.right + (-(x - y) * Vector3.up * maxInclination + y * Vector3.forward));
+                        else
+                            if (y > 0)
+                                pointer.transform.LookAt(transform.position + Vector3.right + ((x - y) * -Vector3.up * maxInclination - y * Vector3.forward));
+                            else
+                                pointer.transform.LookAt(transform.position + Vector3.right + ((x + y) * -Vector3.up * maxInclination - y* Vector3.forward));
+                else if (horizontal) pointer.transform.LookAt(transform.position + Vector3.right - x * Vector3.up * maxInclination);
+                else if (vertical) pointer.transform.LookAt(transform.position + Vector3.forward - y * Vector3.up * maxInclination);
+            else pointer.transform.rotation = Quaternion.identity;
+
+            transform.rotation = Quaternion.Lerp(transform.rotation, pointer.transform.rotation, 10f * Time.deltaTime);
+
         }
-        else transform.LookAt(transform.position + new Vector3(0, -handle.transform.localPosition.z, handle.transform.localPosition.y));
-
-        handle.transform.localPosition = new Vector3(0, 1, 0);
-
-        if (currentRotation.x > 70 || currentRotation.x < -70)
+        else 
         {
-            handle.transform.localPosition = validPos;
-            switchBase.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+            if (!bonesActive)
+            {
+                SphereCollider[] bones = GameObject.Find("Root").GetComponentsInChildren<SphereCollider>();
+                foreach (SphereCollider bone in bones)
+                {
+                    bone.enabled = true;
+                    bone.gameObject.GetComponent<Rigidbody>().isKinematic = false;
+                }
+                bonesActive = true;
+            }
+            if (comingBackToVerticalPos) transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.identity, 10 * Time.deltaTime);
         }
-
-        else
-            validPos = handle.transform.localPosition;
+        
 
 
         if (currentRotation.x > firstMinRotation && currentRotation.x < firstMaxRotation)
