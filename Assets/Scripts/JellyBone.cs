@@ -17,9 +17,9 @@ public class JellyBone : MonoBehaviour {
 
 	Vector3 lastGoodPosition;
 
-    bool notReached=false;
+	bool notReached = false;
 
-    void Awake() {
+	void Awake() {
 		core = GetComponentInParent<FlapperCore>().GetComponentInChildren<JellyCore>();
 		coreRigidbody = core.GetComponent<Rigidbody>();
 		rigidbody = GetComponent<Rigidbody>();
@@ -103,28 +103,28 @@ public class JellyBone : MonoBehaviour {
 				|| Physics.Raycast(transform.position + Vector3.right, (core.transform.position - transform.position).normalized, out hit, 0.1f, layerMask)
 				|| Physics.Raycast(transform.position + Vector3.back, (core.transform.position - transform.position).normalized, out hit, 0.1f, layerMask)
 				|| Physics.Raycast(transform.position + Vector3.forward, (core.transform.position - transform.position).normalized, out hit, 0.1f, layerMask)
-                ||notReached
+				|| notReached
 				) {
 				Debug.DrawRay(transform.position, Vector3.up * 10, Color.green, 20, true);
-                notReached = false;
+				notReached = false;
 				//rigidbody.AddForce((Vector3.up * 10), ForceMode.Acceleration);
 				//Debug.Log(lastGoodPosition);
 				transform.LookAt(core.transform.position);
-                gameObject.layer=16;
-                //rigidbody.isKinematic = true;
-				transform.position=Vector3.Lerp(transform.position, core.transform.position, 0.00001f*Time.deltaTime);
+				gameObject.layer = 16;
+				//rigidbody.isKinematic = true;
+				transform.position = Vector3.Lerp(transform.position, core.transform.position, 0.00001f * Time.deltaTime);
 
-				Debug.DrawRay(transform.position, (transform.forward * 2 + Vector3.up * 4) * 200f, Color.red, 20, true);
+				Debug.DrawRay(transform.position, (transform.forward * 2 + Vector3.up * 4) * 200f, Color.red, 3, true);
 				//continues in elseif
 			}
 		} else if (Vector3.Distance(core.transform.position, transform.position) < 0.75f) {
-            rigidbody.isKinematic = false;
-            notReached = true;
-            lastGoodPosition = (core.transform.position - transform.position);
-            gameObject.layer = 9;
+			rigidbody.isKinematic = false;
+			notReached = true;
+			lastGoodPosition = (core.transform.position - transform.position);
+			gameObject.layer = 9;
 
-        }
+		}
 
 
-    }
+	}
 }

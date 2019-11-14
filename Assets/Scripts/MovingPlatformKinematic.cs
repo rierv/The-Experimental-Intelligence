@@ -29,7 +29,7 @@ public class MovingPlatformKinematic : MonoBehaviour {
 		if (!isPlatformMoving) //The platform is not moving, so you have to wait for a short time and then start moving
 		{
 			if (platformTimer > 0f) {
-				platformTimer -= Time.fixedDeltaTime;
+				platformTimer -= Time.fixedDeltaTime * speed;
 			} else {
 				isPlatformMoving = true;
 				if (direction) {
@@ -37,17 +37,17 @@ public class MovingPlatformKinematic : MonoBehaviour {
 					platform.transform.position = Vector3.MoveTowards(platform.transform.position, targets[targetsIndex], Time.fixedDeltaTime * speed);
 				} else {
 					targetsIndex = targetsLength - 2;
-					platform.transform.position = Vector3.MoveTowards(platform.transform.position, targets[targetsIndex], Time.fixedDeltaTime);
+					platform.transform.position = Vector3.MoveTowards(platform.transform.position, targets[targetsIndex], Time.fixedDeltaTime * speed);
 				}
 			}
 		} else //The platform is moving, you may have to slow down or speed up
 		  {
 
 			//Get closer to the current target
-			platform.transform.position = Vector3.MoveTowards(platform.transform.position, targets[targetsIndex], Time.fixedDeltaTime);
+			platform.transform.position = Vector3.MoveTowards(platform.transform.position, targets[targetsIndex], Time.fixedDeltaTime * speed);
 
 			//Check if you have to change the current target
-			if (Vector3.Distance(platform.transform.position, targets[targetsIndex]) < Time.fixedDeltaTime) {
+			if (Vector3.Distance(platform.transform.position, targets[targetsIndex]) < Time.fixedDeltaTime * speed) {
 				//Update the current target and if necessary change the direction (forward/backward route)
 				if (direction && (targetsIndex < (targetsLength - 1))) {
 					Debug.Log(targetsIndex);
