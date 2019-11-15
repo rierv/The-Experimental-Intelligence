@@ -1343,7 +1343,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 31
+      scalar: 55.89
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -1461,17 +1461,17 @@ ParticleSystem:
         - serializedVersion: 3
           time: 0
           value: 0
-          inSlope: 0.000027153226
-          outSlope: 0.000027153226
+          inSlope: 1.6937463
+          outSlope: 1.6937463
           tangentMode: 0
           weightedMode: 0
           inWeight: 0.33333334
-          outWeight: 0.1097561
+          outWeight: 0.3866667
         - serializedVersion: 3
-          time: 0.34478295
-          value: 0.19209039
-          inSlope: 0.2810597
-          outSlope: 0.2810597
+          time: 0.3966198
+          value: 0.4015574
+          inSlope: 0.28784966
+          outSlope: 0.28784966
           tangentMode: 0
           weightedMode: 0
           inWeight: 0.33333334
@@ -1479,11 +1479,11 @@ ParticleSystem:
         - serializedVersion: 3
           time: 1
           value: 0
-          inSlope: -0.9504563
-          outSlope: -0.9504563
+          inSlope: -2.057223
+          outSlope: -2.057223
           tangentMode: 0
           weightedMode: 0
-          inWeight: 0.4814815
+          inWeight: 0.28835976
           outWeight: 0.33333334
         m_PreInfinity: 2
         m_PostInfinity: 2
@@ -5219,15 +5219,15 @@ ParticleSystemRenderer:
   m_SortingOrder: 0
   m_RenderMode: 4
   m_SortMode: 1
-  m_MinParticleSize: 0
-  m_MaxParticleSize: 5
+  m_MinParticleSize: 0.002
+  m_MaxParticleSize: 0.01
   m_CameraVelocityScale: 0
   m_VelocityScale: 0
   m_LengthScale: 2
-  m_SortingFudge: 0
-  m_NormalDirection: 0.5
+  m_SortingFudge: 5.3
+  m_NormalDirection: 0
   m_ShadowBias: 0
-  m_RenderAlignment: 0
+  m_RenderAlignment: 1
   m_Pivot: {x: 0, y: 0, z: 0}
   m_Flip: {x: 0.5, y: 0.5, z: 0}
   m_UseCustomVertexStreams: 0
