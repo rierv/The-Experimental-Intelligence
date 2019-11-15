@@ -41,7 +41,8 @@ public class PlayerMove : MonoBehaviour {
 	public bool jumping, shrinking = false;
 	public bool canMove = true;
 
-	Rigidbody rigidbody;
+	[HideInInspector]
+	public Rigidbody rigidbody;
 	StateManager stateManager;
 	int shrinkage = 0;
 	int shrinking_counter = 0;
@@ -52,9 +53,13 @@ public class PlayerMove : MonoBehaviour {
 		jumping = false;
 	}
 
-	void Update() {
-		if (canMove) rigidbody.MovePosition(rigidbody.position + (Input.GetAxis("Horizontal") * Vector3.right + Input.GetAxis("Vertical") * Vector3.forward) * speed * Time.deltaTime);
+	void FixedUpdate() {
+		if (canMove) {
+			rigidbody.MovePosition(rigidbody.position + (Input.GetAxis("Horizontal") * Vector3.right + Input.GetAxis("Vertical") * Vector3.forward) * speed * Time.deltaTime);
+		}
+	}
 
+	void Update() {
 		if (shrinking_counter > 0) updateShrink();
 
 		if (stateManager.state == FlapperState.gaseous) {
@@ -69,7 +74,7 @@ public class PlayerMove : MonoBehaviour {
 			}
 		}
 
-		if (rigidbody.velocity.y < -0.1f) {
+		if (rigidbody.useGravity && rigidbody.velocity.y < -0.1f) {
 			rigidbody.AddForce(Vector3.up * -fallingBoost, ForceMode.Acceleration);
 		}
 		//if (!shrinking) shrinkage = 0;
