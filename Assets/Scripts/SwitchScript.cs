@@ -44,6 +44,7 @@ public partial class SwitchScript : MonoBehaviour
             if (bonesActive)
             {
                 SphereCollider[] bones = GameObject.Find("Root").GetComponentsInChildren<SphereCollider>();
+                GameObject.Find("CORE").GetComponent<Rigidbody>().isKinematic=true;
                 foreach (SphereCollider bone in bones)
                 {
                     bone.enabled = false;
@@ -109,6 +110,7 @@ public partial class SwitchScript : MonoBehaviour
             if (!bonesActive)
             {
                 SphereCollider[] bones = GameObject.Find("Root").GetComponentsInChildren<SphereCollider>();
+                GameObject.Find("CORE").GetComponent<Rigidbody>().isKinematic = false;
                 foreach (SphereCollider bone in bones)
                 {
                     bone.enabled = true;

@@ -14,7 +14,7 @@ public class ThrowObjects : MonoBehaviour
 
     void Update()
     {
-
+        if (obj) GetComponent<PlayerMove>().shrinking = true;
         if (obj && Input.GetButtonDown("Jump"))
         {
             StartCoroutine(Throw());
@@ -23,24 +23,23 @@ public class ThrowObjects : MonoBehaviour
     }
     IEnumerator Throw()
     {
-
-        yield return new WaitForSeconds(0.2f);
-
         obj.GetComponent<ThrowableObject>().enabled = false;
-        
         th.enabled = false;
+
+        yield return new WaitForSeconds(0.0f);
+                
         if (th.isHandle)
         {
 
             transform.parent.SetParent(null);
             this.GetComponent<PlayerMove>().canMove = true;
             this.GetComponent<PlayerMove>().shrinking = false;
-            //this.GetComponent<Rigidbody>().AddForce(Vector3.up * strenght*2 + (Input.GetAxis("Horizontal") * Vector3.right + Input.GetAxis("Vertical") * Vector3.forward) * strenght*2f);
+            this.gameObject.GetComponent<Rigidbody>().AddForce(Vector3.up * strenght+ (Input.GetAxis("Horizontal") * Vector3.right + Input.GetAxis("Vertical") * Vector3.forward) * strenght);
 
         }
         else
         {
-            th.GetComponent<Rigidbody>().AddForce(Vector3.up * strenght + (Input.GetAxis("Horizontal") * Vector3.right + Input.GetAxis("Vertical") * Vector3.forward) * strenght*2);
+            obj.GetComponent<Rigidbody>().AddForce(Vector3.up * strenght*2 + (Input.GetAxis("Horizontal") * Vector3.right + Input.GetAxis("Vertical") * Vector3.forward) * strenght*4);
 
         }
 
