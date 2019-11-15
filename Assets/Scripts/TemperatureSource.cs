@@ -7,9 +7,9 @@ public class TemperatureSource : MonoBehaviour {
 	public int variation;
 
 	private void OnTriggerEnter(Collider other) {
-		StateManager stateManager = other.GetComponent<StateManager>();
-		if (stateManager) {
-			stateManager.temperature = variation;
+		JellyBone jellyBone = other.GetComponent<JellyBone>();
+		if (jellyBone) {
+			jellyBone.GetComponentInParent<FlapperCore>().GetComponentInChildren<StateManager>().temperature = variation;
 		}
 	}
 }

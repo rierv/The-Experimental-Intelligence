@@ -15,7 +15,7 @@ public class JellyBone : MonoBehaviour {
 	SphereCollider coreCollider;
 	Vector3 localPos;
 
-	Vector3 lastGoodPosition;
+	//Vector3 lastGoodPosition;
 
 	bool notReached = false;
 
@@ -120,7 +120,7 @@ public class JellyBone : MonoBehaviour {
 		} else if (Vector3.Distance(core.transform.position, transform.position) < 0.75f) {
 			rigidbody.isKinematic = false;
 			notReached = true;
-			lastGoodPosition = (core.transform.position - transform.position);
+			//lastGoodPosition = (core.transform.position - transform.position);
 			gameObject.layer = 9;
 
 		}
