@@ -27,13 +27,14 @@ public class ThrowObjects : MonoBehaviour
         th.enabled = false;
 
         yield return new WaitForSeconds(0.0f);
-                
+
+        this.GetComponent<PlayerMove>().shrinking = false;
+
         if (th.isHandle)
         {
 
             transform.parent.SetParent(null);
             this.GetComponent<PlayerMove>().canMove = true;
-            this.GetComponent<PlayerMove>().shrinking = false;
             this.gameObject.GetComponent<Rigidbody>().AddForce(Vector3.up * strenght+ (Input.GetAxis("Horizontal") * Vector3.right + Input.GetAxis("Vertical") * Vector3.forward) * strenght);
 
         }
