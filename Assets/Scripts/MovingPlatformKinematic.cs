@@ -34,17 +34,17 @@ public class MovingPlatformKinematic : MonoBehaviour {
 				isPlatformMoving = true;
 				if (direction) {
 					targetsIndex = 1;
-					platform.transform.position = Vector3.MoveTowards(platform.transform.position, targets[targetsIndex], Time.fixedDeltaTime * speed);
+					platform.MovePosition(Vector3.MoveTowards(platform.transform.position, targets[targetsIndex], Time.fixedDeltaTime * speed));
 				} else {
 					targetsIndex = targetsLength - 2;
-					platform.transform.position = Vector3.MoveTowards(platform.transform.position, targets[targetsIndex], Time.fixedDeltaTime * speed);
+					platform.MovePosition(Vector3.MoveTowards(platform.transform.position, targets[targetsIndex], Time.fixedDeltaTime * speed));
 				}
 			}
 		} else //The platform is moving, you may have to slow down or speed up
 		  {
 
 			//Get closer to the current target
-			platform.transform.position = Vector3.MoveTowards(platform.transform.position, targets[targetsIndex], Time.fixedDeltaTime * speed);
+			platform.MovePosition(Vector3.MoveTowards(platform.transform.position, targets[targetsIndex], Time.fixedDeltaTime * speed));
 
 			//Check if you have to change the current target
 			if (Vector3.Distance(platform.transform.position, targets[targetsIndex]) < Time.fixedDeltaTime * speed) {
@@ -57,19 +57,6 @@ public class MovingPlatformKinematic : MonoBehaviour {
 					ChangeDirection();
 			}
 		}
-	}
-
-	private void OnTriggerEnter(Collider other) {
-		//If it's the player, stick it on the platform
-		if (other.CompareTag("Player")) {
-			other.transform.parent = platform.gameObject.transform;
-		}
-	}
-
-	private void OnTriggerExit(Collider other) {
-		//Free the player
-		if (other.CompareTag("Player"))
-			other.transform.parent = null;
 	}
 
 	private void ChangeDirection() {
@@ -86,4 +73,3 @@ public class MovingPlatformKinematic : MonoBehaviour {
 		}
 	}
 }
-
