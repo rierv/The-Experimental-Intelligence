@@ -17,9 +17,9 @@ public class PushableLight : MonoBehaviour {
 		if (jellyBone) {
 			if (jellyBone.state != FlapperState.gaseous) {
 				if (moveOnZ) {
-					rigidbody.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionY;
+					rigidbody.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionX;
 				} else {
-					rigidbody.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezePositionZ;
+					rigidbody.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionZ;
 				}
 			} else {
 				rigidbody.constraints = RigidbodyConstraints.FreezeAll;
