@@ -69,7 +69,7 @@ public class PlayerMove : MonoBehaviour {
 				rigidbody.MovePosition(rigidbody.position + (Vector3.up * gaseousFloatUpForce * Time.deltaTime));
 			}
 		} else {
-			if (Input.GetButtonDown("Jump") && !shrinking && !jumping) {
+			if (Input.GetButtonDown("Jump") && !shrinking && !jumping && shrinkage < 2) {
 				Shrink();
 			}
 		}
