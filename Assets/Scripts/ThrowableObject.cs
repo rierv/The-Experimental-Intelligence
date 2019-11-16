@@ -19,6 +19,7 @@ public class ThrowableObject : MonoBehaviour
     Rigidbody coreRB;
     public float SpineStrenght = 50000f;
     public List<Rigidbody> parentBodies;
+    public float handle_hight=1f;
     Vector3 startPos;
     private void Awake()
     {
@@ -58,7 +59,7 @@ public class ThrowableObject : MonoBehaviour
 
 
                 }
-                core.transform.position = this.transform.position;
+                core.transform.position = this.transform.position*handle_hight;
                 coreRB.AddForce( Vector3.up * 50 );
                 //rigidbody.AddForce(Vector3.down * 500 * Time.deltaTime);
 

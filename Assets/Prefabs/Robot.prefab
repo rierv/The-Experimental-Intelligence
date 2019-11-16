@@ -357,13 +357,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 6085675686997837594}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: de21e725ecd317b409d437f716f885e9, type: 3}
+  m_Script: {fileID: 11500000, guid: 8f9f2cf086ba0454fa1459a5227a61e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   flapper: {fileID: 0}
   wheel: {fileID: 4075120967635633317}
-  maxLockerZ: 6
-  minLockerZ: -6
+  maxLockerZ: 0
+  minLockerZ: -1.83
 --- !u!1 &7470543108342453892
 GameObject:
   m_ObjectHideFlags: 0
