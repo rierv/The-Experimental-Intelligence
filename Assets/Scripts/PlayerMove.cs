@@ -66,7 +66,7 @@ public class PlayerMove : MonoBehaviour {
 
 		if (stateManager.state == FlapperState.gaseous) {
 			if (Input.GetButton("Jump")) {
-                transform.position = Vector3.Lerp(transform.position, transform.position + Vector3.up, -gaseousShrinkDownForce * Time.deltaTime);
+                transform.position = Vector3.Lerp(transform.position, transform.position - Vector3.up, gaseousShrinkDownForce * Time.deltaTime);
 
                 //rigidbody.MovePosition(rigidbody.position + (Vector3.up * -gaseousShrinkDownForce * Time.deltaTime));
 			} else {
