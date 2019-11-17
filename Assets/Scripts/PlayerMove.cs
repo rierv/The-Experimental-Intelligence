@@ -66,8 +66,9 @@ public class PlayerMove : MonoBehaviour {
 		if (shrinking_counter > 0) updateShrink();
 
 		if (stateManager.state == FlapperState.gaseous) {
+            rigidbody.isKinematic = true;
 			if (Input.GetButton("Jump")) {
-                transform.position = Vector3.Lerp(transform.position, transform.position - Vector3.up, gaseousShrinkDownForce * Time.deltaTime);
+                transform.position = Vector3.Lerp(transform.position, transform.position - Vector3.up*10, gaseousShrinkDownForce/10 * Time.deltaTime);
 
                 //rigidbody.MovePosition(rigidbody.position + (Vector3.up * -gaseousShrinkDownForce * Time.deltaTime));
 			} else {
@@ -75,7 +76,10 @@ public class PlayerMove : MonoBehaviour {
 
                 //rigidbody.MovePosition(rigidbody.position + (Vector3.up * gaseousFloatUpForce * Time.deltaTime));
 			}
-		} else {
+            rigidbody.isKinematic = false;
+
+        }
+        else {
 			if (Input.GetButtonDown("Jump") && !shrinking && !jumping && shrinkage < 2) {
 				Shrink();
 			}
