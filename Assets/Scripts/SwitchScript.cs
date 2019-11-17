@@ -114,6 +114,8 @@ public partial class SwitchScript : MonoBehaviour
                 foreach (SphereCollider bone in bones)
                 {
                     bone.enabled = true;
+                    bone.gameObject.GetComponent<Rigidbody>().isKinematic = false;
+
                 }
                 bonesActive = true;
             }

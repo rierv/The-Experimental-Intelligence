@@ -22,7 +22,7 @@ public class RopeJoint : MonoBehaviour
             Distance = Vector3.Distance(Rigidbody.position, ConnectedRigidbody.position);
     }
 
-    void FixedUpdate()
+    void Update()
     {
 
         var connection = Rigidbody.position - ConnectedRigidbody.position;
