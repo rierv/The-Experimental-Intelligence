@@ -112,12 +112,12 @@ public class JellyBone : MonoBehaviour {
 				transform.LookAt(core.transform.position);
 				gameObject.layer = 16;
 				//rigidbody.isKinematic = true;
-				transform.position = Vector3.Lerp(transform.position, core.transform.position, 0.00001f * Time.deltaTime);
+				transform.position = Vector3.Lerp(transform.position, core.transform.position, 1f * Time.deltaTime);
 
 				Debug.DrawRay(transform.position, (transform.forward * 2 + Vector3.up * 4) * 200f, Color.red, 3, true);
 				//continues in elseif
 			}
-		} else if (Vector3.Distance(core.transform.position, transform.position) < 0.75f) {
+		} else if (Vector3.Distance(core.transform.position, transform.position) < 1f) {
 			rigidbody.isKinematic = false;
 			notReached = true;
 			//lastGoodPosition = (core.transform.position - transform.position);
