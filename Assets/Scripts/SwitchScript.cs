@@ -83,27 +83,27 @@ public partial class SwitchScript : MonoBehaviour
                                 pointer.transform.LookAt(transform.position + Vector3.forward + (x * Vector3.right - (-x + y) * Vector3.up * maxInclination));
                         else
                             if (x > 0)
-                                pointer.transform.LookAt(transform.position + Vector3.forward + (x * -Vector3.right - (-x + y) * Vector3.up * maxInclination));
+                            pointer.transform.LookAt(transform.position + Vector3.forward + (x * -Vector3.right - (-x + y) * Vector3.up * maxInclination));
 
-                            else
-                                pointer.transform.LookAt(transform.position + Vector3.forward + (x * -Vector3.right - (x + y) * Vector3.up * maxInclination));
+                        else
+                            pointer.transform.LookAt(transform.position + Vector3.forward + (x * -Vector3.right - (x + y) * Vector3.up * maxInclination));
                     else
                         if (x > 0)
-                            if (y > 0)
-                                pointer.transform.LookAt(transform.position + Vector3.right + (-(x+ y) * Vector3.up * maxInclination + y * Vector3.forward));
-                            else
-                                pointer.transform.LookAt(transform.position + Vector3.right + (-(x - y) * Vector3.up * maxInclination + y * Vector3.forward));
+                        if (y > 0)
+                            pointer.transform.LookAt(transform.position + Vector3.right + (-(x + y) * Vector3.up * maxInclination + y * Vector3.forward));
                         else
+                            pointer.transform.LookAt(transform.position + Vector3.right + (-(x - y) * Vector3.up * maxInclination + y * Vector3.forward));
+                    else
                             if (y > 0)
-                                pointer.transform.LookAt(transform.position + Vector3.right + ((x - y) * -Vector3.up * maxInclination - y * Vector3.forward));
-                            else
-                                pointer.transform.LookAt(transform.position + Vector3.right + ((x + y) * -Vector3.up * maxInclination - y* Vector3.forward));
+                        pointer.transform.LookAt(transform.position + Vector3.right + ((x - y) * -Vector3.up * maxInclination - y * Vector3.forward));
+                    else
+                        pointer.transform.LookAt(transform.position + Vector3.right + ((x + y) * -Vector3.up * maxInclination - y * Vector3.forward));
                 else if (horizontal) pointer.transform.LookAt(transform.position + Vector3.right - x * Vector3.up * maxInclination);
                 else if (vertical) pointer.transform.LookAt(transform.position + Vector3.forward - y * Vector3.up * maxInclination);
-            else pointer.transform.rotation = Quaternion.identity;
+                else pointer.transform.rotation = Quaternion.identity;
 
             transform.rotation = Quaternion.Lerp(transform.rotation, pointer.transform.rotation, 10f * Time.deltaTime);
-
+            targetObject.GetComponent<I_SwitchControlled>().Action(GameObject.Find("Flapper").transform.up);
         }
         else 
         {
@@ -123,7 +123,7 @@ public partial class SwitchScript : MonoBehaviour
         
 
 
-        if (currentRotation.x > firstMinRotation && currentRotation.x < firstMaxRotation)
+       /* if (currentRotation.x > firstMinRotation && currentRotation.x < firstMaxRotation)
         {
             ActivateFirstFunction();
         }
@@ -131,17 +131,7 @@ public partial class SwitchScript : MonoBehaviour
         {
             ActivateSecondFunction();
         }
-
-    }
-
-    private void ActivateFirstFunction()
-    {
-        targetObject.GetComponent<I_Activable>().Activate(true);
-    }
-
-    private void ActivateSecondFunction()
-    {
-        targetObject.GetComponent<I_Activable>().Activate(false);
+        */
     }
 
     public enum SwitchState

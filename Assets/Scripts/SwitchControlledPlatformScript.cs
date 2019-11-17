@@ -2,33 +2,59 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SwitchControlledPlatformScript : MonoBehaviour, I_Activable
+public class SwitchControlledPlatformScript : MonoBehaviour, I_SwitchControlled
 {
     #region Attributes
-    public Vector3 firstTarget;
-    public Vector3 secondTarget;
+    private Vector3 currentDirection;
+    public float maxConstraintX;
+    public float minConstraintX;
+    public float maxConstraintZ;
+    public float minConstraintZ;
     public float speed;
-
+    private float movementThreshold = 0.2f;
+    private bool isPlatformActive = false;
     #endregion
-    public void Activate()
+
+    private void Start()
     {
+        currentDirection = Vector3.zero;
+    }
+    public void Action(Vector3 direction)
+    {
+
+
+        if (direction.x > movementThreshold)
+            currentDirection.x = 1;
+        else if (direction.x < -movementThreshold)
+            currentDirection.x = -1;
+        else currentDirection.x = 0;
+
+        if (direction.z > movementThreshold)
+            currentDirection.z = 1;
+        else if (direction.z < -movementThreshold)
+            currentDirection.z = -1;
+        else currentDirection.z = 0;
+
+        if(currentDirection.x != 0 || currentDirection.z != 0)
+            isPlatformActive = true;
     }
 
-    public void Activate(bool twoFunctions)
+    private void FixedUpdate()
     {
-        if (twoFunctions)
+        if (isPlatformActive)
         {
-            transform.position = Vector3.MoveTowards(transform.position, firstTarget, speed * Time.deltaTime);
+            FixDirection();
+            this.transform.position += speed * currentDirection * Time.fixedDeltaTime;
         }
-        else
-        {
-            transform.position = Vector3.MoveTowards(transform.position, secondTarget, speed * Time.deltaTime);
-        }
+
+        isPlatformActive = false;
     }
 
-    public void Deactivate()
+    private void FixDirection()
     {
+        if ((transform.position.x >= maxConstraintX && currentDirection.x > 0) || (transform.position.x <= minConstraintX && currentDirection.x < 0))
+            currentDirection.x = 0;
+        if ((transform.position.z >= maxConstraintZ && currentDirection.z > 0) || (transform.position.z <= minConstraintZ && currentDirection.z < 0))
+            currentDirection.z = 0;
     }
-
-
 }

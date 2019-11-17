@@ -15,7 +15,7 @@ public class ButtonScript : MonoBehaviour {
 	#endregion
 
 	private void Start() {
-		activable = triggeredObject.GetComponent<I_Activable>();
+        activable = triggeredObject.GetComponent<I_Activable>();
 		maxZtemp = maxZ;
 	}
 
