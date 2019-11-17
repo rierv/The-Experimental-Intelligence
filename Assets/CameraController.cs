@@ -24,7 +24,7 @@ public class CameraController : MonoBehaviour
 
     JellyCore jellyCore;
 
-    void Start()
+    void Awake()
     {
 
         jellyCore = FindObjectOfType<JellyCore>();
