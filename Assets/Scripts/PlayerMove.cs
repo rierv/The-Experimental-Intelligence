@@ -55,7 +55,10 @@ public class PlayerMove : MonoBehaviour {
 
 	void FixedUpdate() {
 		if (canMove) {
-			rigidbody.MovePosition(rigidbody.position + (Input.GetAxis("Horizontal") * Vector3.right + Input.GetAxis("Vertical") * Vector3.forward) * speed * Time.fixedDeltaTime);
+            if(Input.GetAxis("Horizontal")!=0&& Input.GetAxis("Vertical")!=0) transform.position = Vector3.Lerp(transform.position, transform.position + (Input.GetAxis("Horizontal") * Vector3.right + Input.GetAxis("Vertical") * Vector3.forward)/1.3f, speed * Time.fixedDeltaTime);
+            else transform.position = Vector3.Lerp(transform.position, transform.position + (Input.GetAxis("Horizontal") * Vector3.right + Input.GetAxis("Vertical") * Vector3.forward), speed * Time.fixedDeltaTime);
+
+            //rigidbody.MovePosition(rigidbody.position + (Input.GetAxis("Horizontal") * Vector3.right + Input.GetAxis("Vertical") * Vector3.forward) * speed * Time.fixedDeltaTime);
 		}
 	}
 
@@ -63,13 +66,21 @@ public class PlayerMove : MonoBehaviour {
 		if (shrinking_counter > 0) updateShrink();
 
 		if (stateManager.state == FlapperState.gaseous) {
+            rigidbody.isKinematic = true;
 			if (Input.GetButton("Jump")) {
-				rigidbody.MovePosition(rigidbody.position + (Vector3.up * -gaseousShrinkDownForce * Time.deltaTime));
+                transform.position = Vector3.Lerp(transform.position, transform.position - Vector3.up*10, gaseousShrinkDownForce/10 * Time.deltaTime);
+
+                //rigidbody.MovePosition(rigidbody.position + (Vector3.up * -gaseousShrinkDownForce * Time.deltaTime));
 			} else {
-				rigidbody.MovePosition(rigidbody.position + (Vector3.up * gaseousFloatUpForce * Time.deltaTime));
+                transform.position = Vector3.Lerp(transform.position, transform.position + Vector3.up, gaseousFloatUpForce * Time.deltaTime);
+
+                //rigidbody.MovePosition(rigidbody.position + (Vector3.up * gaseousFloatUpForce * Time.deltaTime));
 			}
-		} else {
-			if (Input.GetButtonDown("Jump") && !shrinking && !jumping) {
+            rigidbody.isKinematic = false;
+
+        }
+        else {
+			if (Input.GetButtonDown("Jump") && !shrinking && !jumping && shrinkage < 2) {
 				Shrink();
 			}
 		}

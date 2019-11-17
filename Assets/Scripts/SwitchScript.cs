@@ -21,7 +21,7 @@ public partial class SwitchScript : MonoBehaviour
     public bool vertical = true;
     public bool horizontal = true;
     bool bonesActive = true;
-    public GameObject pointer;
+    public Transform pointer;
     #endregion
     // Start is called before the first frame update
 
@@ -78,31 +78,33 @@ public partial class SwitchScript : MonoBehaviour
                     if (Mathf.Abs(y) - Mathf.Abs(x) > 0)
                         if (y > 0)
                             if (x > 0)
-                                pointer.transform.LookAt(transform.position + Vector3.forward + (x * Vector3.right - (x + y) * Vector3.up * maxInclination));
+                                pointer.LookAt(transform.position + Vector3.forward + (x * Vector3.right - (x + y) * Vector3.up * maxInclination));
                             else
-                                pointer.transform.LookAt(transform.position + Vector3.forward + (x * Vector3.right - (-x + y) * Vector3.up * maxInclination));
+                                pointer.LookAt(transform.position + Vector3.forward + (x * Vector3.right - (-x + y) * Vector3.up * maxInclination));
                         else
                             if (x > 0)
-                            pointer.transform.LookAt(transform.position + Vector3.forward + (x * -Vector3.right - (-x + y) * Vector3.up * maxInclination));
+                                pointer.LookAt(transform.position + Vector3.forward + (x * -Vector3.right - (-x + y) * Vector3.up * maxInclination));
 
-                        else
-                            pointer.transform.LookAt(transform.position + Vector3.forward + (x * -Vector3.right - (x + y) * Vector3.up * maxInclination));
+                            else
+                                pointer.LookAt(transform.position + Vector3.forward + (x * -Vector3.right - (x + y) * Vector3.up * maxInclination));
                     else
                         if (x > 0)
-                        if (y > 0)
-                            pointer.transform.LookAt(transform.position + Vector3.right + (-(x + y) * Vector3.up * maxInclination + y * Vector3.forward));
+                            if (y > 0)
+                                pointer.LookAt(transform.position + Vector3.right + (-(x+ y) * Vector3.up * maxInclination + y * Vector3.forward));
+                            else
+                                pointer.LookAt(transform.position + Vector3.right + (-(x - y) * Vector3.up * maxInclination + y * Vector3.forward));
                         else
                             pointer.transform.LookAt(transform.position + Vector3.right + (-(x - y) * Vector3.up * maxInclination + y * Vector3.forward));
                     else
                             if (y > 0)
-                        pointer.transform.LookAt(transform.position + Vector3.right + ((x - y) * -Vector3.up * maxInclination - y * Vector3.forward));
-                    else
-                        pointer.transform.LookAt(transform.position + Vector3.right + ((x + y) * -Vector3.up * maxInclination - y * Vector3.forward));
-                else if (horizontal) pointer.transform.LookAt(transform.position + Vector3.right - x * Vector3.up * maxInclination);
-                else if (vertical) pointer.transform.LookAt(transform.position + Vector3.forward - y * Vector3.up * maxInclination);
-                else pointer.transform.rotation = Quaternion.identity;
+                                pointer.LookAt(transform.position + Vector3.right + ((x - y) * -Vector3.up * maxInclination - y * Vector3.forward));
+                            else
+                                pointer.LookAt(transform.position + Vector3.right + ((x + y) * -Vector3.up * maxInclination - y* Vector3.forward));
+                else if (horizontal) pointer.LookAt(transform.position + Vector3.right - x * Vector3.up * maxInclination);
+                else if (vertical) pointer.LookAt(transform.position + Vector3.forward - y * Vector3.up * maxInclination);
+            else pointer.rotation = Quaternion.identity;
 
-            transform.rotation = Quaternion.Lerp(transform.rotation, pointer.transform.rotation, 10f * Time.deltaTime);
+            transform.rotation = Quaternion.Lerp(transform.rotation, pointer.rotation, 10f * Time.deltaTime);
             targetObject.GetComponent<I_SwitchControlled>().Action(GameObject.Find("Flapper").transform.up);
         }
         else 
@@ -114,7 +116,6 @@ public partial class SwitchScript : MonoBehaviour
                 foreach (SphereCollider bone in bones)
                 {
                     bone.enabled = true;
-                    bone.gameObject.GetComponent<Rigidbody>().isKinematic = false;
                 }
                 bonesActive = true;
             }

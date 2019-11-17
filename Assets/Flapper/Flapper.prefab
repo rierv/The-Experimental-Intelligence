@@ -444,21 +444,21 @@ MonoBehaviour:
   maxFallingSpeedForJumping: 0.5
   jumpingWait: 0.5
   fallingBoost: 60
-  gaseousFloatUpForce: 5
-  gaseousShrinkDownForce: 2.8
+  gaseousFloatUpForce: 3
+  gaseousShrinkDownForce: 3
   jumpType: 0
   toShrinkWait: 0.24
   stopShrinkWait: 0.44
   bonesForce: 8
   bonesForceUp: -8
-  toShrinkWait1: 0.04
-  stopShrinkWait1: 0.24
-  bonesForce1: 2
-  bonesForceUp1: 2
+  toShrinkWait1: 0
+  stopShrinkWait1: 0.18
+  bonesForce1: -3
+  bonesForceUp1: -3
   toShrinkWait2: 0
-  stopShrinkWait2: 0.2
-  bonesForce2: 2
-  bonesForceUp2: 2
+  stopShrinkWait2: 0.18
+  bonesForce2: 4
+  bonesForceUp2: -3
   Up: {fileID: 1650412426688054141}
   Down: {fileID: 1650412427280877092}
   Left: {fileID: 1650412428202199701}
@@ -468,6 +468,7 @@ MonoBehaviour:
   jumping: 0
   shrinking: 0
   canMove: 1
+  rigidbody: {fileID: 1650412428068302612}
 --- !u!114 &139324025
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -481,7 +482,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   temperature: 0
-  temperatureChangeDuration: 5
+  temperatureChangeDuration: 4
   state: 0
   gaseousPush: 0
   gaseousMass: 0.5
