@@ -94,8 +94,6 @@ public partial class SwitchScript : MonoBehaviour
                             else
                                 pointer.LookAt(transform.position + Vector3.right + (-(x - y) * Vector3.up * maxInclination + y * Vector3.forward));
                         else
-                            pointer.transform.LookAt(transform.position + Vector3.right + (-(x - y) * Vector3.up * maxInclination + y * Vector3.forward));
-                    else
                             if (y > 0)
                                 pointer.LookAt(transform.position + Vector3.right + ((x - y) * -Vector3.up * maxInclination - y * Vector3.forward));
                             else
