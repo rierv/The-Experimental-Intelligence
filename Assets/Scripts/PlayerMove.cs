@@ -12,6 +12,7 @@ public class PlayerMove : MonoBehaviour {
 	[Space]
 	public float jumpForce = 1;
 	public float doubleJumpMultiplier = 1.5f;
+	public float solidJumpForce = 1;
 	public float maxFallingSpeedForJumping = 0.5f;
 	public float jumpingWait = 1f;
 	public float fallingBoost = 1;
@@ -38,8 +39,9 @@ public class PlayerMove : MonoBehaviour {
 	[Space]
 	public Rigidbody Up;
 	public Rigidbody Down, Left, Front, Right, Back;
-	public bool jumping, shrinking = false;
 	public bool canMove = true;
+	[HideInInspector]
+	public bool jumping, shrinking = false;
 
 	[HideInInspector]
 	public Rigidbody rigidbody;
@@ -55,10 +57,10 @@ public class PlayerMove : MonoBehaviour {
 
 	void FixedUpdate() {
 		if (canMove) {
-            if(Input.GetAxis("Horizontal")!=0&& Input.GetAxis("Vertical")!=0) transform.position = Vector3.Lerp(transform.position, transform.position + (Input.GetAxis("Horizontal") * Vector3.right + Input.GetAxis("Vertical") * Vector3.forward)/1.3f, speed * Time.fixedDeltaTime);
-            else transform.position = Vector3.Lerp(transform.position, transform.position + (Input.GetAxis("Horizontal") * Vector3.right + Input.GetAxis("Vertical") * Vector3.forward ), speed * Time.fixedDeltaTime);
+			if (Input.GetAxis("Horizontal") != 0 && Input.GetAxis("Vertical") != 0) transform.position = Vector3.Lerp(transform.position, transform.position + (Input.GetAxis("Horizontal") * Vector3.right + Input.GetAxis("Vertical") * Vector3.forward) / 1.3f, speed * Time.fixedDeltaTime);
+			else transform.position = Vector3.Lerp(transform.position, transform.position + (Input.GetAxis("Horizontal") * Vector3.right + Input.GetAxis("Vertical") * Vector3.forward), speed * Time.fixedDeltaTime);
 
-            //rigidbody.MovePosition(rigidbody.position + (Input.GetAxis("Horizontal") * Vector3.right + Input.GetAxis("Vertical") * Vector3.forward) * speed * Time.fixedDeltaTime);
+			//rigidbody.MovePosition(rigidbody.position + (Input.GetAxis("Horizontal") * Vector3.right + Input.GetAxis("Vertical") * Vector3.forward) * speed * Time.fixedDeltaTime);
 		}
 	}
 
@@ -66,22 +68,22 @@ public class PlayerMove : MonoBehaviour {
 		if (shrinking_counter > 0) updateShrink();
 
 		if (stateManager.state == FlapperState.gaseous) {
-            rigidbody.isKinematic = true;
+			rigidbody.isKinematic = true;
 			if (Input.GetButton("Jump")) {
-                transform.position = Vector3.Lerp(transform.position, transform.position - Vector3.up*10, gaseousShrinkDownForce/10 * Time.deltaTime);
-
-                //rigidbody.MovePosition(rigidbody.position + (Vector3.up * -gaseousShrinkDownForce * Time.deltaTime));
+				transform.position = Vector3.Lerp(transform.position, transform.position - Vector3.up * 10, gaseousShrinkDownForce / 10 * Time.deltaTime);
+				//rigidbody.MovePosition(rigidbody.position + (Vector3.up * -gaseousShrinkDownForce * Time.deltaTime));
 			} else {
-                transform.position = Vector3.Lerp(transform.position, transform.position + Vector3.up, gaseousFloatUpForce * Time.deltaTime);
-
-                //rigidbody.MovePosition(rigidbody.position + (Vector3.up * gaseousFloatUpForce * Time.deltaTime));
+				transform.position = Vector3.Lerp(transform.position, transform.position + Vector3.up, gaseousFloatUpForce * Time.deltaTime);
+				//rigidbody.MovePosition(rigidbody.position + (Vector3.up * gaseousFloatUpForce * Time.deltaTime));
 			}
-            rigidbody.isKinematic = false;
-
-        }
-        else {
-			if (Input.GetButtonDown("Jump") && !shrinking && !jumping && shrinkage < 2) {
-				Shrink();
+			rigidbody.isKinematic = false;
+		} else {
+			if (Input.GetButtonDown("Jump") && !shrinking && !jumping) {
+				if (stateManager.state == FlapperState.jelly && shrinkage < 2) {
+					Shrink();
+				} else if (stateManager.state == FlapperState.solid && shrinkage < 1) {
+					StartCoroutine(JumpCoroutine());
+				}
 			}
 		}
 
@@ -95,15 +97,15 @@ public class PlayerMove : MonoBehaviour {
 		shrinking = true;
 		shrinkage++;
 		shrinking_counter = 6;
-		StartCoroutine(toShrink());
-		StartCoroutine(stopShrink());
+		StartCoroutine(ShrinkCoroutine());
+		StartCoroutine(JumpCoroutine());
 
 		//if (shrinkage == 3) shrinkage = 2;
 		//if (shrinking_counter == 0 && shrinking && (Left.transform.position - rigidbody.position).magnitude < 0.285) shrinking = false;
 		//Debug.Log((Left.transform.position - rigidbody.position).magnitude);
 	}
 
-	IEnumerator toShrink() {
+	IEnumerator ShrinkCoroutine() {
 		float wait = toShrinkWait;
 		switch (jumpType) {
 			case JumpType.Shrink:
@@ -117,7 +119,7 @@ public class PlayerMove : MonoBehaviour {
 		shrinking = false;
 	}
 
-	IEnumerator stopShrink() {
+	IEnumerator JumpCoroutine() {
 		float wait = stopShrinkWait;
 		switch (jumpType) {
 			case JumpType.Shrink:
@@ -131,18 +133,21 @@ public class PlayerMove : MonoBehaviour {
 		if (!shrinking && !jumping) {
 			jumping = true;
 			if (stateManager.state != FlapperState.gaseous && rigidbody.velocity.y > -maxFallingSpeedForJumping) {
-				if (shrinkage == 1) {
+				if (stateManager.state == FlapperState.solid) {
+					rigidbody.AddForce(Vector3.up * solidJumpForce, ForceMode.VelocityChange);
+				} else if (shrinkage == 1) {
 					rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.VelocityChange);
 				} else {
 					rigidbody.AddForce(Vector3.up * jumpForce * doubleJumpMultiplier, ForceMode.VelocityChange);
 				}
 			}
 			shrinkage = 0;
-			StartCoroutine(Jumping());
+			yield return new WaitForSeconds(jumpingWait);
+			jumping = false;
 		}
 	}
 
-	IEnumerator Jumping() {
+	/*IEnumerator Jumping() {
 		/*float high = bonesForce * 100;
 		switch (jumpType) {
 			case JumpType.Shrink:
@@ -156,10 +161,10 @@ public class PlayerMove : MonoBehaviour {
 		Right.AddForce(Right.position + Vector3.down * high);
 		Front.AddForce(Front.position + Vector3.down * high);
 		Back.AddForce(Back.position + Vector3.down * high);*/
-		//shrinking_counter--;
-		yield return new WaitForSeconds(jumpingWait);
-		jumping = false;
-	}
+	//shrinking_counter--;
+	/*yield return new WaitForSeconds(jumpingWait);
+	jumping = false;
+}*/
 
 	void updateShrink() {
 		float force = bonesForce * shrinkage;
