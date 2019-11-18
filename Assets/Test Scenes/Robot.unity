@@ -275,36 +275,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 181759920107734413}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &792532078
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 792532077}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87a0ff1c12a80b54b89738799be1fe8b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 25
---- !u!114 &792532079
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 792532077}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 221e78ec63792094d9df58854b627b22, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxConstraintX: 0
-  minConstraintX: 0
-  maxConstraintZ: 0
-  minConstraintZ: 0
-  speed: 0
 --- !u!1 &877419675
 GameObject:
   m_ObjectHideFlags: 0
