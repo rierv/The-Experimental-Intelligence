@@ -32,7 +32,7 @@ Transform:
   m_LocalScale: {x: 2.5, y: 0.2, z: 2.5}
   m_Children: []
   m_Father: {fileID: 9197279904752920404}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &357615083545460036
 MeshFilter:
@@ -137,8 +137,8 @@ Transform:
   m_LocalPosition: {x: 0.2435036, y: -7.5043006, z: 61.59555}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 9197279905691961032}
   - {fileID: 357615083545460035}
+  - {fileID: 9197279905691961032}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -167,6 +167,7 @@ MonoBehaviour:
   velocities:
   - -5
   - 10
+  obstacle: {fileID: 0}
 --- !u!1 &9197279905691961039
 GameObject:
   m_ObjectHideFlags: 0
@@ -199,7 +200,7 @@ Transform:
   m_LocalScale: {x: 2.5, y: 0.2, z: 2.5}
   m_Children: []
   m_Father: {fileID: 9197279904752920404}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &9197279905691961012
 MeshFilter:

@@ -21,6 +21,7 @@ public class DoubleSwitchPlatform : MonoBehaviour, I_Activable
     [Range(0,3)]
     public int numberOfPlatforms=2;
     public float[] velocities = new float[3];
+    public GameObject obstacle;
     #endregion
     private void Start()
     {
@@ -67,10 +68,10 @@ public class DoubleSwitchPlatform : MonoBehaviour, I_Activable
                     else if (!zLock)
                         dir = new Vector3(0f, Input.GetAxis("Vertical"), 0f);
                 }
-                FixDirection(platform);
-                Debug.Log(platform.gameObject.name + velocities[i]);
                 dir = dir * velocities[i];
-                platform.Translate( dir* Time.fixedDeltaTime, Space.Self);
+                FixDirection(platform);
+                if (Vector3.Distance(platform.transform.position, obstacle.transform.position) > 1) platform.position = Vector3.Lerp(platform.position, platform.position+dir, Time.fixedDeltaTime);
+                Debug.Log(Vector3.Distance(platform.transform.position, obstacle.transform.position));
             }
         }
     }

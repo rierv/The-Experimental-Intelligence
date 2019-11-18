@@ -13,7 +13,8 @@ public class RopeRoot : MonoBehaviour
     public float JointDamper = 5f;
     public Vector3 RotationOffset;
     public Vector3 PositionOffset;
-
+    public float spineStrenght = 100000f;
+    public float exitForce = 1f;
     protected List<Transform> CopySource;
     protected List<Transform> CopyDestination;
     protected static GameObject RigidBodyContainer;
@@ -32,7 +33,7 @@ public class RopeRoot : MonoBehaviour
         
         
         th = CopySource[12].gameObject.AddComponent<ThrowableObject>();
-        th.SpineStrenght = 100000f;
+        th.SpineStrenght = spineStrenght;
         CopySource[12].gameObject.GetComponent<CapsuleCollider>().enabled = false;
         CopySource[13].gameObject.GetComponent<CapsuleCollider>().enabled = false;
         CopySource[14].gameObject.GetComponent<CapsuleCollider>().enabled = false;
@@ -138,7 +139,7 @@ public class RopeRoot : MonoBehaviour
             SphereCollider[] bones = GameObject.Find("Root").GetComponentsInChildren<SphereCollider>();
             Rigidbody core = GameObject.Find("CORE").GetComponent<Rigidbody>();
             core.isKinematic = false;
-            core.AddForce(Vector3.up * 1000 + (Input.GetAxis("Horizontal") * Vector3.right + Input.GetAxis("Vertical") * Vector3.forward) * 400); foreach (SphereCollider bone in bones)
+            core.AddForce(Vector3.up * exitForce* 1000 + (Input.GetAxis("Horizontal") * Vector3.right + Input.GetAxis("Vertical") * Vector3.forward) * exitForce*400); foreach (SphereCollider bone in bones)
             {
                 bone.enabled = true;
                 bone.gameObject.GetComponent<Rigidbody>().isKinematic = false;

@@ -27,13 +27,16 @@ public partial class SwitchScript : MonoBehaviour
     public float xCameraOffset = 0f;
     public float yCameraOffset = 0f;
     public float zCameraOffset = 0f;
-
+    Vector3 cameraStartingPos;
     Transform cameraPointer;
+    public float cameraMovementSpeed = 3f;
+    public float cameraRotationSpeed = 3f;
     #endregion
     // Start is called before the first frame update
 
     private void Start()
     {
+        bonesActive = true;
         handle.GetComponent<ThrowableObject>().parentBodies.Add(handle.GetComponent<Rigidbody>());
         firstMaxRotation = maxRotation;
         firstMinRotation = maxRotation / 2;
@@ -45,7 +48,6 @@ public partial class SwitchScript : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        currentRotation = switchBase.transform.rotation.eulerAngles;
 
         if (handle.GetComponent<ThrowableObject>().isActiveAndEnabled)
         {
@@ -66,14 +68,16 @@ public partial class SwitchScript : MonoBehaviour
                     if (camera.GetComponent<CameraController>().isActiveAndEnabled)
                     {
                         camera.GetComponent<CameraController>().enabled = false;
-                        camera.transform.position = new Vector3(camera.transform.position.x + xCameraOffset, camera.transform.position.y + yCameraOffset, camera.transform.position.z + zCameraOffset);
+
+                        cameraStartingPos = new Vector3(camera.transform.position.x + xCameraOffset, camera.transform.position.y + yCameraOffset, camera.transform.position.z + zCameraOffset);
                     }
                 }
             }
             if (camera != null)
             {
                 cameraPointer.transform.LookAt(targetObject.transform);
-                camera.transform.rotation = Quaternion.Lerp(camera.transform.rotation, cameraPointer.transform.rotation, 5 * Time.deltaTime);
+                camera.transform.position = Vector3.Lerp(camera.transform.position, cameraStartingPos, cameraMovementSpeed * Time.deltaTime);
+                camera.transform.rotation = Quaternion.Lerp(camera.transform.rotation, cameraPointer.transform.rotation, cameraRotationSpeed * Time.deltaTime);
             }
             float x = Input.GetAxis("Horizontal");
             float y = Input.GetAxis("Vertical");
@@ -103,7 +107,7 @@ public partial class SwitchScript : MonoBehaviour
                 bonesActive = true;
                 targetObject.GetComponent<I_Activable>().Deactivate();
 
-                if (camera != null)
+                if (camera != null )
                         camera.GetComponent<CameraController>().enabled = true;
             }
         }

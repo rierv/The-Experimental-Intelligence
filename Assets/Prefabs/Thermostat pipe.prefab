@@ -40,7 +40,7 @@ Transform:
   m_GameObject: {fileID: 7341233069350875690}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -9.76, y: 0, z: 9.1}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_Children:
   - {fileID: 2349744697127390288}
   m_Father: {fileID: 0}
@@ -72,6 +72,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   variation: 1
+  active: 0
+  activeMaterial: {fileID: 2100000, guid: 9797f7d49ebf4cd47ae704959c67b4ec, type: 2}
+  nonActiveMaterial: {fileID: 2100000, guid: 1d4813cc860a2dd4089b69f43f8af2c5, type: 2}
 --- !u!1001 &7341233069362997066
 PrefabInstance:
   m_ObjectHideFlags: 0
