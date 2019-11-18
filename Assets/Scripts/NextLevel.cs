@@ -39,7 +39,4 @@ public class NextLevel : MonoBehaviour, I_Activable {
 		isActive = false;
 		light.enabled = isActive;
 	}
-
-	public void Activate(bool twoFunctions) {
-	}
 }

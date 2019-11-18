@@ -103,7 +103,7 @@ public partial class SwitchScript : MonoBehaviour
             else pointer.rotation = Quaternion.identity;
 
             transform.rotation = Quaternion.Lerp(transform.rotation, pointer.rotation, 10f * Time.deltaTime);
-            targetObject.GetComponent<I_SwitchControlled>().Action(GameObject.Find("Flapper").transform.up);
+            targetObject.GetComponent<I_Activable>().Activate();
         }
         else 
         {
@@ -120,6 +120,7 @@ public partial class SwitchScript : MonoBehaviour
                 bonesActive = true;
             }
             if (comingBackToVerticalPos) transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.identity, 10 * Time.deltaTime);
+            targetObject.GetComponent<I_Activable>().Deactivate();
         }
         
 

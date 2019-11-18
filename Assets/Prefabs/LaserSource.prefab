@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 181759919977554427}
   - component: {fileID: 792532084}
   - component: {fileID: 792532078}
+  - component: {fileID: 792532079}
   m_Layer: 0
   m_Name: LaserSource
   m_TagString: Untagged
@@ -240,10 +241,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87a0ff1c12a80b54b89738799be1fe8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 25
+--- !u!114 &792532079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 181759919977554428}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 221e78ec63792094d9df58854b627b22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   maxConstraintX: 0
   minConstraintX: 0
   maxConstraintZ: 0
   minConstraintZ: 0
-  movementSpeed: 0
-  rotationSpeed: 0
-  type: 0
+  speed: 0

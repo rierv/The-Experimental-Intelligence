@@ -20,12 +20,6 @@ public class TemperatureSource : MonoBehaviour, I_Activable {
         active=true;
         myColor.material = activeMaterial;
     }
-
-    public void Activate(bool secondActive)
-    {
-        throw new System.NotImplementedException();
-    }
-
     public void Deactivate()
     {
         active=false;
