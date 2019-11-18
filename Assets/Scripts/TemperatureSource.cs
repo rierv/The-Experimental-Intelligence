@@ -5,7 +5,7 @@ using UnityEngine;
 public class TemperatureSource : MonoBehaviour, I_Activable {
 	[Range(-1, 1)]
 	public int variation;
-    bool active=false;
+    public bool active=false;
     MeshRenderer myColor;
     public Material activeMaterial;
     public Material nonActiveMaterial;

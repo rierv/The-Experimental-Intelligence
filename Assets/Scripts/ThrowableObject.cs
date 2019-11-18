@@ -60,7 +60,9 @@ public class ThrowableObject : MonoBehaviour
 
                 }
                 core.transform.position = new Vector3(core.transform.position.x, this.transform.position.y+handle_hight, core.transform.position.z);
-                //coreRB.AddForce( Vector3.up * 50 );
+                coreRB.AddForce( Vector3.up * 100 );
+                
+
                 //rigidbody.AddForce(Vector3.down * 500 * Time.deltaTime);
 
             }
@@ -75,4 +77,5 @@ public class ThrowableObject : MonoBehaviour
         }
         
     }
+    
 }

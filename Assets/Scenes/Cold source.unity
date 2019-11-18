@@ -1208,6 +1208,21 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.1474957
       objectReference: {fileID: 0}
+    - target: {fileID: 6382738780424299012, guid: 0cb33893142e69f49a52db8b0619b17c,
+        type: 3}
+      propertyPath: active
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6382738780424299012, guid: 0cb33893142e69f49a52db8b0619b17c,
+        type: 3}
+      propertyPath: nonActiveMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 1d4813cc860a2dd4089b69f43f8af2c5, type: 2}
+    - target: {fileID: 6382738780424299012, guid: 0cb33893142e69f49a52db8b0619b17c,
+        type: 3}
+      propertyPath: activeMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 125e9e6eb79a3e04b82e66987f4f3a5c, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0cb33893142e69f49a52db8b0619b17c, type: 3}
 --- !u!4 &1472174141 stripped
@@ -2119,21 +2134,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1650412428068302614, guid: 7fd10ec0c1708c3458fb091fd7d1d232,
-        type: 3}
-      propertyPath: _const
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1650412428068302614, guid: 7fd10ec0c1708c3458fb091fd7d1d232,
-        type: 3}
-      propertyPath: jumpingWait1
-      value: 0.14
-      objectReference: {fileID: 0}
-    - target: {fileID: 1650412428068302614, guid: 7fd10ec0c1708c3458fb091fd7d1d232,
-        type: 3}
-      propertyPath: jumpingWait2
-      value: 0.2
-      objectReference: {fileID: 0}
     - target: {fileID: 1650412426688054140, guid: 7fd10ec0c1708c3458fb091fd7d1d232,
         type: 3}
       propertyPath: m_Radius
@@ -2163,6 +2163,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Radius
       value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1650412428068302614, guid: 7fd10ec0c1708c3458fb091fd7d1d232,
+        type: 3}
+      propertyPath: _const
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1650412428068302614, guid: 7fd10ec0c1708c3458fb091fd7d1d232,
+        type: 3}
+      propertyPath: jumpingWait1
+      value: 0.14
+      objectReference: {fileID: 0}
+    - target: {fileID: 1650412428068302614, guid: 7fd10ec0c1708c3458fb091fd7d1d232,
+        type: 3}
+      propertyPath: jumpingWait2
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7fd10ec0c1708c3458fb091fd7d1d232, type: 3}

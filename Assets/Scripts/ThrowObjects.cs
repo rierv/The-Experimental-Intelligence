@@ -36,7 +36,9 @@ public class ThrowObjects : MonoBehaviour
             transform.parent.SetParent(null);
             this.GetComponent<PlayerMove>().canMove = true;
             this.gameObject.GetComponent<Rigidbody>().AddForce(Vector3.up * strenght+ (Input.GetAxis("Horizontal") * Vector3.right + Input.GetAxis("Vertical") * Vector3.forward) * strenght);
+            
 
+            
         }
         else
         {

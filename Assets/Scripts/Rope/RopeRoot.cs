@@ -17,7 +17,8 @@ public class RopeRoot : MonoBehaviour
     protected List<Transform> CopySource;
     protected List<Transform> CopyDestination;
     protected static GameObject RigidBodyContainer;
-
+    ThrowableObject th;
+    bool bonesActive = true;
     void Awake()
     {
         if (RigidBodyContainer == null)
@@ -30,9 +31,8 @@ public class RopeRoot : MonoBehaviour
 
         
         
-        ThrowableObject th = CopySource[12].gameObject.AddComponent<ThrowableObject>();
+        th = CopySource[12].gameObject.AddComponent<ThrowableObject>();
 
-        
         CopySource[12].gameObject.GetComponent<CapsuleCollider>().enabled = false;
         CopySource[13].gameObject.GetComponent<CapsuleCollider>().enabled = false;
         CopySource[14].gameObject.GetComponent<CapsuleCollider>().enabled = false;
@@ -119,6 +119,35 @@ public class RopeRoot : MonoBehaviour
             CopyDestination[i].position = CopySource[i].position + PositionOffset;
             CopyDestination[i].rotation = CopySource[i].rotation * Quaternion.Euler(RotationOffset);
         }
+        if (th.isActiveAndEnabled)
+        {
+            if (bonesActive)
+            {
+                SphereCollider[] bones = GameObject.Find("Root").GetComponentsInChildren<SphereCollider>();
+                GameObject.Find("CORE").GetComponent<Rigidbody>().isKinematic = true;
+                foreach (SphereCollider bone in bones)
+                {
+                    bone.enabled = false;
+                    bone.gameObject.GetComponent<Rigidbody>().isKinematic = true;
+                }
+                bonesActive = false;
+            }
+        }
+        else if (!bonesActive)
+        {
+            SphereCollider[] bones = GameObject.Find("Root").GetComponentsInChildren<SphereCollider>();
+            Rigidbody core = GameObject.Find("CORE").GetComponent<Rigidbody>();
+            core.isKinematic = false;
+            core.AddForce(Vector3.up * 1000 + (Input.GetAxis("Horizontal") * Vector3.right + Input.GetAxis("Vertical") * Vector3.forward) * 400); foreach (SphereCollider bone in bones)
+            {
+                bone.enabled = true;
+                bone.gameObject.GetComponent<Rigidbody>().isKinematic = false;
+
+            }
+            bonesActive = true;
+        }
+        
+        
     }
 
     void AddHandle(Transform handle)

@@ -117,7 +117,7 @@ public class JellyBone : MonoBehaviour {
 				Debug.DrawRay(transform.position, (transform.forward * 2 + Vector3.up * 4) * 200f, Color.red, 3, true);
 				//continues in elseif
 			}
-		} else if (Vector3.Distance(core.transform.position, transform.position) < 1f) {
+		} else if (Vector3.Distance(core.transform.position, transform.position) < 2f) {
 			rigidbody.isKinematic = false;
 			notReached = true;
 			//lastGoodPosition = (core.transform.position - transform.position);
