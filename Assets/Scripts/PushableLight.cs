@@ -22,7 +22,7 @@ public class PushableLight : MonoBehaviour {
 					rigidbody.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionZ;
 				}
 			} else {
-				rigidbody.constraints = RigidbodyConstraints.FreezeAll;
+				rigidbody.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ;
 			}
 		}
 	}
