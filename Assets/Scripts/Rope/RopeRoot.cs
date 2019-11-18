@@ -32,7 +32,7 @@ public class RopeRoot : MonoBehaviour
         
         
         th = CopySource[12].gameObject.AddComponent<ThrowableObject>();
-
+        th.SpineStrenght = 100000f;
         CopySource[12].gameObject.GetComponent<CapsuleCollider>().enabled = false;
         CopySource[13].gameObject.GetComponent<CapsuleCollider>().enabled = false;
         CopySource[14].gameObject.GetComponent<CapsuleCollider>().enabled = false;

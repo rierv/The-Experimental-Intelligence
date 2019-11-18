@@ -5,6 +5,8 @@ using UnityEngine;
 public class SwitchControlledPosition : MonoBehaviour, I_Activable
 {
     #region Attributes
+    public bool xLock=false;
+    public bool zLock = false;
     public float maxConstraintX;
     public float minConstraintX;
     public float maxConstraintZ;
@@ -28,7 +30,12 @@ public class SwitchControlledPosition : MonoBehaviour, I_Activable
     {
         if(isActive)
         {
-            dir = new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical"));
+            if(!xLock&&!zLock)
+                dir = new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical"));
+            else if (!xLock)
+                dir = new Vector3(Input.GetAxis("Horizontal"), 0f, 0f);
+            else
+                dir = new Vector3(0f , 0f, Input.GetAxis("Vertical"));
             FixDirection();
             transform.Translate(dir * speed * Time.fixedDeltaTime, Space.Self);
         }
