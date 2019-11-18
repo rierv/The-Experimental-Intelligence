@@ -12,10 +12,11 @@ public class ButtonScript : MonoBehaviour {
 
 	I_Activable activable;
 	float maxZtemp;
+	float timer;
 	#endregion
 
 	private void Start() {
-        activable = triggeredObject.GetComponent<I_Activable>();
+		activable = triggeredObject.GetComponent<I_Activable>();
 		maxZtemp = maxZ;
 	}
 
@@ -25,22 +26,16 @@ public class ButtonScript : MonoBehaviour {
 			if (transform.localPosition.z <= minZ) {
 				maxZtemp = minZ;
 			}
+			timer = timeBeforeDeactivate;
 		}
-	}
-
-	private void OnTriggerExit(Collider other) {
-		if (other.CompareTag("Player") || other.gameObject.layer == 13) {
-			StartCoroutine(DeactivateCoroutine());
-		}
-	}
-
-	IEnumerator DeactivateCoroutine() {
-		yield return new WaitForSeconds(timeBeforeDeactivate);
-		activable.Deactivate();
-		maxZtemp = maxZ;
 	}
 
 	private void Update() {
 		transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, Mathf.Clamp(transform.localPosition.z, minZ, maxZtemp));
+		timer -= Time.deltaTime;
+		if (timer <= 0 && maxZtemp != maxZ) {
+			activable.Deactivate();
+			maxZtemp = maxZ;
+		}
 	}
 }
