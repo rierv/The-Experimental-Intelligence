@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 
@@ -9,7 +10,7 @@ using UnityEngine;
 public class LaserScript : MonoBehaviour
 {
     LineRenderer laser;
-    public float laserWidth = 1.0f;
+    public float laserWidth = 0.2f;
     public float maxLength;
     public Color startColor = new Color(1, 0f, 0f, 0.8f);
     public Color endColor = new Color(1, 0f, 0f, 0.5f);
@@ -61,6 +62,8 @@ public class LaserScript : MonoBehaviour
         {
             if (hit[i].collider)
             {
+                if (hit[i].collider.CompareTag("Player"))
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().name);
                 laserLength = (int)Mathf.Round(hit[i].distance) + 2;
                 laserPositions = new Vector3[laserLength];
                 laser.positionCount = laserLength;
