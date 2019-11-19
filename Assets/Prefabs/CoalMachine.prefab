@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4563918274529077178}
   - component: {fileID: 652198023579751854}
+  - component: {fileID: 422127762}
   m_Layer: 0
   m_Name: CoalMachine
   m_TagString: Untagged
@@ -56,6 +57,19 @@ MonoBehaviour:
   doorHightDifference: {x: 0, y: 2.67, z: 0}
   doorVecolicity: 2
   newBlockTime: 3
+--- !u!65 &422127762
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 652198023579751849}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 6.850269, y: 6.5988436, z: 7.356513}
+  m_Center: {x: 0, y: -0.055054486, z: -0.110851765}
 --- !u!1 &1499088276024358318
 GameObject:
   m_ObjectHideFlags: 0
@@ -159,6 +173,7 @@ GameObject:
   - component: {fileID: 1659432664182178998}
   - component: {fileID: 3931569321400440722}
   - component: {fileID: 1762653523965182725}
+  - component: {fileID: 809711146}
   m_Layer: 0
   m_Name: pCylinder2
   m_TagString: Untagged
@@ -226,6 +241,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &809711146
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3652831988905508865}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5.250002, y: 18.806047, z: 10.759894}
+  m_Center: {x: 0.00000071525574, y: 3.3291607, z: 2.7818713}
 --- !u!1 &4835973818101187309
 GameObject:
   m_ObjectHideFlags: 0
@@ -237,6 +265,7 @@ GameObject:
   - component: {fileID: 3809048594301004558}
   - component: {fileID: 5262531254805064448}
   - component: {fileID: 3930567070678823137}
+  - component: {fileID: 159656374}
   m_Layer: 0
   m_Name: pCylinder1
   m_TagString: Untagged
@@ -304,6 +333,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &159656374
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4835973818101187309}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5.250002, y: 18.80605, z: 10.759895}
+  m_Center: {x: -0.0000021457672, y: 3.32916, z: 2.7818696}
 --- !u!1 &8494762421406386627
 GameObject:
   m_ObjectHideFlags: 0
@@ -345,6 +387,7 @@ GameObject:
   - component: {fileID: 7740954773159207178}
   - component: {fileID: 2579472995597277902}
   - component: {fileID: 1740859252467791608}
+  - component: {fileID: 1144972885}
   m_Layer: 0
   m_Name: body
   m_TagString: Untagged
@@ -412,3 +455,16 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &1144972885
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8646945373976664016}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3, y: 2.8898911, z: 3.2217035}
+  m_Center: {x: 0, y: -0.055054486, z: -0.110851765}
