@@ -10,8 +10,9 @@ public enum FlapperState {
 
 public class StateManager : MonoBehaviour {
 	public float temperature;
-	public float temperatureChangeDuration = 10;
-	public FlapperState state;
+    public float hotTemperatureChangeDuration = 5;
+    public float coldTemperatureChangeDuration = 5;
+    public FlapperState state;
 	public float gaseousPush = 3;
 	public float gaseousMass = 0.5f;
 	[Space]
@@ -50,12 +51,12 @@ public class StateManager : MonoBehaviour {
 			SetState(FlapperState.solid);
 		}
 		if (temperature > 0) {
-			temperature = Mathf.Clamp(temperature - Time.deltaTime / temperatureChangeDuration, 0, float.MaxValue);
+			temperature = Mathf.Clamp(temperature - Time.deltaTime / hotTemperatureChangeDuration, 0, float.MaxValue);
 			if (temperature <= 0) {
 				SetState(FlapperState.jelly);
 			}
 		} else if (temperature < 0) {
-			temperature = Mathf.Clamp(temperature + Time.deltaTime / temperatureChangeDuration, float.MinValue, 0);
+			temperature = Mathf.Clamp(temperature + Time.deltaTime / coldTemperatureChangeDuration, float.MinValue, 0);
 			if (temperature >= 0) {
 				SetState(FlapperState.jelly);
 			}

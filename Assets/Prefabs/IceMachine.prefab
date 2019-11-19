@@ -89,6 +89,7 @@ GameObject:
   - component: {fileID: 2487872819769738010}
   - component: {fileID: 7649354597524617438}
   - component: {fileID: 5891570586936022248}
+  - component: {fileID: 867348668}
   m_Layer: 0
   m_Name: body
   m_TagString: Untagged
@@ -156,6 +157,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &867348668
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3597190273344173504}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.0000007, y: 2.8898911, z: 3.2217042}
+  m_Center: {x: 0, y: -0.055054486, z: -0.11085084}
 --- !u!1 &4325886756495731667
 GameObject:
   m_ObjectHideFlags: 0
@@ -196,6 +210,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8556167502496089514}
   - component: {fileID: 4676641704702621630}
+  - component: {fileID: 132973374}
   m_Layer: 0
   m_Name: IceMachine
   m_TagString: Untagged
@@ -219,6 +234,7 @@ Transform:
   - {fileID: 9022860682457925918}
   - {fileID: 6840030263779468966}
   - {fileID: 4325886756495731664}
+  - {fileID: 411477781000812727}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -242,6 +258,97 @@ MonoBehaviour:
   doorHightDifference: {x: 0, y: 2.67, z: 0}
   doorVecolicity: 2
   newBlockTime: 10
+--- !u!65 &132973374
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4676641704702621625}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 7.927328, y: 7.493412, z: 7.6028275}
+  m_Center: {x: -0.016732216, y: -0.63868904, z: 0.16738725}
+--- !u!1 &6108970348323815277
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 411477781000812727}
+  - component: {fileID: 3370301773048684238}
+  - component: {fileID: 18943517528835974}
+  m_Layer: 0
+  m_Name: pCube42
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &411477781000812727
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6108970348323815277}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 6.2701826, z: 1.139709}
+  m_LocalScale: {x: 0.153522, y: 0.8933963, z: 0.15352206}
+  m_Children: []
+  m_Father: {fileID: 8556167502496089514}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &3370301773048684238
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6108970348323815277}
+  m_Mesh: {fileID: 4105602893859884100, guid: afc14c8210d652f4e8ceb1be88e70c69, type: 3}
+--- !u!23 &18943517528835974
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6108970348323815277}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: -4563408662408329412, guid: afc14c8210d652f4e8ceb1be88e70c69, type: 3}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
 --- !u!1 &6712055213397579710
 GameObject:
   m_ObjectHideFlags: 0
