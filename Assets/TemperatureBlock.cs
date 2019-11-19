@@ -12,6 +12,6 @@ public class TemperatureBlock : MonoBehaviour
     void Update()
     {
         transform.localScale = Vector3.Lerp(transform.localScale, Vector3.zero, Time.deltaTime / duration);
-        if (transform.localScale.magnitude < 0.1f) Destroy(this.gameObject);
+        if (transform.localScale.magnitude < 0.25f) Destroy(this.gameObject);
     }
 }
