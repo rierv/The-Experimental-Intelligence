@@ -3,7 +3,22 @@ guid: 11b35d8d1e353304e8fb92b9300ab247
 ModelImporter:
   serializedVersion: 26
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: blue_cold
+    second: {fileID: 2100000, guid: 94365f0b3ad952b448406d2b4556415a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert1
+    second: {fileID: 2100000, guid: 49749c39841bf5a459f9bb01febb690f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: red_hot
+    second: {fileID: 2100000, guid: a634626d8b9b19d4eb99e73823816220, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -81,7 +96,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 3
+    globalScale: 300
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0

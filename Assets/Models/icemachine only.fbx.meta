@@ -3,7 +3,31 @@ guid: afc14c8210d652f4e8ceb1be88e70c69
 ModelImporter:
   serializedVersion: 26
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: door1
+    second: {fileID: -5706270415110660019, guid: afc14c8210d652f4e8ceb1be88e70c69,
+      type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: forno
+    second: {fileID: 1924593369744067997, guid: afc14c8210d652f4e8ceb1be88e70c69,
+      type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: snowflake
+    second: {fileID: -4563408662408329412, guid: afc14c8210d652f4e8ceb1be88e70c69,
+      type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: tubes
+    second: {fileID: 6739443871471919635, guid: afc14c8210d652f4e8ceb1be88e70c69,
+      type: 3}
   materials:
     importMaterials: 1
     materialName: 0
@@ -81,7 +105,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 3
+    globalScale: 300
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
