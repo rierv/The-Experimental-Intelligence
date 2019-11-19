@@ -21,6 +21,7 @@ public class CameraController : MonoBehaviour
     public float maxZ = 0;
     public float zOffset = -10;
 
+    public Vector3 targetOffset=Vector3.zero;
 
     JellyCore jellyCore;
 
@@ -37,7 +38,7 @@ public class CameraController : MonoBehaviour
         transform.position = Vector3.Lerp(transform.position, newPosition, Time.deltaTime * cameraSpeed);
         if (allowLookAtPlayer)
         {
-            pointer.transform.LookAt(jellyCore.transform);
+            pointer.transform.LookAt(jellyCore.transform.position + targetOffset);
             transform.rotation = Quaternion.Lerp(transform.rotation, pointer.rotation, cameraSpeed * Time.deltaTime);
         }
     }

@@ -6,7 +6,7 @@ public class RobotScript : MonoBehaviour
 {
 
     #region Attributes
-    public Transform flapper;
+    private Transform flapper;
     public Transform wheel;
     public float maxLockerZ;
     public float minLockerZ;
@@ -14,23 +14,37 @@ public class RobotScript : MonoBehaviour
     private Vector3 currPos;
     private float positionDifference;
     private float rotationScale = 100f;
+    public float stunnTime = 5f;
+    bool stop = false;
     #endregion
 
     private void Start()
     {
+        flapper = GameObject.Find("CORE").GetComponent<Transform>();
         robot = gameObject.transform;
         ResetRobotPosition();
     }
 
     private void Update()
     {
-        positionDifference = currPos.z;
-        currPos.z = Mathf.Clamp(flapper.position.z, minLockerZ, maxLockerZ);
-        positionDifference = currPos.z - positionDifference;
-        robot.Translate(0f,0f,positionDifference, Space.World);
-        wheel.Rotate(0f, 0f, rotationScale * positionDifference, Space.Self);
+        if (!stop)
+        {
+            positionDifference = currPos.z;
+            currPos.z = Mathf.Clamp(flapper.position.z, minLockerZ, maxLockerZ);
+            positionDifference = currPos.z - positionDifference;
+            robot.Translate(0f, 0f, positionDifference, Space.World);
+            wheel.Rotate(0f, 0f, rotationScale * positionDifference, Space.Self);
+        }
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.layer == 12)
+        {
+            stop = true;
+            StartCoroutine(RobotStop());
+        }
+    }
     private void OnCollisionStay(Collision collision)
     {
         /*if(collision.gameObject.CompareTag("Player"){
@@ -46,7 +60,11 @@ public class RobotScript : MonoBehaviour
          * ResetRobotPosition();
          */
     }
-
+    IEnumerator RobotStop()
+    {
+        yield return new WaitForSeconds(stunnTime);
+        stop = false;
+    }
    private void ResetRobotPosition()
     {
         currPos = robot.position;

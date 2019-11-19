@@ -9,7 +9,9 @@ public enum JumpType {
 }
 public class PlayerMove : MonoBehaviour {
 	public float speed = 5;
-	[Space]
+    
+
+    [Space]
 	public float jumpForce = 1;
 	public float doubleJumpMultiplier = 1.5f;
 	public float solidJumpForce = 1;
@@ -57,6 +59,7 @@ public class PlayerMove : MonoBehaviour {
 
 	void FixedUpdate() {
 		if (canMove) {
+            
 			if (Input.GetAxis("Horizontal") != 0 && Input.GetAxis("Vertical") != 0) transform.position = Vector3.Lerp(transform.position, transform.position + (Input.GetAxis("Horizontal") * Vector3.right + Input.GetAxis("Vertical") * Vector3.forward) / 1.3f, speed * Time.fixedDeltaTime);
 			else transform.position = Vector3.Lerp(transform.position, transform.position + (Input.GetAxis("Horizontal") * Vector3.right + Input.GetAxis("Vertical") * Vector3.forward), speed * Time.fixedDeltaTime);
 

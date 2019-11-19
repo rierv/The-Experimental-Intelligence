@@ -21,19 +21,22 @@ public class StateManager : MonoBehaviour {
 	public Material solid;
 	public GameObject[] gasParticles;
 	public ParticleSystem gasParticle;
-
-	JellyBone[] bones;
+    public float jellySpeed = 7;
+    public float solidSpeed = 6f;
+    public float gaseousSpeed = 4f;
+    JellyBone[] bones;
 	Rigidbody rigidbody;
 	float defaultMass;
 	SphereCollider collider;
 	SkinnedMeshRenderer meshRenderer;
-
+    PlayerMove pm;
 	void Awake() {
 		bones = GetComponentInParent<FlapperCore>().GetComponentsInChildren<JellyBone>();
 		rigidbody = GetComponent<Rigidbody>();
 		defaultMass = rigidbody.mass;
 		collider = GetComponent<SphereCollider>();
 		meshRenderer = mesh.GetComponent<SkinnedMeshRenderer>();
+        pm = GetComponent<PlayerMove>();
 	}
 
 	void Start() {
@@ -70,6 +73,7 @@ public class StateManager : MonoBehaviour {
 		}
 		if (state == FlapperState.gaseous) {
 			rigidbody.AddForce(Vector3.up * gaseousPush, ForceMode.Impulse);
+            pm.speed = gaseousSpeed;
 			/*foreach (JellyBone bone in bones) {
 				bone.GetComponent<Rigidbody>().AddForce(Vector3.up * gaseousPush, ForceMode.Impulse);
 			}*/
@@ -88,8 +92,10 @@ public class StateManager : MonoBehaviour {
 			gasParticle.Stop();
 			if (state == FlapperState.solid) {
 				meshRenderer.material = solid;
+                pm.speed = solidSpeed;
 			} else {
 				meshRenderer.material = jelly;
+                pm.speed = jellySpeed;
 			}
 		}
 		rigidbody.useGravity = state != FlapperState.gaseous;
