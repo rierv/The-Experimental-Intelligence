@@ -6,41 +6,47 @@ public class IceMachineScript : MonoBehaviour
 {
     #region Attributes
     public Transform cubeQueue;
-    public Rigidbody machineDoor;
-    public Rigidbody blockRigidbody;
-    private Rigidbody instance;
-    private Vector3 temperatureBlockForce = new Vector3(100f, 0f, 0f);
-    private Vector3 doorPositionDifference = new Vector3(0f, 0.5f, 0f);
+    public Transform machineDoor;
+    public GameObject block;
+    private GameObject instance;
+    public float throwBlockForce = 1000f;
+    public float blockDuration = 10f;
+    public Vector3 doorHightDifference = new Vector3(0f, 0.5f, 0f);
+    [Range(1, 5)]
+    public float doorVecolicity = 2;
     private bool isMachineActive = false;
-    private float machineTime = 10f;
-    private float doorTime = 8f;
+    [Range (2, 10)]
+    public float newBlockTime = 2f;
+    private float closeDoorTime;
+    private float openDoorTime;
     private float currentTimeLeft;
     private bool isDoorOpen;
-
+    Vector3 throwForce;
+    Vector3 DoorStartpos;
+    bool newBlockNeeded=true;
     #endregion
     // Start is called before the first frame update
     void Start()
     {
+        closeDoorTime = newBlockTime + 1 / doorVecolicity;
+        openDoorTime = newBlockTime - 1 / doorVecolicity;
+        DoorStartpos = machineDoor.position;
+        throwForce = -transform.forward * throwBlockForce;
         ActivateMachine();
-        OpenMachineDoor();
-        CreateNewCube();
     }
 
     void ActivateMachine()
     {
         isMachineActive = true;
-        currentTimeLeft = machineTime;
     }
 
     void OpenMachineDoor()
     {
-        machineDoor.MovePosition(machineDoor.position + doorPositionDifference);
         isDoorOpen = true;
     }
 
     void CloseMachineDoor()
     {
-        machineDoor.MovePosition(machineDoor.position - doorPositionDifference);
         isDoorOpen = false;
     }
 
@@ -48,30 +54,53 @@ public class IceMachineScript : MonoBehaviour
     {
         if (isDoorOpen)
         {
-            instance = Instantiate(blockRigidbody, cubeQueue.position, cubeQueue.rotation, cubeQueue);
-            instance.AddForce(temperatureBlockForce);
-            currentTimeLeft = machineTime;
+            
+            instance = Instantiate(block, cubeQueue.position, cubeQueue.rotation, cubeQueue);
+            instance.GetComponent<TemperatureBlock>().duration = blockDuration;
+            instance.GetComponent<Rigidbody>().AddForce(throwForce);
         }
     }
 
 
     private void FixedUpdate()
     {
-        if(isMachineActive)
+        if(isMachineActive&&newBlockNeeded)
         {
-            if(currentTimeLeft <= 0f)
-            {
-                OpenMachineDoor();
-                CreateNewCube();
-            }
-            else
-            {
-                if (currentTimeLeft < doorTime && isDoorOpen)
-                    CloseMachineDoor();
-                currentTimeLeft -= Time.fixedDeltaTime;
+            StartCoroutine(openDoor());
+            StartCoroutine(newBlockCoroutine());
+            StartCoroutine(closeDoor());
+            StartCoroutine(restart());
 
-            }
         }
+
+    }
+    IEnumerator openDoor()
+    {
+        yield return new WaitForSeconds(openDoorTime);
+        OpenMachineDoor();
+    }
+    IEnumerator newBlockCoroutine()
+    {
+        yield return new WaitForSeconds(newBlockTime);
+        CreateNewCube();
+    }
+    IEnumerator closeDoor()
+    {
+        yield return new WaitForSeconds(closeDoorTime);
+        CloseMachineDoor();
+    }
+    IEnumerator restart()
+    {
+        newBlockNeeded = false;
+        yield return new WaitForSeconds(newBlockTime*2);
+        newBlockNeeded=true;
+    }
+    private void Update()
+    {
         
+        if (isDoorOpen)
+            machineDoor.position = Vector3.Lerp(machineDoor.position, DoorStartpos + doorHightDifference, Time.deltaTime * doorVecolicity);
+        else
+            machineDoor.position = Vector3.Lerp(machineDoor.position, DoorStartpos, Time.deltaTime * doorVecolicity);
     }
 }

@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 5007871433228375009}
   - component: {fileID: 3601303194633471028}
   - component: {fileID: 552392510436449283}
+  - component: {fileID: 5897291169796071427}
   m_Layer: 13
   m_Name: Movable block
   m_TagString: Untagged
@@ -139,6 +140,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   variation: -1
+  active: 1
+  activeMaterial: {fileID: 2100000, guid: 125e9e6eb79a3e04b82e66987f4f3a5c, type: 2}
+  nonActiveMaterial: {fileID: 2100000, guid: 1d4813cc860a2dd4089b69f43f8af2c5, type: 2}
+--- !u!114 &5897291169796071427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5007871433228375008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bf8d8a31b3dc604e856f68652feeb7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 10
 --- !u!1 &5007871433528857414
 GameObject:
   m_ObjectHideFlags: 0
