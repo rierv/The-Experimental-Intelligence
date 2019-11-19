@@ -5,24 +5,28 @@ using UnityEngine;
 
 public class ButtonScript : MonoBehaviour {
 	#region Attributes
-	public GameObject triggeredObject;
+	public GameObject[] triggeredObjects;
 	public float timeBeforeDeactivate = 1;
 	public float maxZ;
 	public float minZ;
 
-	I_Activable activable;
+	List<I_Activable> activables = new List<I_Activable>();
 	float maxZtemp;
 	float timer;
 	#endregion
 
 	private void Start() {
-		activable = triggeredObject.GetComponent<I_Activable>();
+		foreach (GameObject go in triggeredObjects) {
+			activables.Add(go.GetComponent<I_Activable>());
+		}
 		maxZtemp = maxZ;
 	}
 
 	private void OnTriggerStay(Collider other) {
 		if (other.CompareTag("Player") || other.gameObject.layer == 13) {
-			activable.Activate();
+			foreach (I_Activable ac in activables) {
+				ac.Activate();
+			}
 			if (transform.localPosition.z <= minZ) {
 				maxZtemp = minZ;
 			}
@@ -34,7 +38,9 @@ public class ButtonScript : MonoBehaviour {
 		transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, Mathf.Clamp(transform.localPosition.z, minZ, maxZtemp));
 		timer -= Time.deltaTime;
 		if (timer <= 0 && maxZtemp != maxZ) {
-			activable.Deactivate();
+			foreach (I_Activable ac in activables) {
+				ac.Deactivate();
+			}
 			maxZtemp = maxZ;
 		}
 	}

@@ -281,7 +281,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1773163765994516024, guid: 67bbf04775ed9a548bb0ad92d8832ea1,
         type: 3}
+      propertyPath: triggeredObjects.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1773163765994516024, guid: 67bbf04775ed9a548bb0ad92d8832ea1,
+        type: 3}
       propertyPath: triggeredObject
+      value: 
+      objectReference: {fileID: 504283625}
+    - target: {fileID: 1773163765994516024, guid: 67bbf04775ed9a548bb0ad92d8832ea1,
+        type: 3}
+      propertyPath: triggeredObjects.Array.data[0]
       value: 
       objectReference: {fileID: 504283625}
     - target: {fileID: 4400403741676368409, guid: 67bbf04775ed9a548bb0ad92d8832ea1,
