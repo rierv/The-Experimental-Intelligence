@@ -10,9 +10,9 @@ public enum FlapperState {
 
 public class StateManager : MonoBehaviour {
 	public float temperature;
-    public float hotTemperatureChangeDuration = 5;
-    public float coldTemperatureChangeDuration = 5;
-    public FlapperState state;
+	public float hotTemperatureChangeDuration = 5;
+	public float coldTemperatureChangeDuration = 5;
+	public FlapperState state;
 	public float gaseousPush = 3;
 	public float gaseousMass = 0.5f;
 	[Space]
@@ -22,22 +22,22 @@ public class StateManager : MonoBehaviour {
 	public Material solid;
 	public GameObject[] gasParticles;
 	public ParticleSystem gasParticle;
-    public float jellySpeed = 7;
-    public float solidSpeed = 6f;
-    public float gaseousSpeed = 4f;
-    JellyBone[] bones;
+	public float jellySpeed = 7;
+	public float solidSpeed = 6f;
+	public float gaseousSpeed = 4f;
+	JellyBone[] bones;
 	Rigidbody rigidbody;
 	float defaultMass;
 	SphereCollider collider;
 	SkinnedMeshRenderer meshRenderer;
-    PlayerMove pm;
+	PlayerMove pm;
 	void Awake() {
 		bones = GetComponentInParent<FlapperCore>().GetComponentsInChildren<JellyBone>();
 		rigidbody = GetComponent<Rigidbody>();
 		defaultMass = rigidbody.mass;
 		collider = GetComponent<SphereCollider>();
 		meshRenderer = mesh.GetComponent<SkinnedMeshRenderer>();
-        pm = GetComponent<PlayerMove>();
+		pm = GetComponent<PlayerMove>();
 	}
 
 	void Start() {
@@ -64,9 +64,9 @@ public class StateManager : MonoBehaviour {
 	}
 
 	public void SetState(FlapperState newState) {
-		/*if (newState == state) {
+		if (newState == state) {
 			return;
-		}*/
+		}
 		Debug.Log("New state: " + newState);
 		state = newState;
 		foreach (JellyBone b in bones) {
@@ -74,7 +74,7 @@ public class StateManager : MonoBehaviour {
 		}
 		if (state == FlapperState.gaseous) {
 			rigidbody.AddForce(Vector3.up * gaseousPush, ForceMode.Impulse);
-            pm.speed = gaseousSpeed;
+			pm.speed = gaseousSpeed;
 			/*foreach (JellyBone bone in bones) {
 				bone.GetComponent<Rigidbody>().AddForce(Vector3.up * gaseousPush, ForceMode.Impulse);
 			}*/
@@ -93,10 +93,10 @@ public class StateManager : MonoBehaviour {
 			gasParticle.Stop();
 			if (state == FlapperState.solid) {
 				meshRenderer.material = solid;
-                pm.speed = solidSpeed;
+				pm.speed = solidSpeed;
 			} else {
 				meshRenderer.material = jelly;
-                pm.speed = jellySpeed;
+				pm.speed = jellySpeed;
 			}
 		}
 		rigidbody.useGravity = state != FlapperState.gaseous;

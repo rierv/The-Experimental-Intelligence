@@ -27,9 +27,7 @@ public class ButtonScript : MonoBehaviour {
 			foreach (I_Activable ac in activables) {
 				ac.Activate();
 			}
-			if (transform.localPosition.z <= minZ) {
-				maxZtemp = minZ;
-			}
+			maxZtemp = minZ;
 			timer = timeBeforeDeactivate;
 		}
 	}
