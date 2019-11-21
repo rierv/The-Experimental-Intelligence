@@ -191,7 +191,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5495297968594658006
 Transform:
   m_ObjectHideFlags: 0
@@ -513,7 +513,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7525606549279015212}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: 14.9, y: -13.9, z: 6.34}
+  m_LocalPosition: {x: 14.9, y: -17.2, z: 6.34}
   m_LocalScale: {x: 1000, y: 1000, z: 1000}
   m_Children:
   - {fileID: 121334863323612312}
@@ -532,13 +532,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbef54045f14be14392c6e17223e43d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RigidbodyMass: 100
+  RigidbodyMass: 5
   ColliderRadius: 0.01
   ColliderHeight: 1
   JointSpring: 0
-  JointDamper: 2
+  JointDamper: 4
   RotationOffset: {x: 0, y: 0, z: 0}
   PositionOffset: {x: 0, y: 0, z: 0}
+  spineStrenght: 30000
+  exitForce: 1
+  activeBone: 12
 --- !u!1 &7576631455690826731
 GameObject:
   m_ObjectHideFlags: 0
@@ -616,7 +619,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5689834333949052049
 Transform:
   m_ObjectHideFlags: 0

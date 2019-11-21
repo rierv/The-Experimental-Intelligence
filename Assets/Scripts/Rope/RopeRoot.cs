@@ -20,6 +20,7 @@ public class RopeRoot : MonoBehaviour
     protected static GameObject RigidBodyContainer;
     ThrowableObject th;
     bool bonesActive = true;
+    public int activeBone = 4;
     void Awake()
     {
         if (RigidBodyContainer == null)
@@ -32,9 +33,9 @@ public class RopeRoot : MonoBehaviour
 
         
         
-        th = CopySource[4].gameObject.AddComponent<ThrowableObject>();
+        th = CopySource[activeBone].gameObject.AddComponent<ThrowableObject>();
         th.SpineStrenght = spineStrenght;
-        CopySource[4].gameObject.GetComponent<CapsuleCollider>().enabled = false;
+        CopySource[activeBone].gameObject.GetComponent<CapsuleCollider>().enabled = false;
         //CopySource[13].gameObject.GetComponent<CapsuleCollider>().enabled = false;
         //CopySource[14].gameObject.GetComponent<CapsuleCollider>().enabled = false;
         th.parentBodies = new List<Rigidbody>();
@@ -46,10 +47,10 @@ public class RopeRoot : MonoBehaviour
         Debug.Log(th.parentBodies.Count);
         th.enabled = false;
         th.isHandle = true;
-        CopySource[4].gameObject.layer = 12;
+        CopySource[activeBone].gameObject.layer = 12;
 
         GameObject trigger = new GameObject();
-        trigger.transform.parent = CopySource[4];
+        trigger.transform.parent = CopySource[activeBone];
         CapsuleCollider sc = trigger.AddComponent<CapsuleCollider>();
         sc.radius *= 1.8f;
         sc.isTrigger = true;
