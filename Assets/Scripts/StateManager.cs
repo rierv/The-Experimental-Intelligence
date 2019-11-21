@@ -50,18 +50,18 @@ public class StateManager : MonoBehaviour {
 			SetState(FlapperState.gaseous);
 		} else if (temperature == -1) {
 			SetState(FlapperState.solid);
-		}
-		if (temperature > 0) {
+        }
+        if (temperature > 0) {
 			temperature = Mathf.Clamp(temperature - Time.deltaTime / hotTemperatureChangeDuration, 0, float.MaxValue);
 			if (temperature <= 0) {
 				SetState(FlapperState.jelly);
-			}
-		} else if (temperature < 0) {
+            }
+        } else if (temperature < 0) {
 			temperature = Mathf.Clamp(temperature + Time.deltaTime / coldTemperatureChangeDuration, float.MinValue, 0);
 			if (temperature >= 0) {
 				SetState(FlapperState.jelly);
-			}
-		}
+            }
+        }
 	}
 
 	public void SetState(FlapperState newState) {
