@@ -12,7 +12,7 @@ public class RobotScript : MonoBehaviour
     public float minLockerZ;
     private Transform robot;
     private Vector3 currPos;
-    private float positionDifference;
+    private Vector3 tmp;
     private float rotationScale = 100f;
     public float stunnTime = 5f;
     bool stop = false;
@@ -29,11 +29,12 @@ public class RobotScript : MonoBehaviour
     {
         if (!stop)
         {
-            positionDifference = currPos.z;
+            tmp = currPos;
             currPos.z = Mathf.Clamp(flapper.position.z, minLockerZ, maxLockerZ);
-            positionDifference = currPos.z - positionDifference;
-            robot.Translate(0f, 0f, positionDifference, Space.World);
-            wheel.Rotate(0f, 0f, rotationScale * positionDifference, Space.Self);
+            robot.position = Vector3.Lerp(tmp, currPos, Time.deltaTime * 10);
+            tmp = currPos - tmp;
+            //robot.Translate(0f, 0f, positionDifference, Space.World);
+            wheel.Rotate(0f, 0f, rotationScale * tmp.z, Space.Self);
         }
     }
 
@@ -70,6 +71,6 @@ public class RobotScript : MonoBehaviour
         currPos = robot.position;
         currPos.z = Mathf.Clamp(flapper.position.z, minLockerZ, maxLockerZ);
         robot.position = currPos;
-        positionDifference = 0f;
+        tmp = Vector3.zero;
     }
 }

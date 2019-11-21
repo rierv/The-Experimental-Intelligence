@@ -53,7 +53,8 @@ public class SwitchControlledPosition : MonoBehaviour, I_Activable
                     dir = new Vector3(0f, Input.GetAxis("Vertical"), 0f);
             }
             FixDirection();
-            transform.Translate(dir * speed * Time.fixedDeltaTime, Space.Self);
+            transform.position = Vector3.Lerp(transform.position, transform.position + dir, speed * Time.fixedDeltaTime);
+            //transform.Translate(dir * speed * Time.fixedDeltaTime, Space.Self);
         }
     }
 
