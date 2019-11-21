@@ -30,6 +30,7 @@ public class JellyBone : MonoBehaviour {
 		if (!isRoot) {
 			coreCollider = core.gameObject.AddComponent<SphereCollider>();
 			coreCollider.radius = collider.radius;
+			coreCollider.enabled = false;
 		}
 	}
 
