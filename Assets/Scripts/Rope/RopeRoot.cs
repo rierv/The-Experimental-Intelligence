@@ -32,11 +32,11 @@ public class RopeRoot : MonoBehaviour
 
         
         
-        th = CopySource[12].gameObject.AddComponent<ThrowableObject>();
+        th = CopySource[4].gameObject.AddComponent<ThrowableObject>();
         th.SpineStrenght = spineStrenght;
-        CopySource[12].gameObject.GetComponent<CapsuleCollider>().enabled = false;
-        CopySource[13].gameObject.GetComponent<CapsuleCollider>().enabled = false;
-        CopySource[14].gameObject.GetComponent<CapsuleCollider>().enabled = false;
+        CopySource[4].gameObject.GetComponent<CapsuleCollider>().enabled = false;
+        //CopySource[13].gameObject.GetComponent<CapsuleCollider>().enabled = false;
+        //CopySource[14].gameObject.GetComponent<CapsuleCollider>().enabled = false;
         th.parentBodies = new List<Rigidbody>();
         foreach(Transform bone in CopySource)
         {
@@ -46,10 +46,10 @@ public class RopeRoot : MonoBehaviour
         Debug.Log(th.parentBodies.Count);
         th.enabled = false;
         th.isHandle = true;
-        CopySource[12].gameObject.layer = 12;
+        CopySource[4].gameObject.layer = 12;
 
         GameObject trigger = new GameObject();
-        trigger.transform.parent = CopySource[12];
+        trigger.transform.parent = CopySource[4];
         CapsuleCollider sc = trigger.AddComponent<CapsuleCollider>();
         sc.radius *= 1.8f;
         sc.isTrigger = true;
@@ -78,7 +78,7 @@ public class RopeRoot : MonoBehaviour
             collider.height = ColliderHeight;
             //DistanceJoint
             var joint = representative.gameObject.AddComponent<RopeJoint>();
-            joint.ConnectedRigidbody = parent;
+            joint.ParentTransform = parent;
             joint.DetermineDistanceOnStart = true;
             joint.Spring = JointSpring;
             joint.Damper = JointDamper;

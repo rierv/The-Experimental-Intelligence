@@ -52,10 +52,11 @@ public class ThrowableObject : MonoBehaviour
             
             if (isHandle)
             {
-
+                int counter = 0;
                 foreach (Rigidbody bone in parentBodies)
                 {
-                    bone.AddForce((Input.GetAxis("Horizontal") * Vector3.right + Input.GetAxis("Vertical") * Vector3.forward + Vector3.down / 2) * (SpineStrenght / ((coreRB.transform.position - startPos).magnitude + 1)) * Time.deltaTime);
+                    counter++;
+                    bone.AddForce((Input.GetAxis("Horizontal") * Vector3.right + Input.GetAxis("Vertical") * Vector3.forward + Vector3.down / 2) * (SpineStrenght / ((coreRB.transform.position - startPos).magnitude + 1)) * Time.deltaTime/counter);
 
 
                 }
