@@ -130,6 +130,7 @@ public class RopeRoot : MonoBehaviour
                 foreach (SphereCollider bone in bones)
                 {
                     bone.enabled = false;
+                    bone.GetComponent<JellyBone>().enabled = false;
                     bone.gameObject.GetComponent<Rigidbody>().isKinematic = true;
                 }
                 bonesActive = false;
@@ -140,9 +141,11 @@ public class RopeRoot : MonoBehaviour
             SphereCollider[] bones = GameObject.Find("Root").GetComponentsInChildren<SphereCollider>();
             Rigidbody core = GameObject.Find("CORE").GetComponent<Rigidbody>();
             core.isKinematic = false;
-            core.AddForce(Vector3.up * exitForce* 1000 + (Input.GetAxis("Horizontal") * Vector3.right + Input.GetAxis("Vertical") * Vector3.forward) * exitForce*400); foreach (SphereCollider bone in bones)
+            core.AddForce(Vector3.up * exitForce* 1000 + (Input.GetAxis("Horizontal") * Vector3.right + Input.GetAxis("Vertical") * Vector3.forward) * exitForce*400);
+            foreach (SphereCollider bone in bones)
             {
                 bone.enabled = true;
+                bone.GetComponent<JellyBone>().enabled = true;
                 bone.gameObject.GetComponent<Rigidbody>().isKinematic = false;
 
             }

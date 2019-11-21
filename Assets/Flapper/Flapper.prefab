@@ -594,7 +594,7 @@ ParticleSystem:
   playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
-  useRigidbodyForVelocity: 1
+  useRigidbodyForVelocity: 0
   startDelay:
     serializedVersion: 2
     minMaxState: 0
@@ -658,8 +658,8 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 1
-      minScalar: 0.4
+      scalar: 4
+      minScalar: 0.0001
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -827,8 +827,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 3
-      minScalar: 2
+      scalar: 2
+      minScalar: 0
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -1092,7 +1092,7 @@ ParticleSystem:
     startRotation:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 6.283185
+      scalar: 0
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -1408,7 +1408,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 55.89
+      scalar: 35
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -1461,7 +1461,7 @@ ParticleSystem:
     rateOverDistance:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 15
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -1533,22 +1533,31 @@ ParticleSystem:
           inWeight: 0.33333334
           outWeight: 0.3866667
         - serializedVersion: 3
-          time: 0.3966198
-          value: 0.4015574
-          inSlope: 0.28784966
-          outSlope: 0.28784966
+          time: 0.19857413
+          value: 0.529922
+          inSlope: -0.5729187
+          outSlope: -0.5729187
           tangentMode: 0
           weightedMode: 0
           inWeight: 0.33333334
           outWeight: 0.33333334
         - serializedVersion: 3
-          time: 1
-          value: 0
-          inSlope: -2.057223
-          outSlope: -2.057223
+          time: 0.7282947
+          value: 0.09684317
+          inSlope: 0.05013763
+          outSlope: 0.05013763
           tangentMode: 0
           weightedMode: 0
-          inWeight: 0.28835976
+          inWeight: 0.33333334
+          outWeight: 0.8700762
+        - serializedVersion: 3
+          time: 1
+          value: 0
+          inSlope: -0.06601684
+          outSlope: -0.06601684
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.7533822
           outWeight: 0.33333334
         m_PreInfinity: 2
         m_PostInfinity: 2
@@ -1685,7 +1694,7 @@ ParticleSystem:
         m_RotationOrder: 4
     separateAxes: 0
   RotationModule:
-    enabled: 1
+    enabled: 0
     x:
       serializedVersion: 2
       minMaxState: 3
@@ -2623,11 +2632,11 @@ ParticleSystem:
     inWorldSpace: 0
   InheritVelocityModule:
     enabled: 1
-    m_Mode: 1
+    m_Mode: 0
     m_Curve:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 0.2
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -3119,7 +3128,7 @@ ParticleSystem:
     inWorldSpace: 0
     multiplyDragByParticleSize: 1
     multiplyDragByParticleVelocity: 1
-    dampen: 0
+    dampen: 1
     drag:
       serializedVersion: 2
       minMaxState: 0
@@ -5260,7 +5269,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 58c8e1ba3f4d8bd46a281c5513ce889d, type: 2}
+  - {fileID: 2100000, guid: ea8849d7065b99c43a06511885950b42, type: 2}
   - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -5319,13 +5328,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2540189788356693658, guid: c4147d0d1252c8d459b331e28364c565,
         type: 3}
-      propertyPath: m_IsActive
-      value: 0
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 2540189788356693658, guid: c4147d0d1252c8d459b331e28364c565,
         type: 3}
-      propertyPath: m_Layer
-      value: 9
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2542360666665112360, guid: c4147d0d1252c8d459b331e28364c565,
         type: 3}
@@ -5404,13 +5413,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2540189788356693658, guid: c4147d0d1252c8d459b331e28364c565,
         type: 3}
-      propertyPath: m_IsActive
-      value: 0
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 2540189788356693658, guid: c4147d0d1252c8d459b331e28364c565,
         type: 3}
-      propertyPath: m_Layer
-      value: 9
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2542360666665112360, guid: c4147d0d1252c8d459b331e28364c565,
         type: 3}
@@ -5489,13 +5498,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2540189788356693658, guid: c4147d0d1252c8d459b331e28364c565,
         type: 3}
-      propertyPath: m_IsActive
-      value: 0
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 2540189788356693658, guid: c4147d0d1252c8d459b331e28364c565,
         type: 3}
-      propertyPath: m_Layer
-      value: 9
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2542360666665112360, guid: c4147d0d1252c8d459b331e28364c565,
         type: 3}
@@ -5833,13 +5842,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2540189788356693658, guid: c4147d0d1252c8d459b331e28364c565,
         type: 3}
-      propertyPath: m_IsActive
-      value: 0
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 2540189788356693658, guid: c4147d0d1252c8d459b331e28364c565,
         type: 3}
-      propertyPath: m_Layer
-      value: 9
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2542360666665112360, guid: c4147d0d1252c8d459b331e28364c565,
         type: 3}
@@ -5918,13 +5927,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2540189788356693658, guid: c4147d0d1252c8d459b331e28364c565,
         type: 3}
-      propertyPath: m_IsActive
-      value: 0
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 2540189788356693658, guid: c4147d0d1252c8d459b331e28364c565,
         type: 3}
-      propertyPath: m_Layer
-      value: 9
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2542360666665112360, guid: c4147d0d1252c8d459b331e28364c565,
         type: 3}
@@ -6003,13 +6012,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2540189788356693658, guid: c4147d0d1252c8d459b331e28364c565,
         type: 3}
-      propertyPath: m_IsActive
-      value: 0
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 2540189788356693658, guid: c4147d0d1252c8d459b331e28364c565,
         type: 3}
-      propertyPath: m_Layer
-      value: 9
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2542360666665112360, guid: c4147d0d1252c8d459b331e28364c565,
         type: 3}
