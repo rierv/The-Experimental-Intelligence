@@ -31,6 +31,7 @@ public class StateManager : MonoBehaviour {
 	SphereCollider collider;
 	SkinnedMeshRenderer meshRenderer;
 	PlayerMove pm;
+
 	void Awake() {
 		bones = GetComponentInParent<FlapperCore>().GetComponentsInChildren<JellyBone>();
 		rigidbody = GetComponent<Rigidbody>();
