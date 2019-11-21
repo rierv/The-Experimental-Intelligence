@@ -9,9 +9,9 @@ public enum JumpType {
 }
 public class PlayerMove : MonoBehaviour {
 	public float speed = 5;
-    
 
-    [Space]
+
+	[Space]
 	public float jumpForce = 1;
 	public float doubleJumpMultiplier = 1.5f;
 	public float solidJumpForce = 1;
@@ -41,7 +41,7 @@ public class PlayerMove : MonoBehaviour {
 	[Space]
 	public Rigidbody Up;
 	public Rigidbody Down, Left, Front, Right, Back;
-	public bool canMove = true;
+	public bool canMove, canJump = true;
 	[HideInInspector]
 	public bool jumping, shrinking = false;
 
@@ -59,7 +59,7 @@ public class PlayerMove : MonoBehaviour {
 
 	void FixedUpdate() {
 		if (canMove) {
-            
+
 			if (Input.GetAxis("Horizontal") != 0 && Input.GetAxis("Vertical") != 0) transform.position = Vector3.Lerp(transform.position, transform.position + (Input.GetAxis("Horizontal") * Vector3.right + Input.GetAxis("Vertical") * Vector3.forward) / 1.3f, speed * Time.fixedDeltaTime);
 			else transform.position = Vector3.Lerp(transform.position, transform.position + (Input.GetAxis("Horizontal") * Vector3.right + Input.GetAxis("Vertical") * Vector3.forward), speed * Time.fixedDeltaTime);
 
@@ -135,7 +135,7 @@ public class PlayerMove : MonoBehaviour {
 		yield return new WaitForSeconds(wait + shrinkage * 0.02f);
 		if (!shrinking && !jumping) {
 			jumping = true;
-			if (stateManager.state != FlapperState.gaseous && rigidbody.velocity.y > -maxFallingSpeedForJumping) {
+			if (stateManager.state != FlapperState.gaseous && canJump) {
 				if (stateManager.state == FlapperState.solid) {
 					rigidbody.AddForce(Vector3.up * solidJumpForce, ForceMode.VelocityChange);
 				} else if (shrinkage == 1) {
