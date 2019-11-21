@@ -8,34 +8,22 @@ public class DoorScript : MonoBehaviour, I_Activable {
 	public float lowerLockerY;
 	public float doorOpenTime;
 	private bool isActive = false;
-	private bool takeDoorUp = false;
-	private float doorTimer;
 	private Vector3 translateVector;
 	#endregion
 
 	private void Start() {
-		translateVector = new Vector3(0f, Time.fixedDeltaTime, 0f);
+		translateVector = Vector3.up;
 	}
 
 	private void Update() {
-		if (takeDoorUp) {
+		if (isActive) {
 			if ((upperLockerY - transform.position.y) > Time.deltaTime) {
-				transform.Translate(translateVector);
-			} else {
-				takeDoorUp = false;
-				doorTimer = doorOpenTime;
+				transform.position=Vector3.Lerp(transform.position, transform.position+translateVector, Time.deltaTime*doorOpenTime);
 			}
-		} else {
-			if (isActive) {
-				takeDoorUp = true;
-			} else if (doorTimer > 0f) {
-				doorTimer -= Time.deltaTime;
-			} else if ((transform.position.y - lowerLockerY) > Time.deltaTime) {
-				transform.Translate(-translateVector);
-			}
-		}
+		} else if ((transform.position.y - lowerLockerY) > Time.deltaTime) {
+                transform.position = Vector3.Lerp(transform.position, transform.position - translateVector, Time.deltaTime * doorOpenTime);
+        }
 
-		isActive = false;
 
 	}
 
@@ -43,5 +31,7 @@ public class DoorScript : MonoBehaviour, I_Activable {
 		isActive = true;
 	}
 
-	public void Deactivate() { }
+	public void Deactivate() {
+        isActive = false;
+    }
 }
