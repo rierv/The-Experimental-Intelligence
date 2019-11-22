@@ -360,10 +360,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f9f2cf086ba0454fa1459a5227a61e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flapper: {fileID: 0}
   wheel: {fileID: 4075120967635633317}
   maxLockerZ: 6
   minLockerZ: -6
+  rotationScale: 50
+  stunnTime: 5
+  speed: 10
 --- !u!1 &7470543108342453892
 GameObject:
   m_ObjectHideFlags: 0

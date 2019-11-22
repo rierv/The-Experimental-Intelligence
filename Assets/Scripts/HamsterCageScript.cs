@@ -14,7 +14,7 @@ public class HamsterCageScript : MonoBehaviour
     {
         wheel = gameObject.GetComponentInParent<Rigidbody>();
     }
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Player"))
         {

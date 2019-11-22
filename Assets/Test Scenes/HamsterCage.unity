@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.45131308, g: 0.50095665, b: 0.57315546, a: 1}
+  m_IndirectSpecularColor: {r: 0.45131254, g: 0.5009561, b: 0.57315487, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -606,8 +606,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1615730973}
-  - component: {fileID: 1615730975}
   - component: {fileID: 1615730974}
+  - component: {fileID: 1615730975}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -623,8 +623,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1615730972}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.8835, y: 0.8835, z: 1.1018602}
+  m_LocalPosition: {x: 0, y: 0.00039, z: 0}
+  m_LocalScale: {x: 0.8627313, y: 0.8627313, z: 1.0759584}
   m_Children: []
   m_Father: {fileID: 1824579083}
   m_RootOrder: 0
@@ -655,7 +655,7 @@ MeshCollider:
   serializedVersion: 3
   m_Convex: 1
   m_CookingOptions: 14
-  m_Mesh: {fileID: 2534964839176971238, guid: 1af67f272468d4b49953e6db0fea2ea4, type: 3}
+  m_Mesh: {fileID: 4300000, guid: f02ac4c7b1fc58647b688c654ed34424, type: 2}
 --- !u!1 &1772181278
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,14 +13,17 @@ public class RobotScript : MonoBehaviour
     private Transform robot;
     private Vector3 currPos;
     private Vector3 tmp;
-    private float rotationScale = 100f;
+    public float rotationScale = 50f;
     public float stunnTime = 5f;
     bool stop = false;
+    public float speed = 10f;
+    private FlapperState state;
     #endregion
 
     private void Start()
     {
         flapper = GameObject.Find("CORE").GetComponent<Transform>();
+        state = GameObject.Find("Flapper model").GetComponent<JellyBone>().state;
         robot = gameObject.transform;
         ResetRobotPosition();
     }
@@ -29,12 +32,12 @@ public class RobotScript : MonoBehaviour
     {
         if (!stop)
         {
-            tmp = currPos;
+            tmp = robot.position;
             currPos.z = Mathf.Clamp(flapper.position.z, minLockerZ, maxLockerZ);
-            robot.position = Vector3.Lerp(tmp, currPos, Time.deltaTime * 10);
+            robot.position = Vector3.Lerp(tmp, currPos, Time.deltaTime * speed);
             tmp = currPos - tmp;
             //robot.Translate(0f, 0f, positionDifference, Space.World);
-            wheel.Rotate(0f, 0f, rotationScale * tmp.z, Space.Self);
+            wheel.Rotate(0f, 0f, -rotationScale * tmp.z, Space.Self);
         }
     }
 
@@ -45,21 +48,20 @@ public class RobotScript : MonoBehaviour
             stop = true;
             StartCoroutine(RobotStop());
         }
-    }
-    private void OnCollisionStay(Collision collision)
-    {
-        /*if(collision.gameObject.CompareTag("Player"){
-         * if(flapperState == "Solid")
-         * robot.getComponent<Rigidbody>().isKinematic = false;
-         * }*/
+        /*else if (collision.gameObject.CompareTag("Player"))
+        {
+            state = GameObject.Find("Flapper model").GetComponent<JellyBone>().state;
+            if (state == FlapperState.solid)
+            {
+                robot.GetComponent<Rigidbody>().isKinematic = false;
+            }
+        }*/
     }
 
     private void OnCollisionExit(Collision collision)
     {
-        /*
-         * robot.getComponent<Rigidbody>().isKinematic = true;
-         * ResetRobotPosition();
-         */
+          //robot.GetComponent<Rigidbody>().isKinematic = true;
+          //ResetRobotPosition();
     }
     IEnumerator RobotStop()
     {
@@ -68,9 +70,11 @@ public class RobotScript : MonoBehaviour
     }
    private void ResetRobotPosition()
     {
+        tmp = robot.position;
         currPos = robot.position;
         currPos.z = Mathf.Clamp(flapper.position.z, minLockerZ, maxLockerZ);
-        robot.position = currPos;
-        tmp = Vector3.zero;
+        robot.position = Vector3.Lerp(tmp, currPos, Time.deltaTime * speed);
+        tmp = currPos - tmp;
+        wheel.Rotate(0f, 0f, -rotationScale * tmp.z, Space.Self);
     }
 }
