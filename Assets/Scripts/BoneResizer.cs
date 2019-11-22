@@ -33,7 +33,7 @@ public class BoneResizer : MonoBehaviour
     private void Update()
     {
         Flapper.transform.localPosition = Core.transform.position;
-        Core.transform.localPosition = new Vector3(0, (oldScale.y-Flapper.transform.localScale.y)/1000, 0);
+        Core.transform.localPosition = new Vector3(0, (oldScale.y-Flapper.transform.localScale.y)/10000, 0);
 
         if (active||waitingForJellyState) Flapper.transform.localScale = Vector3.Lerp(Flapper.transform.localScale, newScale, Time.deltaTime * scaleVelocity);
         else if ( Flapper.transform.localScale != oldScale) Flapper.transform.localScale = Vector3.Lerp(Flapper.transform.localScale, oldScale, Time.deltaTime * scaleVelocity);
