@@ -6,7 +6,10 @@ public class CameraController : MonoBehaviour
 {
     public float cameraSpeed = 1;
     public Transform pointer;
-    public bool allowLookAtPlayer=false;
+    public Transform target;
+    public Transform secondTarget;
+
+    public bool allowLookAtTarget=false;
     [Header("To lock an axis, freeze set 0 to min and max")]
     public float minX = -100;
     public float maxX = 100;
@@ -21,24 +24,24 @@ public class CameraController : MonoBehaviour
     public float maxZ = 0;
     public float zOffset = -10;
 
-    public Vector3 targetOffset=Vector3.zero;
+    private Vector3 secondTargetOffset = Vector3.zero;
 
-    JellyCore jellyCore;
 
     void Awake()
     {
 
-        jellyCore = FindObjectOfType<JellyCore>();
-        transform.position=Vector3.Lerp(transform.position, new Vector3(Mathf.Clamp(jellyCore.transform.position.x, minX, maxX)+ xOffset, Mathf.Clamp(jellyCore.transform.position.y, minY, maxY) + yOffset, Mathf.Clamp(jellyCore.transform.position.z, minZ, maxZ) + zOffset), Time.deltaTime*cameraSpeed);
+        if(target==null) target = FindObjectOfType<JellyCore>().transform;
+        transform.position=Vector3.Lerp(transform.position, new Vector3(Mathf.Clamp(target.transform.position.x, minX, maxX)+ xOffset, Mathf.Clamp(target.transform.position.y, minY, maxY) + yOffset, Mathf.Clamp(target.transform.position.z, minZ, maxZ) + zOffset), Time.deltaTime*cameraSpeed);
     }
 
     void Update()
     {
-        Vector3 newPosition = new Vector3(Mathf.Clamp(jellyCore.transform.position.x, minX, maxX) + xOffset, Mathf.Clamp(jellyCore.transform.position.y, minY, maxY) + yOffset, Mathf.Clamp(jellyCore.transform.position.z, minZ, maxZ) + zOffset);
+        Vector3 newPosition = new Vector3(Mathf.Clamp(target.transform.position.x, minX, maxX) + xOffset, Mathf.Clamp(target.transform.position.y, minY, maxY) + yOffset, Mathf.Clamp(target.transform.position.z, minZ, maxZ) + zOffset);
         transform.position = Vector3.Lerp(transform.position, newPosition, Time.deltaTime * cameraSpeed);
-        if (allowLookAtPlayer)
+        if (allowLookAtTarget)
         {
-            pointer.transform.LookAt(jellyCore.transform.position + targetOffset);
+            if (secondTarget != null) secondTargetOffset = secondTarget.position - target.transform.position;
+            pointer.transform.LookAt(target.transform.position + secondTargetOffset);
             transform.rotation = Quaternion.Lerp(transform.rotation, pointer.rotation, cameraSpeed * Time.deltaTime);
         }
     }

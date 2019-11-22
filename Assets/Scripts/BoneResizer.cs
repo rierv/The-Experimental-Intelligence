@@ -15,6 +15,7 @@ public class BoneResizer : MonoBehaviour
     GameObject Core;
     public float scaleVelocity = 5;
     bool transformation=true;
+    bool starting = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -59,13 +60,15 @@ public class BoneResizer : MonoBehaviour
         {
             Core.GetComponent<PlayerMove>().jumping = true;
             freezeFlapperBones();
+            starting = true;
         }
     }
     private void OnTriggerExit(Collider other)
     {
         
-        if (other.tag == "Player")
+        if (other.tag == "Player"&&starting)
         {
+            starting = false;
             Core.GetComponent<PlayerMove>().jumping = false;
             if (state.state == FlapperState.solid) waitingForJellyState = true;
             else

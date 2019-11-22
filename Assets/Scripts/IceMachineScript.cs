@@ -15,7 +15,7 @@ public class IceMachineScript : MonoBehaviour {
 	[Range(1, 5)]
 	public float doorVecolicity = 2;
 	private bool isMachineActive = false;
-	[Range(2, 10)]
+	[Range(2, 20)]
 	public float newBlockTime = 2f;
 	private float closeDoorTime;
 	private float openDoorTime;
@@ -93,7 +93,6 @@ public class IceMachineScript : MonoBehaviour {
         CreateNewCube();
         yield return new WaitForSeconds(closeDoorTime - newBlockTime);
         CloseMachineDoor();
-        yield return new WaitForSeconds(newBlockTime * 2);
         newBlockNeeded = true;
     }
     IEnumerator firstBlockCoroutine()

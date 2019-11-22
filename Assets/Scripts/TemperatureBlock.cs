@@ -24,9 +24,9 @@ public class TemperatureBlock : MonoBehaviour {
     IEnumerator destroyBlock()
     {
         
-        yield return new WaitForSeconds(melting_duration/2);
+        yield return new WaitForSeconds(melting_duration/2+melting_duration/4);
         dissolveParticle.Play();
-        yield return new WaitForSeconds(melting_duration/2);
+        yield return new WaitForSeconds(melting_duration/2- melting_duration / 4);
         melting_speed *= 10;
         yield return new WaitForSeconds(3f);
         Destroy(this.gameObject);

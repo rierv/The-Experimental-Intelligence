@@ -516,11 +516,12 @@ MonoBehaviour:
   machineDoor: {fileID: 5266336238740787383}
   block: {fileID: 5286839683607338677, guid: 87ff0b2d244a0d24191f992aa3aaf0a7, type: 3}
   throwBlockForce: 700
-  block_melting_speed: 0.05
+  block_melting_speed: 0.03
   block_melting_duration: 15
   doorHightDifference: {x: 0, y: 2, z: 0}
   doorVecolicity: 2.79
   newBlockTime: 8.81
+  firstBlock: 1
 --- !u!1 &7395222109461629219
 GameObject:
   m_ObjectHideFlags: 0
