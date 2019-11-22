@@ -14,7 +14,7 @@ public class TemperatureSource : MonoBehaviour, I_Activable {
 		myColor = transform.GetComponentInChildren<MeshRenderer>();
 		if (!active) Deactivate();
 	}
-	public void Activate() {
+	public void Activate(bool type=true) {
 		active = true;
 		myColor.material = activeMaterial;
 	}

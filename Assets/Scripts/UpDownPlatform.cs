@@ -31,7 +31,7 @@ public class UpDownPlatform : MonoBehaviour, I_Activable {
 		if (Vector3.Distance(transform.position, StartPos) < 5f) ready = true;
 	}
 
-	public void Activate() {
+	public void Activate(bool type = true) {
 		if (ready) StartCoroutine(Move());
 		ready = false;
 	}

@@ -12,7 +12,7 @@ public class SwitchControlledRotation : MonoBehaviour, I_Activable
     private bool isActive = false;
     #endregion
 
-    public void Activate()
+    public void Activate(bool type = true)
     {
         isActive = true;
     }

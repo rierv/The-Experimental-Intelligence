@@ -30,7 +30,7 @@ public class NextLevel : MonoBehaviour, I_Activable {
 		SceneManager.LoadScene(nextLevel.name);
 	}
 
-	public void Activate() {
+	public void Activate(bool type=true) {
 		isActive = true;
 		light.enabled = isActive;
 	}

@@ -88,8 +88,10 @@ public partial class SwitchScript : MonoBehaviour
                 y = y * Time.deltaTime * stickSpeed * 3;
                 if (vertical && horizontal)
                     cursor.localPosition= new Vector3 (Mathf.Clamp(cursor.localPosition.x + x, -maxInclination, maxInclination), cursor.localPosition.y, Mathf.Clamp(cursor.localPosition.z+y,-maxInclination, maxInclination));
-                else if (horizontal) cursor.localPosition = new Vector3(Mathf.Clamp(cursor.localPosition.x + x,-maxInclination, maxInclination), cursor.localPosition.y, cursor.localPosition.z);
-                else if (vertical) cursor.localPosition = new Vector3(cursor.localPosition.x, cursor.localPosition.y, Mathf.Clamp(cursor.localPosition.z + y,-maxInclination, maxInclination));
+                //else if (horizontal) cursor.localPosition = new Vector3(Mathf.Clamp(cursor.localPosition.x + x,-maxInclination, maxInclination), cursor.localPosition.y, cursor.localPosition.z);
+                //else if (vertical) cursor.localPosition = new Vector3(cursor.localPosition.x, cursor.localPosition.y, Mathf.Clamp(cursor.localPosition.z + y,-maxInclination, maxInclination));
+                else if (horizontal) pointer.LookAt(transform.position + Vector3.right - x * Vector3.up * maxInclination);
+                else if (vertical) pointer.LookAt(transform.position + Vector3.forward - y * Vector3.up * maxInclination);
             }
         }
         else 
@@ -114,7 +116,7 @@ public partial class SwitchScript : MonoBehaviour
 
         if (comingBackToVerticalPos) cursor.localPosition = Vector3.Lerp(cursor.localPosition, Vector3.up * 5, stickSpeed * Time.deltaTime);
 
-        pointer.LookAt(cursor.position);
+        if (vertical && horizontal) pointer.LookAt(cursor.position);
         transform.rotation = Quaternion.Lerp(transform.rotation, pointer.rotation, stickSpeed * Time.deltaTime);
     }
 

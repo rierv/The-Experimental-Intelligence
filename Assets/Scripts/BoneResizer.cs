@@ -55,7 +55,7 @@ public class BoneResizer : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.tag == "Player"&&state.state==FlapperState.jelly)
         {
             Core.GetComponent<PlayerMove>().jumping = true;
             freezeFlapperBones();

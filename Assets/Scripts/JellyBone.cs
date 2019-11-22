@@ -5,6 +5,7 @@ using UnityEngine;
 public class JellyBone : MonoBehaviour {
 	public bool isRoot;
 	public FlapperState state;
+    public Vector3 offset = Vector3.zero;
 
 	JellyCore core;
 	Rigidbody coreRigidbody;
@@ -46,7 +47,7 @@ public class JellyBone : MonoBehaviour {
 				rigidbody.AddForce(Physics.gravity * -JellyCore.gaseousAntiGravity);
 			}*/
 			float acceleration = (coreRigidbody.velocity.y - lastCoreSpeedY) / Time.fixedDeltaTime;
-			Vector3 force = (core.transform.position - transform.position) * JellyCore.cohesion;
+			Vector3 force = (core.transform.position - transform.position + offset) * JellyCore.cohesion;
 			if (acceleration < -0.1f) {
 				// limit acceleration only when falling
 				force.y = Mathf.Clamp(force.y, acceleration, float.MaxValue);

@@ -19,7 +19,7 @@ public class SwitchControlledPosition : MonoBehaviour, I_Activable
     private Vector3 dir;
     private bool isActive = false;
     #endregion
-    public void Activate()
+    public void Activate(bool type = true)
     {
         isActive = true;
     }

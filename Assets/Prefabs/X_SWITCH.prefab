@@ -277,7 +277,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   switchBase: {fileID: 1236377197499479368}
-  targetObject: {fileID: 4533409351744442341}
+  targetObject: {fileID: 0}
   yOffset: 1
   handle: {fileID: 2617106573365485021}
   maxInclination: 5
@@ -291,6 +291,8 @@ MonoBehaviour:
   xCameraOffset: 0
   yCameraOffset: 0
   zCameraOffset: 0
+  cameraMovementSpeed: 3
+  cameraRotationSpeed: 3
 --- !u!1 &2617106573268165358
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,7 +8,7 @@ public class RotatingPlatform : MonoBehaviour, I_Activable
     Quaternion startRotation;
     public Quaternion aimedRotation;
     public float speed=1;
-    public void Activate()
+    public void Activate(bool type = true)
     {
         active = true;
     }

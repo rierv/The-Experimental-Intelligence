@@ -27,7 +27,7 @@ public class DoorScript : MonoBehaviour, I_Activable {
 
 	}
 
-	public void Activate() {
+	public void Activate(bool type = true) {
 		isActive = true;
 	}
 

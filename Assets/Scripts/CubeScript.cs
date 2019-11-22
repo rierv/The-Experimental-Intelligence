@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CubeScript : MonoBehaviour, I_Activable {
 	private Vector3 force = new Vector3(10f, 0f, 0f);
-	public void Activate() {
+	public void Activate(bool type = true) {
 		GetComponent<Rigidbody>().AddForce(force);
 	}
 
