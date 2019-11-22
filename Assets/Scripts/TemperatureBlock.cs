@@ -3,22 +3,32 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class TemperatureBlock : MonoBehaviour {
-    public float duration;
-    public BoxCollider collider;
+    public float melting_speed=0.1f;
+    public float melting_duration=20f;
     private ParticleSystem dissolveParticle;
-
     // Start is called before the first frame update
 
-    private void Start()
+    private void Awake()
     {
         dissolveParticle = GetComponent<ParticleSystem>();
     }
+    private void Start()
+    {
+        StartCoroutine(destroyBlock());
+    }
     // Update is called once per frame
     void Update() {
-        transform.localScale = Vector3.Lerp(transform.localScale, Vector3.zero, Time.deltaTime / duration);
-        if (transform.localScale.magnitude < 0.8f) {
-                dissolveParticle.Play();
-                Destroy(this.gameObject);
-        }
-	}
+        transform.localScale = Vector3.Lerp(transform.localScale, Vector3.zero, Time.deltaTime * melting_speed);
+        
+    }
+    IEnumerator destroyBlock()
+    {
+        
+        yield return new WaitForSeconds(melting_duration/2);
+        dissolveParticle.Play();
+        yield return new WaitForSeconds(melting_duration/2);
+        melting_speed *= 10;
+        yield return new WaitForSeconds(3f);
+        Destroy(this.gameObject);
+    }
 }
