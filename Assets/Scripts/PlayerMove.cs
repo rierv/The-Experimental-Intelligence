@@ -195,5 +195,6 @@ public class PlayerMove : MonoBehaviour {
 		Front.MovePosition(Front.position + Vector3.forward * force * Time.deltaTime);
 		Back.MovePosition(Back.position + Vector3.back * force * Time.deltaTime);
 		shrinking_counter--;
+        Debug.Log("ueue!");
 	}
 }

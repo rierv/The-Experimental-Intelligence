@@ -25,9 +25,8 @@ public class TemperatureSource : MonoBehaviour, I_Activable {
 	}
 
 	private void OnTriggerStay(Collider other) {
-		JellyBone jellyBone = other.GetComponent<JellyBone>();
-		if (jellyBone && active) {
-			jellyBone.GetComponentInParent<FlapperCore>().GetComponentInChildren<StateManager>().temperature = variation;
+		if ((other.gameObject.tag == "Bone"||other.gameObject.tag == "Player") && active) {
+			other.GetComponentInParent<FlapperCore>().GetComponentInChildren<StateManager>().temperature = variation;
 		}
 	}
 }
