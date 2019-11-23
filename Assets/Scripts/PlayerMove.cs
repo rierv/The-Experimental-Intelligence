@@ -169,7 +169,7 @@ public class PlayerMove : MonoBehaviour {
 	jumping = false;
 }*/
 
-	void updateShrink() {
+	public void updateShrink() {
 		float force = bonesForce * shrinkage;
 		switch (jumpType) {
 			case JumpType.Shrink:
