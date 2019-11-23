@@ -5,15 +5,15 @@ using UnityEngine;
 public class IsTouchingGround : MonoBehaviour {
 	PlayerMove playerMove;
 	int colliderCount = 0;
-	float offset;
+	Vector3 offset;
 
 	void Awake() {
 		playerMove = GetComponentInParent<PlayerMove>();
-		offset = transform.localPosition.y;
+		offset = transform.localPosition;
 	}
 
 	private void Update() {
-		transform.position = transform.parent.position + Vector3.up * offset;
+		transform.position = transform.parent.position + offset;
 	}
 
 	private void OnTriggerEnter(Collider other) {
