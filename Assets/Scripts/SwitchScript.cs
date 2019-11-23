@@ -61,7 +61,7 @@ public partial class SwitchScript : MonoBehaviour
                     bone.gameObject.GetComponent<Rigidbody>().isKinematic = true;
                 }
                 bonesActive = false;
-                targetObject.GetComponent<I_Activable>().Activate();
+                if (vertical && horizontal) targetObject.GetComponent<I_Activable>().Activate();
 
                 if (camera != null)
                 {
@@ -107,26 +107,29 @@ public partial class SwitchScript : MonoBehaviour
 
                 }
                 bonesActive = true;
-                targetObject.GetComponent<I_Activable>().Deactivate();
+                if (vertical && horizontal) targetObject.GetComponent<I_Activable>().Deactivate();
 
                 if (camera != null )
                         camera.GetComponent<CameraController>().enabled = true;
             }
         }
 
+        if ((horizontal&&!vertical)||(!horizontal&&vertical))
+        {
+            if (pointer.rotation.eulerAngles.x > 300&& pointer.rotation.eulerAngles.x < 321)
+                targetObject.GetComponent<I_Activable>().Activate();
+            else if (pointer.rotation.eulerAngles.x < 60 && pointer.rotation.eulerAngles.x > 40) 
+                targetObject.GetComponent<I_Activable>().Activate(false); 
+            else targetObject.GetComponent<I_Activable>().Deactivate();
+        }
+        
+
         if (comingBackToVerticalPos) cursor.localPosition = Vector3.Lerp(cursor.localPosition, Vector3.up * 5, stickSpeed * Time.deltaTime);
 
         if (vertical && horizontal) pointer.LookAt(cursor.position);
         transform.rotation = Quaternion.Lerp(transform.rotation, pointer.rotation, stickSpeed * Time.deltaTime);
     }
-
-    //NOT USED
-    public enum SwitchState
-    {
-        NonActive,
-        ActiveFirst,
-        ActiveSecond
-    }
+    
 }
 
 

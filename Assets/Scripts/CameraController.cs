@@ -24,8 +24,8 @@ public class CameraController : MonoBehaviour
     public float maxZ = 0;
     public float zOffset = -10;
 
-    private Vector3 secondTargetOffset = Vector3.zero;
-
+    public Vector3 secondTargetOffset = Vector3.zero;
+    private Vector3 directionOnSecondTarget;
 
     void Awake()
     {
@@ -40,8 +40,8 @@ public class CameraController : MonoBehaviour
         transform.position = Vector3.Lerp(transform.position, newPosition, Time.deltaTime * cameraSpeed);
         if (allowLookAtTarget)
         {
-            if (secondTarget != null) secondTargetOffset = secondTarget.position - target.transform.position;
-            pointer.transform.LookAt(target.transform.position + secondTargetOffset);
+            if (secondTarget != null) directionOnSecondTarget = secondTargetOffset + secondTarget.position - target.transform.position;
+            pointer.transform.LookAt(target.transform.position + directionOnSecondTarget);
             transform.rotation = Quaternion.Lerp(transform.rotation, pointer.rotation, cameraSpeed * Time.deltaTime);
         }
     }
