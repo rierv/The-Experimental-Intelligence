@@ -201,7 +201,7 @@ PrefabInstance:
         type: 3}
       propertyPath: target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 462259476}
     - target: {fileID: 7457115346133579095, guid: f5546f701e6c54342b4be58165b8616b,
         type: 3}
       propertyPath: aimDirection
@@ -226,7 +226,7 @@ PrefabInstance:
         type: 3}
       propertyPath: secondTarget
       value: 
-      objectReference: {fileID: 2008010152}
+      objectReference: {fileID: 462259476}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f5546f701e6c54342b4be58165b8616b, type: 3}
 --- !u!1001 &57008872
@@ -551,6 +551,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7fd10ec0c1708c3458fb091fd7d1d232, type: 3}
+--- !u!4 &462259476 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1650412428068302613, guid: 7fd10ec0c1708c3458fb091fd7d1d232,
+    type: 3}
+  m_PrefabInstance: {fileID: 312361079}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &464635660
 GameObject:
   m_ObjectHideFlags: 0
