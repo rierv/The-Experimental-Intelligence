@@ -105,7 +105,7 @@ public partial class SwitchScript : MonoBehaviour {
 				targetObject.GetComponent<I_Activable>().Activate();
 			else if (pointer.rotation.eulerAngles.x < 60 && pointer.rotation.eulerAngles.x > 40)
 				targetObject.GetComponent<I_Activable>().Activate(false);
-			else if (comingBackToVerticalPos)
+			else
 				targetObject.GetComponent<I_Activable>().Deactivate();
 		}
 

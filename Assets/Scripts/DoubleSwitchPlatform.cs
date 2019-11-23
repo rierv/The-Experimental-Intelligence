@@ -16,7 +16,7 @@ public class DoubleSwitchPlatform : MonoBehaviour, I_Activable
     public float maxConstraintY;
     public float minConstraintY;
     private Vector3 dir;
-    private bool isActive = false;
+    public bool isActive = false;
     List<Transform> platforms;
     [Range(0,3)]
     public int numberOfPlatforms=2;

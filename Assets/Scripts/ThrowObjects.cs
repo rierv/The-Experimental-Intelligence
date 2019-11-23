@@ -7,9 +7,10 @@ public class ThrowObjects : MonoBehaviour
     GameObject obj=null;
     ThrowableObject th;
     public float strenght=500f;
+    StateManager state;
     void Start()
     {
-        
+        state = GetComponent<StateManager>();
     }
 
     void Update()
@@ -51,7 +52,7 @@ public class ThrowObjects : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == 14&&obj==null)
+        if (other.gameObject.layer == 14&&obj==null&&state.state==FlapperState.jelly)
         {
             th = other.transform.parent.gameObject.GetComponent<ThrowableObject>();
             th.enabled = true;
