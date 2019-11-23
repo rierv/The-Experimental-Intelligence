@@ -20,7 +20,6 @@ public partial class SwitchScript : MonoBehaviour {
 	public bool comingBackToVerticalPos = true;
 	public bool vertical = true;
 	public bool horizontal = true;
-	public bool invertTrueFalse;
 	bool bonesActive = true;
 	public Transform pointer, cursor;
 	public GameObject camera;
@@ -103,9 +102,9 @@ public partial class SwitchScript : MonoBehaviour {
 
 		if ((horizontal && !vertical) || (!horizontal && vertical)) {
 			if (pointer.rotation.eulerAngles.x > 300 && pointer.rotation.eulerAngles.x < 321)
-				targetObject.GetComponent<I_Activable>().Activate(invertTrueFalse);
+				targetObject.GetComponent<I_Activable>().Activate();
 			else if (pointer.rotation.eulerAngles.x < 60 && pointer.rotation.eulerAngles.x > 40)
-				targetObject.GetComponent<I_Activable>().Activate(!invertTrueFalse);
+				targetObject.GetComponent<I_Activable>().Activate(false);
 			else if (comingBackToVerticalPos)
 				targetObject.GetComponent<I_Activable>().Deactivate();
 		}

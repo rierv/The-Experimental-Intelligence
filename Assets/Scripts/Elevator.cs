@@ -8,6 +8,8 @@ public class Elevator : MonoBehaviour, I_Activable {
 	float inactiveY = 1;
 	float targetY = 1;
 	Rigidbody rigidbody;
+	[Header("Activable")]
+	public bool invertTrueFalse;
 
 	void Awake() {
 		rigidbody = GetComponent<Rigidbody>();
@@ -26,7 +28,7 @@ public class Elevator : MonoBehaviour, I_Activable {
 	}
 
 	public void Activate(bool type) {
-		if (type) {
+		if (type && !invertTrueFalse || !type && invertTrueFalse) {
 			targetY = activeY;
 		} else {
 			Deactivate();

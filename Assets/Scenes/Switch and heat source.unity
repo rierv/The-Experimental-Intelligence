@@ -2327,6 +2327,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activeY: 0.26
   speed: 1
+  invertTrueFalse: 1
 --- !u!54 &2128994201
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2483,6 +2484,16 @@ PrefabInstance:
         type: 3}
       propertyPath: active
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7341233069350875691, guid: 73dfb149d5b7e6a488551e6735da662e,
+        type: 3}
+      propertyPath: activableInvertTrueFalse
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7341233069350875691, guid: 73dfb149d5b7e6a488551e6735da662e,
+        type: 3}
+      propertyPath: invertTrueFalse
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 73dfb149d5b7e6a488551e6735da662e, type: 3}

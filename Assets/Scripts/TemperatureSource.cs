@@ -9,6 +9,8 @@ public class TemperatureSource : MonoBehaviour, I_Activable {
 	MeshRenderer myColor;
 	public Material activeMaterial;
 	public Material nonActiveMaterial;
+	[Header("Activable")]
+	public bool invertTrueFalse;
 
 	private void Start() {
 		myColor = transform.GetComponentInChildren<MeshRenderer>();
@@ -16,7 +18,7 @@ public class TemperatureSource : MonoBehaviour, I_Activable {
 	}
 
 	public void Activate(bool type) {
-		if (type) {
+		if (type && !invertTrueFalse || !type && invertTrueFalse) {
 			active = true;
 			myColor.material = activeMaterial;
 		} else {
