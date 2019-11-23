@@ -4,19 +4,19 @@ using UnityEngine;
 
 public class IsTouchingGround : MonoBehaviour {
 	PlayerMove playerMove;
-    GameObject Flapper;
 	int colliderCount = 0;
+	float offset;
 
 	void Awake() {
-        playerMove = GetComponentInParent<PlayerMove>();
-        Flapper = GetComponentInParent<FlapperCore>().gameObject;
-    }
+		playerMove = GetComponentInParent<PlayerMove>();
+		offset = transform.localPosition.y;
+	}
 
-    private void Update()
-    {
-        transform.position = Vector3.Lerp(transform.position, Flapper.transform.localPosition + playerMove.transform.localPosition -Vector3.up, Time.deltaTime * 2);
-    }
-    private void OnTriggerEnter(Collider other) {
+	private void Update() {
+		transform.position = transform.parent.position + Vector3.up * offset;
+	}
+
+	private void OnTriggerEnter(Collider other) {
 		if (other.gameObject.layer != gameObject.layer) {
 			colliderCount++;
 			playerMove.canJump = colliderCount > 0;
