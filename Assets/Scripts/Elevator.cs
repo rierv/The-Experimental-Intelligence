@@ -25,11 +25,13 @@ public class Elevator : MonoBehaviour, I_Activable {
 		rigidbody.MovePosition(new Vector3(transform.position.x, y, transform.position.z));
 	}
 
-	public void Activate() {
-		targetY = activeY;
+	public void Activate(bool type) {
+		if (type) {
+			targetY = activeY;
+		} else {
+			Deactivate();
+		}
 	}
-
-	public void Activate(bool twoFunctions) { }
 
 	public void Deactivate() {
 		targetY = inactiveY;

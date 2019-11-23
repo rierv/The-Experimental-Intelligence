@@ -14,10 +14,16 @@ public class TemperatureSource : MonoBehaviour, I_Activable {
 		myColor = transform.GetComponentInChildren<MeshRenderer>();
 		if (!active) Deactivate();
 	}
-	public void Activate(bool type=true) {
-		active = true;
-		myColor.material = activeMaterial;
+
+	public void Activate(bool type) {
+		if (type) {
+			active = true;
+			myColor.material = activeMaterial;
+		} else {
+			Deactivate();
+		}
 	}
+
 	public void Deactivate() {
 		active = false;
 		myColor.material = nonActiveMaterial;
@@ -25,7 +31,7 @@ public class TemperatureSource : MonoBehaviour, I_Activable {
 	}
 
 	private void OnTriggerStay(Collider other) {
-		if ((other.gameObject.tag == "Bone"||other.gameObject.tag == "Player") && active) {
+		if ((other.gameObject.tag == "Bone" || other.gameObject.tag == "Player") && active) {
 			other.GetComponentInParent<FlapperCore>().GetComponentInChildren<StateManager>().temperature = variation;
 		}
 	}
