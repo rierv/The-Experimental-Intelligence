@@ -16,7 +16,7 @@ public class ThrowObjects : MonoBehaviour
     void Update()
     {
         if (obj) GetComponent<PlayerMove>().shrinking = true;
-        if (obj && Input.GetButtonDown("Jump"))
+        if (obj && (Input.GetButtonDown("Jump")||state.state==FlapperState.gaseous))
         {
             StartCoroutine(Throw());
 

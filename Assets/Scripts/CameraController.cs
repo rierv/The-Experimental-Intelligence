@@ -6,7 +6,7 @@ public class CameraController : MonoBehaviour
 {
     public float cameraSpeed = 1;
     public Transform pointer;
-    public Transform target;
+    private Transform target;
     public Transform secondTarget;
 
     public bool allowLookAtTarget=false;
