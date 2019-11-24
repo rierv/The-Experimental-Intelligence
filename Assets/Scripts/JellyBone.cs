@@ -41,7 +41,7 @@ public class JellyBone : MonoBehaviour {
 		if (state == FlapperState.solid) {
 			if (isRoot) {
 				transform.position = core.transform.position + localPos;
-				transform.rotation = core.transform.rotation;
+				//transform.rotation = core.transform.rotation;
 			}
 		} else {
 			/*if (state == FlapperState.gaseous) {
@@ -66,7 +66,7 @@ public class JellyBone : MonoBehaviour {
 
 	public void SetState(FlapperState newState) {
 		state = newState;
-		if (state == FlapperState.jelly || state == FlapperState.gaseous) {
+		if (state != FlapperState.solid) {
 			rigidbody.constraints = RigidbodyConstraints.None;
 			if (coreCollider) {
 				coreCollider.enabled = false;
@@ -75,7 +75,7 @@ public class JellyBone : MonoBehaviour {
 			rigidbody.constraints = RigidbodyConstraints.FreezeAll;
 			if (!isRoot) {
 				coreCollider.enabled = true;
-				coreCollider.center = transform.localRotation * collider.center + transform.position - core.transform.position;
+				coreCollider.center = Quaternion.Inverse(core.transform.rotation) * ((transform.rotation * collider.center) + transform.position - core.transform.position);
 			} else {
 				localPos = transform.position - core.transform.position;
 			}
