@@ -5,7 +5,7 @@ using UnityEngine;
 public class JellyBone : MonoBehaviour {
 	public bool isRoot;
 	public FlapperState state;
-    public Vector3 offset = Vector3.zero;
+	public Vector3 offset = Vector3.zero;
 
 	JellyCore core;
 	Rigidbody coreRigidbody;
@@ -30,6 +30,7 @@ public class JellyBone : MonoBehaviour {
 		transform.localPosition = Vector3.zero;
 		if (!isRoot) {
 			coreCollider = core.gameObject.AddComponent<SphereCollider>();
+			coreCollider.material = collider.material;
 			coreCollider.radius = collider.radius;
 			coreCollider.enabled = false;
 		}
