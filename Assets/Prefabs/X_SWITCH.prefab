@@ -278,14 +278,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   switchBase: {fileID: 1236377197499479368}
   targetObject: {fileID: 0}
-  yOffset: 1
+  yOffset: 0.5
   handle: {fileID: 2617106573365485021}
   maxInclination: 5
   stickSpeed: 5
   comingBackToVerticalPos: 1
   vertical: 0
   horizontal: 1
-  invertTrueFalse: 0
   pointer: {fileID: 2617106573268165353}
   cursor: {fileID: 5736443295525846146}
   camera: {fileID: 0}
@@ -352,7 +351,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2617106573365485021}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.5}
   m_LocalScale: {x: 0.2907034, y: 0.29070395, z: 0.29070395}
   m_Children:
   - {fileID: 2617106572779552698}
@@ -411,7 +410,7 @@ MonoBehaviour:
   isHandle: 1
   SpineStrenght: 50000
   parentBodies: []
-  handle_hight: 1.3
+  handle_hight: 0.5
 --- !u!1 &3195556842015055903
 GameObject:
   m_ObjectHideFlags: 0
