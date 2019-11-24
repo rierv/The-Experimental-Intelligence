@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SwitchControlledLaser : MonoBehaviour, I_SwitchControlled
+public class SwitchControlledLaser : MonoBehaviour
 {
     #region Attributes
     private Vector3 currentDirection;

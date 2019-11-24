@@ -48,6 +48,7 @@ public class LaserScript : MonoBehaviour
         {
             positionOffset.x = laserOrigin.x + i * transform.forward.x;
             positionOffset.z = laserOrigin.z + i * transform.forward.z;
+            positionOffset.y = laserOrigin.y + i * transform.forward.y;
             laserPositions[i] = positionOffset;
         }
         laser.SetPositions(laserPositions);
