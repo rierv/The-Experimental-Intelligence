@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SwitchControlledPlatformScript : MonoBehaviour, I_SwitchControlled
+public class SwitchControlledPlatformScript : MonoBehaviour
 {
     #region Attributes
     private Vector3 currentDirection;
