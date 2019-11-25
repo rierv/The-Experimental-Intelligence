@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -499,7 +499,7 @@ GameObject:
   - component: {fileID: 572306435}
   - component: {fileID: 572306434}
   m_Layer: 11
-  m_Name: Floor (2)
+  m_Name: Roof
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -913,7 +913,7 @@ GameObject:
   - component: {fileID: 983333697}
   - component: {fileID: 983333698}
   m_Layer: 11
-  m_Name: Wall (3)
+  m_Name: Wall front
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -927,8 +927,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 983333696}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 5, z: -5.5}
-  m_LocalScale: {x: 1, y: 10, z: 30}
+  m_LocalPosition: {x: 0, y: 7, z: -6.5}
+  m_LocalScale: {x: 1, y: 14, z: 30}
   m_Children: []
   m_Father: {fileID: 253390317}
   m_RootOrder: 4
@@ -1212,7 +1212,7 @@ GameObject:
   - component: {fileID: 1148072545}
   - component: {fileID: 1148072544}
   m_Layer: 11
-  m_Name: Wall (2)
+  m_Name: Wall back
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1952,7 +1952,7 @@ GameObject:
   - component: {fileID: 1618235929}
   - component: {fileID: 1618235928}
   m_Layer: 11
-  m_Name: Wall
+  m_Name: Wall left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2182,7 +2182,7 @@ GameObject:
   - component: {fileID: 1853057199}
   - component: {fileID: 1853057198}
   m_Layer: 11
-  m_Name: Wall (1)
+  m_Name: Wall right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
