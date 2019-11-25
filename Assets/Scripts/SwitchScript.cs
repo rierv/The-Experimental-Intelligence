@@ -4,6 +4,7 @@ using UnityEngine;
 
 public partial class SwitchScript : MonoBehaviour {
 	#region Attributes
+	public Collider solidCollider;
 	public GameObject switchBase;
 	public GameObject targetObject;
 	private float maxRotation = 90f;
@@ -116,6 +117,12 @@ public partial class SwitchScript : MonoBehaviour {
 		transform.rotation = Quaternion.Lerp(transform.rotation, pointer.rotation, stickSpeed * Time.deltaTime);
 	}
 
+	private void OnTriggerStay(Collider other) {
+		JellyBone jellyBone = other.GetComponent<JellyBone>();
+		if (jellyBone) {
+			solidCollider.isTrigger = jellyBone.state != FlapperState.solid;
+		}
+	}
 }
 
 
