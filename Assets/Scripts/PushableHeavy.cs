@@ -12,7 +12,7 @@ public class PushableHeavy : MonoBehaviour {
 		rigidbody = GetComponentInParent<Rigidbody>();
 	}
 
-	private void OnTriggerEnter(Collider other) {
+	private void OnTriggerStay(Collider other) {
 		JellyBone jellyBone = other.GetComponent<JellyBone>();
 		if (jellyBone) {
 			if (jellyBone.state == FlapperState.solid) {
@@ -22,7 +22,7 @@ public class PushableHeavy : MonoBehaviour {
 					rigidbody.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionZ;
 				}
 			} else {
-				rigidbody.constraints = RigidbodyConstraints.FreezeAll;
+				rigidbody.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ;
 			}
 		}
 	}

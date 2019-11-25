@@ -12,7 +12,7 @@ public class PushableLight : MonoBehaviour {
 		rigidbody = GetComponentInParent<Rigidbody>();
 	}
 
-	private void OnTriggerEnter(Collider other) {
+	private void OnTriggerStay(Collider other) {
 		JellyBone jellyBone = other.GetComponent<JellyBone>();
 		if (jellyBone) {
 			if (jellyBone.state != FlapperState.gaseous) {

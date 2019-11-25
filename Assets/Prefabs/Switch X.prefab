@@ -242,6 +242,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2617106573259330187}
   - component: {fileID: 2617106573259330184}
+  - component: {fileID: 4531710407877640597}
+  - component: {fileID: 3330666700679246127}
   m_Layer: 0
   m_Name: SwitchLogic
   m_TagString: Untagged
@@ -276,6 +278,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f23fef25a5fee4846ab03365a0f2f3f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  solidCollider: {fileID: 3330666700679246127}
   switchBase: {fileID: 1236377197499479368}
   targetObject: {fileID: 0}
   yOffset: 0.5
@@ -293,6 +296,34 @@ MonoBehaviour:
   zCameraOffset: 0
   cameraMovementSpeed: 3
   cameraRotationSpeed: 3
+--- !u!136 &4531710407877640597
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2617106573259330185}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.4
+  m_Height: 1.7
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.65, z: 0}
+--- !u!136 &3330666700679246127
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2617106573259330185}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.35
+  m_Height: 1.5
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.65, z: 0}
 --- !u!1 &2617106573268165358
 GameObject:
   m_ObjectHideFlags: 0
@@ -500,7 +531,7 @@ GameObject:
   - component: {fileID: 626772281598655990}
   - component: {fileID: 7365845891911717004}
   m_Layer: 0
-  m_Name: X_SWITCH
+  m_Name: Switch X
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
