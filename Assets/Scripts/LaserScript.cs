@@ -63,7 +63,7 @@ public class LaserScript : MonoBehaviour
         {
             if (hit[i].collider)
             {
-                if (hit[i].collider.CompareTag("Player"))
+                if (hit[i].collider.gameObject.layer == 9)
                     SceneManager.LoadScene(SceneManager.GetActiveScene().name);
                 laserLength = (int)Mathf.Round(hit[i].distance) + 2;
                 laserPositions = new Vector3[laserLength];
