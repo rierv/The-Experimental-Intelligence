@@ -5,11 +5,11 @@ using UnityEngine;
 public class TemperatureSource : MonoBehaviour, I_Activable {
 	[Range(-1, 1)]
 	public int variation;
-	public bool active = false;
 	MeshRenderer myColor;
 	public Material activeMaterial;
 	public Material nonActiveMaterial;
 	[Header("Activable")]
+	public bool active = true;
 	public bool invertTrueFalse;
 
 	private void Start() {
