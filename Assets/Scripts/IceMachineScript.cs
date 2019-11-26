@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class IceMachineScript : MonoBehaviour, I_Activable {
 	#region Attributes
+	public MeshRenderer topIcon;
+	Material topIconMaterialOn;
+	public Material topIconMaterialOff;
+	public MeshRenderer door;
+	Material doorMaterialOn;
+	public Material doorMaterialOff;
+	[Space]
 	public Transform cubeQueue;
 	public Transform machineDoor;
 	public GameObject block;
@@ -31,6 +38,12 @@ public class IceMachineScript : MonoBehaviour, I_Activable {
 	#endregion
 
 	void Start() {
+		topIconMaterialOn = topIcon.material;
+		doorMaterialOn = door.material;
+		if (!active) {
+			topIcon.material = topIconMaterialOff;
+			door.material = doorMaterialOff;
+		}
 		closeDoorTime = newBlockTime + 1 / doorVecolicity;
 		openDoorTime = newBlockTime - 1 / doorVecolicity;
 		DoorStartpos = machineDoor.position;
@@ -114,10 +127,11 @@ public class IceMachineScript : MonoBehaviour, I_Activable {
 	public void Activate(bool type) {
 		if (type && !invertTrueFalse || !type && invertTrueFalse) {
 			active = true;
+			topIcon.material = topIconMaterialOn;
+			door.material = doorMaterialOn;
 			if (newBlockNeeded) {
 				StartCoroutine(newBlockCoroutine());
 			}
-			//myColor.material = activeMaterial;
 		} else {
 			Deactivate();
 		}
@@ -125,7 +139,7 @@ public class IceMachineScript : MonoBehaviour, I_Activable {
 
 	public void Deactivate() {
 		active = false;
-		//myColor.material = nonActiveMaterial;
-
+		topIcon.material = topIconMaterialOff;
+		door.material = doorMaterialOff;
 	}
 }
