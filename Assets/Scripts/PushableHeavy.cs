@@ -15,6 +15,7 @@ public class PushableHeavy : MonoBehaviour {
 	private void OnTriggerStay(Collider other) {
 		JellyBone jellyBone = other.GetComponent<JellyBone>();
 		if (jellyBone) {
+			Debug.Log(name + " " + other.name + " " + jellyBone.state);
 			if (jellyBone.state == FlapperState.solid) {
 				if (moveOnZ) {
 					rigidbody.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionX;
