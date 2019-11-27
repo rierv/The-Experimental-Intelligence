@@ -7,6 +7,8 @@ public class RobotScript : MonoBehaviour {
 	#region Attributes
 	private Transform robot;
 	private Transform flapper;
+	public Transform body;
+	public float rotationSpeed;
 	public Transform wheel;
 	public float maxLockerZ;
 	public float minLockerZ;
@@ -50,7 +52,11 @@ public class RobotScript : MonoBehaviour {
 			ManageRobotPosition();
 		}
 
-
+		if (flapper.position.x < transform.position.x) {
+			body.localRotation = Quaternion.Euler(new Vector3(0, 0, Mathf.Lerp(body.localRotation.eulerAngles.z, 0, rotationSpeed * Time.deltaTime)));
+		} else {
+			body.localRotation = Quaternion.Euler(new Vector3(0, 0, Mathf.Lerp(body.localRotation.eulerAngles.z, 180, rotationSpeed * Time.deltaTime)));
+		}
 	}
 
 	private void OnCollisionEnter(Collision collision) {
