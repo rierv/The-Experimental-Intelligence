@@ -504,6 +504,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 966d7900b368a0f4b80b65eb3adf6fa0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  flapperModel: {fileID: 1650412427489319875}
   speed: 7
   jumpForce: 12
   doubleJumpMultiplier: 1.333
@@ -511,6 +512,7 @@ MonoBehaviour:
   maxFallingSpeedForJumping: 0.5
   jumpingWait: 0.5
   fallingBoost: 60
+  shrink: {fileID: 8300000, guid: 2c6eb4a6e4c64f1498f14369e4e5f5c2, type: 3}
   gaseousFloatUpForce: 3
   gaseousShrinkDownForce: 5
   jumpType: 1
@@ -526,6 +528,12 @@ MonoBehaviour:
   stopShrinkWait2: 0.18
   bonesForce2: 4
   bonesForceUp2: -3
+  toShrinkWait3: 0
+  stopShrinkWait3: 0.14
+  scaleXZ: 0.7
+  scaleY: 0.4
+  scaleSpeedXZ: 7
+  scaleSpeedY: 10
   Up: {fileID: 1650412426688054141}
   Down: {fileID: 1650412427280877092}
   Left: {fileID: 1650412428202199701}
@@ -537,6 +545,7 @@ MonoBehaviour:
   jumping: 0
   shrinking: 0
   rigidbody: {fileID: 1650412428068302612}
+  collider: {fileID: 0}
 --- !u!114 &139324025
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -570,6 +579,9 @@ MonoBehaviour:
   jellySpeed: 7
   solidSpeed: 6
   gaseousSpeed: 4
+  gasTransition: {fileID: 8300000, guid: df6e447024bd02541b0ea3cb8f48efcb, type: 3}
+  jellyTransition: {fileID: 8300000, guid: 748398f5ab9f27940acaff0f0a9ec9a2, type: 3}
+  solidTransition: {fileID: 8300000, guid: 8672b5d3a29d5e34abc65d9ce8a559e3, type: 3}
 --- !u!114 &191124946663321803
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5675,6 +5687,20 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 100022, guid: d5c85d381fb2c7a48a6fbf1c97a8b987, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4381454792350094727, guid: d5c85d381fb2c7a48a6fbf1c97a8b987,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a10951ebd5eb1ba4cb56ad3cf31845d1, type: 2}
+    - target: {fileID: 4381454792350094727, guid: d5c85d381fb2c7a48a6fbf1c97a8b987,
+        type: 3}
+      propertyPath: m_Quality
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 100028, guid: d5c85d381fb2c7a48a6fbf1c97a8b987, type: 3}
       propertyPath: m_TagString
       value: Bone
@@ -5698,20 +5724,6 @@ PrefabInstance:
     - target: {fileID: 100006, guid: d5c85d381fb2c7a48a6fbf1c97a8b987, type: 3}
       propertyPath: m_TagString
       value: Bone
-      objectReference: {fileID: 0}
-    - target: {fileID: 4381454792350094727, guid: d5c85d381fb2c7a48a6fbf1c97a8b987,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: a10951ebd5eb1ba4cb56ad3cf31845d1, type: 2}
-    - target: {fileID: 4381454792350094727, guid: d5c85d381fb2c7a48a6fbf1c97a8b987,
-        type: 3}
-      propertyPath: m_Quality
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 100022, guid: d5c85d381fb2c7a48a6fbf1c97a8b987, type: 3}
-      propertyPath: m_Layer
-      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 100030, guid: d5c85d381fb2c7a48a6fbf1c97a8b987, type: 3}
       propertyPath: m_Layer

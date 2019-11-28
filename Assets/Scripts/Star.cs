@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Star : MonoBehaviour {
+	public AudioClip sound;
 	public float rotationAngle = 1;
 
 	void Update() {
@@ -11,6 +12,7 @@ public class Star : MonoBehaviour {
 
 	private void OnTriggerEnter(Collider other) {
 		if (other.GetComponent<JellyBone>()) {
+			AudioManager.singleton.PlayClip(sound);
 			gameObject.SetActive(false);
 		}
 	}

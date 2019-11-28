@@ -9,6 +9,7 @@ public class ButtonScript : MonoBehaviour {
 	public float timeBeforeDeactivate = 1;
 	public float maxZ;
 	public float minZ;
+	public AudioClip sound;
 
 	List<I_Activable> activables = new List<I_Activable>();
 	float maxZtemp;
@@ -23,10 +24,11 @@ public class ButtonScript : MonoBehaviour {
 	}
 
 	private void OnTriggerStay(Collider other) {
-		if (other.CompareTag("Player") || other.gameObject.layer == 13) {
+		if (other.CompareTag("Player") || other.gameObject.layer == 13 || other.gameObject.layer == 12) {
 			foreach (I_Activable ac in activables) {
 				ac.Activate();
 			}
+			PlayClip();
 			maxZtemp = minZ;
 			timer = timeBeforeDeactivate;
 		}
@@ -39,7 +41,16 @@ public class ButtonScript : MonoBehaviour {
 			foreach (I_Activable ac in activables) {
 				ac.Deactivate();
 			}
+			canPlayClip = true;
 			maxZtemp = maxZ;
+		}
+	}
+
+	bool canPlayClip = true;
+	void PlayClip() {
+		if (canPlayClip) {
+			AudioManager.singleton.PlayClip(sound);
+			canPlayClip = false;
 		}
 	}
 }

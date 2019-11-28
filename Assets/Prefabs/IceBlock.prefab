@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 2178910147375604069}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 4155624020231153202}
   m_RootOrder: 0
@@ -43,7 +43,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.2, y: 1.2, z: 0.8}
+  m_Size: {x: 1.2, y: 1, z: 0.6}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &5330266714445546694
 MonoBehaviour:
@@ -85,7 +85,7 @@ Transform:
   m_GameObject: {fileID: 2281631293056928041}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 4155624020231153202}
   m_RootOrder: 1
@@ -101,7 +101,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.8, y: 1.2, z: 1.2}
+  m_Size: {x: 0.6, y: 1, z: 1.2}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &8193810213016059579
 MonoBehaviour:
@@ -258,9 +258,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   variation: -1
-  active: 1
   activeMaterial: {fileID: 2100000, guid: ea8849d7065b99c43a06511885950b42, type: 2}
   nonActiveMaterial: {fileID: 2100000, guid: 1d4813cc860a2dd4089b69f43f8af2c5, type: 2}
+  active: 1
+  invertTrueFalse: 0
+  illuminationSource: {fileID: 0}
 --- !u!114 &3243530288011941332
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -273,8 +275,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bf8d8a31b3dc604e856f68652feeb7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 10
-  collider: {fileID: 4155624020231153201}
+  melting_speed: 0.1
+  melting_duration: 20
 --- !u!198 &7751472490842926305
 ParticleSystem:
   m_ObjectHideFlags: 0

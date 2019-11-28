@@ -2,43 +2,60 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IceMachineScript : MonoBehaviour {
+public class IceMachineScript : MonoBehaviour, I_Activable {
 	#region Attributes
+	public MeshRenderer topIcon;
+	Material topIconMaterialOn;
+	public Material topIconMaterialOff;
+	public MeshRenderer door;
+	Material doorMaterialOn;
+	public Material doorMaterialOff;
+	[Space]
 	public Transform cubeQueue;
 	public Transform machineDoor;
 	public GameObject block;
 	private GameObject instance;
 	public float throwBlockForce = 1000f;
-    public float block_melting_speed = 0.1f;
-    public float block_melting_duration = 15f;
-    public Vector3 doorHightDifference = new Vector3(0f, 0.5f, 0f);
+	public float block_melting_speed = 0.1f;
+	public float block_melting_duration = 15f;
+	public Vector3 doorHightDifference = new Vector3(0f, 0.5f, 0f);
 	[Range(1, 5)]
 	public float doorVecolicity = 2;
-	private bool isMachineActive = false;
+	//private bool isMachineActive = false;
 	[Range(2, 20)]
 	public float newBlockTime = 2f;
 	private float closeDoorTime;
 	private float openDoorTime;
-	private float currentTimeLeft;
+	//private float currentTimeLeft;
 	private bool isDoorOpen;
 	Vector3 throwForce;
 	Vector3 DoorStartpos;
 	bool newBlockNeeded = true;
-    public bool firstBlock = true;
+	public bool firstBlock = true;
+	[Header("Activable")]
+	public bool active = true;
+	public bool invertTrueFalse;
 	#endregion
-	// Start is called before the first frame update
+
 	void Start() {
+		topIconMaterialOn = topIcon.material;
+		doorMaterialOn = door.material;
+		if (!active) {
+			topIcon.material = topIconMaterialOff;
+			door.material = doorMaterialOff;
+		}
 		closeDoorTime = newBlockTime + 1 / doorVecolicity;
 		openDoorTime = newBlockTime - 1 / doorVecolicity;
 		DoorStartpos = machineDoor.position;
 		throwForce = -transform.forward * throwBlockForce;
-		ActivateMachine();
+		//ActivateMachine();
+		StartCoroutine(newBlockCoroutine());
 	}
 
-	void ActivateMachine() {
+	/*void ActivateMachine() {
 		isMachineActive = true;
-        if(firstBlock) StartCoroutine(firstBlockCoroutine());
-	}
+		if (firstBlock) StartCoroutine(firstBlockCoroutine());
+	}*/
 
 	void OpenMachineDoor() {
 		isDoorOpen = true;
@@ -52,9 +69,9 @@ public class IceMachineScript : MonoBehaviour {
 		if (isDoorOpen) {
 
 			instance = Instantiate(block, cubeQueue.position, cubeQueue.rotation, cubeQueue);
-            instance.GetComponent<TemperatureBlock>().melting_speed = block_melting_speed;
-            instance.GetComponent<TemperatureBlock>().melting_duration = block_melting_duration;
-            instance.GetComponent<Rigidbody>().AddForce(throwForce);
+			instance.GetComponent<TemperatureBlock>().melting_speed = block_melting_speed;
+			instance.GetComponent<TemperatureBlock>().melting_duration = block_melting_duration;
+			instance.GetComponent<Rigidbody>().AddForce(throwForce);
 			instance.GetComponent<BoxCollider>().isTrigger = true;
 		}
 	}
@@ -66,16 +83,16 @@ public class IceMachineScript : MonoBehaviour {
 	}
 
 
-	private void FixedUpdate() {
+	/*private void FixedUpdate() {
 		if (isMachineActive && newBlockNeeded) {
 			StartCoroutine(newBlockCoroutine());
 		}
 
-	}
+	}*/
 
-    
 
-    private void Update() {
+
+	private void Update() {
 
 		if (isDoorOpen)
 			machineDoor.position = Vector3.Lerp(machineDoor.position, DoorStartpos + doorHightDifference, Time.deltaTime * doorVecolicity);
@@ -83,26 +100,46 @@ public class IceMachineScript : MonoBehaviour {
 			machineDoor.position = Vector3.Lerp(machineDoor.position, DoorStartpos, Time.deltaTime * doorVecolicity);
 	}
 
-    IEnumerator newBlockCoroutine()
-    {
-        newBlockNeeded = false;
+	IEnumerator newBlockCoroutine() {
+		if (active) {
+			newBlockNeeded = false;
+			OpenMachineDoor();
+			yield return new WaitForSeconds(newBlockTime - openDoorTime);
+			CreateNewCube();
+			yield return new WaitForSeconds(closeDoorTime - newBlockTime);
+			CloseMachineDoor();
+			yield return new WaitForSeconds(openDoorTime);
+			newBlockNeeded = true;
+			yield return newBlockCoroutine();
+		}
+	}
+	/*IEnumerator firstBlockCoroutine() {
+		newBlockNeeded = false;
+		OpenMachineDoor();
+		yield return new WaitForSeconds(1f);
+		CreateNewCube();
+		yield return new WaitForSeconds(1f);
+		CloseMachineDoor();
+		newBlockNeeded = true;
+	}*/
 
-        yield return new WaitForSeconds(openDoorTime);
-        OpenMachineDoor();
-        yield return new WaitForSeconds(newBlockTime - openDoorTime);
-        CreateNewCube();
-        yield return new WaitForSeconds(closeDoorTime - newBlockTime);
-        CloseMachineDoor();
-        newBlockNeeded = true;
-    }
-    IEnumerator firstBlockCoroutine()
-    {
-        newBlockNeeded = false;
-        OpenMachineDoor();
-        yield return new WaitForSeconds(1f);
-        CreateNewCube();
-        yield return new WaitForSeconds(1f);
-        CloseMachineDoor();
-        newBlockNeeded = true;
-    }
+
+	public void Activate(bool type) {
+		if (type && !invertTrueFalse || !type && invertTrueFalse) {
+			active = true;
+			topIcon.material = topIconMaterialOn;
+			door.material = doorMaterialOn;
+			if (newBlockNeeded) {
+				StartCoroutine(newBlockCoroutine());
+			}
+		} else {
+			Deactivate();
+		}
+	}
+
+	public void Deactivate() {
+		active = false;
+		topIcon.material = topIconMaterialOff;
+		door.material = doorMaterialOff;
+	}
 }

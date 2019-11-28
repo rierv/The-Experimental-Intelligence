@@ -353,6 +353,7 @@ GameObject:
   - component: {fileID: 162300638338062206}
   - component: {fileID: 710284301534415481}
   - component: {fileID: 8207911973655502200}
+  - component: {fileID: 2538772733844977898}
   m_Layer: 0
   m_Name: furnace
   m_TagString: Untagged
@@ -420,6 +421,20 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &2538772733844977898
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5827836277475097839}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 14
+  m_Mesh: {fileID: -972389053705707870, guid: ecc24a89786dbf7458fb1bfa360ddde6, type: 3}
 --- !u!1 &6401762695101622853
 GameObject:
   m_ObjectHideFlags: 0
@@ -512,6 +527,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc8996e465462354dbe72ac3cc7b8aa3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  topIcon: {fileID: 3899500869021446147}
+  topIconMaterialOff: {fileID: 2100000, guid: 1a908a9e4af7c284fbd9aad7220a6ef4, type: 2}
+  door: {fileID: 143962455600616566}
+  doorMaterialOff: {fileID: 2100000, guid: d0cb8a9f9ed04514bbb1798ee0bfcd43, type: 2}
   cubeQueue: {fileID: 1173796438457607626}
   machineDoor: {fileID: 5266336238740787383}
   block: {fileID: 5286839683607338677, guid: 87ff0b2d244a0d24191f992aa3aaf0a7, type: 3}
@@ -522,6 +541,8 @@ MonoBehaviour:
   doorVecolicity: 2.79
   newBlockTime: 8.81
   firstBlock: 1
+  active: 1
+  invertTrueFalse: 0
 --- !u!1 &7395222109461629219
 GameObject:
   m_ObjectHideFlags: 0
