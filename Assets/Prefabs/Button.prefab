@@ -260,10 +260,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 349b60c96d4ff054686bf21fd307406f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  triggeredObject: {fileID: 0}
+  triggeredObjects: []
   timeBeforeDeactivate: 1
   maxZ: -0.1625858
   minZ: -0.410524
+  sound: {fileID: 8300000, guid: 66f8dc3067b166548b7a56a7eadada0d, type: 3}
 --- !u!1 &3430679926201197415
 GameObject:
   m_ObjectHideFlags: 0

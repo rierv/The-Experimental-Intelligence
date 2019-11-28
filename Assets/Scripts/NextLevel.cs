@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class NextLevel : MonoBehaviour, I_Activable {
 	public Object nextLevel;
+	public AudioClip sound;
 	public float delayToStopFlapper = 0.1f;
 	public float delayToLoadLevel = 0.3f;
 	public bool isActive = true;
@@ -23,6 +24,7 @@ public class NextLevel : MonoBehaviour, I_Activable {
 
 	IEnumerator LoadLevel() {
 		yield return new WaitForSeconds(delayToStopFlapper);
+		AudioManager.singleton.PlayClip(sound);
 		foreach (PlayerMove p in FindObjectsOfType<PlayerMove>()) {
 			p.canMove = false;
 		}
@@ -30,7 +32,7 @@ public class NextLevel : MonoBehaviour, I_Activable {
 		SceneManager.LoadScene(nextLevel.name);
 	}
 
-	public void Activate(bool type=true) {
+	public void Activate(bool type = true) {
 		isActive = true;
 		light.enabled = isActive;
 	}

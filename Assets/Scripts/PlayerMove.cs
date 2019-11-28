@@ -18,6 +18,7 @@ public class PlayerMove : MonoBehaviour {
 	public float maxFallingSpeedForJumping = 0.5f;
 	public float jumpingWait = 1f;
 	public float fallingBoost = 1;
+	public AudioClip shrink;
 	[Space]
 	public float gaseousFloatUpForce = 1;
 	public float gaseousShrinkDownForce = 1;
@@ -54,12 +55,14 @@ public class PlayerMove : MonoBehaviour {
 
 	[HideInInspector]
 	public Rigidbody rigidbody;
+	public SphereCollider collider;
 	StateManager stateManager;
 	int shrinkage = 0;
 	int shrinking_counter = 0;
 
 	void Awake() {
 		rigidbody = GetComponent<Rigidbody>();
+		collider = GetComponent<SphereCollider>();
 		stateManager = GetComponent<StateManager>();
 		jumping = false;
 	}
@@ -203,6 +206,8 @@ public class PlayerMove : MonoBehaviour {
 }*/
 
 	public void updateShrink() {
+		AudioManager.singleton.PlayClip(shrink);
+
 		float force = bonesForce * shrinkage;
 		float forceUp = bonesForceUp * shrinkage;
 		switch (jumpType) {

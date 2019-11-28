@@ -31,6 +31,7 @@ public partial class SwitchScript : MonoBehaviour {
 	Transform cameraPointer;
 	public float cameraMovementSpeed = 3f;
 	public float cameraRotationSpeed = 3f;
+	public AudioClip sound;
 	#endregion
 	// Start is called before the first frame update
 
@@ -102,12 +103,16 @@ public partial class SwitchScript : MonoBehaviour {
 		}
 
 		if ((horizontal && !vertical) || (!horizontal && vertical)) {
-			if (pointer.rotation.eulerAngles.x > 300 && pointer.rotation.eulerAngles.x < 321)
+			if (pointer.rotation.eulerAngles.x > 300 && pointer.rotation.eulerAngles.x < 321) {
 				targetObject.GetComponent<I_Activable>().Activate();
-			else if (pointer.rotation.eulerAngles.x < 60 && pointer.rotation.eulerAngles.x > 40)
+				PlayClip();
+			} else if (pointer.rotation.eulerAngles.x < 60 && pointer.rotation.eulerAngles.x > 40) {
 				targetObject.GetComponent<I_Activable>().Activate(false);
-			else
+				PlayClip();
+			} else {
 				targetObject.GetComponent<I_Activable>().Deactivate();
+				canPlayClip = true;
+			}
 		}
 
 
@@ -115,6 +120,14 @@ public partial class SwitchScript : MonoBehaviour {
 
 		if (vertical && horizontal) pointer.LookAt(cursor.position);
 		transform.rotation = Quaternion.Lerp(transform.rotation, pointer.rotation, stickSpeed * Time.deltaTime);
+	}
+
+	bool canPlayClip = true;
+	void PlayClip() {
+		if (canPlayClip) {
+			AudioManager.singleton.PlayClip(sound);
+			canPlayClip = false;
+		}
 	}
 
 	private void OnTriggerStay(Collider other) {

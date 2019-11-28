@@ -25,6 +25,9 @@ public class StateManager : MonoBehaviour {
 	public float jellySpeed = 7;
 	public float solidSpeed = 6f;
 	public float gaseousSpeed = 4f;
+	public AudioClip gasTransition;
+	public AudioClip jellyTransition;
+	public AudioClip solidTransition;
 	JellyBone[] bones;
 	Rigidbody rigidbody;
 	float defaultMass;
@@ -50,18 +53,18 @@ public class StateManager : MonoBehaviour {
 			SetState(FlapperState.gaseous);
 		} else if (temperature == -1) {
 			SetState(FlapperState.solid);
-        }
-        if (temperature > 0) {
+		}
+		if (temperature > 0) {
 			temperature = Mathf.Clamp(temperature - Time.deltaTime / hotTemperatureChangeDuration, 0, float.MaxValue);
 			if (temperature <= 0) {
 				SetState(FlapperState.jelly);
-            }
-        } else if (temperature < 0) {
+			}
+		} else if (temperature < 0) {
 			temperature = Mathf.Clamp(temperature + Time.deltaTime / coldTemperatureChangeDuration, float.MinValue, 0);
 			if (temperature >= 0) {
 				SetState(FlapperState.jelly);
-            }
-        }
+			}
+		}
 	}
 
 	public void SetState(FlapperState newState) {
@@ -85,6 +88,7 @@ public class StateManager : MonoBehaviour {
 			}*/
 			gasParticle.Play();
 			meshRenderer.material = gas;
+			AudioManager.singleton.PlayClip(gasTransition);
 		} else {
 			rigidbody.mass = defaultMass;
 			//mesh.SetActive(true);
@@ -95,9 +99,11 @@ public class StateManager : MonoBehaviour {
 			if (state == FlapperState.solid) {
 				meshRenderer.material = solid;
 				pm.speed = solidSpeed;
+				AudioManager.singleton.PlayClip(solidTransition);
 			} else {
 				meshRenderer.material = jelly;
 				pm.speed = jellySpeed;
+				AudioManager.singleton.PlayClip(jellyTransition);
 			}
 		}
 		rigidbody.useGravity = state != FlapperState.gaseous;
