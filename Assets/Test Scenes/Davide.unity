@@ -232,9 +232,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   variation: 1
-  active: 1
   activeMaterial: {fileID: 0}
   nonActiveMaterial: {fileID: 0}
+  active: 1
+  invertTrueFalse: 0
+  illuminationSource: {fileID: 0}
 --- !u!135 &334226805
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -433,9 +435,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   variation: -1
-  active: 1
   activeMaterial: {fileID: 0}
   nonActiveMaterial: {fileID: 0}
+  active: 1
+  invertTrueFalse: 0
+  illuminationSource: {fileID: 0}
 --- !u!135 &432256758
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1985,8 +1989,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 336587195, guid: 7fd10ec0c1708c3458fb091fd7d1d232, type: 3}
+    - target: {fileID: 1650412428068302614, guid: 7fd10ec0c1708c3458fb091fd7d1d232,
+        type: 3}
+      propertyPath: jumpType
+      value: 3
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7fd10ec0c1708c3458fb091fd7d1d232, type: 3}
 --- !u!1001 &1960659642279107994
 PrefabInstance:
