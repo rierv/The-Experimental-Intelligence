@@ -25,9 +25,10 @@ public class RobotScript : MonoBehaviour {
 	private float currentRotationScale;
 	private FlapperState state;
 	private bool collidingWithSolid;
-	#endregion
+    public bool zAxis_xAxis = true;
+    #endregion
 
-	private void Start() {
+    private void Start() {
 		collidingWithSolid = false;
 		flapper = GameObject.Find("CORE").GetComponent<Transform>();
 		state = GameObject.Find("Flapper model").GetComponent<JellyBone>().state;
@@ -75,22 +76,57 @@ public class RobotScript : MonoBehaviour {
 	}
 	private void ManageRobotPosition() {
 		tmp = robot.position;
-		if (collidingWithSolid) {
-			if (Mathf.Abs(tmp.z - minLockerZ) < Mathf.Abs(tmp.z - maxLockerZ))
-				currPos.z = minLockerZ;
-			else
-				currPos.z = maxLockerZ;
-		} else {
-			currPos.z = Mathf.Clamp(flapper.position.z, minLockerZ, maxLockerZ);
-		}
-		robot.position = Vector3.Lerp(tmp, currPos, Time.deltaTime * currentSpeed);
-		tmp = currPos - tmp;
-		wheel.Rotate(0f, 0f, currentRotationScale * tmp.z, Space.Self);
+        if (zAxis_xAxis)
+        {
+            if (collidingWithSolid)
+            {
+                if (Mathf.Abs(tmp.z - minLockerZ) < Mathf.Abs(tmp.z - maxLockerZ))
+                    currPos.z = minLockerZ;
+                else
+                    currPos.z = maxLockerZ;
+            }
+            else
+            {
+                currPos.z = Mathf.Clamp(flapper.position.z, minLockerZ, maxLockerZ);
+            }
+            robot.position = Vector3.Lerp(tmp, currPos, Time.deltaTime * currentSpeed);
+            tmp = currPos - tmp;
+            wheel.Rotate(0f, 0f, currentRotationScale * tmp.z, Space.Self);
 
-		if (flapper.position.x < transform.position.x) {
-			body.localRotation = Quaternion.Euler(new Vector3(0, 0, Mathf.Lerp(body.localRotation.eulerAngles.z, 0, rotationSpeed * Time.deltaTime)));
-		} else {
-			body.localRotation = Quaternion.Euler(new Vector3(0, 0, Mathf.Lerp(body.localRotation.eulerAngles.z, 180, rotationSpeed * Time.deltaTime)));
-		}
+            if (flapper.position.x < transform.position.x)
+            {
+                body.localRotation = Quaternion.Euler(new Vector3(0, 0, Mathf.Lerp(body.localRotation.eulerAngles.z, 0, rotationSpeed * Time.deltaTime)));
+            }
+            else
+            {
+                body.localRotation = Quaternion.Euler(new Vector3(0, 0, Mathf.Lerp(body.localRotation.eulerAngles.z, 180, rotationSpeed * Time.deltaTime)));
+            }
+        }
+        else
+        {
+            if (collidingWithSolid)
+            {
+                if (Mathf.Abs(tmp.x - minLockerZ) < Mathf.Abs(tmp.x - maxLockerZ))
+                    currPos.x = minLockerZ;
+                else
+                    currPos.x = maxLockerZ;
+            }
+            else
+            {
+                currPos.x = Mathf.Clamp(flapper.position.x, minLockerZ, maxLockerZ);
+            }
+            robot.position = Vector3.Lerp(tmp, currPos, Time.deltaTime * currentSpeed);
+            tmp = currPos - tmp;
+            wheel.Rotate(0f, 0f, currentRotationScale * tmp.z, Space.Self);
+
+            if (flapper.position.z < transform.position.z)
+            {
+                body.localRotation = Quaternion.Euler(new Vector3(0, 0, Mathf.Lerp(body.localRotation.eulerAngles.z, 0, rotationSpeed * Time.deltaTime)));
+            }
+            else
+            {
+                body.localRotation = Quaternion.Euler(new Vector3(0, 0, Mathf.Lerp(body.localRotation.eulerAngles.z, 180, rotationSpeed * Time.deltaTime)));
+            }
+        }
 	}
 }

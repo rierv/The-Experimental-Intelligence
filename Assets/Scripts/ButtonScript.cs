@@ -23,7 +23,7 @@ public class ButtonScript : MonoBehaviour {
 	}
 
 	private void OnTriggerStay(Collider other) {
-		if (other.CompareTag("Player") || other.gameObject.layer == 13) {
+		if (other.CompareTag("Player") || other.gameObject.layer == 13 || other.gameObject.layer == 12) {
 			foreach (I_Activable ac in activables) {
 				ac.Activate();
 			}
