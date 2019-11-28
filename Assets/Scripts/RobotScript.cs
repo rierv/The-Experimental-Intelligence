@@ -51,12 +51,6 @@ public class RobotScript : MonoBehaviour {
 		if (!stop) {
 			ManageRobotPosition();
 		}
-
-		if (flapper.position.x < transform.position.x) {
-			body.localRotation = Quaternion.Euler(new Vector3(0, 0, Mathf.Lerp(body.localRotation.eulerAngles.z, 0, rotationSpeed * Time.deltaTime)));
-		} else {
-			body.localRotation = Quaternion.Euler(new Vector3(0, 0, Mathf.Lerp(body.localRotation.eulerAngles.z, 180, rotationSpeed * Time.deltaTime)));
-		}
 	}
 
 	private void OnCollisionEnter(Collision collision) {
@@ -92,5 +86,11 @@ public class RobotScript : MonoBehaviour {
 		robot.position = Vector3.Lerp(tmp, currPos, Time.deltaTime * currentSpeed);
 		tmp = currPos - tmp;
 		wheel.Rotate(0f, 0f, currentRotationScale * tmp.z, Space.Self);
+
+		if (flapper.position.x < transform.position.x) {
+			body.localRotation = Quaternion.Euler(new Vector3(0, 0, Mathf.Lerp(body.localRotation.eulerAngles.z, 0, rotationSpeed * Time.deltaTime)));
+		} else {
+			body.localRotation = Quaternion.Euler(new Vector3(0, 0, Mathf.Lerp(body.localRotation.eulerAngles.z, 180, rotationSpeed * Time.deltaTime)));
+		}
 	}
 }
