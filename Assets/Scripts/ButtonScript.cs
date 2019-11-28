@@ -9,6 +9,7 @@ public class ButtonScript : MonoBehaviour {
 	public float timeBeforeDeactivate = 1;
 	public float maxZ;
 	public float minZ;
+	public AudioClip sound;
 
 	List<I_Activable> activables = new List<I_Activable>();
 	float maxZtemp;
@@ -27,6 +28,7 @@ public class ButtonScript : MonoBehaviour {
 			foreach (I_Activable ac in activables) {
 				ac.Activate();
 			}
+			PlayClip();
 			maxZtemp = minZ;
 			timer = timeBeforeDeactivate;
 		}
@@ -39,7 +41,16 @@ public class ButtonScript : MonoBehaviour {
 			foreach (I_Activable ac in activables) {
 				ac.Deactivate();
 			}
+			canPlayClip = true;
 			maxZtemp = maxZ;
+		}
+	}
+
+	bool canPlayClip = true;
+	void PlayClip() {
+		if (canPlayClip) {
+			AudioManager.singleton.PlayClip(sound);
+			canPlayClip = false;
 		}
 	}
 }

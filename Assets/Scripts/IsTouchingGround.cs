@@ -19,14 +19,24 @@ public class IsTouchingGround : MonoBehaviour {
 	private void OnTriggerEnter(Collider other) {
 		if (other.gameObject.layer != gameObject.layer) {
 			colliderCount++;
-			playerMove.canJump = colliderCount > 0;
+			ApplyChanges();
 		}
 	}
 
 	private void OnTriggerExit(Collider other) {
 		if (other.gameObject.layer != gameObject.layer) {
 			colliderCount--;
-			playerMove.canJump = colliderCount > 0;
+			ApplyChanges();
+		}
+	}
+
+	void ApplyChanges() {
+		if (colliderCount > 0) {
+			playerMove.canJump = true;
+			playerMove.collider.material.frictionCombine = PhysicMaterialCombine.Average;
+		} else {
+			playerMove.canJump = true;
+			playerMove.collider.material.frictionCombine = PhysicMaterialCombine.Minimum;
 		}
 	}
 }
