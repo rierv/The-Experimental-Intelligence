@@ -107,19 +107,28 @@ public class PlayerMove : MonoBehaviour {
 		//if (!shrinking) shrinkage = 0;
 	}
 
-	void Shrink() {
-		shrinking = true;
-		shrinkage++;
-		shrinking_counter = 6;
-		StartCoroutine(ShrinkCoroutine());
-		StartCoroutine(JumpCoroutine());
+    void Shrink()
+    {
+        shrinking = true;
+        shrinkage++;
+        shrinking_counter = 6;
+        StartCoroutine(ShrinkCoroutine());
+        StartCoroutine(JumpCoroutine());
 
-		//if (shrinkage == 3) shrinkage = 2;
-		//if (shrinking_counter == 0 && shrinking && (Left.transform.position - rigidbody.position).magnitude < 0.285) shrinking = false;
-		//Debug.Log((Left.transform.position - rigidbody.position).magnitude);
-	}
+        //if (shrinkage == 3) shrinkage = 2;
+        //if (shrinking_counter == 0 && shrinking && (Left.transform.position - rigidbody.position).magnitude < 0.285) shrinking = false;
+        //Debug.Log((Left.transform.position - rigidbody.position).magnitude);
+    }
+    public void justShrink()
+    {
+        shrinking = true;
+        shrinkage++;
+        shrinking_counter = 6;
+        StartCoroutine(ShrinkCoroutine());
+        jumping = false;
+    }
 
-	IEnumerator ShrinkCoroutine() {
+    IEnumerator ShrinkCoroutine() {
 		float wait = toShrinkWait;
 		switch (jumpType) {
 			case JumpType.Shrink:
@@ -134,9 +143,16 @@ public class PlayerMove : MonoBehaviour {
 		}
 		yield return new WaitForSeconds(wait + shrinkage * 0.02f);
 		shrinking = false;
-	}
+        if (!jumping)
+        {
+            yield return new WaitForSeconds(jumpingWait);
+            shrinkage = 0;
+        }
 
-	IEnumerator JumpCoroutine() {
+
+    }
+
+    IEnumerator JumpCoroutine() {
 		float wait = stopShrinkWait;
 		switch (jumpType) {
 			case JumpType.Shrink:

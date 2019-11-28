@@ -29,7 +29,7 @@ public class ThrowObjects : MonoBehaviour
 
         yield return new WaitForSeconds(0.0f);
 
-        this.GetComponent<PlayerMove>().shrinking = false;
+        this.GetComponent<PlayerMove>().justShrink();
 
         if (th.isHandle)
         {
