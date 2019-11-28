@@ -22,13 +22,15 @@ public class DoubleSwitchPlatform : MonoBehaviour, I_Activable
     public int numberOfPlatforms=2;
     public float[] velocities = new float[3];
     public GameObject obstacle;
+    public Material activeMaterial;
+    public Material notActiveMaterial;
     #endregion
     private void Start()
     {
         platforms = new List<Transform>();
         foreach (Transform child in transform.GetComponentsInChildren<Transform>())
         {
-            platforms.Add(child);
+            if(child.transform!=this.gameObject.transform) platforms.Add(child);
         }
        
     }
@@ -47,7 +49,7 @@ public class DoubleSwitchPlatform : MonoBehaviour, I_Activable
     {
         if (isActive)
         {
-            for (int i= 0; i < numberOfPlatforms; i++)
+            for (int i = 0; i < numberOfPlatforms; i++)
             {
                 Transform platform = platforms[i];
                 if (!xLock && !zLock)
@@ -70,9 +72,18 @@ public class DoubleSwitchPlatform : MonoBehaviour, I_Activable
                 }
                 dir = dir * velocities[i];
                 FixDirection(platform);
-                if (Vector3.Distance(platform.transform.position, obstacle.transform.position) > 1) platform.position = Vector3.Lerp(platform.position, platform.position+dir, Time.fixedDeltaTime);
+                if (Vector3.Distance(platform.transform.position, obstacle.transform.position) > 2)
+                    platform.position = Vector3.Lerp(platform.position, platform.position + dir, Time.fixedDeltaTime);
+
                 Debug.Log(Vector3.Distance(platform.transform.position, obstacle.transform.position));
             }
+        }
+        foreach (Transform platform in platforms)
+        {
+            if (Vector3.Distance(platform.transform.position, obstacle.transform.position) > 2)
+                platform.GetComponent<MeshRenderer>().material = activeMaterial;
+
+            else platform.GetComponent<MeshRenderer>().material = notActiveMaterial;
         }
     }
 

@@ -100,7 +100,12 @@ public partial class SwitchScript : MonoBehaviour {
 				if (camera != null)
 					camera.GetComponent<CameraController>().enabled = true;
 			}
-		}
+            if (comingBackToVerticalPos)
+            {
+                if (horizontal) pointer.LookAt(transform.position + Vector3.right);
+                else if (vertical) pointer.LookAt(transform.position + Vector3.forward);
+            }
+        }
 
 		if ((horizontal && !vertical) || (!horizontal && vertical)) {
 			if (pointer.rotation.eulerAngles.x > 300 && pointer.rotation.eulerAngles.x < 321) {
@@ -116,9 +121,10 @@ public partial class SwitchScript : MonoBehaviour {
 		}
 
 
-		if (comingBackToVerticalPos) cursor.localPosition = Vector3.Lerp(cursor.localPosition, Vector3.up * 5, stickSpeed * Time.deltaTime);
-
-		if (vertical && horizontal) pointer.LookAt(cursor.position);
+        if (vertical && horizontal) {
+            cursor.localPosition = Vector3.Lerp(cursor.localPosition, Vector3.up * 5, stickSpeed * Time.deltaTime);
+            pointer.LookAt(cursor.position);
+        }
 		transform.rotation = Quaternion.Lerp(transform.rotation, pointer.rotation, stickSpeed * Time.deltaTime);
 	}
 
