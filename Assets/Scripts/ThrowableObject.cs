@@ -8,7 +8,7 @@ public class ThrowableObject : MonoBehaviour
     Rigidbody rigidbody;
     BoxCollider collider;
     Quaternion baseRotation;
-    FlapperState state;
+    StateManager state;
 
     SphereCollider coreCollider;
     Vector3 localPos;
@@ -35,14 +35,14 @@ public class ThrowableObject : MonoBehaviour
         baseRotation = rigidbody.rotation;
         coreRB = core.GetComponent<Rigidbody>();
         startPos = transform.position;
+        state = core.GetComponent<StateManager>();
     }
 
     void FixedUpdate()
     {
-        if (state == FlapperState.solid)
+        if (state.state == FlapperState.solid)
         {
-            
-                transform.position = core.transform.position + localPos;
+                transform.position = core.transform.position;
                 transform.rotation = core.transform.rotation;
             
         }
@@ -69,7 +69,7 @@ public class ThrowableObject : MonoBehaviour
             }
             else
             {
-                Vector3 force = (core.transform.position - transform.position) * JellyCore.cohesion * 5;
+                Vector3 force = (core.transform.position - transform.position) * SpineStrenght;
                 force.y = Mathf.Clamp(force.y, Physics.gravity.y, float.MaxValue);
                 rigidbody.AddForce(force);
 
