@@ -5,12 +5,12 @@ using UnityEngine;
 public enum JumpType {
 	DilateShrink,
 	Shrink,
-	Dilate
+	Dilate,
+	Scale
 }
 public class PlayerMove : MonoBehaviour {
+	public Transform flapperModel;
 	public float speed = 5;
-
-
 	[Space]
 	public float jumpForce = 1;
 	public float doubleJumpMultiplier = 1.5f;
@@ -38,6 +38,13 @@ public class PlayerMove : MonoBehaviour {
 	public float stopShrinkWait2 = 2f;
 	public float bonesForce2;
 	public float bonesForceUp2;
+	[Header("Dilate")]
+	public float toShrinkWait3 = 0.7f;
+	public float stopShrinkWait3 = 2f;
+	public float scaleXZ = 0.8f;
+	public float scaleY = 0.6f;
+	public float scaleSpeedXZ = 7;
+	public float scaleSpeedY = 7;
 	[Space]
 	public Rigidbody Up;
 	public Rigidbody Down, Left, Front, Right, Back;
@@ -68,7 +75,11 @@ public class PlayerMove : MonoBehaviour {
 	}
 
 	void Update() {
-		if (shrinking_counter > 0) updateShrink();
+		if (shrinking_counter > 0) {
+			updateShrink();
+		} else {
+			flapperModel.localScale = new Vector3(Mathf.Lerp(flapperModel.localScale.x, 1, scaleSpeedXZ * Time.deltaTime), Mathf.Lerp(flapperModel.localScale.y, 1, scaleSpeedY * Time.deltaTime), Mathf.Lerp(flapperModel.localScale.z, 1, scaleSpeedXZ * Time.deltaTime));
+		}
 
 		if (stateManager.state == FlapperState.gaseous) {
 			rigidbody.isKinematic = true;
@@ -117,6 +128,9 @@ public class PlayerMove : MonoBehaviour {
 			case JumpType.Dilate:
 				wait = toShrinkWait2;
 				break;
+			case JumpType.Scale:
+				wait = toShrinkWait3;
+				break;
 		}
 		yield return new WaitForSeconds(wait + shrinkage * 0.02f);
 		shrinking = false;
@@ -130,6 +144,9 @@ public class PlayerMove : MonoBehaviour {
 				break;
 			case JumpType.Dilate:
 				wait = stopShrinkWait2;
+				break;
+			case JumpType.Scale:
+				wait = stopShrinkWait3;
 				break;
 		}
 		yield return new WaitForSeconds(wait + shrinkage * 0.02f);
@@ -171,29 +188,33 @@ public class PlayerMove : MonoBehaviour {
 
 	public void updateShrink() {
 		float force = bonesForce * shrinkage;
-		switch (jumpType) {
-			case JumpType.Shrink:
-				force = bonesForce1 * shrinkage;
-				break;
-			case JumpType.Dilate:
-				force = bonesForce2 * shrinkage;
-				break;
-		}
 		float forceUp = bonesForceUp * shrinkage;
 		switch (jumpType) {
 			case JumpType.Shrink:
+				force = bonesForce1 * shrinkage;
 				forceUp = bonesForceUp1 * shrinkage;
 				break;
 			case JumpType.Dilate:
+				force = bonesForce2 * shrinkage;
 				forceUp = bonesForceUp2 * shrinkage;
 				break;
+			case JumpType.Scale:
+				force = 0;
+				forceUp = 0;
+				break;
 		}
+
 		//Down.MovePosition(Down.position + Vector3.down * shrinkage * -high * Time.deltaTime);
 		Up.MovePosition(Up.position + Vector3.up * forceUp * Time.deltaTime);
 		Left.MovePosition(Left.position + Vector3.left * force * Time.deltaTime);
 		Right.MovePosition(Right.position + Vector3.right * force * Time.deltaTime);
 		Front.MovePosition(Front.position + Vector3.forward * force * Time.deltaTime);
 		Back.MovePosition(Back.position + Vector3.back * force * Time.deltaTime);
+
+		if (jumpType == JumpType.Scale) {
+			flapperModel.localScale = new Vector3(Mathf.Lerp(flapperModel.localScale.x, scaleXZ, scaleSpeedXZ * Time.deltaTime), Mathf.Lerp(flapperModel.localScale.y, scaleY, scaleSpeedY * Time.deltaTime), Mathf.Lerp(flapperModel.localScale.z, scaleXZ, scaleSpeedXZ * Time.deltaTime));
+		}
+
 		shrinking_counter--;
 	}
 }
