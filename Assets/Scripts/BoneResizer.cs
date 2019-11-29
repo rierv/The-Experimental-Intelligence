@@ -33,14 +33,10 @@ public class BoneResizer : MonoBehaviour
     }
     private void Update()
     {
-        Flapper.transform.localPosition = Vector3.Lerp(Flapper.transform.localPosition, Core.transform.position, Time.deltaTime*1000);
-        Core.transform.localPosition = Vector3.Lerp(Core.transform.localPosition, Vector3.zero, Time.deltaTime*1000);
-        if (Input.GetButton("Jump"))
-        {
-            //Core.GetComponent<PlayerMove>().updateShrink();
+        /*ICI SURFACE*/
+        Flapper.transform.localPosition = Vector3.Lerp(Flapper.transform.localPosition, Core.transform.position, Time.deltaTime*100);
+        Core.transform.localPosition = Vector3.zero;
 
-
-        }
         if (active||waitingForJellyState) Flapper.transform.localScale = Vector3.Lerp(Flapper.transform.localScale, newScale, Time.deltaTime * scaleVelocity);
         else if ( Flapper.transform.localScale != oldScale) Flapper.transform.localScale = Vector3.Lerp(Flapper.transform.localScale, oldScale, Time.deltaTime * scaleVelocity);
         if (waitingForJellyState && state.state == FlapperState.jelly) waitingForJellyState = false;
