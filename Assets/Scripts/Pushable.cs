@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PushableLight : MonoBehaviour {
+public class Pushable : MonoBehaviour {
+	public bool heavy = false;
 	[Tooltip("False = move on X")]
 	public bool moveOnZ = false;
 
@@ -13,9 +14,9 @@ public class PushableLight : MonoBehaviour {
 	}
 
 	private void OnTriggerStay(Collider other) {
-		JellyBone jellyBone = other.GetComponent<JellyBone>();
-		if (jellyBone) {
-			if (jellyBone.state != FlapperState.gaseous) {
+		StateManager flapper = other.GetComponent<StateManager>();
+		if (flapper) {
+			if (!heavy && flapper.state != FlapperState.gaseous || heavy && flapper.state == FlapperState.solid) {
 				if (moveOnZ) {
 					rigidbody.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionX;
 				} else {
@@ -23,6 +24,13 @@ public class PushableLight : MonoBehaviour {
 				}
 			} else {
 				rigidbody.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ;
+			}
+		} else {
+			Pushable pushable = other.GetComponent<Pushable>();
+			if (pushable) {
+				if (!heavy) {
+					rigidbody.constraints = pushable.rigidbody.constraints;
+				}
 			}
 		}
 	}

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1620994342277804835}
   - component: {fileID: 7227490254967071670}
-  - component: {fileID: 8149611671294784073}
+  - component: {fileID: 2204288112135459586}
   m_Layer: 13
   m_Name: Collider X
   m_TagString: Untagged
@@ -45,7 +45,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.2, y: 1, z: 0.6}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8149611671294784073
+--- !u!114 &2204288112135459586
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -54,9 +54,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 35682362670998061}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c3405bf395a68847bae6cdb5af8d66f, type: 3}
+  m_Script: {fileID: 11500000, guid: 6db38ac308e682846a326c0918ae01b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  heavy: 1
   moveOnZ: 0
 --- !u!1 &4890044092944077107
 GameObject:
@@ -210,7 +211,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2590370769461272514}
   - component: {fileID: 5683811938762288880}
-  - component: {fileID: 2992901696942310272}
+  - component: {fileID: 1430128813962895864}
   m_Layer: 13
   m_Name: Collider Z
   m_TagString: Untagged
@@ -245,7 +246,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.6, y: 1, z: 1.2}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2992901696942310272
+--- !u!114 &1430128813962895864
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -254,7 +255,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 8856119220217345481}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c3405bf395a68847bae6cdb5af8d66f, type: 3}
+  m_Script: {fileID: 11500000, guid: 6db38ac308e682846a326c0918ae01b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  heavy: 1
   moveOnZ: 1

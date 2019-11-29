@@ -18,7 +18,7 @@ public class AirFan : MonoBehaviour {
 	}
 
 	private void OnTriggerEnter(Collider other) {
-        /*
+		/*
          * per distinguere tra core e ossa ci vorrebbero 4 parentesi in più, però forse è più carino l'effetto se mandiamo su solo il core e lasciamo le ossa a inseguirlo
          * era così
          * (other.GetComponent<StateManager>() && other.GetComponent<StateManager>().state == FlapperState.jelly || other.GetComponent<JellyBone>() && other.GetComponent<JellyBone>().state == FlapperState.jelly)
@@ -26,27 +26,29 @@ public class AirFan : MonoBehaviour {
          * ((other.GetComponent<StateManager>() && other.GetComponent<StateManager>().state == FlapperState.jelly) || (other.GetComponent<JellyBone>() && other.GetComponent<JellyBone>().state == FlapperState.jelly))
          ma alla fine proverei così per usare anche i pushable e far levitare solo il core: */
 
-        if ((other.isTrigger != true && (other.gameObject.layer == 13 || (other.gameObject.layer == 12&& !other.GetComponent<ThrowableObject>().enabled)) && other.GetComponentInChildren<PushableHeavy>() == null) || (other.GetComponent<StateManager>() && other.GetComponent<StateManager>().state == FlapperState.jelly))
-        {
-            Rigidbody r = other.GetComponent<Rigidbody>();
+		if (CheckOther(other)) {
+			Rigidbody r = other.GetComponent<Rigidbody>();
 			r.useGravity = false;
 			r.AddForce(transform.up * -r.velocity.y * splashForce, ForceMode.VelocityChange);
 		}
-        
+	}
 
-    }
-
-    private void OnTriggerStay(Collider other) {
-        if ((other.isTrigger != true && (other.gameObject.layer == 13 || (other.gameObject.layer == 12 && !other.GetComponent<ThrowableObject>().enabled)) && other.GetComponentInChildren<PushableHeavy>() == null) || (other.GetComponent<StateManager>() && other.GetComponent<StateManager>().state == FlapperState.jelly))
-        {
-            other.GetComponent<Rigidbody>().AddForce(transform.up * (transform.position.y + surface - other.transform.position.y) * force, ForceMode.Acceleration);
+	private void OnTriggerStay(Collider other) {
+		if (CheckOther(other)) {
+			other.GetComponent<Rigidbody>().AddForce(transform.up * (transform.position.y + surface - other.transform.position.y) * force, ForceMode.Acceleration);
 		}
 	}
 
 	private void OnTriggerExit(Collider other) {
-        if ((other.isTrigger != true && (other.gameObject.layer == 13 || (other.gameObject.layer == 12 && !other.GetComponent<ThrowableObject>().enabled)) && other.GetComponentInChildren<PushableHeavy>() == null) || (other.GetComponent<StateManager>() && other.GetComponent<StateManager>().state == FlapperState.jelly))
-        {
-            other.GetComponent<Rigidbody>().useGravity = true;
+		if (CheckOther(other)) {
+			other.GetComponent<Rigidbody>().useGravity = true;
 		}
+	}
+
+	bool CheckOther(Collider other) {
+		return (other.isTrigger != true &&
+				(other.gameObject.layer == 13 || (other.gameObject.layer == 12 && !other.GetComponent<ThrowableObject>().enabled)) &&
+				(!other.GetComponentInChildren<Pushable>() || !other.GetComponentInChildren<Pushable>().heavy)) ||
+			(other.GetComponent<StateManager>() && other.GetComponent<StateManager>().state != FlapperState.solid);
 	}
 }
