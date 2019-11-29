@@ -15,13 +15,16 @@ public class BarScript : MonoBehaviour
     private float maxTemperature = 1.0f;
     private float minFillAmount = 0.4f;
     private float maxFillAmount = 1.0f;
-    private float changeColorOffset;
-    private Color[] barColors;
+    //private float changeColorOffset;
+    //private Color[] barColors;
+    private Color flapperColor = new Color(0.6470588f, 0.9529412f, 0.9568628f, 1);
+    private Color iceColor = new Color(0f, 0.5f, 1f, 1f);
+    private Color fireColor = new Color(1f, 0.2f, 0f, 1f);
     #endregion
 
-    void Start()
+    private void Awake()
     {
-        changeColorOffset = (maxFillAmount - minFillAmount) / 5;
+        //changeColorOffset = (maxFillAmount - minFillAmount) / 5;
         thermometers = new GameObject[3];
         thermometers[0] = GameObject.Find("JellyThermometer");
         thermometers[1] = GameObject.Find("SolidThermometer");
@@ -31,7 +34,7 @@ public class BarScript : MonoBehaviour
         temperatureBar = gameObject.GetComponent<Image>();
         flapperStateManager = GameObject.Find("CORE").GetComponent<StateManager>();
         currentState = flapperStateManager.state;
-        barColors = new Color[7];
+        /*barColors = new Color[7];
         barColors[0] = new Color(0.2f, 0.6f, 1f, 1f);
         barColors[1] = new Color(0.2f, 0.8f, 1f, 1f);
         barColors[5] = new Color(0.2f, 1f, 1f, 1f);
@@ -39,12 +42,13 @@ public class BarScript : MonoBehaviour
         barColors[4] = new Color(1f, 0.2f, 0f, 1f);
         barColors[6] = new Color(1f, 0.6f, 0f, 1f);
         barColors[2] = new Color(0.65f, 0.95f, 0.96f, 1f);
+        */
         HandleModels();
         HandleThermometer();
 
     }
 
-    void Update()
+    private void Update()
     {
         HandleThermometer();
     }
@@ -56,11 +60,15 @@ public class BarScript : MonoBehaviour
             currentState = flapperStateManager.state;
             HandleModels();
         }
+
         fillAmount = flapperStateManager.temperature;
         fillAmount = Map(fillAmount, minTemperature, maxTemperature, minFillAmount, maxFillAmount);
-        if(fillAmount != temperatureBar.fillAmount)
+        if (fillAmount != temperatureBar.fillAmount)
+        {
             temperatureBar.fillAmount = Mathf.Lerp(temperatureBar.fillAmount, fillAmount, 0.03f);
-        HandleBarColor();
+            HandleBarColor();
+        }
+
     }
 
     private float Map(float value, float inMin, float inMax, float outMin, float outMax)
@@ -93,7 +101,11 @@ public class BarScript : MonoBehaviour
 
     private void HandleBarColor()
     {
-        if (fillAmount < (minFillAmount + changeColorOffset))
+        if(flapperStateManager.temperature < 0)
+            temperatureBar.color = Color.Lerp(flapperColor, iceColor, Mathf.Abs(flapperStateManager.temperature));
+        else if(flapperStateManager.temperature > 0)
+            temperatureBar.color = Color.Lerp(flapperColor, fireColor, Mathf.Abs(flapperStateManager.temperature));
+        /*if (fillAmount < (minFillAmount + changeColorOffset))
             temperatureBar.color = barColors[0];
         else if (fillAmount < (minFillAmount + 2 * changeColorOffset))
             temperatureBar.color = barColors[1];
@@ -117,6 +129,6 @@ public class BarScript : MonoBehaviour
         else if (fillAmount < (minFillAmount + 4 * changeColorOffset))
             temperatureBar.color = barColors[3];
         else
-            temperatureBar.color = barColors[4];
+            temperatureBar.color = barColors[4];*/
     }
 }
