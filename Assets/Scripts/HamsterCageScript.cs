@@ -17,6 +17,7 @@ public class HamsterCageScript : MonoBehaviour
     private void Start()
     {
         wheel = gameObject.GetComponentInParent<Rigidbody>();
+        Debug.Log(wheel);
         dynamo = gameObject.transform.parent.parent.parent.Find("bobine_idea_3").GetComponentsInChildren<Transform>();
         electricity = gameObject.transform.parent.parent.parent.Find("battery").Find("battery electricity").gameObject;
         electricity.SetActive(false);
@@ -50,11 +51,11 @@ public class HamsterCageScript : MonoBehaviour
                 }
                 if (horizontalInput > 0)
                 {
-                    //Activate "Right" function
+                    targetObject.GetComponent<I_Activable>().Activate(true);
                 }
                 else
                 {
-                    //Activate "Left" function
+                    targetObject.GetComponent<I_Activable>().Activate(false);
                 }
             }
             else

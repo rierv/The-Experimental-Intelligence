@@ -206,7 +206,7 @@ public class PlayerMove : MonoBehaviour {
 }*/
 
 	public void updateShrink() {
-		AudioManager.singleton.PlayClip(shrink);
+		//AudioManager.singleton.PlayClip(shrink);
 
 		float force = bonesForce * shrinkage;
 		float forceUp = bonesForceUp * shrinkage;
