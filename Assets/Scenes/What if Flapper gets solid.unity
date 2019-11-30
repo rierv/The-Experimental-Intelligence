@@ -2072,5 +2072,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 13
       objectReference: {fileID: 0}
+    - target: {fileID: 8652509107071795575, guid: da3b35131c3d8e949a78f7100a5f1a74,
+        type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 1.6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: da3b35131c3d8e949a78f7100a5f1a74, type: 3}
