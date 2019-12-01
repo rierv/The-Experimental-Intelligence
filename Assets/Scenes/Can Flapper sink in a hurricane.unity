@@ -2376,8 +2376,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   camera: {fileID: 1115916508}
   NewPosition: {x: 0, y: 0, z: 0}
-  NewTarget: {x: 9, y: -5, z: 0}
-  duration: 2
+  NewTarget: {x: 7.94, y: -5, z: -0.9}
+  duration: 3
   cameraMovementSpeed: 1
   cameraRotationSpeed: 1
 --- !u!4 &1449887683
@@ -3678,7 +3678,7 @@ PrefabInstance:
     - target: {fileID: 1650412426641883344, guid: 7fd10ec0c1708c3458fb091fd7d1d232,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.61
+      value: -15.76
       objectReference: {fileID: 0}
     - target: {fileID: 1650412426641883344, guid: 7fd10ec0c1708c3458fb091fd7d1d232,
         type: 3}

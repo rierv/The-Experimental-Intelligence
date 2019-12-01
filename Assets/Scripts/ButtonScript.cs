@@ -13,7 +13,7 @@ public class ButtonScript : MonoBehaviour {
 
 	List<I_Activable> activables = new List<I_Activable>();
 	float maxZtemp;
-	float timer;
+	float timer=0;
 	#endregion
 
 	private void Start() {
@@ -24,7 +24,7 @@ public class ButtonScript : MonoBehaviour {
 	}
 
 	private void OnTriggerStay(Collider other) {
-		if (other.CompareTag("Player") || other.gameObject.layer == 13 || other.gameObject.layer == 12) {
+		if (timer<=0&& other.CompareTag("Player") || other.gameObject.layer == 13 || other.gameObject.layer == 12) {
 			foreach (I_Activable ac in activables) {
 				ac.Activate();
 			}
