@@ -11,9 +11,15 @@ public class NextLevel : MonoBehaviour, I_Activable {
 	public bool isActive = true;
 	Light light;
 
+	float logTimer = 0;
+
 	void Awake() {
 		light = GetComponentInChildren<Light>();
 		light.enabled = isActive;
+	}
+
+	void Update() {
+		logTimer += Time.deltaTime;
 	}
 
 	private void OnTriggerEnter(Collider other) {
@@ -23,6 +29,8 @@ public class NextLevel : MonoBehaviour, I_Activable {
 	}
 
 	IEnumerator LoadLevel() {
+		System.IO.File.AppendAllText(FlapperCore.logFile, logTimer.ToString());
+
 		yield return new WaitForSeconds(delayToStopFlapper);
 		AudioManager.singleton.PlayClip(sound);
 		foreach (PlayerMove p in FindObjectsOfType<PlayerMove>()) {
