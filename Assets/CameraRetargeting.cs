@@ -22,8 +22,7 @@ public class CameraRetargeting : MonoBehaviour, I_Activable {
 	}
 
 	public void Deactivate() {
-		camera.GetComponent<CameraController>().enabled = true;
-		active = false;
+        if (duration == 0) Stop();
 	}
 
 	private void Start() {
@@ -39,6 +38,11 @@ public class CameraRetargeting : MonoBehaviour, I_Activable {
 	}
 	IEnumerator waitToDeactivate() {
 		yield return new WaitForSeconds(duration);
-		Deactivate();
+        Stop();
 	}
+    public void Stop()
+    {
+        camera.GetComponent<CameraController>().enabled = true;
+        active = false;
+    }
 }
