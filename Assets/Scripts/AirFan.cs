@@ -8,13 +8,16 @@ public class AirFan : MonoBehaviour, I_Activable {
 	public float force = 4;
 	public float splashForce = 0.85f;
 	float surface;
-    public bool active = true;
+	public bool active = true;
 	void Awake() {
 		surface = transform.localScale.y;
+		if (!active) {
+			GetComponentInChildren<ParticleSystem>().Stop();
+		}
 	}
 
 	void Update() {
-		if(active) fan.Rotate(transform.up, fanSpeed * Time.deltaTime);
+		if (active) fan.Rotate(transform.up, fanSpeed * Time.deltaTime);
 	}
 
 	private void OnTriggerEnter(Collider other) {
@@ -26,7 +29,7 @@ public class AirFan : MonoBehaviour, I_Activable {
          * ((other.GetComponent<StateManager>() && other.GetComponent<StateManager>().state == FlapperState.jelly) || (other.GetComponent<JellyBone>() && other.GetComponent<JellyBone>().state == FlapperState.jelly))
          ma alla fine proverei così per usare anche i pushable e far levitare solo il core: */
 
-		if (active&&CheckOther(other)) {
+		if (active && CheckOther(other)) {
 			Rigidbody r = other.GetComponent<Rigidbody>();
 			r.useGravity = false;
 			r.AddForce(transform.up * -r.velocity.y * splashForce, ForceMode.VelocityChange);
@@ -34,7 +37,7 @@ public class AirFan : MonoBehaviour, I_Activable {
 	}
 
 	private void OnTriggerStay(Collider other) {
-		if (active&&CheckOther(other)) {
+		if (active && CheckOther(other)) {
 			other.GetComponent<Rigidbody>().AddForce(transform.up * (transform.position.y + surface - other.transform.position.y) * force, ForceMode.Acceleration);
 		}
 	}
@@ -52,13 +55,13 @@ public class AirFan : MonoBehaviour, I_Activable {
 			(other.GetComponent<StateManager>() && other.GetComponent<StateManager>().state != FlapperState.solid);
 	}
 
-    public void Activate(bool type = true)
-    {
-        active = true;
-    }
+	public void Activate(bool type = true) {
+		active = true;
+		GetComponentInChildren<ParticleSystem>().Play();
+	}
 
-    public void Deactivate()
-    {
-        active = false;
-    }
+	public void Deactivate() {
+		active = false;
+		GetComponentInChildren<ParticleSystem>().Stop();
+	}
 }
