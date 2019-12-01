@@ -623,6 +623,7 @@ MonoBehaviour:
   fanSpeed: 0
   force: 6
   splashForce: 0.2
+  active: 1
 --- !u!65 &171060347
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1415,11 +1416,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 191124946663321803, guid: 7fd10ec0c1708c3458fb091fd7d1d232,
-        type: 3}
-      propertyPath: strenght
-      value: 2000
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7fd10ec0c1708c3458fb091fd7d1d232, type: 3}
 --- !u!1 &475959135
@@ -1550,6 +1546,7 @@ MonoBehaviour:
   fanSpeed: 0
   force: 6
   splashForce: 0.2
+  active: 1
 --- !u!65 &481392188
 BoxCollider:
   m_ObjectHideFlags: 0

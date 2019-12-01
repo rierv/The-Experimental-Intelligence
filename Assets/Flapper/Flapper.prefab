@@ -510,7 +510,7 @@ MonoBehaviour:
   doubleJumpMultiplier: 1.333
   solidJumpForce: 12
   maxFallingSpeedForJumping: 0.5
-  jumpingWait: 0.5
+  jumpingWait: 0.3
   fallingBoost: 60
   shrink: {fileID: 8300000, guid: 2c6eb4a6e4c64f1498f14369e4e5f5c2, type: 3}
   gaseousFloatUpForce: 3
@@ -521,7 +521,7 @@ MonoBehaviour:
   bonesForce: 8
   bonesForceUp: -8
   toShrinkWait1: 0
-  stopShrinkWait1: 0.18
+  stopShrinkWait1: 0.15
   bonesForce1: -5
   bonesForceUp1: 5
   toShrinkWait2: 0
@@ -594,7 +594,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1a3c0d9154f86444b265c2092fe510d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  strenght: 1000
+  strenght: 2000
 --- !u!65 &563335559
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -68,9 +68,9 @@ public partial class SwitchScript : MonoBehaviour {
 				}
 			}
 			if (camera != null) {
-				cameraPointer.transform.LookAt(targetObject.transform);
 				camera.transform.position = Vector3.Lerp(camera.transform.position, cameraStartingPos, cameraMovementSpeed * Time.deltaTime);
-				camera.transform.rotation = Quaternion.Lerp(camera.transform.rotation, cameraPointer.transform.rotation, cameraRotationSpeed * Time.deltaTime);
+                cameraPointer.transform.LookAt(targetObject.transform);
+                camera.transform.rotation = Quaternion.Lerp(camera.transform.rotation, cameraPointer.transform.rotation, cameraRotationSpeed * Time.deltaTime);
 			}
 			float x = Input.GetAxis("Horizontal");
 			float y = Input.GetAxis("Vertical");

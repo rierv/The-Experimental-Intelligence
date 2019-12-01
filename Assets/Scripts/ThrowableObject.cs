@@ -38,7 +38,7 @@ public class ThrowableObject : MonoBehaviour
         state = core.GetComponent<StateManager>();
     }
 
-    void FixedUpdate()
+    void Update()
     {
         if (state.state == FlapperState.solid)
         {
@@ -55,7 +55,6 @@ public class ThrowableObject : MonoBehaviour
                 int counter = 1;
                 foreach (Rigidbody bone in parentBodies)
                 {
-                    //counter++;
                     bone.AddForce((Input.GetAxis("Horizontal") * Vector3.right + Input.GetAxis("Vertical") * Vector3.forward + Vector3.down / 2) * (SpineStrenght / ((coreRB.transform.position - startPos).magnitude + 1)) * Time.deltaTime/counter);
 
 

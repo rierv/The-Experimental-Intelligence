@@ -73,9 +73,10 @@ public class DoubleSwitchPlatform : MonoBehaviour, I_Activable
                 dir = dir * velocities[i];
                 FixDirection(platform);
                 if (Vector3.Distance(platform.transform.position, obstacle.transform.position) > 2)
-                    platform.position = Vector3.Lerp(platform.position, platform.position + dir, Time.fixedDeltaTime);
-
-                Debug.Log(Vector3.Distance(platform.transform.position, obstacle.transform.position));
+                {
+                    if (i == 0) platform.position = Vector3.Lerp(platform.position, platform.position + dir, Time.fixedDeltaTime);
+                    if (i == 1) platform.position = Vector3.Lerp(platform.position, platform.position + dir/2, Time.fixedDeltaTime);
+                }
             }
         }
         foreach (Transform platform in platforms)

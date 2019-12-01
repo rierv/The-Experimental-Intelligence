@@ -9,8 +9,16 @@ public class SwitchHelper4TwoTargets : MonoBehaviour, I_Activable
     public GameObject secondTarget;
     public void Activate(bool type)
     {
-        if (type) firstTarget.GetComponent<I_Activable>().Activate();
-        else secondTarget.GetComponent<I_Activable>().Activate();
+        if (type)
+        {
+            firstTarget.GetComponent<I_Activable>().Activate();
+            secondTarget.GetComponent<I_Activable>().Deactivate();
+        }
+        else
+        {
+            secondTarget.GetComponent<I_Activable>().Activate();
+            firstTarget.GetComponent<I_Activable>().Deactivate();
+        }
     }
 
     public void Deactivate()

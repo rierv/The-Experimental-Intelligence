@@ -52,7 +52,7 @@ public class RopeRoot : MonoBehaviour
         GameObject trigger = new GameObject();
         trigger.transform.parent = CopySource[activeBone];
         CapsuleCollider sc = trigger.AddComponent<CapsuleCollider>();
-        sc.radius *= 1.8f;
+        sc.radius *= 3f;
         sc.isTrigger = true;
         trigger.layer = 14;
         
@@ -127,12 +127,12 @@ public class RopeRoot : MonoBehaviour
             {
                 SphereCollider[] bones = GameObject.Find("Root").GetComponentsInChildren<SphereCollider>();
                 GameObject.Find("CORE").GetComponent<Rigidbody>().isKinematic = true;
-                foreach (SphereCollider bone in bones)
+                /*foreach (SphereCollider bone in bones)
                 {
                     bone.enabled = false;
                     bone.GetComponent<JellyBone>().enabled = false;
                     bone.gameObject.GetComponent<Rigidbody>().isKinematic = true;
-                }
+                }*/
                 bonesActive = false;
             }
         }
@@ -141,14 +141,15 @@ public class RopeRoot : MonoBehaviour
             SphereCollider[] bones = GameObject.Find("Root").GetComponentsInChildren<SphereCollider>();
             Rigidbody core = GameObject.Find("CORE").GetComponent<Rigidbody>();
             core.isKinematic = false;
-            core.AddForce(Vector3.up * exitForce* 1000 + (Input.GetAxis("Horizontal") * Vector3.right + Input.GetAxis("Vertical") * Vector3.forward) * exitForce*400);
-            foreach (SphereCollider bone in bones)
+            core.AddForce(Vector3.up * exitForce* 2000 + (Input.GetAxis("Horizontal") * Vector3.right + Input.GetAxis("Vertical") * Vector3.forward) * exitForce*400+ new Vector3(CopySource[activeBone].GetComponent<Rigidbody>().velocity.x, 0 , CopySource[activeBone].GetComponent<Rigidbody>().velocity.z)* 500* exitForce);
+            Debug.Log(core.velocity);
+            /*foreach (SphereCollider bone in bones)
             {
                 bone.enabled = true;
                 bone.GetComponent<JellyBone>().enabled = true;
                 bone.gameObject.GetComponent<Rigidbody>().isKinematic = false;
 
-            }
+            }*/
             bonesActive = true;
         }
         

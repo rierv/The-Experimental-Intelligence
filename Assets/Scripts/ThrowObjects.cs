@@ -8,6 +8,7 @@ public class ThrowObjects : MonoBehaviour
     ThrowableObject th;
     public float strenght=500f;
     StateManager state;
+    bool ready = true;
     void Start()
     {
         state = GetComponent<StateManager>();
@@ -16,7 +17,7 @@ public class ThrowObjects : MonoBehaviour
     void Update()
     {
         if (obj && state.state != FlapperState.solid) GetComponent<PlayerMove>().shrinking = true;
-        else if(state.state == FlapperState.solid) GetComponent<PlayerMove>().shrinking = false;
+        else GetComponent<PlayerMove>().shrinking = false;
         if (obj && state.state != FlapperState.solid && (Input.GetButtonDown("Jump")||state.state==FlapperState.gaseous))
         {
             StartCoroutine(Throw());
@@ -27,8 +28,7 @@ public class ThrowObjects : MonoBehaviour
     {
         obj.GetComponent<ThrowableObject>().enabled = false;
         th.enabled = false;
-
-        yield return new WaitForSeconds(0.0f);
+        ready = false;
 
         this.GetComponent<PlayerMove>().justShrink();
 
@@ -37,7 +37,6 @@ public class ThrowObjects : MonoBehaviour
 
             transform.parent.SetParent(null);
             this.GetComponent<PlayerMove>().canMove = true;
-            this.gameObject.GetComponent<Rigidbody>().AddForce(Vector3.up * strenght+ (Input.GetAxis("Horizontal") * Vector3.right + Input.GetAxis("Vertical") * Vector3.forward) * strenght);
             
 
             
@@ -48,12 +47,13 @@ public class ThrowObjects : MonoBehaviour
 
         }
 
-        obj = null;        
-       
+        obj = null;
+        yield return new WaitForSeconds(0.1f);
+        ready = true;
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == 14&&obj==null&&state.state==FlapperState.jelly)
+        if (ready && other.gameObject.layer == 14&&obj==null&&state.state==FlapperState.jelly)
         {
             th = other.transform.parent.gameObject.GetComponent<ThrowableObject>();
             th.enabled = true;
