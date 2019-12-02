@@ -106,7 +106,7 @@ public class PlayerMove : MonoBehaviour {
 				if (stateManager.state == FlapperState.solid) {
 					rigidbody.AddForce(Vector3.up * solidJumpForce, ForceMode.VelocityChange);
 				} else {
-					rigidbody.AddForce(Vector3.up * jumpForce * Mathf.Clamp(shrinkage, 1, float.MaxValue), ForceMode.VelocityChange);
+					rigidbody.AddForce(Vector3.up * jumpForce * Mathf.Clamp(shrinkage, 1, max_shrinking), ForceMode.VelocityChange);
 				}
 			}
 			shrinkage = 0;
