@@ -88,6 +88,11 @@ public class PlayerMove : MonoBehaviour {
             }
             else if (Input.GetButton("Jump") && !jumping)
             {
+                if (!shrinking)
+                {
+                    shrinking = true;
+                }
+
                 if (stateManager.state == FlapperState.jelly && shrinkage <= max_shrinking)
                 {
                     Shrink();
@@ -103,13 +108,7 @@ public class PlayerMove : MonoBehaviour {
 
     void Shrink()
     {
-        if (!shrinking)
-        {
-            shrinking = true;
-        }
-        
         shrinkage+=Time.deltaTime*shrink_velocity;
-
     }
     
 
