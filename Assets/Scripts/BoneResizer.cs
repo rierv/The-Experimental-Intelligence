@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class BoneResizer : MonoBehaviour
 {
+    public GameObject FlapperModel;
     bool active = false;
     bool waitingForJellyState=false;
-    GameObject Flapper;
     StateManager state;
     Vector3 oldScale;
     public Vector3 newScale;
@@ -19,14 +19,13 @@ public class BoneResizer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Flapper = GameObject.Find("Flapper");
         Root = GameObject.Find("Root");
         Core = GameObject.Find("CORE");
         state = Core.GetComponent<StateManager>();
-        oldScale = Flapper.transform.localScale;
+        oldScale = FlapperModel.transform.localScale;
         bones = new List<Transform>();
-
-        for(int i=0; i<Root.transform.childCount; i++)
+        Core.GetComponent<BoxCollider>().size=newScale*1.5f;
+        for (int i=0; i<Root.transform.childCount; i++)
         {
             bones.Add(Root.transform.GetChild(i));
         }
@@ -34,12 +33,12 @@ public class BoneResizer : MonoBehaviour
     private void Update()
     {
         /*ICI SURFACE*/
-        Flapper.transform.localPosition = Vector3.Lerp(Flapper.transform.localPosition, Core.transform.position, Time.deltaTime*100);
-        Core.transform.localPosition = Vector3.zero;
+        //Flapper.transform.localPosition = Vector3.Lerp(Flapper.transform.localPosition, Core.transform.position, Time.deltaTime*100);
+        //Core.transform.localPosition = Vector3.zero;
 
-        if (active||waitingForJellyState) Flapper.transform.localScale = Vector3.Lerp(Flapper.transform.localScale, newScale, Time.deltaTime * scaleVelocity);
-        else if ( Flapper.transform.localScale != oldScale) Flapper.transform.localScale = Vector3.Lerp(Flapper.transform.localScale, oldScale, Time.deltaTime * scaleVelocity);
-        if (waitingForJellyState && state.state == FlapperState.jelly) waitingForJellyState = false;
+        if (active||waitingForJellyState) FlapperModel.transform.localScale = Vector3.Lerp(FlapperModel.transform.localScale, newScale, Time.deltaTime * scaleVelocity);
+        else if (FlapperModel.transform.localScale != oldScale) FlapperModel.transform.localScale = Vector3.Lerp(FlapperModel.transform.localScale, oldScale, Time.deltaTime * scaleVelocity);
+        if (waitingForJellyState && (state.state == FlapperState.jelly|| state.state == FlapperState.gaseous)) waitingForJellyState = false;
         if (state.state == FlapperState.solid && transformation&&active)
         {
             transformation = false; 
@@ -48,7 +47,7 @@ public class BoneResizer : MonoBehaviour
                 sc.enabled = false;
             }
         }
-        if (state.state == FlapperState.jelly && !transformation)
+        if ((state.state == FlapperState.jelly || state.state == FlapperState.gaseous) && !transformation)
         {
             transformation = true;
             freeFlapperBones();
