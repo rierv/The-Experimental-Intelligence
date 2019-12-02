@@ -7,16 +7,25 @@ public class AirFan : MonoBehaviour, I_Activable {
 	public float fanSpeed;
 	public float force = 4;
 	public float splashForce = 0.85f;
+    public float hight = 1;
 	float surface;
 	public bool active = true;
+    ParticleSystem PS;
 	void Awake() {
-		surface = transform.localScale.y;
 		if (!active) {
 			GetComponentInChildren<ParticleSystem>().Stop();
 		}
 	}
+    private void Start()
+    {
+        PS = GetComponentInChildren<ParticleSystem>();
+        PS.startLifetime *= hight*.9f;
+        BoxCollider collider = GetComponent<BoxCollider>();
+        collider.size = new Vector3(collider.size.x, hight, collider.size.z);
+        surface = transform.localScale.y*collider.size.y;
 
-	void Update() {
+    }
+    void Update() {
 		if (active) fan.Rotate(transform.up, fanSpeed * Time.deltaTime);
 	}
 
