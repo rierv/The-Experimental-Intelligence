@@ -28,6 +28,6 @@ public class RotatingPlatform : MonoBehaviour, I_Activable
     void Update()
     {
         if (active) transform.rotation = Quaternion.Lerp(transform.rotation, aimedRotation, Time.deltaTime * speed);
-        else transform.rotation = Quaternion.Lerp(transform.rotation, startRotation, Time.deltaTime * speed);
+        else transform.rotation = Quaternion.Lerp(transform.rotation, startRotation, Time.deltaTime * speed * 10);
     }
 }
