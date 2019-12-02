@@ -16,8 +16,8 @@ public class ThrowObjects : MonoBehaviour
 
     void Update()
     {
-        if (obj && state.state != FlapperState.solid) GetComponent<PlayerMove>().shrinking = true;
-        else GetComponent<PlayerMove>().shrinking = false;
+        //if (obj && state.state != FlapperState.solid) GetComponent<PlayerMove>().shrinking = true;
+       // else GetComponent<PlayerMove>().shrinking = false;
         if (obj && state.state != FlapperState.solid && (Input.GetButtonDown("Jump")||state.state==FlapperState.gaseous))
         {
             StartCoroutine(Throw());
@@ -30,7 +30,6 @@ public class ThrowObjects : MonoBehaviour
         th.enabled = false;
         ready = false;
 
-        this.GetComponent<PlayerMove>().justShrink();
 
         if (th.isHandle)
         {

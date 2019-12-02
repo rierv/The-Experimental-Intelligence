@@ -511,29 +511,13 @@ MonoBehaviour:
   solidJumpForce: 12
   maxFallingSpeedForJumping: 0.5
   jumpingWait: 0.7
-  fallingBoost: 60
   shrink: {fileID: 8300000, guid: 2c6eb4a6e4c64f1498f14369e4e5f5c2, type: 3}
   gaseousFloatUpForce: 3
   gaseousShrinkDownForce: 5
-  jumpType: 1
-  toShrinkWait: 0.24
-  stopShrinkWait: 0.44
-  bonesForce: 8
-  bonesForceUp: -8
-  toShrinkWait1: 0
-  stopShrinkWait1: 0.15
-  bonesForce1: -5
-  bonesForceUp1: 5
-  toShrinkWait2: 0
-  stopShrinkWait2: 0.18
-  bonesForce2: 4
-  bonesForceUp2: -3
-  toShrinkWait3: 0
-  stopShrinkWait3: 0.14
-  scaleXZ: 0.7
-  scaleY: 0.4
-  scaleSpeedXZ: 7
-  scaleSpeedY: 10
+  bonesForce: -6
+  bonesForceUp: -2
+  max_shrinking: 1.5
+  shrink_velocity: 3
   Up: {fileID: 1650412426688054141}
   Down: {fileID: 1650412427280877092}
   Left: {fileID: 1650412428202199701}
