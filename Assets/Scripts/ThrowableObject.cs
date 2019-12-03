@@ -9,7 +9,6 @@ public class ThrowableObject : MonoBehaviour
     StateManager state;
 
     public bool isHandle;
-    Rigidbody coreRB;
     public float SpineStrenght = 50000f;
     public List<Rigidbody> parentBodies;
     public float handle_hight=1f;
@@ -44,7 +43,7 @@ public class ThrowableObject : MonoBehaviour
                 int counter = 1;
                 foreach (Rigidbody bone in parentBodies)
                 {
-                    bone.AddForce((Input.GetAxis("Horizontal") * Vector3.right + Input.GetAxis("Vertical") * Vector3.forward + Vector3.down / 2) * (SpineStrenght / ((coreRB.transform.position - startPos).magnitude + 1)) * Time.deltaTime/counter);
+                    bone.AddForce((Input.GetAxis("Horizontal") * Vector3.right + Input.GetAxis("Vertical") * Vector3.forward + Vector3.down / 2) * (SpineStrenght / ((core.transform.position - startPos).magnitude + 1)) * Time.deltaTime/counter);
 
 
                 }
