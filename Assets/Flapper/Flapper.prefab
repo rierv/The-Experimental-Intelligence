@@ -507,7 +507,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   flapperModel: {fileID: 1650412427489319875}
   speed: 7
-  jumpForce: 12
+  jumpForce: 8
   doubleJumpMultiplier: 1.333
   solidJumpForce: 12
   maxFallingSpeedForJumping: 0.5
@@ -515,9 +515,9 @@ MonoBehaviour:
   shrink: {fileID: 8300000, guid: 2c6eb4a6e4c64f1498f14369e4e5f5c2, type: 3}
   gaseousFloatUpForce: 3
   gaseousShrinkDownForce: 5
-  bonesForce: -6
-  bonesForceUp: -2
-  max_shrinking: 1.5
+  bonesForce: -5
+  bonesForceUp: 2
+  max_shrinking: 2
   shrink_velocity: 3
   Up: {fileID: 1650412426688054141}
   Down: {fileID: 1650412427280877092}
