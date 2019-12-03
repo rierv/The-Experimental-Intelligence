@@ -10,8 +10,10 @@ public class UpDownPlatform : MonoBehaviour, I_Activable {
 	public float fallingSpeed = 0f;
 	public float duration = 0;
 	bool ready = true;
-	// Start is called before the first frame update
-	void Start() {
+    bool activable = true;
+
+    // Start is called before the first frame update
+    void Start() {
 		StartPos = transform.position;
 		ready = true;
 	}
@@ -32,7 +34,7 @@ public class UpDownPlatform : MonoBehaviour, I_Activable {
 	}
 
 	public void Activate(bool type = true) {
-		if (ready) StartCoroutine(Move());
+		if (ready&&activable) StartCoroutine(Move());
 		ready = false;
 	}
 	IEnumerator Move() {
@@ -44,4 +46,9 @@ public class UpDownPlatform : MonoBehaviour, I_Activable {
 	}
 
 	public void Deactivate() { }
+
+    public void canActivate(bool enabled)
+    {
+        activable = enabled;
+    }
 }

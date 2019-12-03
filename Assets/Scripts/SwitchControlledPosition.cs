@@ -18,10 +18,12 @@ public class SwitchControlledPosition : MonoBehaviour, I_Activable
     public float speed;
     private Vector3 dir;
     private bool isActive = false;
+    bool activable = true;
+
     #endregion
     public void Activate(bool type = true)
     {
-        isActive = true;
+        if(activable) isActive = true;
     }
 
 
@@ -66,5 +68,10 @@ public class SwitchControlledPosition : MonoBehaviour, I_Activable
             dir.z = 0;
         if ((transform.position.y >= maxConstraintY && dir.y > 0) || (transform.position.y <= minConstraintY && dir.y < 0))
             dir.y = 0;
+    }
+
+    public void canActivate(bool enabled)
+    {
+        activable = enabled;
     }
 }

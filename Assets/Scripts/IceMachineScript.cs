@@ -35,9 +35,11 @@ public class IceMachineScript : MonoBehaviour, I_Activable {
 	[Header("Activable")]
 	public bool active = true;
 	public bool invertTrueFalse;
-	#endregion
+    bool activable = true;
 
-	void Start() {
+    #endregion
+
+    void Start() {
 		topIconMaterialOn = topIcon.material;
 		doorMaterialOn = door.material;
 		if (!active) {
@@ -125,7 +127,7 @@ public class IceMachineScript : MonoBehaviour, I_Activable {
 
 
 	public void Activate(bool type) {
-		if (type && !invertTrueFalse || !type && invertTrueFalse) {
+		if (activable&&((type && !invertTrueFalse) || (!type && invertTrueFalse))) {
 			active = true;
 			topIcon.material = topIconMaterialOn;
 			door.material = doorMaterialOn;
@@ -142,4 +144,9 @@ public class IceMachineScript : MonoBehaviour, I_Activable {
 		topIcon.material = topIconMaterialOff;
 		door.material = doorMaterialOff;
 	}
+
+    public void canActivate(bool enabled)
+    {
+        activable = enabled;
+    }
 }

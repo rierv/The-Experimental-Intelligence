@@ -5,16 +5,23 @@ using UnityEngine;
 public class Spawner : MonoBehaviour, I_Activable
 {
     public GameObject objectToSpawn;
+    bool activable = true;
+
     GameObject instance;
     bool ready = true;
     public void Activate(bool type = true)
     {
-        if (ready)
+        if (ready&&activable)
         {
             ready = false;
             if (instance != null) Destroy(instance);
             instance = Instantiate(objectToSpawn, transform.position, transform.rotation);
         }
+    }
+
+    public void canActivate(bool enabled)
+    {
+        activable = enabled;
     }
 
     public void Deactivate()
