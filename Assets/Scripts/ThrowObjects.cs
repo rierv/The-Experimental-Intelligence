@@ -43,7 +43,7 @@ public class ThrowObjects : MonoBehaviour
         else
         {
             obj.GetComponent<Rigidbody>().AddForce(Vector3.up * strenght*2 + (Input.GetAxis("Horizontal") * Vector3.right + Input.GetAxis("Vertical") * Vector3.forward) * strenght*4);
-
+            obj.transform.parent = null;
         }
 
         obj = null;
@@ -64,6 +64,10 @@ public class ThrowObjects : MonoBehaviour
                 other.transform.parent.gameObject.GetComponent<Rigidbody>().AddForce((Input.GetAxis("Horizontal") * Vector3.right + Input.GetAxis("Vertical") * Vector3.forward + Vector3.down / 2) * 100000 * Time.deltaTime);
                 this.GetComponent<PlayerMove>().canMove = false;
                 
+            }
+            else
+            {
+                other.transform.parent.SetParent(transform);
             }
         }
     }

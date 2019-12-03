@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -817,6 +817,12 @@ PrefabInstance:
       propertyPath: exitForce
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 7618920792036604567, guid: cfb5c757897e6f3409e7a1abcade0c55,
+        type: 3}
+      propertyPath: throwableModel
+      value: 
+      objectReference: {fileID: 4823587774335328235, guid: 8bbc1a3bcb2b073439ec307267ccb283,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cfb5c757897e6f3409e7a1abcade0c55, type: 3}
 --- !u!1 &441033314
@@ -1150,6 +1156,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Camera
       objectReference: {fileID: 0}
+    - target: {fileID: 7457115346133579092, guid: f5546f701e6c54342b4be58165b8616b,
+        type: 3}
+      propertyPath: field of view
+      value: 36
+      objectReference: {fileID: 0}
     - target: {fileID: 7457115346133579091, guid: f5546f701e6c54342b4be58165b8616b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1254,11 +1265,6 @@ PrefabInstance:
         type: 3}
       propertyPath: secondTargetOffset.y
       value: 0.14
-      objectReference: {fileID: 0}
-    - target: {fileID: 7457115346133579092, guid: f5546f701e6c54342b4be58165b8616b,
-        type: 3}
-      propertyPath: field of view
-      value: 36
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f5546f701e6c54342b4be58165b8616b, type: 3}
@@ -2141,6 +2147,20 @@ PrefabInstance:
       propertyPath: _drag
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 1650412428068302614, guid: 7fd10ec0c1708c3458fb091fd7d1d232,
+        type: 3}
+      propertyPath: jumpForce
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1650412428068302614, guid: 7fd10ec0c1708c3458fb091fd7d1d232,
+        type: 3}
+      propertyPath: speed
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 139324025, guid: 7fd10ec0c1708c3458fb091fd7d1d232, type: 3}
+      propertyPath: jellySpeed
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 1650412427489282021, guid: 7fd10ec0c1708c3458fb091fd7d1d232,
         type: 3}
       propertyPath: m_Layer
@@ -2604,6 +2624,12 @@ PrefabInstance:
       propertyPath: ColliderHeight
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 7618920792036604567, guid: cfb5c757897e6f3409e7a1abcade0c55,
+        type: 3}
+      propertyPath: throwableModel
+      value: 
+      objectReference: {fileID: 4823587774335328235, guid: 8bbc1a3bcb2b073439ec307267ccb283,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cfb5c757897e6f3409e7a1abcade0c55, type: 3}
 --- !u!1001 &1561444699
@@ -3702,7 +3728,7 @@ PrefabInstance:
     - target: {fileID: 9197279904752920404, guid: 42482bead444bef4ea2f3470ddbd528a,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.7
+      value: -0.27
       objectReference: {fileID: 0}
     - target: {fileID: 9197279904752920404, guid: 42482bead444bef4ea2f3470ddbd528a,
         type: 3}
@@ -3792,7 +3818,7 @@ PrefabInstance:
     - target: {fileID: 357615083545460035, guid: 42482bead444bef4ea2f3470ddbd528a,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 13.8
+      value: 13.99
       objectReference: {fileID: 0}
     - target: {fileID: 357615083545460035, guid: 42482bead444bef4ea2f3470ddbd528a,
         type: 3}

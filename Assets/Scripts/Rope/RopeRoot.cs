@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class RopeRoot : MonoBehaviour
 {
-
+    public GameObject throwableModel;
     public float RigidbodyMass = 1f;
     public float ColliderRadius = 0.0005f;
     public float ColliderHeight = 0.001f;
@@ -47,7 +47,9 @@ public class RopeRoot : MonoBehaviour
         th.enabled = false;
         th.isHandle = true;
         CopySource[activeBone].gameObject.layer = 12;
-
+        GameObject tM = Instantiate(throwableModel);
+        tM.transform.parent = CopySource[activeBone];
+        tM.transform.localPosition = Vector3.up;
         GameObject trigger = new GameObject();
         trigger.transform.parent = CopySource[activeBone];
         CapsuleCollider sc = trigger.AddComponent<CapsuleCollider>();
