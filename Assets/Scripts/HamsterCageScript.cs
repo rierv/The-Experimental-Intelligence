@@ -12,12 +12,13 @@ public class HamsterCageScript : MonoBehaviour
     public float wheelSpeed = 200f;
     private bool isActive = false;
     private float horizontalInput;
+    public GameObject bobine;
     #endregion
 
     private void Start()
     {
         wheel = gameObject.GetComponentInParent<Rigidbody>();
-        dynamo = gameObject.transform.parent.parent.parent.Find("bobine_idea_3").GetComponentsInChildren<Transform>();
+        dynamo = bobine.GetComponentsInChildren<Transform>();
         electricity = gameObject.transform.parent.parent.parent.Find("battery").Find("battery electricity").gameObject;
         electricity.SetActive(false);
     }

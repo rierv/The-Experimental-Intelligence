@@ -50,6 +50,7 @@ public class DoubleSwitchPlatform : MonoBehaviour, I_Activable
 
     private void FixedUpdate()
     {
+        Debug.Log(isActive);
         if (isActive)
         {
             for (int i = 0; i < numberOfPlatforms; i++)
@@ -68,10 +69,12 @@ public class DoubleSwitchPlatform : MonoBehaviour, I_Activable
                 }
                 else
                 {
-                    if (!xLock)
-                        dir = new Vector3(0f, Input.GetAxis("Horizontal"), 0f);
+                    if (xLock && zLock)
+                        dir = new Vector3(0f, Input.GetAxis("Horizontal")+ Input.GetAxis("Vertical"), 0);
+                    else if (!xLock)
+                        dir = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0f);
                     else if (!zLock)
-                        dir = new Vector3(0f, Input.GetAxis("Vertical"), 0f);
+                        dir = new Vector3(0f, Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
                 }
                 dir = dir * velocities[i];
                 FixDirection(platform);
