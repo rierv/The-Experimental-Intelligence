@@ -2009,6 +2009,11 @@ PrefabInstance:
       propertyPath: camera
       value: 
       objectReference: {fileID: 840722291}
+    - target: {fileID: 8758819073277259626, guid: 5009b4b25136dbf42a258096b2c4fa25,
+        type: 3}
+      propertyPath: stickSpeed
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5009b4b25136dbf42a258096b2c4fa25, type: 3}
 --- !u!1 &1057032839
@@ -2079,12 +2084,12 @@ PrefabInstance:
     - target: {fileID: 1650412426641883344, guid: 7fd10ec0c1708c3458fb091fd7d1d232,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.1
+      value: -36.63
       objectReference: {fileID: 0}
     - target: {fileID: 1650412426641883344, guid: 7fd10ec0c1708c3458fb091fd7d1d232,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 11.3
+      value: 28.4
       objectReference: {fileID: 0}
     - target: {fileID: 1650412426641883344, guid: 7fd10ec0c1708c3458fb091fd7d1d232,
         type: 3}

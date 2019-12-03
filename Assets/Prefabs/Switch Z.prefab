@@ -341,7 +341,7 @@ GameObject:
   - component: {fileID: 6156131605817753620}
   - component: {fileID: 4315850138301377902}
   m_Layer: 0
-  m_Name: Z_SWITCH
+  m_Name: Switch Z
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -698,12 +698,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f23fef25a5fee4846ab03365a0f2f3f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  solidCollider: {fileID: 0}
   switchBase: {fileID: 5545120294218516650}
   targetObject: {fileID: 0}
   yOffset: 1
   handle: {fileID: 8758819073101865023}
-  maxInclination: 5
-  stickSpeed: 5
+  maxInclination: 0.5
+  stickSpeed: 2
   comingBackToVerticalPos: 1
   vertical: 1
   horizontal: 0
@@ -715,3 +716,4 @@ MonoBehaviour:
   zCameraOffset: -19.15
   cameraMovementSpeed: 3
   cameraRotationSpeed: 3
+  sound: {fileID: 0}

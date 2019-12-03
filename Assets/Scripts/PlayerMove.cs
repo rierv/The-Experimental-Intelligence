@@ -37,7 +37,7 @@ public class PlayerMove : MonoBehaviour {
 	public Rigidbody rigidbody;
 	public SphereCollider collider;
 	StateManager stateManager;
-	float shrinkage = 0;
+	float shrinkage = 1;
 
 	void Awake() {
 		rigidbody = GetComponent<Rigidbody>();
@@ -90,7 +90,8 @@ public class PlayerMove : MonoBehaviour {
 
 	void Shrink() {
 		shrinkage += Time.deltaTime * shrink_velocity;
-	}
+
+    }
 
 
 
@@ -106,10 +107,10 @@ public class PlayerMove : MonoBehaviour {
 				if (stateManager.state == FlapperState.solid) {
 					rigidbody.AddForce(Vector3.up * solidJumpForce, ForceMode.VelocityChange);
 				} else {
-					rigidbody.AddForce(Vector3.up * jumpForce * Mathf.Clamp(shrinkage, 1, max_shrinking), ForceMode.VelocityChange);
+					rigidbody.AddForce(Vector3.up * jumpForce * shrinkage, ForceMode.VelocityChange);
 				}
 			}
-			shrinkage = 0;
+			shrinkage = 1;
 			yield return new WaitForSeconds(jumpingWait);
 			jumping = false;
 		}
