@@ -5,15 +5,8 @@ using UnityEngine;
 public class ThrowableObject : MonoBehaviour
 {
     JellyCore core;
-    Rigidbody rigidbody;
-    BoxCollider collider;
     Quaternion baseRotation;
     StateManager state;
-
-    SphereCollider coreCollider;
-    Vector3 localPos;
-
-    Vector3 lastGoodPosition;
 
     public bool isHandle;
     Rigidbody coreRB;
@@ -29,11 +22,7 @@ public class ThrowableObject : MonoBehaviour
     void Start()
     {
         core = FindObjectOfType<JellyCore>();
-        rigidbody = GetComponent<Rigidbody>();
-        collider = GetComponent<BoxCollider>();
-        rigidbody.drag = JellyCore.drag;
-        baseRotation = rigidbody.rotation;
-        coreRB = core.GetComponent<Rigidbody>();
+        baseRotation = transform.rotation;
         startPos = transform.position;
         state = core.GetComponent<StateManager>();
     }
@@ -60,10 +49,7 @@ public class ThrowableObject : MonoBehaviour
 
                 }
                 core.transform.position = new Vector3(this.transform.position.x, this.transform.position.y+handle_hight, this.transform.position.z);
-                //coreRB.AddForce( Vector3.up * 100 );
                 
-
-                //rigidbody.AddForce(Vector3.down * 500 * Time.deltaTime);
 
             }
             else
@@ -71,7 +57,7 @@ public class ThrowableObject : MonoBehaviour
                 
                 transform.localPosition=Vector3.Lerp(transform.localPosition, Vector3.zero, Vector3.Distance(core.transform.position, transform.position)*SpineStrenght*Time.deltaTime);
 
-                rigidbody.MoveRotation(baseRotation);
+                transform.rotation = Quaternion.Lerp(transform.rotation, baseRotation, Time.deltaTime);
             }
         }
         

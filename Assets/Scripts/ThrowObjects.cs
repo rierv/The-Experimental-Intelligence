@@ -16,8 +16,6 @@ public class ThrowObjects : MonoBehaviour
 
     void Update()
     {
-        //if (obj && state.state != FlapperState.solid) GetComponent<PlayerMove>().shrinking = true;
-       // else GetComponent<PlayerMove>().shrinking = false;
         if (obj && state.state != FlapperState.solid && (Input.GetButtonDown("Jump")||state.state==FlapperState.gaseous))
         {
             StartCoroutine(Throw());
@@ -42,12 +40,14 @@ public class ThrowObjects : MonoBehaviour
         }
         else
         {
-            obj.GetComponent<Rigidbody>().AddForce(Vector3.up * strenght*2 + (Input.GetAxis("Horizontal") * Vector3.right + Input.GetAxis("Vertical") * Vector3.forward) * strenght*4);
             obj.transform.parent = null;
+            obj.layer = 18;
+            obj.GetComponent<Rigidbody>().AddForce((Vector3.up  + (Input.GetAxis("Horizontal") * Vector3.right + Input.GetAxis("Vertical") * Vector3.forward)) * strenght/50, ForceMode.VelocityChange);
         }
 
-        obj = null;
         yield return new WaitForSeconds(0.1f);
+        obj.layer = 12;
+        obj = null;
         ready = true;
     }
     private void OnTriggerEnter(Collider other)
