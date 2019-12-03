@@ -12,11 +12,12 @@ public class Star : MonoBehaviour {
 
 	private void OnTriggerEnter(Collider other) {
 		if (other.GetComponent<JellyBone>()) {
-			//AudioManager.singleton.PlayClip(sound);
 			gameObject.SetActive(false);
             //GameObject.Find("Clock").GetComponent<ClockManager>().AddStar();
-            GameObject.Find("Clock").GetComponent<StarCollector>().AddStar();
+            //GameObject.Find("Clock").GetComponent<StarCollector>().AddStar();
 
-        }
+			AudioManager.singleton.PlayClip(sound);
+			FindObjectOfType<ClockManager>().AddStar();
+		}
 	}
 }
