@@ -44,7 +44,6 @@ public class RopeRoot : MonoBehaviour
             
             th.parentBodies.Add(bone.gameObject.GetComponent<Rigidbody>());
         }
-        Debug.Log(th.parentBodies.Count);
         th.enabled = false;
         th.isHandle = true;
         CopySource[activeBone].gameObject.layer = 12;
@@ -158,6 +157,6 @@ public class RopeRoot : MonoBehaviour
 
     void AddHandle(Transform handle)
     {
-        Debug.Log(handle.name);
+        //Debug.Log(handle.name);
     }
 }

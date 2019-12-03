@@ -417,7 +417,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8574351855784590264}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2, z: 0}
+  m_LocalPosition: {x: 0, y: 3.88, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5724353369973877770}
@@ -434,7 +434,7 @@ GameObject:
   - component: {fileID: 5724353369973877770}
   - component: {fileID: 2448549508348297584}
   m_Layer: 0
-  m_Name: Joystick
+  m_Name: JOYSTICK
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -597,11 +597,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f23fef25a5fee4846ab03365a0f2f3f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  solidCollider: {fileID: 0}
   switchBase: {fileID: 1654276871265899516}
   targetObject: {fileID: 0}
   yOffset: 1
   handle: {fileID: 8846522831408676322}
-  maxInclination: 5
+  maxInclination: 0.5
   stickSpeed: 5
   comingBackToVerticalPos: 1
   vertical: 1
@@ -612,6 +613,9 @@ MonoBehaviour:
   xCameraOffset: 21.97
   yCameraOffset: 0
   zCameraOffset: -3
+  cameraMovementSpeed: 3
+  cameraRotationSpeed: 3
+  sound: {fileID: 0}
 --- !u!1 &8846522830071831066
 GameObject:
   m_ObjectHideFlags: 0

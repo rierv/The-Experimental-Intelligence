@@ -16,8 +16,9 @@ public partial class SwitchScript : MonoBehaviour {
 	Vector3 validPos;
 	public float yOffset = 1;
 	public GameObject handle;
-	public float maxInclination = 5f;
-	public float stickSpeed = 5f;
+    [Range (0,1)]
+	public float maxInclination = 0.5f;
+	public float stickSpeed = 2f;
 	public bool comingBackToVerticalPos = true;
 	public bool vertical = true;
 	public bool horizontal = true;
@@ -75,17 +76,17 @@ public partial class SwitchScript : MonoBehaviour {
 			float x = Input.GetAxis("Horizontal");
 			float y = Input.GetAxis("Vertical");
 
-			if (y != 0 || x != 0) {
-				x = x * Time.deltaTime * stickSpeed * 3;
-				y = y * Time.deltaTime * stickSpeed * 3;
+			
+				
 				if (vertical && horizontal)
-					cursor.localPosition = new Vector3(Mathf.Clamp(cursor.localPosition.x + x, -maxInclination, maxInclination), cursor.localPosition.y, Mathf.Clamp(cursor.localPosition.z + y, -maxInclination, maxInclination));
+					cursor.localPosition = new Vector3(Mathf.Clamp(cursor.localPosition.x + x, -maxInclination*90, maxInclination*90), cursor.localPosition.y, Mathf.Clamp(cursor.localPosition.z + y, -maxInclination*90, maxInclination*90));
 				//else if (horizontal) cursor.localPosition = new Vector3(Mathf.Clamp(cursor.localPosition.x + x,-maxInclination, maxInclination), cursor.localPosition.y, cursor.localPosition.z);
 				//else if (vertical) cursor.localPosition = new Vector3(cursor.localPosition.x, cursor.localPosition.y, Mathf.Clamp(cursor.localPosition.z + y,-maxInclination, maxInclination));
-				else if (horizontal) pointer.LookAt(transform.position + Vector3.right - x * Vector3.up * maxInclination);
-				else if (vertical) pointer.LookAt(transform.position + Vector3.forward - y * Vector3.up * maxInclination);
-			}
-		} else {
+				else if (horizontal) pointer.LookAt(transform.position - x * Vector3.up + Vector3.right );
+				else if (vertical) pointer.LookAt(transform.position - y * Vector3.up);
+			
+            
+        } else {
 			if (!bonesActive) {
 				SphereCollider[] bones = GameObject.Find("Root").GetComponentsInChildren<SphereCollider>();
 				GameObject.Find("CORE").GetComponent<Rigidbody>().isKinematic = false;
@@ -107,26 +108,40 @@ public partial class SwitchScript : MonoBehaviour {
             }
         }
 
-		if ((horizontal && !vertical) || (!horizontal && vertical)) {
-			if (pointer.rotation.eulerAngles.x > 300 && pointer.rotation.eulerAngles.x < 321) {
-				targetObject.GetComponent<I_Activable>().Activate();
-				PlayClip();
-			} else if (pointer.rotation.eulerAngles.x < 60 && pointer.rotation.eulerAngles.x > 40) {
-				targetObject.GetComponent<I_Activable>().Activate(false);
-				PlayClip();
-			} else {
-				targetObject.GetComponent<I_Activable>().Deactivate();
-				canPlayClip = true;
-			}
-		}
 
+        if ((horizontal && !vertical) || (!horizontal && vertical))
+        {
+
+            transform.rotation = Quaternion.Lerp(transform.rotation, new Quaternion(pointer.rotation.x * maxInclination, pointer.rotation.y, pointer.rotation.z, pointer.rotation.w), stickSpeed * Time.deltaTime);
+            Debug.Log(transform.rotation.x);
+            if (transform.rotation.x > .12f)
+            {
+                targetObject.GetComponent<I_Activable>().Activate();
+                PlayClip();
+            }
+            else if (transform.rotation.x < -.12f)
+            {
+                targetObject.GetComponent<I_Activable>().Activate(false);
+                PlayClip();
+            }
+            else
+            {
+                targetObject.GetComponent<I_Activable>().Deactivate();
+                canPlayClip = true;
+            }
+            if (comingBackToVerticalPos)
+            {
+                if (horizontal) pointer.LookAt(transform.position + Vector3.right);
+                else if (vertical) pointer.LookAt(transform.position + Vector3.forward);
+            }
+        }
 
         if (vertical && horizontal) {
             cursor.localPosition = Vector3.Lerp(cursor.localPosition, Vector3.up * 5, stickSpeed * Time.deltaTime);
             pointer.LookAt(cursor.position);
+            transform.rotation = Quaternion.Lerp(transform.rotation, pointer.rotation, stickSpeed * Time.deltaTime);
         }
-		transform.rotation = Quaternion.Lerp(transform.rotation, pointer.rotation, stickSpeed * Time.deltaTime);
-	}
+    }
 
 	bool canPlayClip = true;
 	void PlayClip() {
