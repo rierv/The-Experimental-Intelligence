@@ -8,15 +8,8 @@ public partial class SwitchScript : MonoBehaviour {
 	public GameObject switchBase;
 	public GameObject targetObject;
 	private float maxRotation = 90f;
-	private float firstMinRotation; //Min rotation to activate first function
-	private float firstMaxRotation; //Max rotation to activate first function; note this is necessary since angles are between 0 and 360
-	private float secondMinRotation;
-	private float secondMaxRotation;
-	Vector3 currentRotation;
-	Vector3 validPos;
-	public float yOffset = 1;
 	public GameObject handle;
-    [Range (0,1)]
+    //[Range (0,1)]
 	public float maxInclination = 0.5f;
 	public float stickSpeed = 2f;
 	public bool comingBackToVerticalPos = true;
@@ -34,19 +27,14 @@ public partial class SwitchScript : MonoBehaviour {
 	public float cameraRotationSpeed = 3f;
 	public AudioClip sound;
 	#endregion
-	// Start is called before the first frame update
 
 	private void Start() {
 		bonesActive = true;
 		handle.GetComponent<ThrowableObject>().parentBodies.Add(handle.GetComponent<Rigidbody>());
-		firstMaxRotation = maxRotation;
-		firstMinRotation = maxRotation / 2;
-		secondMinRotation = 360 - firstMaxRotation;
-		secondMaxRotation = 360 - firstMinRotation;
+		
 		if (camera) cameraPointer = camera.transform.GetChild(0).transform;
 	}
 
-	// Update is called once per frame
 	private void Update() {
 
 		if (handle.GetComponent<ThrowableObject>().isActiveAndEnabled) {
@@ -78,12 +66,14 @@ public partial class SwitchScript : MonoBehaviour {
 
 			
 				
-				if (vertical && horizontal)
-					cursor.localPosition = new Vector3(Mathf.Clamp(cursor.localPosition.x + x, -maxInclination*90, maxInclination*90), cursor.localPosition.y, Mathf.Clamp(cursor.localPosition.z + y, -maxInclination*90, maxInclination*90));
-				//else if (horizontal) cursor.localPosition = new Vector3(Mathf.Clamp(cursor.localPosition.x + x,-maxInclination, maxInclination), cursor.localPosition.y, cursor.localPosition.z);
-				//else if (vertical) cursor.localPosition = new Vector3(cursor.localPosition.x, cursor.localPosition.y, Mathf.Clamp(cursor.localPosition.z + y,-maxInclination, maxInclination));
-				else if (horizontal) pointer.LookAt(transform.position - x * Vector3.up + Vector3.right );
-				else if (vertical) pointer.LookAt(transform.position - y * Vector3.up);
+			if (vertical && horizontal)
+                cursor.localPosition = new Vector3(x*maxInclination, cursor.localPosition.y, y*maxInclination);
+            
+			//	cursor.localPosition = new Vector3(Mathf.Clamp(cursor.localPosition.x + x, -maxInclination, maxInclination), cursor.localPosition.y, Mathf.Clamp(cursor.localPosition.z + y, -maxInclination, maxInclination));
+			//else if (horizontal) cursor.localPosition = new Vector3(Mathf.Clamp(cursor.localPosition.x + x,-maxInclination, maxInclination), cursor.localPosition.y, cursor.localPosition.z);
+			//else if (vertical) cursor.localPosition = new Vector3(cursor.localPosition.x, cursor.localPosition.y, Mathf.Clamp(cursor.localPosition.z + y,-maxInclination, maxInclination));
+			else if (horizontal) pointer.LookAt(transform.position - x * Vector3.up + Vector3.right );
+			else if (vertical) pointer.LookAt(transform.position - y * Vector3.up);
 			
             
         } else {
@@ -101,11 +91,7 @@ public partial class SwitchScript : MonoBehaviour {
 				if (camera != null)
 					camera.GetComponent<CameraController>().enabled = true;
 			}
-            if (comingBackToVerticalPos)
-            {
-                if (horizontal) pointer.LookAt(transform.position + Vector3.right);
-                else if (vertical) pointer.LookAt(transform.position + Vector3.forward);
-            }
+            
         }
 
 
@@ -136,7 +122,6 @@ public partial class SwitchScript : MonoBehaviour {
         }
 
         if (vertical && horizontal) {
-            cursor.localPosition = Vector3.Lerp(cursor.localPosition, Vector3.up * 5, stickSpeed * Time.deltaTime);
             pointer.LookAt(cursor.position);
             transform.rotation = Quaternion.Lerp(transform.rotation, pointer.rotation, stickSpeed * Time.deltaTime);
         }

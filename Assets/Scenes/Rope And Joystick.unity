@@ -3949,21 +3949,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5724353369973877770, guid: 585d496de35445d459cbc01e977ab8d6,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 5724353369973877770, guid: 585d496de35445d459cbc01e977ab8d6,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 5724353369973877770, guid: 585d496de35445d459cbc01e977ab8d6,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1.7
-      objectReference: {fileID: 0}
     - target: {fileID: 8846522830043967124, guid: 585d496de35445d459cbc01e977ab8d6,
         type: 3}
       propertyPath: targetObject
@@ -3974,25 +3959,5 @@ PrefabInstance:
       propertyPath: camera
       value: 
       objectReference: {fileID: 840722291}
-    - target: {fileID: 8846522830043967124, guid: 585d496de35445d459cbc01e977ab8d6,
-        type: 3}
-      propertyPath: zCameraOffset
-      value: -13.08
-      objectReference: {fileID: 0}
-    - target: {fileID: 8846522830043967124, guid: 585d496de35445d459cbc01e977ab8d6,
-        type: 3}
-      propertyPath: yCameraOffset
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8846522830043967124, guid: 585d496de35445d459cbc01e977ab8d6,
-        type: 3}
-      propertyPath: xCameraOffset
-      value: 18.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 8846522830043967124, guid: 585d496de35445d459cbc01e977ab8d6,
-        type: 3}
-      propertyPath: stickSpeed
-      value: 10
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 585d496de35445d459cbc01e977ab8d6, type: 3}
