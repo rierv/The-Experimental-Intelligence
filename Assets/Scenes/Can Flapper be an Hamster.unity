@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -553,12 +553,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f5546f701e6c54342b4be58165b8616b, type: 3}
---- !u!1 &378966334 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6272985390752771431, guid: 78f1736391f641342a6c4fa7f10839fa,
-    type: 3}
-  m_PrefabInstance: {fileID: 467790592}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &435026584
 GameObject:
   m_ObjectHideFlags: 0
@@ -810,11 +804,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114989190612202848, guid: 78f1736391f641342a6c4fa7f10839fa,
-        type: 3}
-      propertyPath: bobine
-      value: 
-      objectReference: {fileID: 378966334}
     - target: {fileID: 114989190612202848, guid: 78f1736391f641342a6c4fa7f10839fa,
         type: 3}
       propertyPath: targetObject
