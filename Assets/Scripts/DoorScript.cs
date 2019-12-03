@@ -10,9 +10,11 @@ public class DoorScript : MonoBehaviour, I_Activable {
 	private bool isActive = false;
     public bool goingUp = true;
 	private Vector3 translateVector;
-	#endregion
+    bool activable = true;
 
-	private void Start() {
+    #endregion
+
+    private void Start() {
 		translateVector = Vector3.up;
 	}
 
@@ -40,10 +42,15 @@ public class DoorScript : MonoBehaviour, I_Activable {
     }
 
 	public void Activate(bool type = true) {
-		isActive = true;
+		if(activable) isActive = true;
 	}
 
 	public void Deactivate() {
         isActive = false;
+    }
+
+    public void canActivate(bool enabled)
+    {
+        activable = enabled;
     }
 }

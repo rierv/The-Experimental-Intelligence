@@ -15,9 +15,11 @@ public class MovingPlatformKinematic : MonoBehaviour, I_Activable {
 	private float platformTimer;
 	private float platformStopTime = 1.5f;
     public bool active = true;
-	#endregion
+    bool activable = true;
 
-	private void Start() {
+    #endregion
+
+    private void Start() {
 		direction = true;
 		platformTimer = platformStopTime;
 		isPlatformMoving = false;
@@ -91,11 +93,16 @@ public class MovingPlatformKinematic : MonoBehaviour, I_Activable {
 
     public void Activate(bool type = true)
     {
-        active = true;
+        if(activable) active = true;
     }
 
     public void Deactivate()
     {
         active = false;
+    }
+
+    public void canActivate(bool enabled)
+    {
+        activable = enabled;
     }
 }

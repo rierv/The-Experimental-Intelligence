@@ -113,7 +113,6 @@ public partial class SwitchScript : MonoBehaviour {
         {
 
             transform.rotation = Quaternion.Lerp(transform.rotation, new Quaternion(pointer.rotation.x * maxInclination, pointer.rotation.y, pointer.rotation.z, pointer.rotation.w), stickSpeed * Time.deltaTime);
-            Debug.Log(transform.rotation.x);
             if (transform.rotation.x > .12f)
             {
                 targetObject.GetComponent<I_Activable>().Activate();

@@ -8,7 +8,9 @@ public class AirFan : MonoBehaviour, I_Activable {
 	public float force = 4;
 	public float splashForce = 0.85f;
 	public float hight = 1;
-	float surface;
+    bool activable = true;
+
+    float surface;
 	public bool active = true;
 	ParticleSystem PS;
 	void Awake() {
@@ -64,12 +66,20 @@ public class AirFan : MonoBehaviour, I_Activable {
 	}
 
 	public void Activate(bool type = true) {
-		active = true;
-		GetComponentInChildren<ParticleSystem>().Play();
+        if (activable)
+        {
+            active = true;
+            GetComponentInChildren<ParticleSystem>().Play();
+        }
 	}
 
 	public void Deactivate() {
 		active = false;
 		GetComponentInChildren<ParticleSystem>().Stop();
 	}
+
+    public void canActivate(bool enabled)
+    {
+        activable = enabled;
+    }
 }

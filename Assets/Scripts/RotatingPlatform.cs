@@ -6,11 +6,13 @@ public class RotatingPlatform : MonoBehaviour, I_Activable
 {
     bool active;
     Quaternion startRotation;
+    bool activable = true;
+
     public Quaternion aimedRotation;
     public float speed=1;
     public void Activate(bool type = true)
     {
-        active = true;
+        if(activable) active = true;
     }
 
     public void Deactivate()
@@ -29,5 +31,10 @@ public class RotatingPlatform : MonoBehaviour, I_Activable
     {
         if (active) transform.rotation = Quaternion.Lerp(transform.rotation, aimedRotation, Time.deltaTime * speed);
         else transform.rotation = Quaternion.Lerp(transform.rotation, startRotation, Time.deltaTime * speed * 10);
+    }
+
+    public void canActivate(bool enabled)
+    {
+        activable = enabled;
     }
 }

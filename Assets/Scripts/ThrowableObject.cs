@@ -59,8 +59,8 @@ public class ThrowableObject : MonoBehaviour
 
 
                 }
-                core.transform.position = new Vector3(core.transform.position.x, this.transform.position.y+handle_hight, core.transform.position.z);
-                coreRB.AddForce( Vector3.up * 100 );
+                core.transform.position = new Vector3(this.transform.position.x, this.transform.position.y+handle_hight, this.transform.position.z);
+                //coreRB.AddForce( Vector3.up * 100 );
                 
 
                 //rigidbody.AddForce(Vector3.down * 500 * Time.deltaTime);
@@ -68,9 +68,8 @@ public class ThrowableObject : MonoBehaviour
             }
             else
             {
-                Vector3 force = (core.transform.position - transform.position) * SpineStrenght;
-                force.y = Mathf.Clamp(force.y, Physics.gravity.y, float.MaxValue);
-                rigidbody.AddForce(force);
+                
+                transform.localPosition=Vector3.Lerp(transform.localPosition, Vector3.zero, Vector3.Distance(core.transform.position, transform.position)*SpineStrenght*Time.deltaTime);
 
                 rigidbody.MoveRotation(baseRotation);
             }
