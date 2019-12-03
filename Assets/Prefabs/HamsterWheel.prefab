@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetObject: {fileID: 0}
   wheelSpeed: 200
-  bobine: {fileID: 0}
+  bobine: {fileID: 6272985390752771431}
 --- !u!64 &114989190612202849
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -808,7 +808,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a1fec776005a63d4a999e8e8a9b193d8, type: 2}
+  - {fileID: 2100000, guid: 49749c39841bf5a459f9bb01febb690f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1265,6 +1265,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 198821592052895758, guid: e243632bb3aff9549abdcfcc2ef0c4f0,
         type: 3}
+      propertyPath: looping
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 198821592052895758, guid: e243632bb3aff9549abdcfcc2ef0c4f0,
+        type: 3}
       propertyPath: UVModule.flipU
       value: 0
       objectReference: {fileID: 0}
@@ -1272,11 +1277,6 @@ PrefabInstance:
         type: 3}
       propertyPath: UVModule.flipV
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 198821592052895758, guid: e243632bb3aff9549abdcfcc2ef0c4f0,
-        type: 3}
-      propertyPath: looping
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e243632bb3aff9549abdcfcc2ef0c4f0, type: 3}
