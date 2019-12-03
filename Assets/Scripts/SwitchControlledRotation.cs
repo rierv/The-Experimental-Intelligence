@@ -10,11 +10,13 @@ public class SwitchControlledRotation : MonoBehaviour, I_Activable
     private Quaternion myRot;
     public float speed;
     private bool isActive = false;
+    bool activable = true;
+
     #endregion
 
     public void Activate(bool type = true)
     {
-        isActive = true;
+        if(activable)isActive = true;
     }
     
     public void Deactivate()
@@ -33,6 +35,11 @@ public class SwitchControlledRotation : MonoBehaviour, I_Activable
                 transform.rotation = myRot;
             }
         }
+    }
+
+    public void canActivate(bool enabled)
+    {
+        activable = enabled;
     }
 
     /*private void Rotate(Vector3 direction)

@@ -9,11 +9,13 @@ public class CameraRetargeting : MonoBehaviour, I_Activable {
 	public Vector3 NewPosition;
 	public Vector3 NewTarget;
 	public float duration = 0f;
-	public float cameraMovementSpeed = 1;
+    bool activable = true;
+
+    public float cameraMovementSpeed = 1;
 	public float cameraRotationSpeed = 1;
 
 	public void Activate(bool type = true) {
-		if (!active) {
+		if (!active&&activable) {
 			if (camera.GetComponent<CameraController>().isActiveAndEnabled)
 				camera.GetComponent<CameraController>().enabled = false;
 			active = true;
@@ -44,5 +46,10 @@ public class CameraRetargeting : MonoBehaviour, I_Activable {
     {
         camera.GetComponent<CameraController>().enabled = true;
         active = false;
+    }
+
+    public void canActivate(bool enabled)
+    {
+        activable = enabled;
     }
 }

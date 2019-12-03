@@ -24,6 +24,9 @@ public class DoubleSwitchPlatform : MonoBehaviour, I_Activable
     public GameObject obstacle;
     public Material activeMaterial;
     public Material notActiveMaterial;
+
+    bool activable = true;
+
     #endregion
     private void Start()
     {
@@ -36,7 +39,7 @@ public class DoubleSwitchPlatform : MonoBehaviour, I_Activable
     }
     public void Activate(bool type = true)
     {
-        isActive = true;
+        if(activable) isActive = true;
     }
 
 
@@ -96,5 +99,10 @@ public class DoubleSwitchPlatform : MonoBehaviour, I_Activable
             dir.z = 0;
         if ((platform.position.y >= maxConstraintY && dir.y > 0) || (platform.position.y <= minConstraintY && dir.y < 0))
             dir.y = 0;
+    }
+
+    public void canActivate(bool enabled)
+    {
+        activable = enabled;
     }
 }

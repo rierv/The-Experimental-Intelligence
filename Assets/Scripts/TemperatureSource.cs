@@ -11,7 +11,7 @@ public class TemperatureSource : MonoBehaviour, I_Activable {
 	[Header("Activable")]
 	public bool active = true;
 	public bool invertTrueFalse;
-
+    bool activable = true;
     public GameObject illuminationSource = null;
     private List<Light> illumination=null;
 	private void Start() {
@@ -38,7 +38,7 @@ public class TemperatureSource : MonoBehaviour, I_Activable {
     
     }
     public void Activate(bool type) {
-		if (type && !invertTrueFalse || !type && invertTrueFalse) {
+		if (activable&&(type && !invertTrueFalse || !type && invertTrueFalse)) {
 			active = true;
 			myColor.material = activeMaterial;
 		} else {
@@ -57,4 +57,9 @@ public class TemperatureSource : MonoBehaviour, I_Activable {
 			other.GetComponentInParent<FlapperCore>().GetComponentInChildren<StateManager>().temperature = variation;
 		}
 	}
+
+    public void canActivate(bool enabled)
+    {
+        activable = enabled;
+    }
 }

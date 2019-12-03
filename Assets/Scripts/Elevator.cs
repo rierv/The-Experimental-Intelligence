@@ -7,7 +7,9 @@ public class Elevator : MonoBehaviour, I_Activable {
 	public float speed = 1;
 	float inactiveY = 1;
 	float targetY = 1;
-	Rigidbody rigidbody;
+    bool activable = true;
+
+    Rigidbody rigidbody;
 	[Header("Activable")]
 	public bool invertTrueFalse;
 
@@ -28,7 +30,7 @@ public class Elevator : MonoBehaviour, I_Activable {
 	}
 
 	public void Activate(bool type) {
-		if (type && !invertTrueFalse || !type && invertTrueFalse) {
+		if (activable&& ((type && !invertTrueFalse )|| (!type && invertTrueFalse))) {
 			targetY = activeY;
 		} else {
 			Deactivate();
@@ -38,4 +40,9 @@ public class Elevator : MonoBehaviour, I_Activable {
 	public void Deactivate() {
 		targetY = inactiveY;
 	}
+
+    public void canActivate(bool enabled)
+    {
+        activable = enabled;
+    }
 }

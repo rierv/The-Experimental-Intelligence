@@ -9,7 +9,9 @@ public class NextLevel : MonoBehaviour, I_Activable {
 	public float delayToStopFlapper = 0.1f;
 	public float delayToLoadLevel = 0.3f;
 	public bool isActive = true;
-	Light light;
+    bool activable = true;
+
+    Light light;
 
 	float logTimer = 0;
 
@@ -41,12 +43,20 @@ public class NextLevel : MonoBehaviour, I_Activable {
 	}
 
 	public void Activate(bool type = true) {
-		isActive = true;
-		light.enabled = isActive;
+        if (activable)
+        {
+            isActive = true;
+            light.enabled = isActive;
+        }
 	}
 
 	public void Deactivate() {
 		isActive = false;
 		light.enabled = isActive;
 	}
+
+    public void canActivate(bool enabled)
+    {
+        activable = enabled;
+    }
 }
