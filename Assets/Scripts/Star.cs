@@ -14,7 +14,9 @@ public class Star : MonoBehaviour {
 		if (other.GetComponent<JellyBone>()) {
 			//AudioManager.singleton.PlayClip(sound);
 			gameObject.SetActive(false);
-            GameObject.Find("Clock").GetComponent<ClockManager>().AddStar();
-		}
+            //GameObject.Find("Clock").GetComponent<ClockManager>().AddStar();
+            GameObject.Find("Clock").GetComponent<StarCollector>().AddStar();
+
+        }
 	}
 }
