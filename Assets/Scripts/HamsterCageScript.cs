@@ -50,15 +50,18 @@ public class HamsterCageScript : MonoBehaviour
                 }
                 if (horizontalInput > 0)
                 {
+                    targetObject.GetComponent<I_Activable>().Deactivate();
                     targetObject.GetComponent<I_Activable>().Activate(true);
                 }
                 else
                 {
+                    targetObject.GetComponent<I_Activable>().Deactivate();
                     targetObject.GetComponent<I_Activable>().Activate(false);
                 }
             }
             else
             {
+                targetObject.GetComponent<I_Activable>().Deactivate();
                 electricity.SetActive(false);
             }
         }
