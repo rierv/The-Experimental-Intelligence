@@ -11,7 +11,8 @@ public class RopeJoint : MonoBehaviour
     GameObject pointer;
     GameObject cursor;
     protected Rigidbody Rigidbody;
-    public float movementSpeed=5f;
+    public float movementSpeed = 5f;
+    public float rotationSpeed = 5f;
     public float cursorSpeed=1000f;
     public float maxRotationOfBone=1f;
     Quaternion originalQuaternion;
@@ -40,9 +41,9 @@ public class RopeJoint : MonoBehaviour
         var distanceDiscrepancy = Distance - connection.magnitude;
         cursor.transform.position= Vector3.Lerp(transform.position, transform.position + new Vector3(-connection.normalized.x, -(Mathf.Sqrt(connection.normalized.x* connection.normalized.x) + Mathf.Sqrt(connection.normalized.z* connection.normalized.z))*maxRotationOfBone, -connection.normalized.z)*distanceDiscrepancy*100, Time.deltaTime * cursorSpeed);
         Rigidbody.position = Vector3.Lerp(Rigidbody.position, Rigidbody.position+ distanceDiscrepancy * connection.normalized, Time.deltaTime*movementSpeed);
-        if (Mathf.Abs(connection.normalized.x) < 0.1 && Mathf.Abs(connection.normalized.z) < 0.1) pointer.transform.rotation = Quaternion.Lerp(pointer.transform.rotation, originalQuaternion, Time.deltaTime); 
+        if (Mathf.Abs(connection.normalized.x) < 0.4 && Mathf.Abs(connection.normalized.z) < 0.4) pointer.transform.rotation = Quaternion.Lerp(pointer.transform.rotation, originalQuaternion, Time.deltaTime*rotationSpeed); 
         else pointer.transform.LookAt(cursor.transform.position);
-        transform.rotation = Quaternion.Lerp(cursor.transform.rotation, pointer.transform.rotation, Time.deltaTime*2f);
+        transform.rotation = Quaternion.Lerp(cursor.transform.rotation, pointer.transform.rotation, Time.deltaTime*rotationSpeed);
         Debug.DrawRay(transform.position, transform.forward, Color.green, 20, true);
         var velocityTarget = connection + (Rigidbody.velocity + Physics.gravity * Spring);
         var projectOnConnection = Vector3.Project(velocityTarget, connection);

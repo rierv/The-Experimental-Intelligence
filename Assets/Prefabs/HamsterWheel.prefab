@@ -46,6 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetObject: {fileID: 0}
   wheelSpeed: 200
+  bobine: {fileID: 6272985390752771431}
 --- !u!64 &114989190612202849
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -255,7 +256,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4661591737206726406}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: -3.4750605}
+  m_LocalPosition: {x: -1.36, y: 0, z: -3.4750605}
   m_LocalScale: {x: 1, y: 1, z: 0.3512676}
   m_Children:
   - {fileID: 5286549995305339313}
@@ -305,14 +306,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4678331299723285981}
-  m_LocalRotation: {x: 1, y: -0, z: 0, w: 6.123234e-17}
-  m_LocalPosition: {x: 0.61552423, y: -1.7646056, z: -2.9553347}
+  m_LocalRotation: {x: 1, y: -0, z: -0, w: 6.123234e-17}
+  m_LocalPosition: {x: -0.7441497, y: -1.7646053, z: -2.955334}
   m_LocalScale: {x: 0.09478694, y: 0.09478694, z: 0.09478694}
   m_Children:
   - {fileID: 114989190092545346}
   - {fileID: 114989190912155921}
   m_Father: {fileID: 4963585547599651843}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2784382305525332276
 MeshFilter:
@@ -524,7 +525,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6272985390752771431}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6.9296737, y: -2.9012573, z: -4.91287}
+  m_LocalPosition: {x: 5.57, y: -2.9012573, z: -4.91287}
   m_LocalScale: {x: 0.7674466, y: 0.7674466, z: 0.7674466}
   m_Children:
   - {fileID: 114989189675264234}
@@ -780,7 +781,7 @@ Transform:
   - {fileID: 114989190822621813}
   - {fileID: 114989190732348257}
   m_Father: {fileID: 4963585547599651843}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!33 &1917894707907762170
 MeshFilter:
@@ -807,7 +808,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a1fec776005a63d4a999e8e8a9b193d8, type: 2}
+  - {fileID: 2100000, guid: 49749c39841bf5a459f9bb01febb690f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -875,7 +876,7 @@ Transform:
   m_LocalScale: {x: 0.16867721, y: 0.71521455, z: 0.16867721}
   m_Children: []
   m_Father: {fileID: 4963585547599651843}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &7174106843994145340
 MeshFilter:
@@ -946,7 +947,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4963585547599651843}
   m_Layer: 0
-  m_Name: ruota da criceto
+  m_Name: HamsterWheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -965,9 +966,9 @@ Transform:
   m_Children:
   - {fileID: 8075022973135271771}
   - {fileID: 6472215755947463900}
-  - {fileID: 5271201357486491641}
   - {fileID: 7356312956004590598}
   - {fileID: 9085763275037339563}
+  - {fileID: 5271201357486491641}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
@@ -1247,6 +1248,11 @@ PrefabInstance:
       propertyPath: looping
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 198359957661721904, guid: e243632bb3aff9549abdcfcc2ef0c4f0,
+        type: 3}
+      propertyPath: looping
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 198240264361987454, guid: e243632bb3aff9549abdcfcc2ef0c4f0,
         type: 3}
       propertyPath: looping
@@ -1257,7 +1263,7 @@ PrefabInstance:
       propertyPath: looping
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 198359957661721904, guid: e243632bb3aff9549abdcfcc2ef0c4f0,
+    - target: {fileID: 198821592052895758, guid: e243632bb3aff9549abdcfcc2ef0c4f0,
         type: 3}
       propertyPath: looping
       value: 1
@@ -1271,11 +1277,6 @@ PrefabInstance:
         type: 3}
       propertyPath: UVModule.flipV
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 198821592052895758, guid: e243632bb3aff9549abdcfcc2ef0c4f0,
-        type: 3}
-      propertyPath: looping
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e243632bb3aff9549abdcfcc2ef0c4f0, type: 3}

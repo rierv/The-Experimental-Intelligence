@@ -449,7 +449,7 @@ Transform:
   m_GameObject: {fileID: 8731253547213823513}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -32.49125, y: 30.95, z: -7.86}
-  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
+  m_LocalScale: {x: 1.7, y: 1.7, z: 1.7}
   m_Children:
   - {fileID: 8846522830071831065}
   - {fileID: 8574351855784590265}
@@ -602,17 +602,17 @@ MonoBehaviour:
   targetObject: {fileID: 0}
   yOffset: 1
   handle: {fileID: 8846522831408676322}
-  maxInclination: 0.5
-  stickSpeed: 5
+  maxInclination: 3
+  stickSpeed: 8
   comingBackToVerticalPos: 1
   vertical: 1
   horizontal: 1
   pointer: {fileID: 8846522830071831065}
   cursor: {fileID: 8574351855784590265}
   camera: {fileID: 0}
-  xCameraOffset: 21.97
-  yCameraOffset: 0
-  zCameraOffset: -3
+  xCameraOffset: 18.6
+  yCameraOffset: 3
+  zCameraOffset: -13.08
   cameraMovementSpeed: 3
   cameraRotationSpeed: 3
   sound: {fileID: 0}

@@ -6,15 +6,17 @@ using UnityEngine;
 public class RopeRoot : MonoBehaviour
 {
     public GameObject throwableModel;
-    public float RigidbodyMass = 1f;
-    public float ColliderRadius = 0.0005f;
-    public float ColliderHeight = 0.001f;
-    public float JointSpring = 0.1f;
-    public float JointDamper = 5f;
+    public float RigidbodyMass = 0.1f;
+    public float ColliderRadius = 0.5f;
+    public float ColliderHeight = 1f;
+    public float JointSpring = 0f;
+    public float JointDamper = 1f;
     public Vector3 RotationOffset;
     public Vector3 PositionOffset;
-    public float spineStrenght = 100000f;
+    public float spineStrenght = 10;
     public float exitForce = 1f;
+    public float rotationSpeed=1f;
+    public float movementSpeed = 1f;
     protected List<Transform> CopySource;
     protected List<Transform> CopyDestination;
     protected static GameObject RigidBodyContainer;
@@ -85,6 +87,8 @@ public class RopeRoot : MonoBehaviour
             joint.Spring = JointSpring;
             joint.Damper = JointDamper;
             joint.DetermineDistanceOnStart = false;
+            joint.movementSpeed = movementSpeed;
+            joint.rotationSpeed = rotationSpeed;
             joint.Distance = Vector3.Distance(parent.position, child.position);
 
             /*joint = representative.gameObject.AddComponent<RopeJoint>();

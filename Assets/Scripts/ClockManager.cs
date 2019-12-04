@@ -22,6 +22,7 @@ public class ClockManager : MonoBehaviour
         clockCenter = GameObject.Find("ClockCenter");
         clockCenterTransform = clockCenter.GetComponent<RectTransform>();
         allStarsEffect = GameObject.Find("AllStarsEffect");
+        allStarsEffect.transform.localScale = Vector3.one * 1200f;
         allStarsEffect.SetActive(false);
         starPositions = new Vector3[3];
         for (int i = 0; i < starPositions.Length; i++)
@@ -86,6 +87,7 @@ public class ClockManager : MonoBehaviour
             if(stopAfterCurrent)
                 rotateTowardsStar = false;
             clockStars[starIndex].SetActive(true);
+            clockStars[starIndex].transform.Find("StarPickupEffect").localScale = Vector3.one * 1000f;
             isStarActive[starIndex] = true;
             if (starIndex == 2)
                 allStarsEffect.SetActive(true);

@@ -33,7 +33,7 @@ public class DoubleSwitchPlatform : MonoBehaviour, I_Activable
         platforms = new List<Transform>();
         foreach (Transform child in transform.GetComponentsInChildren<Transform>())
         {
-            if(child.transform!=this.gameObject.transform) platforms.Add(child);
+            if(child.transform!=this.gameObject.transform&& child.GetComponent<MeshRenderer>()!=null) platforms.Add(child);
         }
        
     }
@@ -68,10 +68,12 @@ public class DoubleSwitchPlatform : MonoBehaviour, I_Activable
                 }
                 else
                 {
-                    if (!xLock)
-                        dir = new Vector3(0f, Input.GetAxis("Horizontal"), 0f);
+                    if (xLock && zLock)
+                        dir = new Vector3(0f, Input.GetAxis("Horizontal")+ Input.GetAxis("Vertical"), 0);
+                    else if (!xLock)
+                        dir = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0f);
                     else if (!zLock)
-                        dir = new Vector3(0f, Input.GetAxis("Vertical"), 0f);
+                        dir = new Vector3(0f, Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
                 }
                 dir = dir * velocities[i];
                 FixDirection(platform);
