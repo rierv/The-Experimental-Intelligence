@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class TextureFixer : MonoBehaviour {
 	public float baseScale = 10;
+	public Mesh oldCube;
+	public Mesh newCube;
 	public Material[] materialsToFix = new Material[0];
 
 	void Start() {
@@ -11,6 +13,11 @@ public class TextureFixer : MonoBehaviour {
 		list.AddRange(materialsToFix);
 		foreach (MeshRenderer meshRenderer in FindObjectsOfType<MeshRenderer>()) {
 			if (list.Contains(meshRenderer.sharedMaterial)) {
+				if (meshRenderer.GetComponent<MeshFilter>().sharedMesh == oldCube) {
+					meshRenderer.GetComponent<MeshFilter>().mesh = newCube;
+					Material m = meshRenderer.sharedMaterial;
+					meshRenderer.materials = new Material[] { m, m, m, m, m, m };
+				}
 				for (int i = 0; i < meshRenderer.materials.Length; i++) {
 					float x = 1, y = 1;
 					switch (i) {
