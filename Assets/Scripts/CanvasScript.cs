@@ -8,6 +8,6 @@ public class CanvasScript : MonoBehaviour
     private void Awake()
     {
         gameObject.GetComponent<Canvas>().worldCamera = FindObjectOfType<Camera>();
-        gameObject.GetComponent<Canvas>().planeDistance = 100f;
+        gameObject.GetComponent<Canvas>().planeDistance = 5f;
     }
 }
