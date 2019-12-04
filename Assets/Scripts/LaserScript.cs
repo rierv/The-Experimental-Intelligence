@@ -20,7 +20,7 @@ public class LaserScript : MonoBehaviour
     private Vector3 positionOffset;
 
 
-    void Start()
+    void Awake()
     {
         laser = GetComponent<LineRenderer>();
         laser.startWidth = laserWidth;
@@ -32,7 +32,7 @@ public class LaserScript : MonoBehaviour
         laserOrigin = transform.position;
     }
 
-    void FixedUpdate()
+    void Update()
     {
         laserOrigin = transform.position;
         RenderLaser();
@@ -44,7 +44,7 @@ public class LaserScript : MonoBehaviour
 
         laserPositions[0] = transform.position;
 
-        for (int i = 0; i < laserLength; i++)
+        for (int i = 1; i < laserLength; i++)
         {
             positionOffset.x = laserOrigin.x + i * transform.forward.x;
             positionOffset.z = laserOrigin.z + i * transform.forward.z;
@@ -58,10 +58,11 @@ public class LaserScript : MonoBehaviour
     {
         RaycastHit[] hit;
         hit = Physics.RaycastAll(laserOrigin, transform.forward, maxLength);
+        hit = SortRaycastAll(hit);
         
-        for(int i = 0; i < hit.Length; i++)
+        for (int i = 0; i < hit.Length; i++)
         {
-            if (hit[i].collider)
+            if (!hit[i].collider.isTrigger)
             {
                 if (hit[i].collider.gameObject.layer == 9)
                     SceneManager.LoadScene(SceneManager.GetActiveScene().name);
@@ -70,12 +71,27 @@ public class LaserScript : MonoBehaviour
                 laser.positionCount = laserLength;
                 return;
             }
-            i++;
         }
         laserLength = (int)maxLength;
         laserPositions = new Vector3[laserLength];
         laser.positionCount = laserLength;
 
 
+    }
+
+    private RaycastHit[] SortRaycastAll(RaycastHit[] myArray)
+    {
+        RaycastHit[] raycastHits = (RaycastHit[]) myArray.Clone();
+        RaycastHit tmp;
+
+        for(int k = 0; k < raycastHits.Length; k++)
+            for(int j = 1; j < raycastHits.Length; j++)
+                if (raycastHits[j-1].distance > raycastHits[j].distance)
+                {
+                    tmp = raycastHits[j-1];
+                    raycastHits[j-1] = raycastHits[j];
+                    raycastHits[j] = tmp;
+                }
+        return raycastHits;
     }
 }
