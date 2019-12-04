@@ -9,9 +9,9 @@ public class AirFan : MonoBehaviour, I_Activable {
 	public float splashForce = 0.85f;
 	public float hight = 1;
     bool activable = true;
-
     float surface;
 	public bool active = true;
+    List<Rigidbody> objectsinAir;
 	ParticleSystem PS;
 	void Awake() {
 		if (!active) {
@@ -19,15 +19,24 @@ public class AirFan : MonoBehaviour, I_Activable {
 		}
 	}
 	private void Start() {
+        objectsinAir = new List<Rigidbody>();
 		PS = GetComponentInChildren<ParticleSystem>();
-		PS.startLifetime *= hight * .9f;
-		BoxCollider collider = GetComponent<BoxCollider>();
-		collider.size = new Vector3(collider.size.x, hight, collider.size.z);
-		surface = transform.localScale.y * collider.size.y;
+		PS.startLifetime *= hight * .33f;
+        BoxCollider airCollider=GetComponent<BoxCollider>();
+
+        airCollider.size = new Vector3(airCollider.size.x, hight, airCollider.size.z);
+        airCollider.center = new Vector3(0, hight / 2, 0);
+        //transform.position = new Vector3 (transform.position.x, transform.position.y + (hight/2), transform.position.z);
+        surface = transform.localScale.y * airCollider.size.y;
 
 	}
 	void Update() {
-		if (active) fan.Rotate(fan.transform.up, fanSpeed * Time.deltaTime);
+        if (active)
+        {
+            fan.Rotate(fan.transform.up, fanSpeed * Time.deltaTime);
+            foreach (Rigidbody r in objectsinAir) r.useGravity = false;
+        }
+        fan.localPosition = Vector3.zero;
 	}
 
 	private void OnTriggerEnter(Collider other) {
@@ -41,19 +50,24 @@ public class AirFan : MonoBehaviour, I_Activable {
 
 		if (active && CheckOther(other)) {
 			Rigidbody r = other.GetComponent<Rigidbody>();
+            objectsinAir.Add(r);
 			r.useGravity = false;
-			r.AddForce(transform.up * -r.velocity.y * splashForce, ForceMode.VelocityChange);
+			//da non pochi problemi:
+            //r.AddForce(transform.up * -r.velocity.y * splashForce, ForceMode.VelocityChange);
 		}
 	}
 
 	private void OnTriggerStay(Collider other) {
 		if (active && CheckOther(other)) {
-			other.GetComponent<Rigidbody>().AddForce(transform.up * (transform.position.y + surface - other.transform.position.y) * force, ForceMode.Acceleration);
+            //con le forze è impossibile simulare un comportamento complesso in modo semplice, vedi le corde xD
+            //other.GetComponent<Rigidbody>().AddForce(transform.up * (transform.position.y + surface - other.transform.position.y) * force, ForceMode.Acceleration);
+            other.transform.position = Vector3.Lerp(other.transform.position, new Vector3(other.transform.position.x, transform.position.y+ surface, other.transform.position.z), Time.deltaTime*force);
 		}
 	}
 
 	private void OnTriggerExit(Collider other) {
 		if (CheckOther(other)) {
+            objectsinAir.Remove(other.GetComponent<Rigidbody>());
 			other.GetComponent<Rigidbody>().useGravity = true;
 		}
 	}

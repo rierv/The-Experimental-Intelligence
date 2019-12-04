@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 357615083545460039}
   m_Layer: 0
   m_Name: SwitchControlledPlatform
-  m_TagString: Untagged
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -163,11 +163,14 @@ MonoBehaviour:
   minConstraintZ: -500
   maxConstraintY: 500
   minConstraintY: -500
+  isActive: 0
   numberOfPlatforms: 2
   velocities:
   - -5
   - 10
   obstacle: {fileID: 0}
+  activeMaterial: {fileID: 0}
+  notActiveMaterial: {fileID: 0}
 --- !u!1 &9197279905691961039
 GameObject:
   m_ObjectHideFlags: 0
@@ -183,7 +186,7 @@ GameObject:
   - component: {fileID: 9197279905691961033}
   m_Layer: 0
   m_Name: SwitchControlledPlatform (1)
-  m_TagString: Untagged
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

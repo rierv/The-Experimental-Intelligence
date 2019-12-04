@@ -38,12 +38,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6688780244657055813}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 1, z: 0.5}
   m_Children: []
-  m_Father: {fileID: 8564882324994740906}
-  m_RootOrder: 1
+  m_Father: {fileID: 1244325392412320334}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!198 &8652509107071795575
 ParticleSystem:
@@ -4775,8 +4775,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8564882324994740906}
-  - component: {fileID: 8564882324994740909}
-  - component: {fileID: 8564882324994740908}
+  - component: {fileID: 8784791605312037118}
+  - component: {fileID: 6231360749796164540}
   m_Layer: 0
   m_Name: Air fan
   m_TagString: Untagged
@@ -4793,27 +4793,13 @@ Transform:
   m_GameObject: {fileID: 8564882324994740911}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.5, y: -6, z: -3.5}
-  m_LocalScale: {x: 6, y: 6, z: 6}
+  m_LocalScale: {x: 0.8571428, y: 5, z: 0.4285714}
   m_Children:
   - {fileID: 1244325392412320334}
-  - {fileID: 7505316397880667145}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &8564882324994740909
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8564882324994740911}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0.5, z: 0}
---- !u!114 &8564882324994740908
+--- !u!114 &8784791605312037118
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4827,9 +4813,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fan: {fileID: 4113348935534657858}
   fanSpeed: 800
-  force: 4
-  splashForce: 0.85
+  force: 0.05
+  splashForce: 0
+  hight: 1
   active: 1
+--- !u!65 &6231360749796164540
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8564882324994740911}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!1001 &6070306478322190676
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4837,6 +4837,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8564882324994740906}
     m_Modifications:
+    - target: {fileID: -927199367670048503, guid: 073fcefcabcb2ea49b4347d33042620e,
+        type: 3}
+      propertyPath: m_Name
+      value: fan
+      objectReference: {fileID: 0}
+    - target: {fileID: -3164220449637510858, guid: 073fcefcabcb2ea49b4347d33042620e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 073fcefcabcb2ea49b4347d33042620e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4907,15 +4917,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.35
       objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 073fcefcabcb2ea49b4347d33042620e,
+    - target: {fileID: 7087200961041043365, guid: 073fcefcabcb2ea49b4347d33042620e,
         type: 3}
-      propertyPath: m_Name
-      value: fan
-      objectReference: {fileID: 0}
-    - target: {fileID: -3164220449637510858, guid: 073fcefcabcb2ea49b4347d33042620e,
-        type: 3}
-      propertyPath: m_Layer
-      value: 15
+      propertyPath: m_CastShadows
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 073fcefcabcb2ea49b4347d33042620e, type: 3}

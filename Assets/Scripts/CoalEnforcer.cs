@@ -12,11 +12,11 @@ public class CoalEnforcer : MonoBehaviour
     }
     private void Update()
     {
-        if (active) light.intensity = Mathf.Lerp(light.intensity, 15, Time.deltaTime);
+        if (active) light.intensity = Mathf.Lerp(light.intensity, 25, Time.deltaTime/2);
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Coal")
+        if (other.gameObject.tag == "Coal"|| other.gameObject.tag == "Ice")
         {
             other.GetComponent<TemperatureBlock>().enabled = false;
             active = true;

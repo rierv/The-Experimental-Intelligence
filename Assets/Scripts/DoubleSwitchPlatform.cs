@@ -33,7 +33,7 @@ public class DoubleSwitchPlatform : MonoBehaviour, I_Activable
         platforms = new List<Transform>();
         foreach (Transform child in transform.GetComponentsInChildren<Transform>())
         {
-            if(child.transform!=this.gameObject.transform&& child.GetComponent<MeshRenderer>()!=null) platforms.Add(child);
+            if(child.gameObject.tag=="Platform") platforms.Add(child);
         }
        
     }
