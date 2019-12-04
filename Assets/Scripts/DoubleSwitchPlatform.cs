@@ -33,7 +33,7 @@ public class DoubleSwitchPlatform : MonoBehaviour, I_Activable
         platforms = new List<Transform>();
         foreach (Transform child in transform.GetComponentsInChildren<Transform>())
         {
-            if(child.transform!=this.gameObject.transform) platforms.Add(child);
+            if(child.transform!=this.gameObject.transform&& child.GetComponent<MeshRenderer>()!=null) platforms.Add(child);
         }
        
     }
@@ -50,7 +50,6 @@ public class DoubleSwitchPlatform : MonoBehaviour, I_Activable
 
     private void FixedUpdate()
     {
-        Debug.Log(isActive);
         if (isActive)
         {
             for (int i = 0; i < numberOfPlatforms; i++)

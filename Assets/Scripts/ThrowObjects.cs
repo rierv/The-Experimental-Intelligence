@@ -60,8 +60,9 @@ public class ThrowObjects : MonoBehaviour
 
             if (th.isHandle)
             {
+                //other.transform.parent.gameObject.GetComponent<Rigidbody>().AddForce((Input.GetAxis("Horizontal") * Vector3.right + Input.GetAxis("Vertical") * Vector3.forward + Vector3.down / 2) * 100000 * Time.deltaTime);
                 transform.parent.SetParent(other.transform.parent.gameObject.transform);
-                other.transform.parent.gameObject.GetComponent<Rigidbody>().AddForce((Input.GetAxis("Horizontal") * Vector3.right + Input.GetAxis("Vertical") * Vector3.forward + Vector3.down / 2) * 100000 * Time.deltaTime);
+
                 this.GetComponent<PlayerMove>().canMove = false;
                 
             }

@@ -91,7 +91,9 @@ public partial class SwitchScript : MonoBehaviour {
 				if (camera != null)
 					camera.GetComponent<CameraController>().enabled = true;
 			}
-            
+            if (comingBackToVerticalPos&&horizontal&&vertical) cursor.localPosition = new Vector3(0, cursor.localPosition.y, 0);
+
+
         }
 
 
