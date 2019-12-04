@@ -11,7 +11,36 @@ public class TextureFixer : MonoBehaviour {
 		list.AddRange(materialsToFix);
 		foreach (MeshRenderer meshRenderer in FindObjectsOfType<MeshRenderer>()) {
 			if (list.Contains(meshRenderer.sharedMaterial)) {
-				meshRenderer.material.SetTextureScale("_BaseMap", new Vector2(baseScale * meshRenderer.gameObject.transform.localScale.x, baseScale * meshRenderer.gameObject.transform.localScale.z));
+				for (int i = 0; i < meshRenderer.materials.Length; i++) {
+					float x = 1, y = 1;
+					switch (i) {
+						case 0: // front
+							x = meshRenderer.gameObject.transform.localScale.y;
+							y = meshRenderer.gameObject.transform.localScale.x;
+							break;
+						case 1: // back
+							x = meshRenderer.gameObject.transform.localScale.x;
+							y = meshRenderer.gameObject.transform.localScale.y;
+							break;
+						case 2: // left
+							x = meshRenderer.gameObject.transform.localScale.z;
+							y = meshRenderer.gameObject.transform.localScale.y;
+							break;
+						case 3: // down
+							x = meshRenderer.gameObject.transform.localScale.z;
+							y = meshRenderer.gameObject.transform.localScale.x;
+							break;
+						case 4: // right
+							x = meshRenderer.gameObject.transform.localScale.z;
+							y = meshRenderer.gameObject.transform.localScale.y;
+							break;
+						case 5: // up
+							x = meshRenderer.gameObject.transform.localScale.z;
+							y = meshRenderer.gameObject.transform.localScale.x;
+							break;
+					}
+					meshRenderer.materials[i].SetTextureScale("_BaseMap", new Vector2(baseScale * x, baseScale * y));
+				}
 			}
 		}
 	}
