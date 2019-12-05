@@ -16,6 +16,7 @@ public class Star : MonoBehaviour {
             AudioManager.singleton.PlayClip(sound);
             //FindObjectOfType<ClockManager>().AddStar();
             FindObjectOfType<StarCollector>().AddStar();
+            //FindObjectOfType<ActivateComic>().Activate();
         }
 	}
 }
