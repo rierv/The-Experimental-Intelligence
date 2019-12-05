@@ -3,7 +3,7 @@
 public class AudioManager : MonoBehaviour {
 	public static AudioManager singleton;
 	public AudioSource backgroundSource;
-	public AudioSource effectSource;
+	//public AudioSource effectSource;
 	public AudioClip backgroundMusic;
 
 	private void Awake() {
@@ -19,13 +19,17 @@ public class AudioManager : MonoBehaviour {
 		PlayBackground(singleton.backgroundMusic);
 	}
 
-	public void PlayClip(AudioClip clip, bool loop = false) {
+	/*public void PlayClip(AudioClip clip, bool loop = false) {
 		if (clip != null) {
-			singleton.effectSource.clip = clip;
-			singleton.effectSource.loop = loop;
-			singleton.effectSource.Play();
+			if (loop) {
+				singleton.effectSource.clip = clip;
+				singleton.effectSource.loop = true;
+				singleton.effectSource.Play();
+			} else {
+				singleton.effectSource.PlayOneShot(clip);
+			}
 		}
-	}
+	}*/
 
 	public void PlayBackground(AudioClip clip) {
 		if (clip != null && clip != singleton.backgroundSource.clip) {

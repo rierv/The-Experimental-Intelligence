@@ -5,13 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class NextLevel : MonoBehaviour, I_Activable {
 	public Object nextLevel;
-	public AudioClip sound;
+	//public AudioClip sound;
 	public float delayToStopFlapper = 0.1f;
 	public float delayToLoadLevel = 0.3f;
 	public bool isActive = true;
-    bool activable = true;
+	bool activable = true;
 
-    Light light;
+	Light light;
 
 	float logTimer = 0;
 
@@ -34,7 +34,7 @@ public class NextLevel : MonoBehaviour, I_Activable {
 		System.IO.File.AppendAllText(FlapperCore.logFile, logTimer.ToString());
 
 		yield return new WaitForSeconds(delayToStopFlapper);
-		AudioManager.singleton.PlayClip(sound);
+		GetComponent<AudioSource>().Play();
 		foreach (PlayerMove p in FindObjectsOfType<PlayerMove>()) {
 			p.canMove = false;
 		}
@@ -43,11 +43,10 @@ public class NextLevel : MonoBehaviour, I_Activable {
 	}
 
 	public void Activate(bool type = true) {
-        if (activable)
-        {
-            isActive = true;
-            light.enabled = isActive;
-        }
+		if (activable) {
+			isActive = true;
+			light.enabled = isActive;
+		}
 	}
 
 	public void Deactivate() {
@@ -55,8 +54,7 @@ public class NextLevel : MonoBehaviour, I_Activable {
 		light.enabled = isActive;
 	}
 
-    public void canActivate(bool enabled)
-    {
-        activable = enabled;
-    }
+	public void canActivate(bool enabled) {
+		activable = enabled;
+	}
 }

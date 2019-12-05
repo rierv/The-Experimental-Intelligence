@@ -11,14 +11,20 @@ public class AirFan : MonoBehaviour, I_Activable {
 	bool activable = true;
 	float surface;
 	public bool active = true;
+	AudioSource audioSource;
 	List<Rigidbody> objectsinAir;
-	//ParticleSystem PS;
+	ParticleSystem particleSystem;
 	StateManager flapperState;
+
 	void Awake() {
+		audioSource = GetComponent<AudioSource>();
+		particleSystem = GetComponentInChildren<ParticleSystem>();
 		if (!active) {
-			GetComponentInChildren<ParticleSystem>().Stop();
+			audioSource.Stop();
+			particleSystem.Stop();
 		}
 	}
+
 	private void Start() {
 		objectsinAir = new List<Rigidbody>();
 		//PS = GetComponentInChildren<ParticleSystem>();
@@ -31,6 +37,7 @@ public class AirFan : MonoBehaviour, I_Activable {
 		surface = transform.localScale.y * airCollider.size.y;
 		flapperState = GameObject.Find("CORE").GetComponent<StateManager>();
 	}
+
 	void Update() {
 		if (active) {
 			if (flapperState.state == FlapperState.solid) objectsinAir.Remove(flapperState.GetComponent<Rigidbody>());
@@ -77,13 +84,15 @@ public class AirFan : MonoBehaviour, I_Activable {
 	public void Activate(bool type = true) {
 		if (activable) {
 			active = true;
-			GetComponentInChildren<ParticleSystem>().Play();
+			audioSource.Play();
+			particleSystem.Play();
 		}
 	}
 
 	public void Deactivate() {
 		active = false;
-		GetComponentInChildren<ParticleSystem>().Stop();
+		audioSource.Stop();
+		particleSystem.Stop();
 	}
 
 	public void canActivate(bool enabled) {

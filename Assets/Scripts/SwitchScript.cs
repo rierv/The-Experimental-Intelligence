@@ -9,7 +9,7 @@ public partial class SwitchScript : MonoBehaviour {
 	public GameObject targetObject;
 	private float maxRotation = 90f;
 	public GameObject handle;
-    //[Range (0,1)]
+	//[Range (0,1)]
 	public float maxInclination = 0.5f;
 	public float stickSpeed = 2f;
 	public bool comingBackToVerticalPos = true;
@@ -25,13 +25,13 @@ public partial class SwitchScript : MonoBehaviour {
 	Transform cameraPointer;
 	public float cameraMovementSpeed = 3f;
 	public float cameraRotationSpeed = 3f;
-	public AudioClip sound;
+	//public AudioClip sound;
 	#endregion
 
 	private void Start() {
 		bonesActive = true;
 		handle.GetComponent<ThrowableObject>().parentBodies.Add(handle.GetComponent<Rigidbody>());
-		
+
 		if (camera) cameraPointer = camera.transform.GetChild(0).transform;
 	}
 
@@ -58,25 +58,25 @@ public partial class SwitchScript : MonoBehaviour {
 			}
 			if (camera != null) {
 				camera.transform.position = Vector3.Lerp(camera.transform.position, cameraStartingPos, cameraMovementSpeed * Time.deltaTime);
-                cameraPointer.transform.LookAt(targetObject.transform);
-                camera.transform.rotation = Quaternion.Lerp(camera.transform.rotation, cameraPointer.transform.rotation, cameraRotationSpeed * Time.deltaTime);
+				cameraPointer.transform.LookAt(targetObject.transform);
+				camera.transform.rotation = Quaternion.Lerp(camera.transform.rotation, cameraPointer.transform.rotation, cameraRotationSpeed * Time.deltaTime);
 			}
 			float x = Input.GetAxis("Horizontal");
 			float y = Input.GetAxis("Vertical");
 
-			
-				
+
+
 			if (vertical && horizontal)
-                cursor.localPosition = new Vector3(x*maxInclination, cursor.localPosition.y, y*maxInclination);
-            
+				cursor.localPosition = new Vector3(x * maxInclination, cursor.localPosition.y, y * maxInclination);
+
 			//	cursor.localPosition = new Vector3(Mathf.Clamp(cursor.localPosition.x + x, -maxInclination, maxInclination), cursor.localPosition.y, Mathf.Clamp(cursor.localPosition.z + y, -maxInclination, maxInclination));
 			//else if (horizontal) cursor.localPosition = new Vector3(Mathf.Clamp(cursor.localPosition.x + x,-maxInclination, maxInclination), cursor.localPosition.y, cursor.localPosition.z);
 			//else if (vertical) cursor.localPosition = new Vector3(cursor.localPosition.x, cursor.localPosition.y, Mathf.Clamp(cursor.localPosition.z + y,-maxInclination, maxInclination));
-			else if (horizontal) pointer.LookAt(transform.position - x * Vector3.up + Vector3.right );
+			else if (horizontal) pointer.LookAt(transform.position - x * Vector3.up + Vector3.right);
 			else if (vertical) pointer.LookAt(transform.position - y * Vector3.up);
-			
-            
-        } else {
+
+
+		} else {
 			if (!bonesActive) {
 				SphereCollider[] bones = GameObject.Find("Root").GetComponentsInChildren<SphereCollider>();
 				GameObject.Find("CORE").GetComponent<Rigidbody>().isKinematic = false;
@@ -91,48 +91,41 @@ public partial class SwitchScript : MonoBehaviour {
 				if (camera != null)
 					camera.GetComponent<CameraController>().enabled = true;
 			}
-            if (comingBackToVerticalPos&&horizontal&&vertical) cursor.localPosition = new Vector3(0, cursor.localPosition.y, 0);
+			if (comingBackToVerticalPos && horizontal && vertical) cursor.localPosition = new Vector3(0, cursor.localPosition.y, 0);
 
 
-        }
+		}
 
 
-        if ((horizontal && !vertical) || (!horizontal && vertical))
-        {
+		if ((horizontal && !vertical) || (!horizontal && vertical)) {
 
-            transform.rotation = Quaternion.Lerp(transform.rotation, new Quaternion(pointer.rotation.x * maxInclination, pointer.rotation.y, pointer.rotation.z, pointer.rotation.w), stickSpeed * Time.deltaTime);
-            if (transform.rotation.x > .12f)
-            {
-                targetObject.GetComponent<I_Activable>().Activate();
-                PlayClip();
-            }
-            else if (transform.rotation.x < -.12f)
-            {
-                targetObject.GetComponent<I_Activable>().Activate(false);
-                PlayClip();
-            }
-            else
-            {
-                targetObject.GetComponent<I_Activable>().Deactivate();
-                canPlayClip = true;
-            }
-            if (comingBackToVerticalPos)
-            {
-                if (horizontal) pointer.LookAt(transform.position + Vector3.right);
-                else if (vertical) pointer.LookAt(transform.position + Vector3.forward);
-            }
-        }
+			transform.rotation = Quaternion.Lerp(transform.rotation, new Quaternion(pointer.rotation.x * maxInclination, pointer.rotation.y, pointer.rotation.z, pointer.rotation.w), stickSpeed * Time.deltaTime);
+			if (transform.rotation.x > .12f) {
+				targetObject.GetComponent<I_Activable>().Activate();
+				PlayClip();
+			} else if (transform.rotation.x < -.12f) {
+				targetObject.GetComponent<I_Activable>().Activate(false);
+				PlayClip();
+			} else {
+				targetObject.GetComponent<I_Activable>().Deactivate();
+				canPlayClip = true;
+			}
+			if (comingBackToVerticalPos) {
+				if (horizontal) pointer.LookAt(transform.position + Vector3.right);
+				else if (vertical) pointer.LookAt(transform.position + Vector3.forward);
+			}
+		}
 
-        if (vertical && horizontal) {
-            pointer.LookAt(cursor.position);
-            transform.rotation = Quaternion.Lerp(transform.rotation, pointer.rotation, stickSpeed * Time.deltaTime);
-        }
-    }
+		if (vertical && horizontal) {
+			pointer.LookAt(cursor.position);
+			transform.rotation = Quaternion.Lerp(transform.rotation, pointer.rotation, stickSpeed * Time.deltaTime);
+		}
+	}
 
 	bool canPlayClip = true;
 	void PlayClip() {
 		if (canPlayClip) {
-			AudioManager.singleton.PlayClip(sound);
+			GetComponent<AudioSource>().Play();
 			canPlayClip = false;
 		}
 	}

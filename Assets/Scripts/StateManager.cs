@@ -34,6 +34,7 @@ public class StateManager : MonoBehaviour {
 	SphereCollider collider;
 	SkinnedMeshRenderer meshRenderer;
 	PlayerMove pm;
+	AudioSource audioSource;
 
 	void Awake() {
 		bones = GetComponentInParent<FlapperCore>().GetComponentsInChildren<JellyBone>();
@@ -42,6 +43,7 @@ public class StateManager : MonoBehaviour {
 		collider = GetComponent<SphereCollider>();
 		meshRenderer = mesh.GetComponent<SkinnedMeshRenderer>();
 		pm = GetComponent<PlayerMove>();
+		audioSource = GetComponent<AudioSource>();
 	}
 
 	void Start() {
@@ -88,7 +90,7 @@ public class StateManager : MonoBehaviour {
 			}*/
 			gasParticle.Play();
 			meshRenderer.material = gas;
-			AudioManager.singleton.PlayClip(gasTransition);
+			audioSource.PlayOneShot(gasTransition);
 		} else {
 			rigidbody.mass = defaultMass;
 			//mesh.SetActive(true);
@@ -99,11 +101,11 @@ public class StateManager : MonoBehaviour {
 			if (state == FlapperState.solid) {
 				meshRenderer.material = solid;
 				pm.speed = solidSpeed;
-				AudioManager.singleton.PlayClip(solidTransition);
+				audioSource.PlayOneShot(solidTransition);
 			} else {
 				meshRenderer.material = jelly;
 				pm.speed = jellySpeed;
-				AudioManager.singleton.PlayClip(jellyTransition);
+				audioSource.PlayOneShot(jellyTransition);
 			}
 		}
 		rigidbody.useGravity = state != FlapperState.gaseous;
