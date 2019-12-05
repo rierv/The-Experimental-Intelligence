@@ -379,7 +379,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -107.40015, y: -88.79999}
+  m_AnchoredPosition: {x: -107.40039, y: -88.79999}
   m_SizeDelta: {x: 2085, y: 2222}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1691800215
@@ -762,7 +762,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -836,7 +836,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1126,6 +1126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2e9fbcb52ad755479d49dd59c6fe831, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  transitionTime: 5
 --- !u!1 &8974112217953246198
 GameObject:
   m_ObjectHideFlags: 0
@@ -1222,14 +1223,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 497776049}
     m_Modifications:
-    - target: {fileID: 100006, guid: 8fc06027b01064e4f885fd8dd2929310, type: 3}
-      propertyPath: m_Name
-      value: StarPickupEffect
-      objectReference: {fileID: 0}
-    - target: {fileID: 100006, guid: 8fc06027b01064e4f885fd8dd2929310, type: 3}
-      propertyPath: m_Layer
-      value: 15
-      objectReference: {fileID: 0}
     - target: {fileID: 2843179025351178847, guid: 8fc06027b01064e4f885fd8dd2929310,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1334,6 +1327,14 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 100006, guid: 8fc06027b01064e4f885fd8dd2929310, type: 3}
+      propertyPath: m_Name
+      value: StarPickupEffect
+      objectReference: {fileID: 0}
+    - target: {fileID: 100006, guid: 8fc06027b01064e4f885fd8dd2929310, type: 3}
+      propertyPath: m_Layer
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 100004, guid: 8fc06027b01064e4f885fd8dd2929310, type: 3}
       propertyPath: m_Layer
@@ -1378,14 +1379,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1118458449}
     m_Modifications:
-    - target: {fileID: 100006, guid: 8fc06027b01064e4f885fd8dd2929310, type: 3}
-      propertyPath: m_Name
-      value: StarPickupEffect
-      objectReference: {fileID: 0}
-    - target: {fileID: 100006, guid: 8fc06027b01064e4f885fd8dd2929310, type: 3}
-      propertyPath: m_Layer
-      value: 15
-      objectReference: {fileID: 0}
     - target: {fileID: 2843179025351178847, guid: 8fc06027b01064e4f885fd8dd2929310,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1490,6 +1483,14 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 100006, guid: 8fc06027b01064e4f885fd8dd2929310, type: 3}
+      propertyPath: m_Name
+      value: StarPickupEffect
+      objectReference: {fileID: 0}
+    - target: {fileID: 100006, guid: 8fc06027b01064e4f885fd8dd2929310, type: 3}
+      propertyPath: m_Layer
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 100004, guid: 8fc06027b01064e4f885fd8dd2929310, type: 3}
       propertyPath: m_Layer
@@ -1534,14 +1535,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 265898235}
     m_Modifications:
-    - target: {fileID: 100006, guid: 8fc06027b01064e4f885fd8dd2929310, type: 3}
-      propertyPath: m_Name
-      value: StarPickupEffect
-      objectReference: {fileID: 0}
-    - target: {fileID: 100006, guid: 8fc06027b01064e4f885fd8dd2929310, type: 3}
-      propertyPath: m_Layer
-      value: 15
-      objectReference: {fileID: 0}
     - target: {fileID: 2843179025351178847, guid: 8fc06027b01064e4f885fd8dd2929310,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1646,6 +1639,14 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 100006, guid: 8fc06027b01064e4f885fd8dd2929310, type: 3}
+      propertyPath: m_Name
+      value: StarPickupEffect
+      objectReference: {fileID: 0}
+    - target: {fileID: 100006, guid: 8fc06027b01064e4f885fd8dd2929310, type: 3}
+      propertyPath: m_Layer
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 100004, guid: 8fc06027b01064e4f885fd8dd2929310, type: 3}
       propertyPath: m_Layer
@@ -1690,14 +1691,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 23483031}
     m_Modifications:
-    - target: {fileID: 1844191813266838, guid: 968c924d2be019d4b9e67647551eec3e, type: 3}
-      propertyPath: m_Name
-      value: AllStarsEffect
-      objectReference: {fileID: 0}
-    - target: {fileID: 1844191813266838, guid: 968c924d2be019d4b9e67647551eec3e, type: 3}
-      propertyPath: m_Layer
-      value: 15
-      objectReference: {fileID: 0}
     - target: {fileID: 8456262372930510232, guid: 968c924d2be019d4b9e67647551eec3e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1802,6 +1795,14 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1844191813266838, guid: 968c924d2be019d4b9e67647551eec3e, type: 3}
+      propertyPath: m_Name
+      value: AllStarsEffect
+      objectReference: {fileID: 0}
+    - target: {fileID: 1844191813266838, guid: 968c924d2be019d4b9e67647551eec3e, type: 3}
+      propertyPath: m_Layer
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 1064834829004598, guid: 968c924d2be019d4b9e67647551eec3e, type: 3}
       propertyPath: m_Layer
