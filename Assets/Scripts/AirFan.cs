@@ -7,42 +7,40 @@ public class AirFan : MonoBehaviour, I_Activable {
 	public float fanSpeed;
 	public float force = 4;
 	public float splashForce = 0.85f;
-	public float hight = 1;
-    bool activable = true;
-    float surface;
+	//public float hight = 1;
+	bool activable = true;
+	float surface;
 	public bool active = true;
-    List<Rigidbody> objectsinAir;
-	ParticleSystem PS;
-    StateManager flapperState;
+	List<Rigidbody> objectsinAir;
+	//ParticleSystem PS;
+	StateManager flapperState;
 	void Awake() {
 		if (!active) {
 			GetComponentInChildren<ParticleSystem>().Stop();
 		}
 	}
 	private void Start() {
-        objectsinAir = new List<Rigidbody>();
-		PS = GetComponentInChildren<ParticleSystem>();
-		PS.startLifetime *= hight * .33f;
-        BoxCollider airCollider=GetComponent<BoxCollider>();
+		objectsinAir = new List<Rigidbody>();
+		//PS = GetComponentInChildren<ParticleSystem>();
+		//PS.startLifetime *= hight * .33f;
+		BoxCollider airCollider = GetComponent<BoxCollider>();
 
-        airCollider.size = new Vector3(airCollider.size.x, hight, airCollider.size.z);
-        airCollider.center = new Vector3(0, hight / 2, 0);
-        //transform.position = new Vector3 (transform.position.x, transform.position.y + (hight/2), transform.position.z);
-        surface = transform.localScale.y * airCollider.size.y;
-        flapperState = GameObject.Find("CORE").GetComponent<StateManager>();
+		//airCollider.size = new Vector3(airCollider.size.x, hight, airCollider.size.z);
+		//airCollider.center = new Vector3(0, hight / 2, 0);
+		//transform.position = new Vector3 (transform.position.x, transform.position.y + (hight/2), transform.position.z);
+		surface = transform.localScale.y * airCollider.size.y;
+		flapperState = GameObject.Find("CORE").GetComponent<StateManager>();
 	}
 	void Update() {
-        if (active)
-        {
-            if (flapperState.state == FlapperState.solid) objectsinAir.Remove(flapperState.GetComponent<Rigidbody>());
-            fan.Rotate(fan.transform.up, fanSpeed * Time.deltaTime);
-            foreach (Rigidbody r in objectsinAir)
-            {
-                r.useGravity = false;
-                r.transform.position = Vector3.Lerp(r.transform.position, new Vector3(r.transform.position.x, transform.position.y + surface, r.transform.position.z), Time.deltaTime * force);
-            }
-        }
-        fan.localPosition = Vector3.zero;
+		if (active) {
+			if (flapperState.state == FlapperState.solid) objectsinAir.Remove(flapperState.GetComponent<Rigidbody>());
+			fan.Rotate(fan.transform.up, fanSpeed * Time.deltaTime);
+			foreach (Rigidbody r in objectsinAir) {
+				r.useGravity = false;
+				r.transform.position = Vector3.Lerp(r.transform.position, new Vector3(r.transform.position.x, transform.position.y + surface, r.transform.position.z), Time.deltaTime * force);
+			}
+		}
+		fan.localPosition = Vector3.zero;
 	}
 
 	private void OnTriggerEnter(Collider other) {
@@ -56,16 +54,16 @@ public class AirFan : MonoBehaviour, I_Activable {
 
 		if (active && CheckOther(other)) {
 			Rigidbody r = other.GetComponent<Rigidbody>();
-            objectsinAir.Add(r);
+			objectsinAir.Add(r);
 			//da non pochi problemi:
-            //r.AddForce(transform.up * -r.velocity.y * splashForce, ForceMode.VelocityChange);
+			//r.AddForce(transform.up * -r.velocity.y * splashForce, ForceMode.VelocityChange);
 		}
-	}	
+	}
 
 	private void OnTriggerExit(Collider other) {
-		if ((other.GetComponent<StateManager>() && other.GetComponent<StateManager>().state == FlapperState.solid)||CheckOther(other)) {
-            other.GetComponent<Rigidbody>().useGravity = true;
-            objectsinAir.Remove(other.GetComponent<Rigidbody>());
+		if ((other.GetComponent<StateManager>() && other.GetComponent<StateManager>().state == FlapperState.solid) || CheckOther(other)) {
+			other.GetComponent<Rigidbody>().useGravity = true;
+			objectsinAir.Remove(other.GetComponent<Rigidbody>());
 		}
 	}
 
@@ -77,11 +75,10 @@ public class AirFan : MonoBehaviour, I_Activable {
 	}
 
 	public void Activate(bool type = true) {
-        if (activable)
-        {
-            active = true;
-            GetComponentInChildren<ParticleSystem>().Play();
-        }
+		if (activable) {
+			active = true;
+			GetComponentInChildren<ParticleSystem>().Play();
+		}
 	}
 
 	public void Deactivate() {
@@ -89,8 +86,7 @@ public class AirFan : MonoBehaviour, I_Activable {
 		GetComponentInChildren<ParticleSystem>().Stop();
 	}
 
-    public void canActivate(bool enabled)
-    {
-        activable = enabled;
-    }
+	public void canActivate(bool enabled) {
+		activable = enabled;
+	}
 }

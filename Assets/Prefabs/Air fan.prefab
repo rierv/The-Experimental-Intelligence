@@ -759,7 +759,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 3
+      value: 6
       mode: 0
       spread: 0
       speed:
@@ -878,7 +878,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 19
+      scalar: 36
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -4793,7 +4793,7 @@ Transform:
   m_GameObject: {fileID: 8564882324994740911}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.5, y: -6, z: -3.5}
-  m_LocalScale: {x: 0.8571428, y: 5, z: 0.4285714}
+  m_LocalScale: {x: 6, y: 6, z: 6}
   m_Children:
   - {fileID: 1244325392412320334}
   m_Father: {fileID: 0}
@@ -4813,9 +4813,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fan: {fileID: 4113348935534657858}
   fanSpeed: 800
-  force: 0.05
+  force: 1.8
   splashForce: 0
-  hight: 1
   active: 1
 --- !u!65 &6231360749796164540
 BoxCollider:
