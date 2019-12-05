@@ -44,7 +44,15 @@ public class LevelSelection : MonoBehaviour, I_Activable
         if (active)
         {
             counter += Time.deltaTime * Input.GetAxis("Horizontal");
-            if ((counter > 1 && currentLevel == levels.Count-1) || (counter < -1 && currentLevel == 0)) counter = 0;
+            if (counter > 1 && currentLevel == levels.Count - 1) {
+                currentLevel = 0;
+                setLevel();
+            }
+            else if (counter < -1 && currentLevel == 0)
+            {
+                currentLevel = levels.Count - 1;
+                setLevel();
+            }
 
             if (counter > 1) {
                 currentLevel++;

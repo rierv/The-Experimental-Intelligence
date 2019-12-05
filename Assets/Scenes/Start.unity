@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -480,8 +480,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 40
-  m_fontSizeBase: 40
+  m_fontSize: 35
+  m_fontSizeBase: 35
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -619,6 +619,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8258779137104765903, guid: 863da2b2784ef8f4cb408ce237d4e184,
+        type: 3}
+      propertyPath: materialsToFix.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8258779137104765903, guid: 863da2b2784ef8f4cb408ce237d4e184,
+        type: 3}
+      propertyPath: materialsToFix.Array.data[3]
+      value: 
+      objectReference: {fileID: 2100000, guid: 758f7afbd2f46a0418341475b1b1d5da, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 863da2b2784ef8f4cb408ce237d4e184, type: 3}
 --- !u!1 &379143594
@@ -925,8 +935,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 40
-  m_fontSizeBase: 40
+  m_fontSize: 35
+  m_fontSizeBase: 35
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1684,16 +1694,6 @@ PrefabInstance:
       propertyPath: targetObject
       value: 
       objectReference: {fileID: 2039105042}
-    - target: {fileID: 4691221458315035717, guid: 78f1736391f641342a6c4fa7f10839fa,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 9dab982081aed1444b44fa7f106494f2, type: 2}
-    - target: {fileID: 1539879533365966913, guid: 78f1736391f641342a6c4fa7f10839fa,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: e5def3d551dd75d49bb65e3882a456c8, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 78f1736391f641342a6c4fa7f10839fa, type: 3}
 --- !u!1 &1599986496
@@ -1779,8 +1779,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 40
-  m_fontSizeBase: 40
+  m_fontSize: 35
+  m_fontSizeBase: 35
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1926,7 +1926,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7338f42973bf1cd44a054213442066c4, type: 2}
+  - {fileID: 2100000, guid: 758f7afbd2f46a0418341475b1b1d5da, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2131,8 +2131,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 40
-  m_fontSizeBase: 40
+  m_fontSize: 35
+  m_fontSizeBase: 35
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
