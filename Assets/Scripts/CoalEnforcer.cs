@@ -12,7 +12,7 @@ public class CoalEnforcer : MonoBehaviour
     }
     private void Update()
     {
-        if (active) light.intensity = Mathf.Lerp(light.intensity, 25, Time.deltaTime/2);
+        if (active) light.intensity = Mathf.Lerp(light.intensity, 15, Time.deltaTime/2);
     }
     private void OnTriggerEnter(Collider other)
     {

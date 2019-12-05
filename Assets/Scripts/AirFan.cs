@@ -13,6 +13,7 @@ public class AirFan : MonoBehaviour, I_Activable {
 	public bool active = true;
     List<Rigidbody> objectsinAir;
 	ParticleSystem PS;
+    StateManager flapperState;
 	void Awake() {
 		if (!active) {
 			GetComponentInChildren<ParticleSystem>().Stop();
@@ -28,13 +29,18 @@ public class AirFan : MonoBehaviour, I_Activable {
         airCollider.center = new Vector3(0, hight / 2, 0);
         //transform.position = new Vector3 (transform.position.x, transform.position.y + (hight/2), transform.position.z);
         surface = transform.localScale.y * airCollider.size.y;
-
+        flapperState = GameObject.Find("CORE").GetComponent<StateManager>();
 	}
 	void Update() {
         if (active)
         {
+            if (flapperState.state == FlapperState.solid) objectsinAir.Remove(flapperState.GetComponent<Rigidbody>());
             fan.Rotate(fan.transform.up, fanSpeed * Time.deltaTime);
-            foreach (Rigidbody r in objectsinAir) r.useGravity = false;
+            foreach (Rigidbody r in objectsinAir)
+            {
+                r.useGravity = false;
+                r.transform.position = Vector3.Lerp(r.transform.position, new Vector3(r.transform.position.x, transform.position.y + surface, r.transform.position.z), Time.deltaTime * force);
+            }
         }
         fan.localPosition = Vector3.zero;
 	}
@@ -51,32 +57,23 @@ public class AirFan : MonoBehaviour, I_Activable {
 		if (active && CheckOther(other)) {
 			Rigidbody r = other.GetComponent<Rigidbody>();
             objectsinAir.Add(r);
-			r.useGravity = false;
 			//da non pochi problemi:
             //r.AddForce(transform.up * -r.velocity.y * splashForce, ForceMode.VelocityChange);
 		}
-	}
-
-	private void OnTriggerStay(Collider other) {
-		if (active && CheckOther(other)) {
-            //con le forze è impossibile simulare un comportamento complesso in modo semplice, vedi le corde xD
-            //other.GetComponent<Rigidbody>().AddForce(transform.up * (transform.position.y + surface - other.transform.position.y) * force, ForceMode.Acceleration);
-            other.transform.position = Vector3.Lerp(other.transform.position, new Vector3(other.transform.position.x, transform.position.y+ surface, other.transform.position.z), Time.deltaTime*force);
-		}
-	}
+	}	
 
 	private void OnTriggerExit(Collider other) {
-		if (CheckOther(other)) {
+		if ((other.GetComponent<StateManager>() && other.GetComponent<StateManager>().state == FlapperState.solid)||CheckOther(other)) {
+            other.GetComponent<Rigidbody>().useGravity = true;
             objectsinAir.Remove(other.GetComponent<Rigidbody>());
-			other.GetComponent<Rigidbody>().useGravity = true;
 		}
 	}
 
 	bool CheckOther(Collider other) {
-		return (other.isTrigger != true &&
-				(other.gameObject.layer == 13 || (other.gameObject.layer == 12 && !other.GetComponent<ThrowableObject>().enabled)) &&
-				(!other.GetComponentInChildren<Pushable>() || !other.GetComponentInChildren<Pushable>().heavy)) ||
-			(other.GetComponent<StateManager>() && other.GetComponent<StateManager>().state != FlapperState.solid);
+		return other.isTrigger != true &&
+				(other.gameObject.layer == 13 || (other.gameObject.layer == 12 && !other.GetComponent<ThrowableObject>().enabled) ||
+				(other.GetComponentInChildren<Pushable>() && !other.GetComponentInChildren<Pushable>().heavy) ||
+			(other.GetComponent<StateManager>() && other.GetComponent<StateManager>().state != FlapperState.solid));
 	}
 
 	public void Activate(bool type = true) {

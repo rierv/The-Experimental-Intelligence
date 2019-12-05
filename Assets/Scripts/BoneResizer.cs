@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BoneResizer : MonoBehaviour
+public class BoneResizer : MonoBehaviour, I_Activable
 {
     public GameObject FlapperModel;
     bool active = false;
@@ -16,6 +16,8 @@ public class BoneResizer : MonoBehaviour
     public float scaleVelocity = 5;
     bool transformation=true;
     bool starting = false;
+    public bool activate = true;
+    bool isEnabled = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -56,7 +58,7 @@ public class BoneResizer : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player"&&state.state==FlapperState.jelly)
+        if (activate && other.tag == "Player"&&state.state==FlapperState.jelly)
         {
             Core.GetComponent<PlayerMove>().jumping = true;
             freezeFlapperBones();
@@ -105,5 +107,20 @@ public class BoneResizer : MonoBehaviour
         }
 
         active = true;
+    }
+
+    public void canActivate(bool enabled)
+    {
+        isEnabled = enabled;
+    }
+
+    public void Activate(bool type = true)
+    {
+        if(isEnabled) activate = true;
+    }
+
+    public void Deactivate()
+    {
+        activate = false;
     }
 }

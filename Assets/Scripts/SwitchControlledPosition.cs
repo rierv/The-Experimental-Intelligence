@@ -90,6 +90,6 @@ public class SwitchControlledPosition : MonoBehaviour, I_Activable
     }
     private void OnCollisionExit(Collision collision)
     {
-        //if (collision.gameObject.transform.parent = this.transform) collision.gameObject.transform.parent = null;
+        if (collision.gameObject.layer == 13) collision.gameObject.transform.parent = null;
     }
 }
