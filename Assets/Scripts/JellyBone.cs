@@ -98,14 +98,14 @@ public class JellyBone : MonoBehaviour {
 
 
 
-		if (Vector3.Distance(core.transform.position, transform.position) > 2.5f) {
-			if (Physics.Raycast(transform.position + Vector3.down, (core.transform.position - transform.position).normalized, out hit, 0.1f, layerMask)
+		if (Vector3.Distance(core.transform.position, transform.position) > 3.5f) {
+			if (Physics.Raycast(transform.position + Vector3.down, (core.transform.position - transform.position).normalized, out hit, 0.0001f, layerMask)
 				//CAN BE REMOVED
-				|| Physics.Raycast(transform.position + Vector3.up, (core.transform.position - transform.position).normalized, out hit, 0.1f, layerMask)
-				|| Physics.Raycast(transform.position + Vector3.left, (core.transform.position - transform.position).normalized, out hit, 0.1f, layerMask)
-				|| Physics.Raycast(transform.position + Vector3.right, (core.transform.position - transform.position).normalized, out hit, 0.1f, layerMask)
-				|| Physics.Raycast(transform.position + Vector3.back, (core.transform.position - transform.position).normalized, out hit, 0.1f, layerMask)
-				|| Physics.Raycast(transform.position + Vector3.forward, (core.transform.position - transform.position).normalized, out hit, 0.1f, layerMask)
+				|| Physics.Raycast(transform.position + Vector3.up, (core.transform.position - transform.position).normalized, out hit, 0.0001f, layerMask)
+				|| Physics.Raycast(transform.position + Vector3.left, (core.transform.position - transform.position).normalized, out hit, 0.0001f, layerMask)
+				|| Physics.Raycast(transform.position + Vector3.right, (core.transform.position - transform.position).normalized, out hit, 0.0001f, layerMask)
+				|| Physics.Raycast(transform.position + Vector3.back, (core.transform.position - transform.position).normalized, out hit, 0.0001f, layerMask)
+				|| Physics.Raycast(transform.position + Vector3.forward, (core.transform.position - transform.position).normalized, out hit, 0.0001f, layerMask)
 				|| notReached
 				) {
 				Debug.DrawRay(transform.position, Vector3.up * 10, Color.green, 20, true);
@@ -115,7 +115,7 @@ public class JellyBone : MonoBehaviour {
 				transform.LookAt(core.transform.position);
 				gameObject.layer = 16;
 				//rigidbody.isKinematic = true;
-				transform.position = Vector3.Lerp(transform.position, core.transform.position, 1f * Time.deltaTime);
+				transform.localPosition = Vector3.Lerp(transform.localPosition, transform.localPosition, 5f * Time.deltaTime);
 
 				Debug.DrawRay(transform.position, (transform.forward * 2 + Vector3.up * 4) * 200f, Color.red, 3, true);
 				//continues in elseif

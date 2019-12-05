@@ -9,6 +9,7 @@ public class ThrowObjects : MonoBehaviour
     public float strenght=500f;
     StateManager state;
     bool ready = true;
+    bool release = false;
     void Start()
     {
         state = GetComponent<StateManager>();
@@ -18,6 +19,10 @@ public class ThrowObjects : MonoBehaviour
     {
         if (obj && state.state != FlapperState.solid && (Input.GetButtonDown("Jump")||state.state==FlapperState.gaseous))
         {
+            if (state.state == FlapperState.gaseous)
+            {
+                release = true;
+            }
             StartCoroutine(Throw());
 
         }
@@ -42,7 +47,7 @@ public class ThrowObjects : MonoBehaviour
         {
             obj.transform.parent = null;
             obj.layer = 18;
-            obj.GetComponent<Rigidbody>().AddForce((Vector3.up  + (Input.GetAxis("Horizontal") * Vector3.right + Input.GetAxis("Vertical") * Vector3.forward)) * strenght/50, ForceMode.VelocityChange);
+            if(!release) obj.GetComponent<Rigidbody>().AddForce((Vector3.up  + (Input.GetAxis("Horizontal") * Vector3.right + Input.GetAxis("Vertical") * Vector3.forward)) * strenght/50, ForceMode.VelocityChange);
         }
 
         yield return new WaitForSeconds(0.1f);
@@ -68,6 +73,7 @@ public class ThrowObjects : MonoBehaviour
             }
             else
             {
+                release = false;
                 other.transform.parent.SetParent(transform);
             }
         }
