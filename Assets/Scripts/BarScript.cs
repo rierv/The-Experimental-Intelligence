@@ -6,9 +6,11 @@ using UnityEngine.UI;
 public class BarScript : MonoBehaviour
 {
     #region Attributes
+    public float transitionTime = 10;
     private float fillAmount;
     private Image temperatureBar;
     private GameObject[] thermometers;
+    private Image[] images;
     private StateManager flapperStateManager;
     private FlapperState currentState;
     private float minTemperature = -1.0f;
@@ -43,6 +45,15 @@ public class BarScript : MonoBehaviour
         barColors[6] = new Color(1f, 0.6f, 0f, 1f);
         barColors[2] = new Color(0.65f, 0.95f, 0.96f, 1f);
         */
+        images = new Image[3];
+
+        images[1] = thermometers[1].GetComponent<Image>();
+        images[2] = thermometers[2].GetComponent<Image>();
+        images[0] = thermometers[0].GetComponent<Image>();
+
+        thermometers[1].SetActive(true);
+        thermometers[0].SetActive(true);
+        thermometers[2].SetActive(true);
         HandleModels();
         HandleThermometer();
 
@@ -51,6 +62,8 @@ public class BarScript : MonoBehaviour
     private void Update()
     {
         HandleThermometer();
+        HandleModels();
+
     }
 
     private void HandleThermometer()
@@ -58,7 +71,6 @@ public class BarScript : MonoBehaviour
         if (currentState != flapperStateManager.state)
         {
             currentState = flapperStateManager.state;
-            HandleModels();
         }
 
         fillAmount = flapperStateManager.temperature;
@@ -78,25 +90,28 @@ public class BarScript : MonoBehaviour
 
     private void HandleModels()
     {
+        Color color0 = images[0].color;
+        Color color1 = images[1].color;
+        Color color2 = images[2].color;
         switch (currentState)
         {
+
             case FlapperState.solid:
-                thermometers[1].SetActive(true);
-                thermometers[0].SetActive(false);
-                thermometers[2].SetActive(false);
+                color1.a = Mathf.Lerp(color1.a, Mathf.Abs(flapperStateManager.temperature), transitionTime); 
+                color2.a = Mathf.Lerp(color2.a, 0, transitionTime);
                 break;
             case FlapperState.gaseous:
-                thermometers[2].SetActive(true);
-                thermometers[0].SetActive(false);
-                thermometers[1].SetActive(false);
+                color2.a = Mathf.Lerp(color2.a, Mathf.Abs(flapperStateManager.temperature), transitionTime);
+                color1.a = Mathf.Lerp(color1.a, 0, transitionTime);
                 break;
             case FlapperState.jelly:
-            default:
-                thermometers[0].SetActive(true);
-                thermometers[1].SetActive(false);
-                thermometers[2].SetActive(false);
+                color1.a = Mathf.Lerp(color1.a, 0, transitionTime);
+                color2.a = Mathf.Lerp(color2.a, 0, transitionTime);
                 break;
         }
+        images[0].color=color0;
+        images[1].color=color1;
+        images[2].color=color2;
     }
 
     private void HandleBarColor()
