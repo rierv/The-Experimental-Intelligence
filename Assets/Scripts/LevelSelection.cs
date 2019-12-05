@@ -63,7 +63,7 @@ public class LevelSelection : MonoBehaviour, I_Activable
         teleport.nextLevel = levels[currentLevel];
         
 
-        levelName.text = "Play the level " + currentLevel+1 + " :\n" + teleport.nextLevel.name;
+        levelName.text = "Play the level " + (currentLevel+1) + " :\n" + teleport.nextLevel.name;
         counter = 0;
     }
 }
