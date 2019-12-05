@@ -114,7 +114,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7457115346133579096}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!114 &7457115346133579095
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129,7 +129,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraSpeed: 6
   pointer: {fileID: 7457115346130469300}
-  allowLookAtPlayer: 1
+  secondTarget: {fileID: 0}
+  allowLookAtTarget: 0
   minX: -100
   maxX: 100
   xOffset: 0
@@ -139,4 +140,4 @@ MonoBehaviour:
   minZ: 0.47
   maxZ: 15.85
   zOffset: -31.59
-  targetOffset: {x: 0, y: 3, z: 0}
+  secondTargetOffset: {x: 0, y: 0, z: 0}

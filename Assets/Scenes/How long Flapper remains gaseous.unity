@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -183,7 +183,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 1d4813cc860a2dd4089b69f43f8af2c5, type: 2}
+  - {fileID: 2100000, guid: 98400861eabcf624d85b1e3369e6b177, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -517,7 +517,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 1d4813cc860a2dd4089b69f43f8af2c5, type: 2}
+  - {fileID: 2100000, guid: 19c7e9952d2925f48930d294a04f1137, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -678,7 +678,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 1d4813cc860a2dd4089b69f43f8af2c5, type: 2}
+  - {fileID: 2100000, guid: 7338f42973bf1cd44a054213442066c4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1908,7 +1908,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 1d4813cc860a2dd4089b69f43f8af2c5, type: 2}
+  - {fileID: 2100000, guid: 7338f42973bf1cd44a054213442066c4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2012,12 +2012,12 @@ PrefabInstance:
     - target: {fileID: 3007057923241960484, guid: d2ac09f54eab9b9409f1c047e11764a3,
         type: 3}
       propertyPath: NewTarget.x
-      value: -7.62
+      value: -9.8
       objectReference: {fileID: 0}
     - target: {fileID: 3007057923241960484, guid: d2ac09f54eab9b9409f1c047e11764a3,
         type: 3}
       propertyPath: NewTarget.y
-      value: 18.8
+      value: 21.53
       objectReference: {fileID: 0}
     - target: {fileID: 3007057923241960484, guid: d2ac09f54eab9b9409f1c047e11764a3,
         type: 3}
@@ -2037,7 +2037,17 @@ PrefabInstance:
     - target: {fileID: 3007057923241960484, guid: d2ac09f54eab9b9409f1c047e11764a3,
         type: 3}
       propertyPath: NewTarget.z
-      value: -6.8
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3007057923241960484, guid: d2ac09f54eab9b9409f1c047e11764a3,
+        type: 3}
+      propertyPath: freezeFlapper
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3007057923241960484, guid: d2ac09f54eab9b9409f1c047e11764a3,
+        type: 3}
+      propertyPath: NewPosition.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d2ac09f54eab9b9409f1c047e11764a3, type: 3}

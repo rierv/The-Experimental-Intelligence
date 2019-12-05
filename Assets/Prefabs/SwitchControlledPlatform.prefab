@@ -60,7 +60,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 4396ea9c12cfd1b4597993b2474b06b6, type: 2}
+  - {fileID: 2100000, guid: e5def3d551dd75d49bb65e3882a456c8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -124,8 +124,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xLock: 0
   zLock: 1
+  yLock: 0
   maxConstraintX: 14
   minConstraintX: 10
   maxConstraintZ: -2
   minConstraintZ: -6
+  maxConstraintY: 0
+  minConstraintY: 0
   speed: 5

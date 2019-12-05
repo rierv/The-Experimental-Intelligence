@@ -37,7 +37,7 @@ public class Pushable : MonoBehaviour {
 
 	private void OnTriggerExit(Collider other) {
 		if (other.GetComponent<StateManager>() || other.GetComponent<Pushable>()) {
-			rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
+			rigidbody.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ;
 		}
 	}
 }
