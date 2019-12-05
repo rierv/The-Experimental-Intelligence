@@ -2105,7 +2105,7 @@ PrefabInstance:
     - target: {fileID: 1650412426641883344, guid: 7fd10ec0c1708c3458fb091fd7d1d232,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 11.2
+      value: 28.4
       objectReference: {fileID: 0}
     - target: {fileID: 1650412426641883344, guid: 7fd10ec0c1708c3458fb091fd7d1d232,
         type: 3}
@@ -2598,6 +2598,62 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3224978489566176682, guid: cfb5c757897e6f3409e7a1abcade0c55,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: -0.82
+      objectReference: {fileID: 0}
+    - target: {fileID: 3224978489566176682, guid: cfb5c757897e6f3409e7a1abcade0c55,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3224978489566176682, guid: cfb5c757897e6f3409e7a1abcade0c55,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7618920792036604567, guid: cfb5c757897e6f3409e7a1abcade0c55,
+        type: 3}
+      propertyPath: JointDamper
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7618920792036604567, guid: cfb5c757897e6f3409e7a1abcade0c55,
+        type: 3}
+      propertyPath: spineStrenght
+      value: 3000
+      objectReference: {fileID: 0}
+    - target: {fileID: 7618920792036604567, guid: cfb5c757897e6f3409e7a1abcade0c55,
+        type: 3}
+      propertyPath: exitForce
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7618920792036604567, guid: cfb5c757897e6f3409e7a1abcade0c55,
+        type: 3}
+      propertyPath: ColliderHeight
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7618920792036604567, guid: cfb5c757897e6f3409e7a1abcade0c55,
+        type: 3}
+      propertyPath: throwableModel
+      value: 
+      objectReference: {fileID: 4823587774335328235, guid: 8bbc1a3bcb2b073439ec307267ccb283,
+        type: 3}
+    - target: {fileID: 7618920792036604567, guid: cfb5c757897e6f3409e7a1abcade0c55,
+        type: 3}
+      propertyPath: RigidbodyMass
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7618920792036604567, guid: cfb5c757897e6f3409e7a1abcade0c55,
+        type: 3}
+      propertyPath: movementSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7618920792036604567, guid: cfb5c757897e6f3409e7a1abcade0c55,
+        type: 3}
+      propertyPath: rotationSpeed
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cfb5c757897e6f3409e7a1abcade0c55, type: 3}

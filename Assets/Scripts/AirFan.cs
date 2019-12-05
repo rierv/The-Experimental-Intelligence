@@ -71,7 +71,7 @@ public class AirFan : MonoBehaviour, I_Activable {
 
 	bool CheckOther(Collider other) {
 		return other.isTrigger != true &&
-				(other.gameObject.layer == 13 || other.gameObject.layer == 12 ||
+				(other.gameObject.layer == 13 || (other.gameObject.layer == 12 && !other.GetComponent<ThrowableObject>().enabled) ||
 				(other.GetComponentInChildren<Pushable>() && !other.GetComponentInChildren<Pushable>().heavy) ||
 			(other.GetComponent<StateManager>() && other.GetComponent<StateManager>().state != FlapperState.solid));
 	}

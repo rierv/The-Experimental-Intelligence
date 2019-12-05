@@ -10,7 +10,7 @@ public class CameraRetargeting : MonoBehaviour, I_Activable {
 	public Vector3 NewTarget;
 	public float duration = 0f;
     bool activable = true;
-    public bool freezeFlapper=true;
+
     public float cameraMovementSpeed = 1;
 	public float cameraRotationSpeed = 1;
 
@@ -20,7 +20,6 @@ public class CameraRetargeting : MonoBehaviour, I_Activable {
 				camera.GetComponent<CameraController>().enabled = false;
 			active = true;
 			if (duration > 0) StartCoroutine(waitToDeactivate());
-            if (freezeFlapper) GameObject.Find("CORE").GetComponent<PlayerMove>().canMove = false;
 		}
 	}
 
@@ -47,8 +46,6 @@ public class CameraRetargeting : MonoBehaviour, I_Activable {
     {
         camera.GetComponent<CameraController>().enabled = true;
         active = false;
-        if (freezeFlapper) GameObject.Find("CORE").GetComponent<PlayerMove>().canMove = true;
-
     }
 
     public void canActivate(bool enabled)

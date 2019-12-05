@@ -337,15 +337,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   throwableModel: {fileID: 4823587774335328235, guid: 8bbc1a3bcb2b073439ec307267ccb283,
     type: 3}
-  RigidbodyMass: 0.15
+  RigidbodyMass: 1
   ColliderRadius: 0.1
   ColliderHeight: 1.5
   JointSpring: 0
-  JointDamper: 1
+  JointDamper: 5
   RotationOffset: {x: 0, y: 0, z: 0}
   PositionOffset: {x: 0, y: 0, z: 0}
-  spineStrenght: 100
-  exitForce: 0.1
-  rotationSpeed: 5
-  movementSpeed: 5
+  spineStrenght: 5000
+  exitForce: 0.37
   activeBone: 4
