@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class BarScript : MonoBehaviour
 {
     #region Attributes
-    public float transitionTime = 10;
+    public float transitionTime = 1;
     private float fillAmount;
     private Image temperatureBar;
     private GameObject[] thermometers;
