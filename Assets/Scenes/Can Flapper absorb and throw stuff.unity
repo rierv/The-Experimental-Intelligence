@@ -329,14 +329,14 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1691800213, guid: 075f475473f96b945889b20ff6d3784e, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -107.40039
+      objectReference: {fileID: 0}
     - target: {fileID: 8974112217448972857, guid: 075f475473f96b945889b20ff6d3784e,
         type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 127.59961
-      objectReference: {fileID: 0}
-    - target: {fileID: 1691800213, guid: 075f475473f96b945889b20ff6d3784e, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -107.40039
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 075f475473f96b945889b20ff6d3784e, type: 3}
@@ -1223,7 +1223,7 @@ PrefabInstance:
     - target: {fileID: 8564882324994740906, guid: da3b35131c3d8e949a78f7100a5f1a74,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.67
+      value: -1.53
       objectReference: {fileID: 0}
     - target: {fileID: 8564882324994740906, guid: da3b35131c3d8e949a78f7100a5f1a74,
         type: 3}
@@ -1268,7 +1268,7 @@ PrefabInstance:
     - target: {fileID: 8564882324994740906, guid: da3b35131c3d8e949a78f7100a5f1a74,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 7
+      value: 5.45
       objectReference: {fileID: 0}
     - target: {fileID: 8564882324994740906, guid: da3b35131c3d8e949a78f7100a5f1a74,
         type: 3}
@@ -1279,6 +1279,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.y
       value: 8.39
+      objectReference: {fileID: 0}
+    - target: {fileID: 6231360749796164540, guid: da3b35131c3d8e949a78f7100a5f1a74,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 2.1
       objectReference: {fileID: 0}
     - target: {fileID: 8564882324994740908, guid: da3b35131c3d8e949a78f7100a5f1a74,
         type: 3}
@@ -1643,6 +1648,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.y
       value: 8.39
+      objectReference: {fileID: 0}
+    - target: {fileID: 6231360749796164540, guid: da3b35131c3d8e949a78f7100a5f1a74,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 2.1
       objectReference: {fileID: 0}
     - target: {fileID: 8564882324994740908, guid: da3b35131c3d8e949a78f7100a5f1a74,
         type: 3}
