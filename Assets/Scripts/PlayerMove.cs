@@ -80,7 +80,7 @@ public class PlayerMove : MonoBehaviour {
 
 				if (stateManager.state == FlapperState.jelly && shrinkage <= max_shrinking) {
 					Shrink();
-				} else if (stateManager.state == FlapperState.solid || shrinkage > max_shrinking) {
+				} else if (stateManager.state == FlapperState.solid) {
 					StartCoroutine(JumpCoroutine());
 				}
 			}
