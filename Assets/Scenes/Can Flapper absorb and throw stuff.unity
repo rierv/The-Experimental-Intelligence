@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -329,14 +329,14 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1691800213, guid: 075f475473f96b945889b20ff6d3784e, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -107.40039
+      objectReference: {fileID: 0}
     - target: {fileID: 8974112217448972857, guid: 075f475473f96b945889b20ff6d3784e,
         type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 127.59961
-      objectReference: {fileID: 0}
-    - target: {fileID: 1691800213, guid: 075f475473f96b945889b20ff6d3784e, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -107.40039
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 075f475473f96b945889b20ff6d3784e, type: 3}
@@ -422,11 +422,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 3598787971647906553, guid: 09f1f192aebdb0d418a51a95c2b412af,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 9dab982081aed1444b44fa7f106494f2, type: 2}
     - target: {fileID: 6826425198467807385, guid: 09f1f192aebdb0d418a51a95c2b412af,
         type: 3}
       propertyPath: lowerLockerY
@@ -442,6 +437,11 @@ PrefabInstance:
       propertyPath: doorOpenTime
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 3598787971647906553, guid: 09f1f192aebdb0d418a51a95c2b412af,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9dab982081aed1444b44fa7f106494f2, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 09f1f192aebdb0d418a51a95c2b412af, type: 3}
 --- !u!1 &64012079
@@ -1285,15 +1285,15 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 8.39
       objectReference: {fileID: 0}
-    - target: {fileID: 8564882324994740908, guid: da3b35131c3d8e949a78f7100a5f1a74,
-        type: 3}
-      propertyPath: hight
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 6231360749796164540, guid: da3b35131c3d8e949a78f7100a5f1a74,
         type: 3}
       propertyPath: m_Size.y
       value: 2.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8564882324994740908, guid: da3b35131c3d8e949a78f7100a5f1a74,
+        type: 3}
+      propertyPath: hight
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: da3b35131c3d8e949a78f7100a5f1a74, type: 3}
@@ -1654,15 +1654,15 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 8.39
       objectReference: {fileID: 0}
-    - target: {fileID: 8564882324994740908, guid: da3b35131c3d8e949a78f7100a5f1a74,
-        type: 3}
-      propertyPath: hight
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 6231360749796164540, guid: da3b35131c3d8e949a78f7100a5f1a74,
         type: 3}
       propertyPath: m_Size.y
       value: 2.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8564882324994740908, guid: da3b35131c3d8e949a78f7100a5f1a74,
+        type: 3}
+      propertyPath: hight
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: da3b35131c3d8e949a78f7100a5f1a74, type: 3}
@@ -2536,7 +2536,7 @@ PrefabInstance:
         type: 3}
       propertyPath: nextLevel
       value: 
-      objectReference: {fileID: 102900000, guid: d86484a61d7ab5548b5139275871c950,
+      objectReference: {fileID: 102900000, guid: a589a0e51d98eef42b3c785a0c3a31de,
         type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f884c8731182b694a9a530fe4c180424, type: 3}
@@ -4138,11 +4138,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 3598787971647906553, guid: 09f1f192aebdb0d418a51a95c2b412af,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 9dab982081aed1444b44fa7f106494f2, type: 2}
     - target: {fileID: 6826425198467807385, guid: 09f1f192aebdb0d418a51a95c2b412af,
         type: 3}
       propertyPath: lowerLockerY
@@ -4158,6 +4153,11 @@ PrefabInstance:
       propertyPath: doorOpenTime
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 3598787971647906553, guid: 09f1f192aebdb0d418a51a95c2b412af,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9dab982081aed1444b44fa7f106494f2, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 09f1f192aebdb0d418a51a95c2b412af, type: 3}
 --- !u!1 &1547384963
@@ -4425,11 +4425,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 3598787971647906553, guid: 09f1f192aebdb0d418a51a95c2b412af,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 9dab982081aed1444b44fa7f106494f2, type: 2}
     - target: {fileID: 6826425198467807385, guid: 09f1f192aebdb0d418a51a95c2b412af,
         type: 3}
       propertyPath: lowerLockerY
@@ -4445,6 +4440,11 @@ PrefabInstance:
       propertyPath: doorOpenTime
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 3598787971647906553, guid: 09f1f192aebdb0d418a51a95c2b412af,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9dab982081aed1444b44fa7f106494f2, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 09f1f192aebdb0d418a51a95c2b412af, type: 3}
 --- !u!1001 &1846556184
