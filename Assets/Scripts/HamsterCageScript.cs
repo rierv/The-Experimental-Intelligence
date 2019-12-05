@@ -8,7 +8,7 @@ public class HamsterCageScript : MonoBehaviour
     public GameObject targetObject;
     Rigidbody wheel;
     Transform[] dynamo;
-    GameObject electricity;
+    GameObject[] electricity;
     public float wheelSpeed = 200f;
     private bool isActive = false;
     private float horizontalInput;
@@ -19,8 +19,12 @@ public class HamsterCageScript : MonoBehaviour
     {
         wheel = gameObject.GetComponentInParent<Rigidbody>();
         dynamo = bobine.GetComponentsInChildren<Transform>();
-        electricity = gameObject.transform.parent.parent.parent.Find("battery").Find("battery electricity").gameObject;
-        electricity.SetActive(false);
+        electricity = new GameObject[3];
+        electricity[0] = gameObject.transform.parent.parent.parent.Find("Battery").Find("BatteryElectricity").gameObject;
+        electricity[1] = gameObject.transform.parent.parent.parent.Find("Cable").Find("CableElectricity1").gameObject;
+        electricity[2] = gameObject.transform.parent.parent.parent.Find("Cable").Find("CableElectricity2").gameObject;
+        foreach (GameObject e in electricity)
+            e.SetActive(false);
     }
     private void OnTriggerStay(Collider other)
     {
@@ -33,7 +37,8 @@ public class HamsterCageScript : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         isActive = false;
-        electricity.SetActive(false);
+        foreach (GameObject e in electricity)
+            e.SetActive(false);
     }
 
     private void Update()
@@ -41,14 +46,18 @@ public class HamsterCageScript : MonoBehaviour
         if (isActive)
         {
             horizontalInput = Input.GetAxis("Horizontal");
+
             if (horizontalInput != 0)
             {
                 wheel.transform.Rotate(new Vector3(0f, wheelSpeed * Time.deltaTime * -horizontalInput, 0f));
-                electricity.SetActive(true);
+                foreach (GameObject e in electricity)
+                    e.SetActive(true);
+
                 for (int i = 1; i < dynamo.Length; i++)
                 {
                     dynamo[i].Rotate(new Vector3(0f, wheelSpeed * Time.deltaTime * -horizontalInput, 0f));
                 }
+
                 if (horizontalInput > 0)
                 {
                     targetObject.GetComponent<I_Activable>().Deactivate();
@@ -56,14 +65,16 @@ public class HamsterCageScript : MonoBehaviour
                 }
                 else
                 {
+                    Debug.Log(horizontalInput);
                     targetObject.GetComponent<I_Activable>().Deactivate();
                     targetObject.GetComponent<I_Activable>().Activate(false);
                 }
             }
             else
             {
+                foreach (GameObject e in electricity)
+                    e.SetActive(false);
                 targetObject.GetComponent<I_Activable>().Deactivate();
-                electricity.SetActive(false);
             }
         }
     }
