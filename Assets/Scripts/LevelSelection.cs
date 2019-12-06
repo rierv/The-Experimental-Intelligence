@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -25,7 +26,9 @@ public class LevelSelection : MonoBehaviour, I_Activable {
 	private void Awake() {
 		levelName = GetComponent<TMPro.TextMeshProUGUI>();
 		setLevel();
-	}
+        //WriteLevels( levels, "Assets/levelsNames.txt");
+
+    }
 
 	void Update() {
 		if (active) {
@@ -48,8 +51,22 @@ public class LevelSelection : MonoBehaviour, I_Activable {
 			}
 		}
 	}
-
-	void setLevel() {
+    static void WriteLevels(List<Object> levels, string path)
+    {
+        string text = "";
+        int i = 0;
+        foreach (Object l in levels)
+        {
+            i++;
+            text = text + "level " + i + ": " + l.name + "\n";
+        }
+        //Write some text to the test.txt file
+        StreamWriter writer = new StreamWriter(path, true);
+        writer.WriteLine(text);
+        writer.Close();
+        
+    }
+    void setLevel() {
 		teleport.nextLevel = levels[currentLevel];
 		levelName.text = "Play level " + (currentLevel + 1) + ":\n" + teleport.nextLevel.name + "?";
 		counter = 0;

@@ -22,7 +22,7 @@ public class IceMachineScript : MonoBehaviour, I_Activable {
 	[Range(1, 5)]
 	public float doorVecolicity = 2;
 	//private bool isMachineActive = false;
-	[Range(2, 20)]
+	[Range(2, 30)]
 	public float newBlockTime = 2f;
 	[Header("Activable")]
 	public bool active = true;
