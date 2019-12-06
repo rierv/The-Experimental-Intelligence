@@ -36,7 +36,6 @@ public partial class SwitchScript : MonoBehaviour {
 	}
 
 	private void Update() {
-
 		if (handle.GetComponent<ThrowableObject>().isActiveAndEnabled) {
 			if (bonesActive) {
 				SphereCollider[] bones = GameObject.Find("Root").GetComponentsInChildren<SphereCollider>();

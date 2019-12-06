@@ -259,7 +259,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2617106573259330185}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0.5, y: -0.5, z: -0.5, w: 0.5}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
   m_Children:
@@ -296,7 +296,6 @@ MonoBehaviour:
   zCameraOffset: 0
   cameraMovementSpeed: 3
   cameraRotationSpeed: 3
-  sound: {fileID: 8300000, guid: 5c3cda5393e4fa44eb13016a7f0485b9, type: 3}
 --- !u!136 &4531710407877640597
 CapsuleCollider:
   m_ObjectHideFlags: 0

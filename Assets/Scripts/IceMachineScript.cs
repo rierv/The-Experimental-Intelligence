@@ -24,22 +24,21 @@ public class IceMachineScript : MonoBehaviour, I_Activable {
 	//private bool isMachineActive = false;
 	[Range(2, 20)]
 	public float newBlockTime = 2f;
+	[Header("Activable")]
+	public bool active = true;
+	public bool invertTrueFalse;
+
 	private float closeDoorTime;
 	private float openDoorTime;
-	//private float currentTimeLeft;
 	private bool isDoorOpen;
 	Vector3 throwForce;
 	Vector3 DoorStartpos;
 	bool newBlockNeeded = true;
-	public bool firstBlock = true;
-	[Header("Activable")]
-	public bool active = true;
-	public bool invertTrueFalse;
-    bool activable = true;
+	bool activable = true;
 
-    #endregion
+	#endregion
 
-    void Start() {
+	void Start() {
 		topIconMaterialOn = topIcon.material;
 		doorMaterialOn = door.material;
 		if (!active) {
@@ -50,14 +49,8 @@ public class IceMachineScript : MonoBehaviour, I_Activable {
 		openDoorTime = newBlockTime - 1 / doorVecolicity;
 		DoorStartpos = machineDoor.position;
 		throwForce = -transform.forward * throwBlockForce;
-		//ActivateMachine();
 		StartCoroutine(newBlockCoroutine());
 	}
-
-	/*void ActivateMachine() {
-		isMachineActive = true;
-		if (firstBlock) StartCoroutine(firstBlockCoroutine());
-	}*/
 
 	void OpenMachineDoor() {
 		isDoorOpen = true;
@@ -84,18 +77,7 @@ public class IceMachineScript : MonoBehaviour, I_Activable {
 		}
 	}
 
-
-	/*private void FixedUpdate() {
-		if (isMachineActive && newBlockNeeded) {
-			StartCoroutine(newBlockCoroutine());
-		}
-
-	}*/
-
-
-
 	private void Update() {
-
 		if (isDoorOpen)
 			machineDoor.position = Vector3.Lerp(machineDoor.position, DoorStartpos + doorHightDifference, Time.deltaTime * doorVecolicity);
 		else
@@ -115,19 +97,9 @@ public class IceMachineScript : MonoBehaviour, I_Activable {
 			yield return newBlockCoroutine();
 		}
 	}
-	/*IEnumerator firstBlockCoroutine() {
-		newBlockNeeded = false;
-		OpenMachineDoor();
-		yield return new WaitForSeconds(1f);
-		CreateNewCube();
-		yield return new WaitForSeconds(1f);
-		CloseMachineDoor();
-		newBlockNeeded = true;
-	}*/
-
 
 	public void Activate(bool type) {
-		if (activable&&((type && !invertTrueFalse) || (!type && invertTrueFalse))) {
+		if (activable && ((type && !invertTrueFalse) || (!type && invertTrueFalse))) {
 			active = true;
 			topIcon.material = topIconMaterialOn;
 			door.material = doorMaterialOn;
@@ -145,8 +117,7 @@ public class IceMachineScript : MonoBehaviour, I_Activable {
 		door.material = doorMaterialOff;
 	}
 
-    public void canActivate(bool enabled)
-    {
-        activable = enabled;
-    }
+	public void canActivate(bool enabled) {
+		activable = enabled;
+	}
 }
