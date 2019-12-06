@@ -5,6 +5,7 @@ using UnityEngine;
 public class Spawner : MonoBehaviour, I_Activable
 {
     public GameObject objectToSpawn;
+    public Vector3 sizeOfTheObject = new Vector3(1, 1, 1);
     bool activable = true;
 
     GameObject instance;
@@ -16,6 +17,7 @@ public class Spawner : MonoBehaviour, I_Activable
             ready = false;
             if (instance != null) Destroy(instance);
             instance = Instantiate(objectToSpawn, transform.position, transform.rotation);
+            instance.transform.localScale = sizeOfTheObject;
         }
     }
 

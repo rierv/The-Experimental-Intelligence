@@ -15,6 +15,10 @@ public class AirFan : MonoBehaviour, I_Activable {
 	List<Rigidbody> objectsinAir;
 	ParticleSystem particleSystem;
 	StateManager flapperState;
+    public Rigidbody specialSpinObject;
+    public float specialSpinForce;
+    public float specialSpinOffset;
+    bool flapperSolid = false;
 
 	void Awake() {
 		audioSource = GetComponent<AudioSource>();
@@ -40,13 +44,37 @@ public class AirFan : MonoBehaviour, I_Activable {
 
 	void Update() {
 		if (active) {
-			if (flapperState.state == FlapperState.solid) objectsinAir.Remove(flapperState.GetComponent<Rigidbody>());
-			fan.Rotate(fan.transform.up, fanSpeed * Time.deltaTime);
+            if (flapperState.state == FlapperState.solid && objectsinAir.Contains(flapperState.GetComponent<Rigidbody>()))
+            {
+                objectsinAir.Remove(flapperState.GetComponent<Rigidbody>());
+                flapperSolid = true;
+                flapperState.GetComponent<Rigidbody>().useGravity = true;
+
+            }
+
+            fan.Rotate(fan.transform.up, fanSpeed * Time.deltaTime);
 			foreach (Rigidbody r in objectsinAir) {
-				r.useGravity = false;
-				r.transform.position = Vector3.Lerp(r.transform.position, new Vector3(r.transform.position.x, transform.position.y + surface, r.transform.position.z), Time.deltaTime * force);
+                if (r)
+                {
+                    r.useGravity = false;
+                    if(specialSpinObject&&specialSpinObject==r) r.transform.position = Vector3.Lerp(r.transform.position, new Vector3(r.transform.position.x, transform.position.y + surface+specialSpinOffset, r.transform.position.z), Time.deltaTime * specialSpinForce);
+                    else r.transform.position = Vector3.Lerp(r.transform.position, new Vector3(r.transform.position.x, transform.position.y + surface, r.transform.position.z), Time.deltaTime * force);
+                }
 			}
+
+            
 		}
+        else
+        {
+            foreach (Rigidbody o in objectsinAir)
+            {
+                if (o)
+                {
+                    o.useGravity = true;
+                    objectsinAir.Remove(o);
+                }
+            }
+        }
 		fan.localPosition = Vector3.zero;
 	}
 
@@ -60,25 +88,37 @@ public class AirFan : MonoBehaviour, I_Activable {
          ma alla fine proverei così per usare anche i pushable e far levitare solo il core: */
 
 		if (active && CheckOther(other)) {
-			Rigidbody r = other.GetComponent<Rigidbody>();
-			objectsinAir.Add(r);
+            Debug.Log("enter " + other.gameObject.name);
+
+            Rigidbody r = other.GetComponent<Rigidbody>();
+			if(!objectsinAir.Contains(r))objectsinAir.Add(r);
 			//da non pochi problemi:
 			//r.AddForce(transform.up * -r.velocity.y * splashForce, ForceMode.VelocityChange);
 		}
 	}
-
-	private void OnTriggerExit(Collider other) {
-		if ((other.GetComponent<StateManager>() && other.GetComponent<StateManager>().state == FlapperState.solid) || CheckOther(other)) {
+    private void OnTriggerStay(Collider other)
+    {
+        if (active && other.GetComponent<StateManager>()&&other.GetComponent<StateManager>().state == FlapperState.jelly&&flapperSolid==true)
+        {
+            Debug.Log("inStay");
+            if (!objectsinAir.Contains(other.GetComponent<Rigidbody>())) objectsinAir.Add(other.GetComponent<Rigidbody>());
+            flapperSolid = false;
+        }
+    }
+    private void OnTriggerExit(Collider other) {
+		if (CheckOther(other)) {
+            Debug.Log("exit " + other.gameObject.name);
 			other.GetComponent<Rigidbody>().useGravity = true;
 			objectsinAir.Remove(other.GetComponent<Rigidbody>());
-		}
+            if(other.GetComponent<StateManager>()) flapperSolid = false;
+        }
 	}
 
 	bool CheckOther(Collider other) {
 		return other.isTrigger != true &&
 				(other.gameObject.layer == 13 || (other.gameObject.layer == 12 && !other.GetComponent<ThrowableObject>().enabled) ||
 				(other.GetComponentInChildren<Pushable>() && !other.GetComponentInChildren<Pushable>().heavy) ||
-			(other.GetComponent<StateManager>() && other.GetComponent<StateManager>().state != FlapperState.solid));
+			other.GetComponent<StateManager>());
 	}
 
 	public void Activate(bool type = true) {

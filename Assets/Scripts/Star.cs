@@ -18,7 +18,6 @@ public class Star : MonoBehaviour {
 
 			//FindObjectOfType<ClockManager>().AddStar();
 			FindObjectOfType<StarCollector>().AddStar();
-			//FindObjectOfType<ActivateComic>().Activate();
 		}
 	}
 }

@@ -31,12 +31,15 @@ public class HamsterCageScript : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isActive = true;
+            other.GetComponent<Rigidbody>().drag = 4;
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
         isActive = false;
+        other.GetComponent<Rigidbody>().drag = 1;
+
         foreach (GameObject e in electricity)
             e.SetActive(false);
     }
