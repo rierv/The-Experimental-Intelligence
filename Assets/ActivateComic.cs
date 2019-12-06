@@ -124,6 +124,6 @@ public class ActivateComic : MonoBehaviour, I_Activable
 
     public void Deactivate()
     {
-        throw new System.NotImplementedException();
+
     }
 }

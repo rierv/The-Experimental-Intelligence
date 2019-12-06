@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7847178}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -200.66669, y: -290.33334, z: -209.33334}
+  m_LocalPosition: {x: -270, y: -398.8, z: -209.33334}
   m_LocalScale: {x: 33.333336, y: 33.333336, z: 33.333336}
   m_Children: []
   m_Father: {fileID: 8358367531903826271}
@@ -93,7 +93,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 63.8, y: 63}
+  m_AnchoredPosition: {x: -89, y: -55}
   m_SizeDelta: {x: 3894.7583, y: 3174}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8358367530877241015
@@ -323,6 +323,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   completeTextPieces:
-  - hey flapper
-  - come here
-  - now
+  - probably you can also jump!
+  - 'pressing space '

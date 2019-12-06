@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class triggerForComic : MonoBehaviour
+public class triggerForComic : MonoBehaviour, I_Activable
 {
     public ActivateComic comicToActivate;
     bool done = false;
+    public bool active = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,11 +20,26 @@ public class triggerForComic : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponent<JellyBone>() && !done)
+        if (active&&other.GetComponent<StateManager>() && other.GetComponent<StateManager>().state==FlapperState.jelly&& !done)
         {
             
             comicToActivate.Activate();
             done = true;
         }
+    }
+
+    public void canActivate(bool enabled)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void Activate(bool type = true)
+    {
+        active = true;
+    }
+
+    public void Deactivate()
+    {
+        active = false;
     }
 }
