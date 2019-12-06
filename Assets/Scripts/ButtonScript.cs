@@ -15,6 +15,7 @@ public class ButtonScript : MonoBehaviour {
 	float maxZtemp;
 	float timer = 0;
 	bool Exit;
+    public GameObject body;
 	#endregion
 
 	private void Start() {
@@ -42,7 +43,7 @@ public class ButtonScript : MonoBehaviour {
 	}
 
 	private void Update() {
-		transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, Mathf.Clamp(transform.localPosition.z, minZ, maxZtemp));
+		body.transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, Mathf.Clamp(transform.localPosition.z, minZ, maxZtemp));
 		timer -= Time.deltaTime;
 		if (timer <= 0 && maxZtemp != maxZ && Exit) {
 			foreach (I_Activable ac in activables) {
