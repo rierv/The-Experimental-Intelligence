@@ -149,7 +149,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1916902872248276921}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -13.052643, y: 2.03, z: -9.94}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.4, y: -1, z: 0.4}
   m_Children:
   - {fileID: 1184277922995645988}
@@ -532,6 +532,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbef54045f14be14392c6e17223e43d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  throwableModel: {fileID: 0}
   RigidbodyMass: 5
   ColliderRadius: 0.01
   ColliderHeight: 1
@@ -541,6 +542,8 @@ MonoBehaviour:
   PositionOffset: {x: 0, y: 0, z: 0}
   spineStrenght: 30000
   exitForce: 1
+  rotationSpeed: 1
+  movementSpeed: 1
   activeBone: 12
 --- !u!1 &7576631455690826731
 GameObject:

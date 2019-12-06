@@ -38,8 +38,8 @@ public class RopeRoot : MonoBehaviour
         th = CopySource[activeBone].gameObject.AddComponent<ThrowableObject>();
         th.SpineStrenght = spineStrenght;
         CopySource[activeBone].gameObject.GetComponent<CapsuleCollider>().enabled = false;
-        //CopySource[13].gameObject.GetComponent<CapsuleCollider>().enabled = false;
-        //CopySource[14].gameObject.GetComponent<CapsuleCollider>().enabled = false;
+        CopySource[0].gameObject.GetComponent<CapsuleCollider>().enabled = false;
+        CopySource[1].gameObject.GetComponent<CapsuleCollider>().enabled = false;
         th.parentBodies = new List<Rigidbody>();
         foreach(Transform bone in CopySource)
         {
