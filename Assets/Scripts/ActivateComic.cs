@@ -3,9 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ActivateComic : MonoBehaviour, I_Activable
+public class ActivateComic : MonoBehaviour
 {
     #region Attributes
+    //public bool comicOrientation;
+    public float duration;
+    public float textWaitTime;
+    public float fadeTime;
     GameObject comicCloud;
     private Color color;
     private bool isActive = false;
@@ -17,7 +21,8 @@ public class ActivateComic : MonoBehaviour, I_Activable
     GameObject textCloud;
     public string[] completeTextPieces;
     private string completeText = "";
-    string text;
+    private string text;
+    private Color textColor;
     #endregion
 
     private void Awake()
@@ -27,6 +32,7 @@ public class ActivateComic : MonoBehaviour, I_Activable
         color.a = 0f;
         comicCloud.SetActive(false);
         textCloud = comicCloud.transform.GetChild(0).gameObject;
+        textColor = textCloud.GetComponent<Text>().color;
         standardScale = comicCloud.transform.localScale;
         bigScale = 1.1f * standardScale;
         littleScale = 0.9f * standardScale;
@@ -41,7 +47,7 @@ public class ActivateComic : MonoBehaviour, I_Activable
 
     private void Update()
     {
-        if(activateAnimation)
+        if (activateAnimation)
         {
             switch (animationPhase)
             {
@@ -60,6 +66,12 @@ public class ActivateComic : MonoBehaviour, I_Activable
                     break;
                 case 4:
                     StartCoroutine(AnimateText(completeText));
+                    break;
+                case 5:
+                    StartCoroutine(WaitAmountOfTime());
+                    break;
+                case 6:
+                    StartCoroutine(Disappear());
                     activateAnimation = false;
                     break;
             }
@@ -68,7 +80,7 @@ public class ActivateComic : MonoBehaviour, I_Activable
 
     IEnumerator Appear()
     {
-        for (float a = 0; color.a < 1; a += Time.deltaTime)
+        for (float a = 0; color.a < 1; a += Time.deltaTime / fadeTime)
         {
             color.a = Mathf.Clamp(a, 0, 1);
             comicCloud.GetComponent<Image>().color = color;
@@ -97,9 +109,31 @@ public class ActivateComic : MonoBehaviour, I_Activable
         {
             text += completeText[i++];
             textCloud.GetComponent<Text>().text = text;
-            yield return new WaitForSeconds(0.2F);
+            yield return new WaitForSeconds(textWaitTime);
+        }
+        animationPhase++;
+        StopAllCoroutines();
+    }
+
+    IEnumerator WaitAmountOfTime()
+    {
+        yield return new WaitForSeconds(textWaitTime);
+        animationPhase++;
+        StopAllCoroutines();
+    }
+
+    IEnumerator Disappear()
+    {
+        for (float a = 1; color.a > 0; a -= Time.deltaTime / fadeTime)
+        {
+            color.a = Mathf.Clamp(a, 0, 1);
+            textColor.a = color.a;
+            comicCloud.GetComponent<Image>().color = color;
+            textCloud.GetComponent<Text>().color = textColor;
+            yield return null;
         }
         animationPhase = 0;
+        activateAnimation = false;
         StopAllCoroutines();
     }
 
