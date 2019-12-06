@@ -17,7 +17,7 @@ public class ClockManager : MonoBehaviour
     GameObject allStarsEffect;
     #endregion
 
-    private void Awake()
+    private void Start()
     {
         clockCenter = GameObject.Find("ClockCenter");
         clockCenterTransform = clockCenter.GetComponent<RectTransform>();
