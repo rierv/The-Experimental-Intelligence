@@ -46,7 +46,8 @@ public class TextureFixer : MonoBehaviour {
 							y = meshRenderer.gameObject.transform.localScale.x;
 							break;
 					}
-					meshRenderer.materials[i].SetTextureScale("_BaseMap", new Vector2(baseScale * x, baseScale * y));
+					//float scale = Mathf.Min(x, y);
+					meshRenderer.materials[i].SetTextureScale("_BaseMap", new Vector2(Mathf.Clamp((int)(baseScale * x), 1, 100), Mathf.Clamp((int)(baseScale * y), 1, 100)));
 				}
 			}
 		}
