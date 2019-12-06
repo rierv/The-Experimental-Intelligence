@@ -27,6 +27,7 @@ public class RopeRoot : MonoBehaviour
     {
         if (RigidBodyContainer == null)
             RigidBodyContainer = new GameObject("RopeRigidbodyContainer");
+        RigidBodyContainer.transform.position = transform.position;
         CopySource = new List<Transform>();
         CopyDestination = new List<Transform>();
         //add children
@@ -53,6 +54,7 @@ public class RopeRoot : MonoBehaviour
         tM.transform.parent = CopySource[activeBone];
         tM.transform.localPosition = Vector3.up;
         GameObject trigger = new GameObject();
+        trigger.transform.position = CopySource[activeBone].position;
         trigger.transform.parent = CopySource[activeBone];
         CapsuleCollider sc = trigger.AddComponent<CapsuleCollider>();
         sc.radius *= 3f;
@@ -68,6 +70,7 @@ public class RopeRoot : MonoBehaviour
             var child = parent.GetChild(i);
             var representative = new GameObject(child.gameObject.name);
             representative.transform.parent = RigidBodyContainer.transform;
+            representative.transform.position = child.transform.position;
             //rigidbody
             var childRigidbody = representative.gameObject.AddComponent<Rigidbody>();
             childRigidbody.useGravity = true;
