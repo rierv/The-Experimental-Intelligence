@@ -7,7 +7,9 @@ using UnityEngine.UI;
 public class LevelSelection : MonoBehaviour, I_Activable {
 	public NextLevel teleport;
 	public List<Object> levels;
-	bool active = false;
+    public float selectionSpeed=2;
+
+    bool active = false;
 	float counter = 0;
 	int currentLevel = 0;
 
@@ -32,7 +34,7 @@ public class LevelSelection : MonoBehaviour, I_Activable {
 
 	void Update() {
 		if (active) {
-			counter += Time.deltaTime * Input.GetAxis("Horizontal");
+			counter += Time.deltaTime * Input.GetAxis("Horizontal")*selectionSpeed;
 			if (counter > 1 && currentLevel == levels.Count - 1) {
 				currentLevel = 0;
 				setLevel();
