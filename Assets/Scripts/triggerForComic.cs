@@ -21,7 +21,7 @@ public class triggerForComic : MonoBehaviour
     {
         if (other.GetComponent<JellyBone>() && !done)
         {
-            Debug.Log("cippete");
+            
             comicToActivate.Activate();
             done = true;
         }

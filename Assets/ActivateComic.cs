@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ActivateComic : MonoBehaviour
+public class ActivateComic : MonoBehaviour, I_Activable
 {
     #region Attributes
     GameObject comicCloud;
@@ -105,7 +105,7 @@ public class ActivateComic : MonoBehaviour
 
 
 
-    public void Activate()
+    public void Activate(bool type = true)
     {
         if (!isActive)
         {
@@ -114,5 +114,16 @@ public class ActivateComic : MonoBehaviour
             isActive = true;
             activateAnimation = true;
         }
+    }
+
+    public void canActivate(bool enabled)
+    {
+        throw new System.NotImplementedException();
+    }
+
+
+    public void Deactivate()
+    {
+        throw new System.NotImplementedException();
     }
 }
