@@ -20,7 +20,7 @@ public class triggerForComic : MonoBehaviour, I_Activable
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (active&&other.GetComponent<StateManager>() && other.GetComponent<StateManager>().state==FlapperState.jelly&& !done)
+        if (active&&((other.GetComponent<StateManager>() && other.GetComponent<StateManager>().state==FlapperState.jelly)||other.gameObject.layer==14)&& !done)
         {
             
             comicToActivate.Activate();
