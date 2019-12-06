@@ -5,6 +5,7 @@ using UnityEngine;
 public class triggerForComic : MonoBehaviour
 {
     public ActivateComic comicToActivate;
+    bool done = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,7 +19,11 @@ public class triggerForComic : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if(other.GetComponent<JellyBone>())
+        if (other.GetComponent<JellyBone>() && !done)
+        {
+            Debug.Log("cippete");
             comicToActivate.Activate();
+            done = true;
+        }
     }
 }
