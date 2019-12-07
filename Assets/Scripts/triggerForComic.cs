@@ -22,7 +22,7 @@ public class triggerForComic : MonoBehaviour, I_Activable
     {
         if (active&&((other.GetComponent<StateManager>() && other.GetComponent<StateManager>().state==FlapperState.jelly)||other.gameObject.layer==14)&& !done)
         {
-            
+            if (transform.parent.gameObject.GetComponent<CameraRetargeting>()) transform.parent.gameObject.GetComponent<CameraRetargeting>().Activate();
             comicToActivate.Activate();
             done = true;
         }
