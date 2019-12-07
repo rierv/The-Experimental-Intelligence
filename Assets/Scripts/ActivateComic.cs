@@ -9,6 +9,7 @@ public class ActivateComic : MonoBehaviour, I_Activable
     public bool comicOrientation;
     public float duration;
     public float fadeTime;
+    public float charWaitTime;
     GameObject comicCloud;
     private Color color;
     private bool isActive = false;
@@ -111,11 +112,23 @@ public class ActivateComic : MonoBehaviour, I_Activable
     IEnumerator AnimateText()
     {
         int index;
-        for (index = 0 ; index < completeText.Length; index++)
+        int newLineCount;
+        for (index = 0, newLineCount = 1 ; index < completeText.Length; index++)
         {
             text += completeText[index];
+
+            if (completeText[index] == '\n') 
+            {
+                newLineCount++;
+            }
+            if (newLineCount > 3)
+            {
+                text = text.Remove(0, text.IndexOf('\n'));
+                newLineCount--;
+            }
             textCloud.GetComponent<Text>().text = text;
-            yield return new WaitForSeconds(fadeTime / completeText.Length);
+            yield return new WaitForSeconds(charWaitTime);
+
         }
         if (index == completeText.Length)
         {
