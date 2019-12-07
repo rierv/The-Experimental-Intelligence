@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ActivateComic : MonoBehaviour
+public class ActivateComic : MonoBehaviour, I_Activable
 {
     #region Attributes
     //public bool comicOrientation;
@@ -23,9 +23,10 @@ public class ActivateComic : MonoBehaviour
     private string completeText = "";
     private string text;
     private Color textColor;
+    public bool active = true;
     #endregion
 
-    private void Awake()
+    private void Start()
     {
         comicCloud = gameObject.transform.Find("ComicCloud").gameObject;
         color = comicCloud.GetComponent<Image>().color;
