@@ -9,7 +9,6 @@ public class InverseActivation : MonoBehaviour, I_Activable
     public void Activate(bool type = true)
     {
         active = true;
-        Debug.Log("attivoo");
 
     }
 

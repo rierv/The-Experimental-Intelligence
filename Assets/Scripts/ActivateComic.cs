@@ -198,7 +198,7 @@ public class ActivateComic : MonoBehaviour, I_Activable
             text = "";
             disactivateAnimation = true;
             StartCoroutine(EndAnimation());
-            comicCloud.SetActive(false);
+            //comicCloud.SetActive(false);
 
 
         }
