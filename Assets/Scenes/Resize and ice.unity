@@ -2719,17 +2719,17 @@ PrefabInstance:
     - target: {fileID: 2261315819131974689, guid: 7ea5783718c638847b79c296ac4e1421,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.5
+      value: 1.7
       objectReference: {fileID: 0}
     - target: {fileID: 2261315819131974689, guid: 7ea5783718c638847b79c296ac4e1421,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.5
+      value: 1.7
       objectReference: {fileID: 0}
     - target: {fileID: 2261315819131974689, guid: 7ea5783718c638847b79c296ac4e1421,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.5
+      value: 1.7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7ea5783718c638847b79c296ac4e1421, type: 3}
@@ -9371,9 +9371,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4348d87de40aac4bb012913c107155e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  duration: 0
+  textWaitTime: 0
+  fadeTime: 0
   completeTextPieces:
   - LOOK HOW YOUR BODY CAN EASILY ASSUME ANY SHAPE
   - "IT\u2019S AMAZYNG!"
+  active: 1
 --- !u!1 &7227126824267399414
 GameObject:
   m_ObjectHideFlags: 0

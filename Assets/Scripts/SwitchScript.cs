@@ -25,18 +25,23 @@ public partial class SwitchScript : MonoBehaviour {
 	Transform cameraPointer;
 	public float cameraMovementSpeed = 3f;
 	public float cameraRotationSpeed = 3f;
-	//public AudioClip sound;
-	#endregion
+    FlapperCore Flapper;
 
-	private void Start() {
-		bonesActive = true;
+    //public AudioClip sound;
+    #endregion
+
+    private void Start() {
+        Flapper = GameObject.FindObjectOfType<FlapperCore>();
+
+        bonesActive = true;
 		handle.GetComponent<ThrowableObject>().parentBodies.Add(handle.GetComponent<Rigidbody>());
 
 		if (camera) cameraPointer = camera.transform.GetChild(0).transform;
 	}
 
 	private void Update() {
-		if (handle.GetComponent<ThrowableObject>().isActiveAndEnabled) {
+
+        if (handle.GetComponent<ThrowableObject>().isActiveAndEnabled) {
 			if (bonesActive) {
 				SphereCollider[] bones = GameObject.Find("Root").GetComponentsInChildren<SphereCollider>();
 				GameObject.Find("CORE").GetComponent<Rigidbody>().isKinematic = true;
@@ -77,7 +82,11 @@ public partial class SwitchScript : MonoBehaviour {
 
 		} else {
 			if (!bonesActive) {
-				SphereCollider[] bones = GameObject.Find("Root").GetComponentsInChildren<SphereCollider>();
+
+                foreach (Transform o in Flapper.gameObject.transform.GetComponentInChildren<Transform>())
+                    o.rotation = Quaternion.identity;//Quaternion.Lerp(Flapper.gameObject.transform.localRotation, Quaternion.identity, Time.deltaTime);
+
+                SphereCollider[] bones = GameObject.Find("Root").GetComponentsInChildren<SphereCollider>();
 				GameObject.Find("CORE").GetComponent<Rigidbody>().isKinematic = false;
 				foreach (SphereCollider bone in bones) {
 					bone.enabled = true;

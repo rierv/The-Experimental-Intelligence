@@ -7,7 +7,6 @@ public class ThrowableObject : MonoBehaviour
     JellyCore core;
     Quaternion baseRotation;
     StateManager state;
-
     public bool isHandle;
     public float SpineStrenght = 50000f;
     public List<Rigidbody> parentBodies;
@@ -40,6 +39,7 @@ public class ThrowableObject : MonoBehaviour
             
             if (isHandle)
             {
+                
                 int counter = 1;
                 foreach (Rigidbody bone in parentBodies)
                 {

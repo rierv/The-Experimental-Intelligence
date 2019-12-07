@@ -34,8 +34,9 @@ public class HamsterCageScript : MonoBehaviour {
 	private void OnTriggerExit(Collider other) {
 		isActive = false;
 		if(other.GetComponent<Rigidbody>())other.GetComponent<Rigidbody>().drag = 1;
+        targetObject.GetComponent<I_Activable>().Deactivate();
 
-		foreach (GameObject e in electricity)
+        foreach (GameObject e in electricity)
 			e.SetActive(false);
 	}
 
