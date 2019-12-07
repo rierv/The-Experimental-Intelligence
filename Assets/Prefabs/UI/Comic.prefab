@@ -86,7 +86,7 @@ RectTransform:
   m_GameObject: {fileID: 8358367530877241018}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 10, y: 10, z: 1}
   m_Children:
   - {fileID: 8358367531652423725}
   m_Father: {fileID: 8358367531903826271}
@@ -344,10 +344,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4348d87de40aac4bb012913c107155e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  comicOrientation: 0
-  duration: 3
+  comicOrientation: 1
+  duration: 2
   fadeTime: 4
-  charWaitTime: 0.2
+  charWaitTime: 0.05
   standardScale: {x: 10, y: 10, z: 1}
   completeTextPieces:
   - probably you can also jump!
@@ -355,3 +355,5 @@ MonoBehaviour:
   - pressing space
   - pressing space
   active: 1
+  deactivateByTrigger: 1
+  activateTriggerAnyTime: 1

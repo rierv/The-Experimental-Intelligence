@@ -24,7 +24,8 @@ public class ActivateComic : MonoBehaviour, I_Activable
     private string completeText = "";
     private string text;
     private Color textColor;
-    public bool active = true;
+    public bool deactivateByTrigger = false;
+    public bool activateTriggerAnyTime = false;
     private float stretchLerp = 0f;
     #endregion
 
@@ -68,7 +69,7 @@ public class ActivateComic : MonoBehaviour, I_Activable
     }
 
     IEnumerator StartAnimation()
-    {        
+    {
         Appear();
         Stretch();
         yield return new WaitForSeconds(Time.deltaTime / fadeTime);
@@ -113,11 +114,11 @@ public class ActivateComic : MonoBehaviour, I_Activable
     {
         int index;
         int newLineCount;
-        for (index = 0, newLineCount = 1 ; index < completeText.Length; index++)
+        for (index = 0, newLineCount = 1; index < completeText.Length; index++)
         {
             text += completeText[index];
 
-            if (completeText[index] == '\n') 
+            if (completeText[index] == '\n')
             {
                 newLineCount++;
             }
@@ -151,7 +152,7 @@ public class ActivateComic : MonoBehaviour, I_Activable
         textColor.a = color.a;
         comicCloud.GetComponent<SpriteRenderer>().color = color;
         textCloud.GetComponent<Text>().color = textColor;
-        if(color.a <= 0)
+        if (color.a <= 0)
         {
             activateAnimation = false;
             disactivateAnimation = false;
@@ -166,8 +167,13 @@ public class ActivateComic : MonoBehaviour, I_Activable
             comicCloud.SetActive(true);
             comicCloud.GetComponent<SpriteRenderer>().color = color;
             isActive = true;
+            disactivateAnimation = false;
             activateAnimation = true;
             animationPhase = 0;
+            text = "";
+            bigScale = 1.1f * standardScale;
+            littleScale = 0.9f * standardScale;
+            color.a = 0f;
         }
     }
 
@@ -179,6 +185,21 @@ public class ActivateComic : MonoBehaviour, I_Activable
 
     public void Deactivate()
     {
+        if (activateTriggerAnyTime) isActive = false;
 
+        if (deactivateByTrigger)
+        {
+            bigScale = 1.1f * standardScale;
+            littleScale = 0.9f * standardScale;
+            color.a = 0f;
+            activateAnimation = false;
+            animationPhase = 0;
+            text = "";
+            disactivateAnimation = true;
+            StartCoroutine(EndAnimation());
+            comicCloud.SetActive(false);
+
+
+        }
     }
 }

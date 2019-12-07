@@ -9,6 +9,8 @@ public class InverseActivation : MonoBehaviour, I_Activable
     public void Activate(bool type = true)
     {
         active = true;
+        Debug.Log("attivoo");
+
     }
 
     public void canActivate(bool enabled)
@@ -19,6 +21,7 @@ public class InverseActivation : MonoBehaviour, I_Activable
     public void Deactivate()
     {
         triggeredObject.GetComponent<I_Activable>().Activate();
+        Debug.Log("attivoo");
         active = false;
     }
 

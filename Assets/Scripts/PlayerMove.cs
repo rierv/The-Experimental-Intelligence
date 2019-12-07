@@ -70,7 +70,7 @@ public class PlayerMove : MonoBehaviour {
 				transform.position = Vector3.Lerp(transform.position, transform.position + Vector3.up, gaseousFloatUpForce * Time.deltaTime);
 			}
 			rigidbody.isKinematic = false;
-		} else {
+		} else if(canMove) {
 			if (Input.GetButtonUp("Jump") && !jumping) {
 				StartCoroutine(JumpCoroutine());
 			} else if (Input.GetButton("Jump") && !jumping) {
