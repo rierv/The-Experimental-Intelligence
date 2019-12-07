@@ -15,7 +15,7 @@ public class ButtonScript : MonoBehaviour {
 	float maxZtemp;
 	float timer = 0;
 	bool Exit;
-    public GameObject body;
+	public GameObject body;
 	#endregion
 
 	private void Start() {
@@ -26,7 +26,7 @@ public class ButtonScript : MonoBehaviour {
 	}
 
 	private void OnTriggerEnter(Collider other) {
-		if (timer <= 0 && other.CompareTag("Player") || other.gameObject.layer == 13 || other.gameObject.layer == 12) {
+		if (timer <= 0 && other.CompareTag("Player") || (other.gameObject.layer == 13 || other.gameObject.layer == 12) && !other.isTrigger) {
 			foreach (I_Activable ac in activables) {
 				ac.Activate();
 			}
@@ -37,7 +37,7 @@ public class ButtonScript : MonoBehaviour {
 		}
 	}
 	private void OnTriggerExit(Collider other) {
-		if (other.CompareTag("Player") || other.gameObject.layer == 13 || other.gameObject.layer == 12) {
+		if (other.CompareTag("Player") || (other.gameObject.layer == 13 || other.gameObject.layer == 12) && !other.isTrigger) {
 			Exit = true;
 		}
 	}
