@@ -6,10 +6,10 @@ using UnityEngine.UI;
 
 public class LevelSelection : MonoBehaviour, I_Activable {
 	public NextLevel teleport;
-	public List<Object> levels;
-    public float selectionSpeed=2;
+	//public List<Object> levels;
+	public float selectionSpeed = 2;
 
-    bool active = false;
+	bool active = false;
 	float counter = 0;
 	int currentLevel = 0;
 
@@ -28,18 +28,18 @@ public class LevelSelection : MonoBehaviour, I_Activable {
 	private void Awake() {
 		levelName = GetComponent<TMPro.TextMeshProUGUI>();
 		setLevel();
-        //WriteLevels( levels, "Assets/levelsNames.txt");
+		//WriteLevels( levels, "Assets/levelsNames.txt");
 
-    }
+	}
 
 	void Update() {
 		if (active) {
-			counter += Time.deltaTime * Input.GetAxis("Horizontal")*selectionSpeed;
-			if (counter > 1 && currentLevel == levels.Count - 1) {
+			counter += Time.deltaTime * Input.GetAxis("Horizontal") * selectionSpeed;
+			if (counter > 1 && currentLevel == Levels.names.Length - 1) {
 				currentLevel = 0;
 				setLevel();
 			} else if (counter < -1 && currentLevel == 0) {
-				currentLevel = levels.Count - 1;
+				currentLevel = Levels.names.Length - 1;
 				setLevel();
 			}
 
@@ -53,24 +53,23 @@ public class LevelSelection : MonoBehaviour, I_Activable {
 			}
 		}
 	}
-    static void WriteLevels(List<Object> levels, string path)
-    {
-        string text = "";
-        int i = 0;
-        foreach (Object l in levels)
-        {
-            i++;
-            text = text + "level " + i + ": " + l.name + "\n";
-        }
-        //Write some text to the test.txt file
-        StreamWriter writer = new StreamWriter(path, true);
-        writer.WriteLine(text);
-        writer.Close();
-        
-    }
-    void setLevel() {
-		teleport.nextLevel = levels[currentLevel];
-		levelName.text = "Play level " + (currentLevel + 1) + ":\n" + teleport.nextLevel.name + "?";
+	/*static void WriteLevels(List<Object> levels, string path) {
+		string text = "";
+		int i = 0;
+		foreach (Object l in levels) {
+			i++;
+			text = text + "level " + i + ": " + l.name + "\n";
+		}
+		//Write some text to the test.txt file
+		StreamWriter writer = new StreamWriter(path, true);
+		writer.WriteLine(text);
+		writer.Close();
+
+	}*/
+
+	void setLevel() {
+		teleport.nextLevel = currentLevel;
+		levelName.text = "Play level " + (currentLevel + 1) + ":\n" + Levels.names[currentLevel];
 		counter = 0;
 	}
 }

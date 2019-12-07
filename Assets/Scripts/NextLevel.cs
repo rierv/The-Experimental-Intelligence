@@ -4,8 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class NextLevel : MonoBehaviour, I_Activable {
-	public Object nextLevel;
-	//public AudioClip sound;
+	[HideInInspector]
+	public int nextLevel;
 	public float delayToStopFlapper = 0.1f;
 	public float delayToLoadLevel = 0.3f;
 	public bool isActive = true;
@@ -39,7 +39,11 @@ public class NextLevel : MonoBehaviour, I_Activable {
 			p.canMove = false;
 		}
 		yield return new WaitForSeconds(delayToLoadLevel);
-		SceneManager.LoadScene(nextLevel.name);
+		if (SceneManager.GetActiveScene().buildIndex == 0) {
+			SceneManager.LoadScene(nextLevel + 1);
+		} else {
+			SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+		}
 	}
 
 	public void Activate(bool type = true) {
