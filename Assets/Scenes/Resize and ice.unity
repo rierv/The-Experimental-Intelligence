@@ -980,6 +980,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f884c8731182b694a9a530fe4c180424, type: 3}
+--- !u!1 &1004443776 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1650412427489282019, guid: 7fd10ec0c1708c3458fb091fd7d1d232,
+    type: 3}
+  m_PrefabInstance: {fileID: 2029968587}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1039113139
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2201,6 +2207,16 @@ PrefabInstance:
       propertyPath: completeTextPieces.Array.data[2]
       value: "IT\u2019S AMAZYNG!"
       objectReference: {fileID: 0}
+    - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
+        type: 3}
+      propertyPath: charWaitTime
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
+        type: 3}
+      propertyPath: fadeTime
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ad9e8bf70f33ad04db8be7a2f3c3c835, type: 3}
 --- !u!1 &1595581914 stripped
@@ -3357,7 +3373,7 @@ PrefabInstance:
         type: 3}
       propertyPath: FlapperModel
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1004443776}
     - target: {fileID: 7566960021892962962, guid: 3b752020318bbe548a5dbcb30de64394,
         type: 3}
       propertyPath: newScale.y
