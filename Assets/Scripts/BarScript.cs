@@ -20,6 +20,7 @@ public class BarScript : MonoBehaviour
     private Color iceColor = new Color(0f, 0.5f, 1f, 1f);
     private Color fireColor = new Color(1f, 0.2f, 0f, 1f);
     private Color tmpColor;
+    private float visibleModelThreshold = 0.5f;
     private float lastTemperature;
     private float currTemperature;
     private bool routineRunning;
@@ -127,21 +128,42 @@ public class BarScript : MonoBehaviour
         if (flapperStateManager.temperature < 0)
         {
             temperatureBar.color = Color.Lerp(flapperColor, iceColor, absTemp);
-            tmpColor.a = 1 - absTemp;
-            thermometersImages[0].color = tmpColor;
-            tmpColor.a = absTemp;
-            thermometersImages[1].color = tmpColor;
+            if(absTemp > visibleModelThreshold)
+            {
+                tmpColor.a = 0;
+                thermometersImages[0].color = tmpColor;
+                tmpColor.a = 1;
+                thermometersImages[1].color = tmpColor;
+            }
+            else
+            {
+                absTemp = Map(absTemp, 0, visibleModelThreshold, minFillAmount, maxFillAmount);
+                tmpColor.a = 1 - absTemp;
+                thermometersImages[0].color = tmpColor;
+                tmpColor.a = absTemp;
+                thermometersImages[1].color = tmpColor;
+            }
             tmpColor.a = 0;
             thermometersImages[2].color = tmpColor;
-
         }
         else if (flapperStateManager.temperature > 0)
         {
             temperatureBar.color = Color.Lerp(flapperColor, fireColor, absTemp);
-            tmpColor.a = 1 - absTemp;
-            thermometersImages[0].color = tmpColor;
-            tmpColor.a = absTemp;
-            thermometersImages[2].color = tmpColor;
+            if (absTemp > visibleModelThreshold)
+            {
+                tmpColor.a = 0;
+                thermometersImages[0].color = tmpColor;
+                tmpColor.a = 1;
+                thermometersImages[2].color = tmpColor;
+            }
+            else
+            {
+                absTemp = Map(absTemp, 0, visibleModelThreshold, minFillAmount, maxFillAmount);
+                tmpColor.a = 1 - absTemp;
+                thermometersImages[0].color = tmpColor;
+                tmpColor.a = absTemp;
+                thermometersImages[2].color = tmpColor;
+            }
             tmpColor.a = 0;
             thermometersImages[1].color = tmpColor;
         }

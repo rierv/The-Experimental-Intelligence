@@ -56,6 +56,7 @@ public class ActivateComic : MonoBehaviour, I_Activable
     {
         if (activateAnimation)
         {
+            GetComponent<AudioSource>().Play();
             StartCoroutine(StartAnimation());
             StartCoroutine(AnimateText());
             activateAnimation = false;

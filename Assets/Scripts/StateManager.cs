@@ -28,13 +28,14 @@ public class StateManager : MonoBehaviour {
 	public AudioClip gasTransition;
 	public AudioClip jellyTransition;
 	public AudioClip solidTransition;
+	public AudioSource audioSource;
+
 	JellyBone[] bones;
 	Rigidbody rigidbody;
 	float defaultMass;
 	SphereCollider collider;
 	SkinnedMeshRenderer meshRenderer;
 	PlayerMove pm;
-	AudioSource audioSource;
 
 	void Awake() {
 		bones = GetComponentInParent<FlapperCore>().GetComponentsInChildren<JellyBone>();
@@ -43,7 +44,6 @@ public class StateManager : MonoBehaviour {
 		collider = GetComponent<SphereCollider>();
 		meshRenderer = mesh.GetComponent<SkinnedMeshRenderer>();
 		pm = GetComponent<PlayerMove>();
-		audioSource = GetComponent<AudioSource>();
 	}
 
 	void Start() {
