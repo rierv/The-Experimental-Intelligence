@@ -10,6 +10,7 @@ public class ActivateComic : MonoBehaviour, I_Activable
     public float fadeInTime;
     public float fadeOutTime;
     public float charWaitTime;
+    public float duration;
     GameObject comicCloud;
     private Color color;
     private bool isActive = false;
@@ -19,6 +20,7 @@ public class ActivateComic : MonoBehaviour, I_Activable
     private Vector3 littleScale;
     private Vector3 bigScale;
     private int animationPhase = 0;
+    private bool isAnimationRunning = false;
     GameObject textCloud;
     public string[] completeTextPieces;
     private string completeText = "";
@@ -133,6 +135,12 @@ public class ActivateComic : MonoBehaviour, I_Activable
             yield return new WaitForSeconds(charWaitTime);
 
         }
+
+        if (index == completeText.Length && !deactivateByTrigger)
+        {
+            yield return new WaitForSeconds(duration);
+            deactivateAnimation = true;
+        }
     }
 
     IEnumerator EndAnimation()
@@ -153,13 +161,14 @@ public class ActivateComic : MonoBehaviour, I_Activable
         {
             activateAnimation = false;
             deactivateAnimation = false;
+            isAnimationRunning = false;
             StopAllCoroutines();
         }
     }
 
     public void Activate(bool type = true)
     {
-        if (!isActive)
+        if (!isActive && !isAnimationRunning)
         {
             StopAllCoroutines();
             comicCloud.SetActive(true);
@@ -172,6 +181,7 @@ public class ActivateComic : MonoBehaviour, I_Activable
             color.a = 0f;
             stretchLerp = 0;
             comicCloud.transform.localScale = standardScale;
+            isAnimationRunning = true;
         }
     }
 
