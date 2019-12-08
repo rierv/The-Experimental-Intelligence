@@ -759,7 +759,7 @@ PrefabInstance:
     - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
         type: 3}
       propertyPath: charWaitTime
-      value: 0.05
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
         type: 3}
@@ -769,7 +769,7 @@ PrefabInstance:
     - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
         type: 3}
       propertyPath: activateTriggerAnyTime
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
         type: 3}
@@ -2738,7 +2738,7 @@ MonoBehaviour:
   camera: {fileID: 1040069624}
   NewPosition: {x: -12, y: 7, z: -36.24}
   NewTarget: {x: -12, y: 10, z: 0}
-  duration: 14
+  duration: 12
   freezeFlapper: 1
   cameraMovementSpeed: 1
   cameraRotationSpeed: 1
