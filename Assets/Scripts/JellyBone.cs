@@ -58,6 +58,14 @@ public class JellyBone : MonoBehaviour {
 
 			rigidbody.MoveRotation(baseRotation);
 			CheckCorePosition();
+
+			if (!isRoot) {
+				transform.localPosition = new Vector3(
+					Mathf.Clamp(transform.localPosition.x, JellyCore.minShift, JellyCore.maxShift),
+					Mathf.Clamp(transform.localPosition.y, JellyCore.minDistance, JellyCore.maxDistance),
+					Mathf.Clamp(transform.localPosition.z, JellyCore.minShift, JellyCore.maxShift)
+					);
+			}
 		}
 
 		//rigidbody.drag = JellyCore.drag;
