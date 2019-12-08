@@ -7,14 +7,14 @@ public class ActivateComic : MonoBehaviour, I_Activable
 {
     #region Attributes
     public bool comicOrientation;
-    public float duration;
-    public float fadeTime;
+    public float fadeInTime;
+    public float fadeOutTime;
     public float charWaitTime;
     GameObject comicCloud;
     private Color color;
     private bool isActive = false;
     private bool activateAnimation = false;
-    private bool disactivateAnimation = false;
+    private bool deactivateAnimation = false;
     public Vector3 standardScale;
     private Vector3 littleScale;
     private Vector3 bigScale;
@@ -44,7 +44,7 @@ public class ActivateComic : MonoBehaviour, I_Activable
         for (int k = 0; k < completeTextPieces.Length - 1; k++)
         {
             completeTextPieces[k] = completeTextPieces[k].ToUpper();
-            completeText += completeTextPieces[k] + "\n";
+            completeText += completeTextPieces[k] + '\n';
         }
         completeTextPieces[completeTextPieces.Length - 1] = completeTextPieces[completeTextPieces.Length - 1].ToUpper();
         completeText += completeTextPieces[completeTextPieces.Length - 1];
@@ -61,11 +61,11 @@ public class ActivateComic : MonoBehaviour, I_Activable
             StartCoroutine(AnimateText());
             activateAnimation = false;
         }
-        else if (disactivateAnimation)
+        else if (deactivateAnimation)
         {
             StopAllCoroutines();
             StartCoroutine(EndAnimation());
-            disactivateAnimation = false;
+            deactivateAnimation = false;
         }
     }
 
@@ -73,13 +73,13 @@ public class ActivateComic : MonoBehaviour, I_Activable
     {
         Appear();
         Stretch();
-        yield return new WaitForSeconds(Time.deltaTime / fadeTime);
+        yield return new WaitForSeconds(Time.deltaTime / fadeInTime);
         yield return StartAnimation();
     }
 
     private void Appear()
     {
-        color.a += Time.deltaTime / fadeTime;
+        color.a += Time.deltaTime / fadeInTime;
         color.a = Mathf.Clamp(color.a, 0, 1);
         textColor.a = color.a;
         comicCloud.GetComponent<SpriteRenderer>().color = color;
@@ -102,7 +102,7 @@ public class ActivateComic : MonoBehaviour, I_Activable
             default:
                 break;
         }
-        stretchLerp += (Time.deltaTime / fadeTime) * 3;
+        stretchLerp += (Time.deltaTime / fadeInTime) * 3;
         if (stretchLerp > 1)
         {
             animationPhase++;
@@ -125,30 +125,26 @@ public class ActivateComic : MonoBehaviour, I_Activable
             }
             if (newLineCount > 3)
             {
-                text = text.Remove(0, text.IndexOf('\n'));
+                text = text.Remove(0, text.IndexOf('\n') + 1);
                 newLineCount--;
             }
+
             textCloud.GetComponent<Text>().text = text;
             yield return new WaitForSeconds(charWaitTime);
 
-        }
-        if (index == completeText.Length)
-        {
-            yield return new WaitForSeconds(duration);
-            disactivateAnimation = true;
         }
     }
 
     IEnumerator EndAnimation()
     {
         Disappear();
-        yield return new WaitForSeconds(Time.deltaTime / fadeTime);
+        yield return new WaitForSeconds(Time.deltaTime / fadeOutTime);
         yield return EndAnimation();
     }
 
     private void Disappear()
     {
-        color.a -= Time.deltaTime / fadeTime;
+        color.a -= Time.deltaTime / fadeOutTime;
         color.a = Mathf.Clamp(color.a, 0, 1);
         textColor.a = color.a;
         comicCloud.GetComponent<SpriteRenderer>().color = color;
@@ -156,7 +152,7 @@ public class ActivateComic : MonoBehaviour, I_Activable
         if (color.a <= 0)
         {
             activateAnimation = false;
-            disactivateAnimation = false;
+            deactivateAnimation = false;
             StopAllCoroutines();
         }
     }
@@ -165,16 +161,17 @@ public class ActivateComic : MonoBehaviour, I_Activable
     {
         if (!isActive)
         {
+            StopAllCoroutines();
             comicCloud.SetActive(true);
             comicCloud.GetComponent<SpriteRenderer>().color = color;
             isActive = true;
-            disactivateAnimation = false;
+            deactivateAnimation = false;
             activateAnimation = true;
             animationPhase = 0;
             text = "";
-            bigScale = 1.1f * standardScale;
-            littleScale = 0.9f * standardScale;
             color.a = 0f;
+            stretchLerp = 0;
+            comicCloud.transform.localScale = standardScale;
         }
     }
 
@@ -186,21 +183,16 @@ public class ActivateComic : MonoBehaviour, I_Activable
 
     public void Deactivate()
     {
-        if (activateTriggerAnyTime) isActive = false;
+        if (activateTriggerAnyTime)
+        {
+            isActive = false;
+        }
 
         if (deactivateByTrigger)
         {
-            bigScale = 1.1f * standardScale;
-            littleScale = 0.9f * standardScale;
-            color.a = 0f;
+            StopAllCoroutines();
             activateAnimation = false;
-            animationPhase = 0;
-            text = "";
-            disactivateAnimation = true;
-            StartCoroutine(EndAnimation());
-            //comicCloud.SetActive(false);
-
-
+            deactivateAnimation = true;
         }
     }
 }

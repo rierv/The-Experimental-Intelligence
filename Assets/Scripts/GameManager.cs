@@ -1,21 +1,59 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public static bool isGamePaused = false;
+    public GameObject pauseMenuUI;
+    public Button firstButton;
 
-    // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape)) SceneManager.LoadScene("Start");
-        if (Input.GetKeyDown(KeyCode.F1)) SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            if (isGamePaused)
+                Resume();
+            else
+                Pause();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape) && isGamePaused)
+            Restart();
+        if (Input.GetKeyDown(KeyCode.F1) && isGamePaused)
+            StageSelect();
 
     }
+
+    private void Pause()
+    {
+        pauseMenuUI.SetActive(true);
+        Time.timeScale = 0f;
+        isGamePaused = true;
+        EventSystem.current.SetSelectedGameObject(firstButton.gameObject);
+        firstButton.OnSelect(null);
+    }
+
+    public void Resume()
+    {
+        pauseMenuUI.SetActive(false);
+        Time.timeScale = 1f;
+        isGamePaused = false;
+    }
+
+    public void Restart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        Time.timeScale = 1f;
+    }
+
+    public void StageSelect()
+    {
+        SceneManager.LoadScene("Start");
+        Time.timeScale = 1f;
+    }
+
 }
