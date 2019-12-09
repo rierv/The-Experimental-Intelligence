@@ -35,7 +35,7 @@ public class IsTouchingGround : MonoBehaviour {
 			playerMove.canJump = true;
 			playerMove.collider.material.frictionCombine = PhysicMaterialCombine.Average;
 		} else {
-			playerMove.canJump = true;
+			playerMove.canJump = false;
 			playerMove.collider.material.frictionCombine = PhysicMaterialCombine.Minimum;
 		}
 	}
