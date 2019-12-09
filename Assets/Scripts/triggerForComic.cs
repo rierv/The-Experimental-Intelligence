@@ -8,6 +8,7 @@ public class triggerForComic : MonoBehaviour, I_Activable
     bool done = false;
     public bool active = true;
     public bool justOneTime = true;
+    public bool onTriggerExit = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,9 +22,9 @@ public class triggerForComic : MonoBehaviour, I_Activable
     }
     private void OnTriggerStay(Collider other)
     {
-        if (active && ((other.GetComponent<StateManager>() && other.GetComponent<StateManager>().state == FlapperState.jelly) || other.gameObject.layer == 14) && !done)
+        if (active && other.GetComponent<StateManager>() && other.GetComponent<StateManager>().state == FlapperState.jelly && !done)
         {
-            if (transform.parent.gameObject.GetComponent<CameraRetargeting>()) transform.parent.gameObject.GetComponent<CameraRetargeting>().Activate();
+            //if (transform.parent.gameObject.GetComponent<CameraRetargeting>()) transform.parent.gameObject.GetComponent<CameraRetargeting>().Activate();
             comicToActivate.Activate();
             done = true;
         }
@@ -32,9 +33,13 @@ public class triggerForComic : MonoBehaviour, I_Activable
     {
         if (active && ((other.GetComponent<StateManager>() && other.GetComponent<StateManager>().state == FlapperState.jelly) || other.gameObject.layer == 14) && done)
         {
-            if (transform.parent.gameObject.GetComponent<CameraRetargeting>()) transform.parent.gameObject.GetComponent<CameraRetargeting>().Deactivate();
-            comicToActivate.Deactivate();
-            if(!justOneTime) done = false;
+            //if (transform.parent.gameObject.GetComponent<CameraRetargeting>()) transform.parent.gameObject.GetComponent<CameraRetargeting>().Deactivate();
+            if (!justOneTime)
+            {
+                if(onTriggerExit) comicToActivate.Deactivate();
+                done = false;
+            }
+
         }
     }
 
