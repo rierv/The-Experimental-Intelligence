@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -455,7 +455,7 @@ MonoBehaviour:
   m_text: Quit
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 79459efec17a4d00a321bdcc27bbc385, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1759,7 +1759,7 @@ MonoBehaviour:
   m_text: Options
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 79459efec17a4d00a321bdcc27bbc385, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2113,7 +2113,7 @@ MonoBehaviour:
     Level name'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 79459efec17a4d00a321bdcc27bbc385, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2223,20 +2223,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   teleport: {fileID: 1698250493}
-  levels:
-  - {fileID: 102900000, guid: d1767fbd3b91efe4e97bc5d287074ad2, type: 3}
-  - {fileID: 102900000, guid: e51c41d6a50d4b3439ccd7b04493a609, type: 3}
-  - {fileID: 102900000, guid: a038beab9a4c08545916ae8642dfaffa, type: 3}
-  - {fileID: 102900000, guid: 7076f02cfea7405449ecc45f61eeec5b, type: 3}
-  - {fileID: 102900000, guid: 98cac3db808f8624eb7e2716722a88a8, type: 3}
-  - {fileID: 102900000, guid: 924ce9923f23a614987740aca6407654, type: 3}
-  - {fileID: 102900000, guid: 4e166eec9406baf45a9f5ce82657bee1, type: 3}
-  - {fileID: 102900000, guid: bd69c9ea46d48374a9b5937b8ef7ec84, type: 3}
-  - {fileID: 102900000, guid: b8cf9370bba2dec489c4dea0e3dc852f, type: 3}
-  - {fileID: 102900000, guid: 3058c623a485b634eb33a0658e52d518, type: 3}
-  - {fileID: 102900000, guid: a589a0e51d98eef42b3c785a0c3a31de, type: 3}
-  - {fileID: 102900000, guid: 9905fbd6aa1b632449c0e8df322b8d8d, type: 3}
-  - {fileID: 102900000, guid: 8af4d8bf1ffbd3d44ad9b7f92e13bbcd, type: 3}
   selectionSpeed: 2
 --- !u!1 &2106705147
 GameObject:

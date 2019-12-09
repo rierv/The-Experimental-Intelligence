@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P)|| Input.GetKeyDown("joystick button 1"))
+        if (Input.GetKeyDown(KeyCode.P)|| Input.GetKeyDown("joystick button 7"))
         {
             if (isGamePaused)
                 Resume();
@@ -23,10 +23,10 @@ public class GameManager : MonoBehaviour
                 Pause();
         }
 
-        if (Input.GetKeyDown(KeyCode.Escape) && isGamePaused)
+        /*if (Input.GetKeyDown(KeyCode.Escape) && isGamePaused)
             Restart();
         if (Input.GetKeyDown(KeyCode.F1) && isGamePaused)
-            StageSelect();
+            StageSelect();*/
 
     }
 

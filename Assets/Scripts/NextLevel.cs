@@ -39,10 +39,14 @@ public class NextLevel : MonoBehaviour, I_Activable {
 		foreach (PlayerMove p in FindObjectsOfType<PlayerMove>()) {
 			p.canMove = false;
 		}
+		
 		if (activateComic) {
 			activateComic.Activate();
+			yield return new WaitForSeconds(delayToLoadLevel);
+		} else {
+			yield return new WaitForSeconds(0.6f);
 		}
-		yield return new WaitForSeconds(delayToLoadLevel);
+		
 		if (SceneManager.GetActiveScene().buildIndex == 0) {
 			SceneManager.LoadScene(nextLevel + 1);
 		} else {
