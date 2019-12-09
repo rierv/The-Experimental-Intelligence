@@ -36,7 +36,14 @@ public class ButtonScript : MonoBehaviour {
 			Exit = false;
 		}
 	}
-	private void OnTriggerExit(Collider other) {
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Player") || (other.gameObject.layer == 13 || other.gameObject.layer == 12) && !other.isTrigger)
+        {
+            Exit = false;
+        }
+    }
+    private void OnTriggerExit(Collider other) {
 		if (other.CompareTag("Player") || (other.gameObject.layer == 13 || other.gameObject.layer == 12) && !other.isTrigger) {
 			Exit = true;
 		}

@@ -709,7 +709,7 @@ PrefabInstance:
     - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
         type: 3}
       propertyPath: completeTextPieces.Array.size
-      value: 7
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
         type: 3}
@@ -719,27 +719,27 @@ PrefabInstance:
     - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
         type: 3}
       propertyPath: completeTextPieces.Array.data[1]
-      value: "I don\u2019t know if you understand what i\u2019m saying.. "
+      value: "I don\u2019t know if you understand "
       objectReference: {fileID: 0}
     - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
         type: 3}
       propertyPath: completeTextPieces.Array.data[2]
-      value: 'Looking at the analysis of your body, you seem really smart! '
+      value: "what i\u2019m saying.. "
       objectReference: {fileID: 0}
     - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
         type: 3}
       propertyPath: completeTextPieces.Array.data[3]
-      value: "Mostly, you\u2019re made of neurons!"
+      value: Looking at the analysis of your body
       objectReference: {fileID: 0}
     - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
         type: 3}
       propertyPath: completeTextPieces.Array.data[4]
-      value: "I\u2019ve built this labyrinth to test your skills"
+      value: 'you seem reaaaally smart! '
       objectReference: {fileID: 0}
     - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
         type: 3}
       propertyPath: completeTextPieces.Array.data[5]
-      value: 'First let see if you can move! '
+      value: "Mostly, you\u2019re made of neurons!"
       objectReference: {fileID: 0}
     - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
         type: 3}
@@ -759,7 +759,7 @@ PrefabInstance:
     - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
         type: 3}
       propertyPath: charWaitTime
-      value: 0.01
+      value: 0.02
       objectReference: {fileID: 0}
     - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
         type: 3}
@@ -769,11 +769,21 @@ PrefabInstance:
     - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
         type: 3}
       propertyPath: activateTriggerAnyTime
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
         type: 3}
       propertyPath: completeTextPieces.Array.data[6]
+      value: "I\u2019ve built this labyrinth to test your skills"
+      objectReference: {fileID: 0}
+    - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
+        type: 3}
+      propertyPath: completeTextPieces.Array.data[7]
+      value: 'First let see if you can move! '
+      objectReference: {fileID: 0}
+    - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
+        type: 3}
+      propertyPath: completeTextPieces.Array.data[8]
       value: Using the arrow on the keyboard
       objectReference: {fileID: 0}
     - target: {fileID: 8358367530877241013, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
@@ -2738,7 +2748,7 @@ MonoBehaviour:
   camera: {fileID: 1040069624}
   NewPosition: {x: -12, y: 7, z: -36.24}
   NewTarget: {x: -12, y: 10, z: 0}
-  duration: 12
-  freezeFlapper: 1
+  duration: 10
+  freezeFlapper: 0
   cameraMovementSpeed: 1
   cameraRotationSpeed: 1

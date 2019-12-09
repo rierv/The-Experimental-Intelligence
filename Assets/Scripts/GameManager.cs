@@ -9,7 +9,9 @@ public class GameManager : MonoBehaviour
 {
     public static bool isGamePaused = false;
     public GameObject pauseMenuUI;
-    public Button firstButton;
+    public Button resumeButton;
+    public Button restartButton;
+    public Button exitButton;
 
     void Update()
     {
@@ -33,8 +35,11 @@ public class GameManager : MonoBehaviour
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         isGamePaused = true;
-        EventSystem.current.SetSelectedGameObject(firstButton.gameObject);
-        firstButton.OnSelect(null);
+        EventSystem.current.SetSelectedGameObject(resumeButton.gameObject);
+        resumeButton.OnSelect(null);
+        resumeButton.onClick.AddListener(Resume);
+        restartButton.onClick.AddListener(Restart);
+        exitButton.onClick.AddListener(StageSelect);
     }
 
     public void Resume()
