@@ -213,12 +213,10 @@ MonoBehaviour:
   fadeOutTime: 2
   charWaitTime: 0.02
   standardScale: {x: 10, y: 10, z: 1}
-  completeText: "It\u2019s\u2026 It\u2019s alive! And look at these data! Its cells
-    are so weird! Muscles, photoreceptors, neurons\u2026 I wonder if it can move."
+  completeText: 
   activateAfter: 0
   deactivateAfter: 4
-  objectsToActivateOnFinish:
-  - {fileID: 0}
+  objectsToActivateOnFinish: []
 --- !u!82 &8515555442637453075
 AudioSource:
   m_ObjectHideFlags: 0
