@@ -61,6 +61,7 @@ public class BoneResizer : MonoBehaviour, I_Activable
         if (activate && other.tag == "Player"&&state.state==FlapperState.jelly)
         {
             Core.GetComponent<PlayerMove>().jumping = true;
+            Core.GetComponent<PlayerMove>().shrinking = false;
             freezeFlapperBones();
             starting = true;
         }

@@ -7,6 +7,7 @@ public class triggerForComic : MonoBehaviour, I_Activable
     public ActivateComic comicToActivate;
     bool done = false;
     public bool active = true;
+    public bool justOneTime = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,7 +34,7 @@ public class triggerForComic : MonoBehaviour, I_Activable
         {
             if (transform.parent.gameObject.GetComponent<CameraRetargeting>()) transform.parent.gameObject.GetComponent<CameraRetargeting>().Deactivate();
             comicToActivate.Deactivate();
-            done = false;
+            if(!justOneTime) done = false;
         }
     }
 

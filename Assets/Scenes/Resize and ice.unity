@@ -695,7 +695,7 @@ PrefabInstance:
     - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
         type: 3}
       propertyPath: completeText
-      value: Hahaha, sorry Flapper, but you looked just like a pizza!
+      value: Loot at that! Your body can take any shape!
       objectReference: {fileID: 0}
     - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
         type: 3}
@@ -705,7 +705,12 @@ PrefabInstance:
     - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
         type: 3}
       propertyPath: deactivateAfter
-      value: -1
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
+        type: 3}
+      propertyPath: charWaitTime
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 8358367531903826271, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
         type: 3}
@@ -824,6 +829,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_FlipX
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8358367530877241013, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -146
+      objectReference: {fileID: 0}
+    - target: {fileID: 8358367530877241013, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 114
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ad9e8bf70f33ad04db8be7a2f3c3c835, type: 3}
@@ -994,7 +1009,7 @@ PrefabInstance:
     - target: {fileID: 1773163765994516024, guid: 67bbf04775ed9a548bb0ad92d8832ea1,
         type: 3}
       propertyPath: triggeredObjects.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1773163765994516024, guid: 67bbf04775ed9a548bb0ad92d8832ea1,
         type: 3}
@@ -1011,6 +1026,11 @@ PrefabInstance:
       propertyPath: triggeredObjects.Array.data[2]
       value: 
       objectReference: {fileID: 1708284218349012127}
+    - target: {fileID: 1773163765994516024, guid: 67bbf04775ed9a548bb0ad92d8832ea1,
+        type: 3}
+      propertyPath: triggeredObjects.Array.data[3]
+      value: 
+      objectReference: {fileID: 1096988840}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 67bbf04775ed9a548bb0ad92d8832ea1, type: 3}
 --- !u!1001 &911619258
@@ -1183,6 +1203,51 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 911619258}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1096988840
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1096988841}
+  - component: {fileID: 1096988842}
+  m_Layer: 0
+  m_Name: ChangeLayer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1096988841
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1096988840}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1.6928717, y: -13.101876, z: 10.76215}
+  m_LocalScale: {x: 0.25, y: 1, z: 0.25}
+  m_Children: []
+  m_Father: {fileID: 3598787971106960526}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1096988842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1096988840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 216f6bc2ecc4f79418f9cab6538be1cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectToChange: {fileID: 3598787971106960517}
+  layer: 18
 --- !u!1 &1146302847
 GameObject:
   m_ObjectHideFlags: 0
@@ -2605,7 +2670,7 @@ PrefabInstance:
         type: 3}
       propertyPath: completeText
       value: "In this level I wanna test your elasticity. I know it may seem scary,
-        but I\u2019m sure it won\u2019t hurt you."
+        but I\u2019m pretty sure it won\u2019t hurt you."
       objectReference: {fileID: 0}
     - target: {fileID: 8358367531903826271, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
         type: 3}
@@ -3159,8 +3224,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 915234f85d31cf247b4e2ac1a48f5c7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  comicToActivate: {fileID: 0}
+  comicToActivate: {fileID: 474393807}
   active: 0
+  justOneTime: 1
 --- !u!1 &1708284218349012127
 GameObject:
   m_ObjectHideFlags: 0
@@ -3178,7 +3244,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!23 &2072397961236955540
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3320,7 +3386,7 @@ GameObject:
   - component: {fileID: 3598787971106960515}
   - component: {fileID: 3598787971106960514}
   - component: {fileID: 6826425197918170848}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: BoneResizerWithMechanism
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3341,6 +3407,7 @@ Transform:
   - {fileID: 1513028477}
   - {fileID: 1146302849}
   - {fileID: 1708284218349012120}
+  - {fileID: 1096988841}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
