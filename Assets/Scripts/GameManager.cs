@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P)|| Input.GetKeyDown("joystick button 1"))
+        if (Input.GetKeyDown(KeyCode.P)|| Input.GetKeyDown("joystick button 7"))
         {
             if (isGamePaused)
                 Resume();
