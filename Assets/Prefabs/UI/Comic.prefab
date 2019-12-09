@@ -213,10 +213,12 @@ MonoBehaviour:
   fadeOutTime: 2
   charWaitTime: 0.02
   standardScale: {x: 10, y: 10, z: 1}
-  completeText: 
+  completeText: "It\u2019s\u2026 It\u2019s alive! And look at these data! Its cells
+    are so weird! Muscles, photoreceptors, neurons\u2026 I wonder if it can move."
   activateAfter: 0
   deactivateAfter: 4
-  objectsToActivateOnFinish: []
+  objectsToActivateOnFinish:
+  - {fileID: 0}
 --- !u!82 &8515555442637453075
 AudioSource:
   m_ObjectHideFlags: 0
@@ -404,12 +406,12 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 36
+  m_fontSize: 5
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 2
-  m_fontSizeMax: 72
+  m_fontSizeMax: 5
   m_fontStyle: 0
   m_textAlignment: 514
   m_characterSpacing: 0
