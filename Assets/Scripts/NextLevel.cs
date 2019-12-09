@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class NextLevel : MonoBehaviour, I_Activable {
 	[HideInInspector]
 	public int nextLevel;
+	public ActivateComic activateComic;
 	public float delayToStopFlapper = 0.1f;
 	public float delayToLoadLevel = 0.3f;
 	public bool isActive = true;
@@ -37,6 +38,9 @@ public class NextLevel : MonoBehaviour, I_Activable {
 		GetComponent<AudioSource>().Play();
 		foreach (PlayerMove p in FindObjectsOfType<PlayerMove>()) {
 			p.canMove = false;
+		}
+		if (activateComic) {
+			activateComic.Activate();
 		}
 		yield return new WaitForSeconds(delayToLoadLevel);
 		if (SceneManager.GetActiveScene().buildIndex == 0) {

@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class ActivateComic : MonoBehaviour, I_Activable {
 	#region Attributes
 	public TextMeshProUGUI textMesh;
-	public bool flipBalloon;
 	public float fadeInTime;
 	public float fadeOutTime;
 	public float charWaitTime;
@@ -59,8 +58,6 @@ public class ActivateComic : MonoBehaviour, I_Activable {
 		}
 		completeTextPieces[completeTextPieces.Length - 1] = completeTextPieces[completeTextPieces.Length - 1].ToUpper();
 		completeText += completeTextPieces[completeTextPieces.Length - 1];*/
-		if (flipBalloon)
-			comicCloud.GetComponent<SpriteRenderer>().flipX = true;
 
 		if (activateAfter >= 0) {
 			StartCoroutine(ActivateCoroutine());
