@@ -35,6 +35,7 @@ public class ActivateComic : MonoBehaviour, I_Activable {
 	[Header("Negative values means wait external trigger")]
 	public float activateAfter = 0;
 	public float deactivateAfter = 0;
+	public GameObject[] objectsToActivateOnFinish = new GameObject[0];
 
 	/*public bool deactivateByTrigger = false;
 	public bool activateTriggerAnyTime = false;*/
@@ -62,10 +63,10 @@ public class ActivateComic : MonoBehaviour, I_Activable {
 			comicCloud.GetComponent<SpriteRenderer>().flipX = true;
 
 		if (activateAfter >= 0) {
-			StartCoroutine(ActivationCoroutine());
+			StartCoroutine(ActivateCoroutine());
 		}
 	}
-	IEnumerator ActivationCoroutine() {
+	IEnumerator ActivateCoroutine() {
 		yield return new WaitForSeconds(activateAfter);
 		Activate();
 	}
@@ -150,12 +151,27 @@ public class ActivateComic : MonoBehaviour, I_Activable {
 	}
 
 	IEnumerator EndAnimation() {
-		Disappear();
-		yield return new WaitForSeconds(Time.deltaTime / fadeOutTime);
-		yield return EndAnimation();
+		while (textColor.a > 0) {
+			color.a -= Time.deltaTime / fadeOutTime;
+			color.a = Mathf.Clamp(color.a, 0, 1);
+			textColor.a = color.a;
+			comicCloud.GetComponent<SpriteRenderer>().color = color;
+			textMesh.color = textColor;
+			yield return new WaitForSeconds(Time.deltaTime / fadeOutTime);
+		}
+		activateAnimation = false;
+		deactivateAnimation = false;
+		isAnimationRunning = false;
+		/*Disappear();
+		//yield return EndAnimation();*/
+		foreach (GameObject go in objectsToActivateOnFinish) {
+			if (go.GetComponent<I_Activable>() != null) {
+				go.GetComponent<I_Activable>().Activate();
+			}
+		}
 	}
 
-	private void Disappear() {
+	/*private void Disappear() {
 		color.a -= Time.deltaTime / fadeOutTime;
 		color.a = Mathf.Clamp(color.a, 0, 1);
 		textColor.a = color.a;
@@ -167,7 +183,7 @@ public class ActivateComic : MonoBehaviour, I_Activable {
 			isAnimationRunning = false;
 			StopAllCoroutines();
 		}
-	}
+	}*/
 
 	public void Activate(bool type = true) {
 		if (!isActive && !isAnimationRunning) {
