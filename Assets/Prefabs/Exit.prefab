@@ -60,9 +60,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b33f3c68c63330e408294fa4ecd82c2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextLevel: {fileID: 0}
+  nextLevel: 0
+  activateComic: {fileID: 0}
   delayToStopFlapper: 0.1
-  delayToLoadLevel: 0.6
+  delayToLoadLevel: 6.5
   isActive: 1
 --- !u!82 &2036831071307840691
 AudioSource:
