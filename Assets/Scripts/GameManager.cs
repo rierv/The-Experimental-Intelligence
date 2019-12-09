@@ -23,10 +23,10 @@ public class GameManager : MonoBehaviour
                 Pause();
         }
 
-        if (Input.GetKeyDown(KeyCode.Escape) && isGamePaused)
+        /*if (Input.GetKeyDown(KeyCode.Escape) && isGamePaused)
             Restart();
         if (Input.GetKeyDown(KeyCode.F1) && isGamePaused)
-            StageSelect();
+            StageSelect();*/
 
     }
 
