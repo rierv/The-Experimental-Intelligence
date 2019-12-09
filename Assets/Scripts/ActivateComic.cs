@@ -166,6 +166,7 @@ public class ActivateComic : MonoBehaviour, I_Activable {
 				go.GetComponent<I_Activable>().Activate();
 			}
 		}
+        Deactivate();
 	}
 
 	/*private void Disappear() {
