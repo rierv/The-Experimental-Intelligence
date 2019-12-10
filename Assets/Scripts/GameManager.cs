@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P)|| Input.GetKeyDown("joystick button 7"))
+        if (Input.GetKeyDown(KeyCode.P)|| Input.GetKeyDown(KeyCode.Escape)|| Input.GetKeyDown("joystick button 7"))
         {
             if (isGamePaused)
                 Resume();
@@ -57,7 +57,7 @@ public class GameManager : MonoBehaviour
 
     public void StageSelect()
     {
-        SceneManager.LoadScene("Start");
+        SceneManager.LoadScene(0); // Start
         Time.timeScale = 1f;
     }
 

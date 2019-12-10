@@ -2,9 +2,9 @@
 public class Levels {
 	public static string[] names = new string[] {
 		"Can Flapper move?",
-		"What if Flapper gets gaseous?",
+		"What if Flapper overheats?",
 		"Can Flapper push stuff?",
-		"What if Flapper gets solid?",
+		"What if Flapper cools down?",
 		"Can Flapper switch things?",
 		"How long can Flapper stay gaseous?",
 		"Resize and Ice",
