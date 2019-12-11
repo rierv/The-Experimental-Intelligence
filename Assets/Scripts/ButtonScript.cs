@@ -9,7 +9,7 @@ public class ButtonScript : MonoBehaviour {
 	public float timeBeforeDeactivate = 1;
 	public float maxZ;
 	public float minZ;
-	//public AudioClip sound;
+	public bool continousActivate;
 
 	List<I_Activable> activables = new List<I_Activable>();
 	float maxZtemp;
@@ -33,8 +33,14 @@ public class ButtonScript : MonoBehaviour {
 			maxZtemp = minZ;
 		}
 	}
+
 	private void OnTriggerStay(Collider other) {
 		if (other.CompareTag("Player") || (other.gameObject.layer == 13 || other.gameObject.layer == 12) && !other.isTrigger) {
+			if (continousActivate) {
+				foreach (I_Activable ac in activables) {
+					ac.Activate();
+				}
+			}
 			timer = timeBeforeDeactivate;
 		}
 	}
