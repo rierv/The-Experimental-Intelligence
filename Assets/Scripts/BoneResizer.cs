@@ -123,6 +123,6 @@ public class BoneResizer : MonoBehaviour, I_Activable
     public void Deactivate()
     {
         activate = false;
-        Core.GetComponent<PlayerMove>().jumping = true;
+        //Core.GetComponent<PlayerMove>().jumping = true;
     }
 }
