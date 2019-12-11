@@ -3,24 +3,39 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class FollowPlayer : MonoBehaviour {
-	[Header("To lock an axis, freeze Rigidbody position")]
-	public float minX = -100;
-	public float maxX = 100;
-	[Space]
-	public float minY = -100;
-	public float maxY = 100;
+	public float offsetY = 8.5f;
+	public float offsetZ = -15.5f;
+	public float speed = 55;
+	public float initialDelay = 2;
+	bool lookAtFlapper;
 
-	JellyCore jellyCore;
-	Rigidbody rigidbody;
+	PlayerMove jellyCore;
+	StateManager stateManager;
+	Vector3 initPosition;
 
 	void Start() {
-		jellyCore = FindObjectOfType<JellyCore>();
-		rigidbody = GetComponent<Rigidbody>();
-		rigidbody.MovePosition(new Vector3(Mathf.Clamp(jellyCore.transform.position.x, minX, maxX), Mathf.Clamp(jellyCore.transform.position.y, minY, maxY), transform.position.z));
+		initPosition = transform.position;
+		jellyCore = FindObjectOfType<PlayerMove>();
+		stateManager = FindObjectOfType<StateManager>();
+		StartCoroutine(InitialCoroutine());
+	}
+	IEnumerator InitialCoroutine() {
+		yield return new WaitForSeconds(initialDelay);
+		lookAtFlapper = true;
 	}
 
-	void Update() {
-		Vector3 newPosition = new Vector3(Mathf.Clamp(jellyCore.transform.position.x, minX, maxX), Mathf.Clamp(jellyCore.transform.position.y, minY, maxY), transform.position.z);
-		rigidbody.MovePosition(newPosition);
+	void FixedUpdate() {
+		if (Input.GetKeyDown(KeyCode.Tab) || Input.GetKeyDown("joystick button 2")) { // controller X
+			lookAtFlapper = !lookAtFlapper;
+		}
+		if (lookAtFlapper) {
+			float y = transform.position.y;
+			if (jellyCore.canJump || stateManager.state == FlapperState.gaseous) {
+				y = jellyCore.transform.position.y + offsetY;
+			}
+			transform.position = Vector3.Lerp(transform.position, new Vector3(jellyCore.transform.position.x, y, jellyCore.transform.position.z + offsetZ), speed * Time.fixedDeltaTime);
+		} else {
+			transform.position = Vector3.Lerp(transform.position, initPosition, speed * Time.fixedDeltaTime);
+		}
 	}
 }
