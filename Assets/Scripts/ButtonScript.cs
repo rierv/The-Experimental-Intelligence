@@ -14,6 +14,7 @@ public class ButtonScript : MonoBehaviour {
 	List<I_Activable> activables = new List<I_Activable>();
 	float maxZtemp;
 	float timer = 0;
+	bool waiting;
 	public GameObject body;
 	#endregion
 
@@ -31,6 +32,7 @@ public class ButtonScript : MonoBehaviour {
 			}
 			PlayClip();
 			maxZtemp = minZ;
+			waiting = true;
 		}
 	}
 
@@ -41,19 +43,27 @@ public class ButtonScript : MonoBehaviour {
 					ac.Activate();
 				}
 			}
+			waiting = true;
 			timer = timeBeforeDeactivate;
+		}
+	}
+
+	private void OnTriggerExit(Collider other) {
+		if (other.CompareTag("Player") || (other.gameObject.layer == 13 || other.gameObject.layer == 12) && !other.isTrigger) {
+			waiting = false;
 		}
 	}
 
 	private void Update() {
 		body.transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, Mathf.Clamp(transform.localPosition.z, minZ, maxZtemp));
 		timer -= Time.deltaTime;
-		if (timer <= 0 && maxZtemp != maxZ) {
+		if (!waiting && timer <= 0 && maxZtemp != maxZ) {
 			foreach (I_Activable ac in activables) {
 				ac.Deactivate();
 			}
 			canPlayClip = true;
 			maxZtemp = maxZ;
+			waiting = false;
 		}
 	}
 
