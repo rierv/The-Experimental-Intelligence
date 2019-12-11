@@ -180,8 +180,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1173796438457607621}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.79, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: -0.79, z: -0.8}
+  m_LocalScale: {x: 1.5, y: 1, z: 1.5}
   m_Children: []
   m_Father: {fileID: 6138579372883086846}
   m_RootOrder: 2
@@ -533,14 +533,13 @@ MonoBehaviour:
   doorMaterialOff: {fileID: 2100000, guid: d0cb8a9f9ed04514bbb1798ee0bfcd43, type: 2}
   cubeQueue: {fileID: 1173796438457607626}
   machineDoor: {fileID: 5266336238740787383}
-  block: {fileID: 5286839683607338677, guid: 87ff0b2d244a0d24191f992aa3aaf0a7, type: 3}
-  throwBlockForce: 700
+  block: {fileID: 6698196819359989485, guid: 31dc89500ffedaf489e9592f2af5e9e9, type: 3}
+  throwBlockForce: 6000
   block_melting_speed: 0.03
-  block_melting_duration: 15
+  block_melting_duration: 20
   doorHightDifference: {x: 0, y: 2, z: 0}
   doorVecolicity: 2.79
-  newBlockTime: 8.81
-  firstBlock: 1
+  newBlockTime: 23
   active: 1
   invertTrueFalse: 0
 --- !u!1 &7395222109461629219

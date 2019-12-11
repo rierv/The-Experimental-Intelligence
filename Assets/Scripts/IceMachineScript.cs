@@ -64,16 +64,16 @@ public class IceMachineScript : MonoBehaviour, I_Activable {
 		if (isDoorOpen) {
 
 			instance = Instantiate(block, cubeQueue.position, cubeQueue.rotation, cubeQueue);
-			instance.GetComponent<TemperatureBlock>().melting_speed = block_melting_speed;
-			instance.GetComponent<TemperatureBlock>().melting_duration = block_melting_duration;
-			instance.GetComponent<Rigidbody>().AddForce(throwForce);
-			instance.GetComponent<BoxCollider>().isTrigger = true;
+			instance.GetComponentInChildren<TemperatureBlock>().melting_speed = block_melting_speed;
+			instance.GetComponentInChildren<TemperatureBlock>().melting_duration = block_melting_duration;
+			instance.GetComponentInChildren<Rigidbody>().AddForce(throwForce);
+			instance.GetComponentInChildren<BoxCollider>().isTrigger = true;
 		}
 	}
 
 	private void OnTriggerExit(Collider other) {
 		if (other.GetComponent<TemperatureBlock>()) {
-			other.GetComponent<BoxCollider>().isTrigger = false;
+            other.transform.parent.GetComponent<BoxCollider>().isTrigger = false;
 		}
 	}
 
