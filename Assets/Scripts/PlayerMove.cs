@@ -95,10 +95,10 @@ public class PlayerMove : MonoBehaviour {
 
 	IEnumerator JumpCoroutine() {
 		//Debug.Log(shrinking + " " + jumping);
-		if (shrinking && !jumping) {
+		if (shrinking && !jumping && canJump) {
 			jumping = true;
 			shrinking = false;
-			if (stateManager.state != FlapperState.gaseous && canJump) {
+			if (stateManager.state != FlapperState.gaseous ) {
 				if (stateManager.state == FlapperState.solid) {
 					rigidbody.AddForce(Vector3.up * solidJumpForce, ForceMode.VelocityChange);
 				} else {

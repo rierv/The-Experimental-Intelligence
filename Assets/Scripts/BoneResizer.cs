@@ -38,7 +38,7 @@ public class BoneResizer : MonoBehaviour, I_Activable
         //Flapper.transform.localPosition = Vector3.Lerp(Flapper.transform.localPosition, Core.transform.position, Time.deltaTime*100);
         //Core.transform.localPosition = Vector3.zero;
 
-        if (active||waitingForJellyState) FlapperModel.transform.localScale = Vector3.Lerp(FlapperModel.transform.localScale, newScale, Time.deltaTime * scaleVelocity);
+        if ((activate&&active)||waitingForJellyState) FlapperModel.transform.localScale = Vector3.Lerp(FlapperModel.transform.localScale, newScale, Time.deltaTime * scaleVelocity);
         else if (FlapperModel.transform.localScale != oldScale) FlapperModel.transform.localScale = Vector3.Lerp(FlapperModel.transform.localScale, oldScale, Time.deltaTime * scaleVelocity);
         if (waitingForJellyState && (state.state == FlapperState.jelly|| state.state == FlapperState.gaseous)) waitingForJellyState = false;
         if (state.state == FlapperState.solid && transformation&&active)
@@ -123,5 +123,6 @@ public class BoneResizer : MonoBehaviour, I_Activable
     public void Deactivate()
     {
         activate = false;
+        Core.GetComponent<PlayerMove>().jumping = true;
     }
 }
