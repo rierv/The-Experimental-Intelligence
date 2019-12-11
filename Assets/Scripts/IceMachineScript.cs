@@ -62,11 +62,7 @@ public class IceMachineScript : MonoBehaviour, I_Activable {
 
 	void CreateNewCube() {
 		if (isDoorOpen) {
-            if (instance!=null)
-            {
-                if(instance.GetComponentInChildren<TemperatureBlock>()) instance.GetComponentInChildren<TemperatureBlock>().fadeOut();
-                
-            }
+            
             instance = Instantiate(block, cubeQueue.position, cubeQueue.rotation, cubeQueue);
 			instance.GetComponentInChildren<TemperatureBlock>().melting_speed = block_melting_speed;
 			instance.GetComponentInChildren<TemperatureBlock>().melting_duration = block_melting_duration;
@@ -90,8 +86,14 @@ public class IceMachineScript : MonoBehaviour, I_Activable {
 
 	IEnumerator newBlockCoroutine() {
 		if (active) {
-			newBlockNeeded = false;
-			OpenMachineDoor();
+            if (instance != null)
+            {
+                if (instance.GetComponentInChildren<TemperatureBlock>()) instance.GetComponentInChildren<TemperatureBlock>().fadeOut();
+
+            }
+            newBlockNeeded = false;
+            yield return new WaitForSeconds(1);
+            OpenMachineDoor();
 			yield return new WaitForSeconds(newBlockTime - openDoorTime);
 			CreateNewCube();
 			yield return new WaitForSeconds(closeDoorTime - newBlockTime);
