@@ -20,8 +20,10 @@ public class Pushable : MonoBehaviour {
 				if (!heavy && flapper.state != FlapperState.gaseous || heavy && flapper.state == FlapperState.solid) {
 					if (moveOnZ) {
 						rigidbody.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionX;
+						flapper.GetComponent<PlayerMove>().canMoveX = Mathf.Abs(Input.GetAxis("Vertical")) < 0.5f;
 					} else {
 						rigidbody.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionZ;
+						flapper.GetComponent<PlayerMove>().canMoveZ = Mathf.Abs(Input.GetAxis("Horizontal")) < 0.5f;
 					}
 				} else {
 					rigidbody.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ;
@@ -40,6 +42,11 @@ public class Pushable : MonoBehaviour {
 	private void OnTriggerExit(Collider other) {
 		if (!other.isTrigger && (other.GetComponent<StateManager>() || other.GetComponent<Pushable>())) {
 			rigidbody.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ;
+			PlayerMove playerMove = other.GetComponent<PlayerMove>();
+			if (playerMove) {
+				playerMove.canMoveX = true;
+				playerMove.canMoveZ = true;
+			}
 		}
 	}
 }
