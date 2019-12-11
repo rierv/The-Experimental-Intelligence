@@ -63,7 +63,6 @@ public class ButtonScript : MonoBehaviour {
 			}
 			canPlayClip = true;
 			maxZtemp = maxZ;
-			waiting = false;
 		}
 	}
 
