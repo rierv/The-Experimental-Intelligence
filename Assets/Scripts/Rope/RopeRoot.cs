@@ -51,6 +51,7 @@ public class RopeRoot : MonoBehaviour
         th.isHandle = true;
         CopySource[activeBone].gameObject.layer = 12;
         GameObject tM = Instantiate(throwableModel);
+        tM.layer = 12;
         tM.transform.parent = CopySource[activeBone];
         tM.transform.localPosition = Vector3.up;
         GameObject trigger = new GameObject();
