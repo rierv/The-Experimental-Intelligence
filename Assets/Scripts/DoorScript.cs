@@ -17,7 +17,7 @@ public class DoorScript : MonoBehaviour, I_Activable {
 		translateVector = Vector3.up;
 	}
 
-	private void Update() {
+	private void FixedUpdate() {
         
         if (isActive)
         {
@@ -45,7 +45,11 @@ public class DoorScript : MonoBehaviour, I_Activable {
     {
         if (collision.gameObject.GetComponent<StateManager>() && collision.gameObject.GetComponent<StateManager>().state == FlapperState.solid) isActive = false;
     }
-    
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.gameObject.GetComponent<StateManager>() && collision.gameObject.GetComponent<StateManager>().state == FlapperState.solid) isActive = false;
+    }
+
     public void Activate(bool type = true) {
 		if(activable) isActive = true;
 	}
