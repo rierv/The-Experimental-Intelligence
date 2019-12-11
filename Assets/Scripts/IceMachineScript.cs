@@ -27,8 +27,9 @@ public class IceMachineScript : MonoBehaviour, I_Activable {
 	[Header("Activable")]
 	public bool active = true;
 	public bool invertTrueFalse;
+    public bool newBlockOnActivate = true;
 
-	private float closeDoorTime;
+    private float closeDoorTime;
 	private float openDoorTime;
 	private bool isDoorOpen;
 	Vector3 throwForce;
@@ -49,7 +50,6 @@ public class IceMachineScript : MonoBehaviour, I_Activable {
 		openDoorTime = newBlockTime - 1 / doorVecolicity;
 		DoorStartpos = machineDoor.position;
 		throwForce = -transform.forward * throwBlockForce;
-		StartCoroutine(newBlockCoroutine());
 	}
 
 	void OpenMachineDoor() {
@@ -62,8 +62,8 @@ public class IceMachineScript : MonoBehaviour, I_Activable {
 
 	void CreateNewCube() {
 		if (isDoorOpen) {
-
-			instance = Instantiate(block, cubeQueue.position, cubeQueue.rotation, cubeQueue);
+            Destroy(instance);
+            instance = Instantiate(block, cubeQueue.position, cubeQueue.rotation, cubeQueue);
 			instance.GetComponentInChildren<TemperatureBlock>().melting_speed = block_melting_speed;
 			instance.GetComponentInChildren<TemperatureBlock>().melting_duration = block_melting_duration;
 			instance.GetComponentInChildren<Rigidbody>().AddForce(throwForce);
@@ -103,15 +103,17 @@ public class IceMachineScript : MonoBehaviour, I_Activable {
 			active = true;
 			topIcon.material = topIconMaterialOn;
 			door.material = doorMaterialOn;
-			if (newBlockNeeded) {
+			if (newBlockNeeded || newBlockOnActivate) {
 				StartCoroutine(newBlockCoroutine());
 			}
-		} else {
+        }
+        else {
 			Deactivate();
 		}
 	}
 
 	public void Deactivate() {
+        StopAllCoroutines();
 		active = false;
 		topIcon.material = topIconMaterialOff;
 		door.material = doorMaterialOff;
