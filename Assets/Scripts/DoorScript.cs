@@ -21,20 +21,20 @@ public class DoorScript : MonoBehaviour, I_Activable {
         
         if (isActive)
         {
-            if (goingUp && (upperLockerY - transform.position.y) > Time.deltaTime)
+            if (goingUp && (upperLockerY - transform.position.y) > 0)
             {
                 transform.position = Vector3.Lerp(transform.position, transform.position + translateVector, Time.deltaTime * doorOpenTime);
             }
-            else if (!goingUp && (transform.position.y - upperLockerY) > Time.deltaTime)
+            else if (!goingUp && (transform.position.y - upperLockerY) > 0)
             {
                 transform.position = Vector3.Lerp(transform.position, transform.position - translateVector, Time.deltaTime * doorOpenTime);
             }
         }
-        else if (goingUp && (transform.position.y - lowerLockerY) > Time.deltaTime)
+        else if (goingUp && (transform.position.y - lowerLockerY) > 0)
         {
             transform.position = Vector3.Lerp(transform.position, transform.position - translateVector, Time.deltaTime * doorOpenTime);
         }
-        else if (!goingUp && (lowerLockerY - transform.position.y) > Time.deltaTime)
+        else if (!goingUp && (lowerLockerY - transform.position.y) > 0)
         {
             transform.position = Vector3.Lerp(transform.position, transform.position + translateVector, Time.deltaTime * doorOpenTime);
         }
