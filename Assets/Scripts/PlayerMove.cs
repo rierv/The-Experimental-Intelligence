@@ -27,7 +27,8 @@ public class PlayerMove : MonoBehaviour {
 	[Space]
 	public Rigidbody Up;
 	public Rigidbody Down, Left, Front, Right, Back;
-	public bool canMove, canJump = true;
+	public bool canMove, canJump, canMoveX, canMoveZ = true;
+	public float perpendicularMoveOnPush = 0.2f;
 	[HideInInspector]
 	public bool jumping, shrinking = false;
 
@@ -50,10 +51,13 @@ public class PlayerMove : MonoBehaviour {
 
 	void FixedUpdate() {
 		if (canMove) {
-
-			if (Input.GetAxis("Horizontal") != 0 && Input.GetAxis("Vertical") != 0) transform.position = Vector3.Lerp(transform.position, transform.position + (Input.GetAxis("Horizontal") * Vector3.right + Input.GetAxis("Vertical") * Vector3.forward) / 1.3f, speed * Time.fixedDeltaTime);
-			else transform.position = Vector3.Lerp(transform.position, transform.position + (Input.GetAxis("Horizontal") * Vector3.right + Input.GetAxis("Vertical") * Vector3.forward), speed * Time.fixedDeltaTime);
-
+			Vector3 right = Input.GetAxis("Horizontal") * Vector3.right * (canMoveX ? 1 : perpendicularMoveOnPush);
+			Vector3 forward = Input.GetAxis("Vertical") * Vector3.forward * (canMoveZ ? 1 : perpendicularMoveOnPush);
+			if (Input.GetAxis("Horizontal") != 0 && Input.GetAxis("Vertical") != 0) {
+				transform.position = Vector3.Lerp(transform.position, transform.position + (right + forward) / 1.3f, speed * Time.fixedDeltaTime);
+			} else {
+				transform.position = Vector3.Lerp(transform.position, transform.position + (right + forward), speed * Time.fixedDeltaTime);
+			}
 		}
 	}
 
@@ -70,7 +74,7 @@ public class PlayerMove : MonoBehaviour {
 				transform.position = Vector3.Lerp(transform.position, transform.position + Vector3.up, gaseousFloatUpForce * Time.deltaTime);
 			}
 			rigidbody.isKinematic = false;
-		} else if(canMove) {
+		} else if (canMove) {
 			if (Input.GetButtonUp("Jump") && !jumping) {
 				StartCoroutine(JumpCoroutine());
 			} else if (Input.GetButton("Jump") && !jumping) {
@@ -98,7 +102,7 @@ public class PlayerMove : MonoBehaviour {
 		if (shrinking && !jumping && canJump) {
 			jumping = true;
 			shrinking = false;
-			if (stateManager.state != FlapperState.gaseous ) {
+			if (stateManager.state != FlapperState.gaseous) {
 				if (stateManager.state == FlapperState.solid) {
 					rigidbody.AddForce(Vector3.up * solidJumpForce, ForceMode.VelocityChange);
 				} else {
