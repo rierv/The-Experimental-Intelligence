@@ -2039,6 +2039,52 @@ PrefabInstance:
       propertyPath: m_Name
       value: Comic
       objectReference: {fileID: 0}
+    - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
+        type: 3}
+      propertyPath: completeTextPieces.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
+        type: 3}
+      propertyPath: completeTextPieces.Array.data[0]
+      value: 'The switches in this level have '
+      objectReference: {fileID: 0}
+    - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
+        type: 3}
+      propertyPath: completeTextPieces.Array.data[1]
+      value: 'two different targets! '
+      objectReference: {fileID: 0}
+    - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
+        type: 3}
+      propertyPath: completeTextPieces.Array.data[2]
+      value: 'Remember to leave enabled at least '
+      objectReference: {fileID: 0}
+    - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
+        type: 3}
+      propertyPath: deactivateByTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
+        type: 3}
+      propertyPath: activateTriggerAnyTime
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
+        type: 3}
+      propertyPath: completeTextPieces.Array.data[3]
+      value: 'one platform to the upstair floor '
+      objectReference: {fileID: 0}
+    - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
+        type: 3}
+      propertyPath: completeTextPieces.Array.data[4]
+      value: until you need it!
+      objectReference: {fileID: 0}
+    - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
+        type: 3}
+      propertyPath: completeText
+      value: The switches in this level have two different targets! Remember to leave
+        enabled at least a platform to the upstair floor until you need it!
+      objectReference: {fileID: 0}
     - target: {fileID: 8358367531903826271, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2144,51 +2190,17 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
-        type: 3}
-      propertyPath: completeTextPieces.Array.size
-      value: 5
+    - target: {fileID: 7847180, guid: ad9e8bf70f33ad04db8be7a2f3c3c835, type: 3}
+      propertyPath: m_Size.x
+      value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
-        type: 3}
-      propertyPath: completeTextPieces.Array.data[0]
-      value: 'The switches in this level have '
+    - target: {fileID: 7847180, guid: ad9e8bf70f33ad04db8be7a2f3c3c835, type: 3}
+      propertyPath: m_Size.y
+      value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
-        type: 3}
-      propertyPath: completeTextPieces.Array.data[1]
-      value: 'two different targets! '
-      objectReference: {fileID: 0}
-    - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
-        type: 3}
-      propertyPath: completeTextPieces.Array.data[2]
-      value: 'Remember to leave enabled at least '
-      objectReference: {fileID: 0}
-    - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
-        type: 3}
-      propertyPath: deactivateByTrigger
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
-        type: 3}
-      propertyPath: activateTriggerAnyTime
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
-        type: 3}
-      propertyPath: completeTextPieces.Array.data[3]
-      value: 'one platform to the upstair floor '
-      objectReference: {fileID: 0}
-    - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
-        type: 3}
-      propertyPath: completeTextPieces.Array.data[4]
-      value: until you need it!
-      objectReference: {fileID: 0}
-    - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
-        type: 3}
-      propertyPath: completeText
-      value: The switches in this level have two different targets! Remember to leave
-        enabled at least a platform to the upstair floor until you need it!
+    - target: {fileID: 7847180, guid: ad9e8bf70f33ad04db8be7a2f3c3c835, type: 3}
+      propertyPath: m_Size.z
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7847181, guid: ad9e8bf70f33ad04db8be7a2f3c3c835, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2201,18 +2213,6 @@ PrefabInstance:
     - target: {fileID: 7847181, guid: ad9e8bf70f33ad04db8be7a2f3c3c835, type: 3}
       propertyPath: m_LocalPosition.y
       value: -208.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 7847180, guid: ad9e8bf70f33ad04db8be7a2f3c3c835, type: 3}
-      propertyPath: m_Size.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7847180, guid: ad9e8bf70f33ad04db8be7a2f3c3c835, type: 3}
-      propertyPath: m_Size.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7847180, guid: ad9e8bf70f33ad04db8be7a2f3c3c835, type: 3}
-      propertyPath: m_Size.z
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ad9e8bf70f33ad04db8be7a2f3c3c835, type: 3}
@@ -2803,16 +2803,6 @@ PrefabInstance:
       propertyPath: EmissionModule.rateOverTime.scalar
       value: 50
       objectReference: {fileID: 0}
-    - target: {fileID: 6231360749796164540, guid: da3b35131c3d8e949a78f7100a5f1a74,
-        type: 3}
-      propertyPath: m_Size.y
-      value: 0.65
-      objectReference: {fileID: 0}
-    - target: {fileID: 6231360749796164540, guid: da3b35131c3d8e949a78f7100a5f1a74,
-        type: 3}
-      propertyPath: m_Center.y
-      value: 0.3
-      objectReference: {fileID: 0}
     - target: {fileID: 8784791605312037118, guid: da3b35131c3d8e949a78f7100a5f1a74,
         type: 3}
       propertyPath: force
@@ -2842,6 +2832,16 @@ PrefabInstance:
         type: 3}
       propertyPath: specialSpinOffset
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6231360749796164540, guid: da3b35131c3d8e949a78f7100a5f1a74,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 0.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 6231360749796164540, guid: da3b35131c3d8e949a78f7100a5f1a74,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 0.3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: da3b35131c3d8e949a78f7100a5f1a74, type: 3}
@@ -3006,16 +3006,6 @@ PrefabInstance:
       propertyPath: EmissionModule.rateOverTime.scalar
       value: 50
       objectReference: {fileID: 0}
-    - target: {fileID: 6231360749796164540, guid: da3b35131c3d8e949a78f7100a5f1a74,
-        type: 3}
-      propertyPath: m_Size.y
-      value: 0.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 6231360749796164540, guid: da3b35131c3d8e949a78f7100a5f1a74,
-        type: 3}
-      propertyPath: m_Center.y
-      value: 0.3
-      objectReference: {fileID: 0}
     - target: {fileID: 8784791605312037118, guid: da3b35131c3d8e949a78f7100a5f1a74,
         type: 3}
       propertyPath: hight
@@ -3040,6 +3030,16 @@ PrefabInstance:
         type: 3}
       propertyPath: specialSpinOffset
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6231360749796164540, guid: da3b35131c3d8e949a78f7100a5f1a74,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6231360749796164540, guid: da3b35131c3d8e949a78f7100a5f1a74,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 0.3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: da3b35131c3d8e949a78f7100a5f1a74, type: 3}
@@ -3475,7 +3475,17 @@ PrefabInstance:
     - target: {fileID: 2261315819014887709, guid: 7ea5783718c638847b79c296ac4e1421,
         type: 3}
       propertyPath: throwBlockForce
-      value: 400
+      value: 6000
+      objectReference: {fileID: 0}
+    - target: {fileID: 2261315819131974689, guid: 7ea5783718c638847b79c296ac4e1421,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5426390325393120122, guid: 7ea5783718c638847b79c296ac4e1421,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7ea5783718c638847b79c296ac4e1421, type: 3}

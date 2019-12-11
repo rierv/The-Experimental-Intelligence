@@ -26,6 +26,8 @@ public partial class SwitchScript : MonoBehaviour {
 	public float cameraMovementSpeed = 3f;
 	public float cameraRotationSpeed = 3f;
     FlapperCore Flapper;
+    bool activateLeft = false;
+    bool activateRight = false;
 
     //public AudioClip sound;
     #endregion
@@ -108,17 +110,23 @@ public partial class SwitchScript : MonoBehaviour {
 		if ((horizontal && !vertical) || (!horizontal && vertical)) {
 
 			transform.rotation = Quaternion.Lerp(transform.rotation, new Quaternion(pointer.rotation.x * maxInclination, pointer.rotation.y, pointer.rotation.z, pointer.rotation.w), stickSpeed * Time.deltaTime);
-			if (transform.rotation.x > .12f) {
+			if (transform.rotation.x > .12f&&!activateRight) {
 				targetObject.GetComponent<I_Activable>().Activate();
 				PlayClip();
-			} else if (transform.rotation.x < -.12f) {
+                activateRight = true;
+			} else if (transform.rotation.x < -.12f&&!activateLeft) {
 				targetObject.GetComponent<I_Activable>().Activate(false);
 				PlayClip();
-			} else {
+                activateLeft = true;
+
+            } else if(transform.rotation.x < .12&& transform.rotation.x > -.12f){
 				targetObject.GetComponent<I_Activable>().Deactivate();
 				canPlayClip = true;
-			}
-			if (comingBackToVerticalPos) {
+                activateRight = false;
+                activateLeft = false;
+
+            }
+            if (comingBackToVerticalPos) {
 				if (horizontal) pointer.LookAt(transform.position + Vector3.right);
 				else if (vertical) pointer.LookAt(transform.position + Vector3.forward);
 			}
