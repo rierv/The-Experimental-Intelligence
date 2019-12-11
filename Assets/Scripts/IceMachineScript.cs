@@ -62,7 +62,11 @@ public class IceMachineScript : MonoBehaviour, I_Activable {
 
 	void CreateNewCube() {
 		if (isDoorOpen) {
-            Destroy(instance);
+            if (instance!=null)
+            {
+                if(instance.GetComponentInChildren<TemperatureBlock>()) instance.GetComponentInChildren<TemperatureBlock>().fadeOut();
+                
+            }
             instance = Instantiate(block, cubeQueue.position, cubeQueue.rotation, cubeQueue);
 			instance.GetComponentInChildren<TemperatureBlock>().melting_speed = block_melting_speed;
 			instance.GetComponentInChildren<TemperatureBlock>().melting_duration = block_melting_duration;
