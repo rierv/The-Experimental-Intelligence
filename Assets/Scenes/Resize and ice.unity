@@ -662,56 +662,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
-        type: 3}
-      propertyPath: completeTextPieces.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
-        type: 3}
-      propertyPath: completeTextPieces.Array.data[0]
-      value: 'Beware of lasers! '
-      objectReference: {fileID: 0}
-    - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
-        type: 3}
-      propertyPath: completeTextPieces.Array.data[1]
-      value: They will teleport you where I want to.
-      objectReference: {fileID: 0}
-    - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
-        type: 3}
-      propertyPath: fadeTime
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
-        type: 3}
-      propertyPath: duration
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
-        type: 3}
-      propertyPath: deactivateByTrigger
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
-        type: 3}
-      propertyPath: completeText
-      value: Loot at that! Your body can take any shape!
-      objectReference: {fileID: 0}
-    - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
-        type: 3}
-      propertyPath: activateAfter
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
-        type: 3}
-      propertyPath: deactivateAfter
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
-        type: 3}
-      propertyPath: charWaitTime
-      value: 0.05
-      objectReference: {fileID: 0}
     - target: {fileID: 8358367531903826271, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -817,9 +767,60 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 25.88
       objectReference: {fileID: 0}
-    - target: {fileID: 7847180, guid: ad9e8bf70f33ad04db8be7a2f3c3c835, type: 3}
-      propertyPath: m_Enabled
+    - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
+        type: 3}
+      propertyPath: completeTextPieces.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
+        type: 3}
+      propertyPath: completeTextPieces.Array.data[0]
+      value: 'Beware of lasers! '
+      objectReference: {fileID: 0}
+    - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
+        type: 3}
+      propertyPath: completeTextPieces.Array.data[1]
+      value: They will teleport you where I want to.
+      objectReference: {fileID: 0}
+    - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
+        type: 3}
+      propertyPath: fadeTime
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
+        type: 3}
+      propertyPath: duration
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
+        type: 3}
+      propertyPath: deactivateByTrigger
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
+        type: 3}
+      propertyPath: completeText
+      value: Loot at that! Your body can take any shape!
+      objectReference: {fileID: 0}
+    - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
+        type: 3}
+      propertyPath: activateAfter
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
+        type: 3}
+      propertyPath: deactivateAfter
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
+        type: 3}
+      propertyPath: charWaitTime
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 8358367530804960191, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
+        type: 3}
+      propertyPath: m_FlipX
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8358367530877241013, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
         type: 3}
@@ -831,10 +832,9 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: -181
       objectReference: {fileID: 0}
-    - target: {fileID: 8358367530804960191, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
-        type: 3}
-      propertyPath: m_FlipX
-      value: 1
+    - target: {fileID: 7847180, guid: ad9e8bf70f33ad04db8be7a2f3c3c835, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7847179, guid: ad9e8bf70f33ad04db8be7a2f3c3c835, type: 3}
       propertyPath: m_Enabled
@@ -1119,11 +1119,6 @@ PrefabInstance:
         type: 3}
       propertyPath: timeBeforeDeactivate
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1773163765994516024, guid: 67bbf04775ed9a548bb0ad92d8832ea1,
-        type: 3}
-      propertyPath: continousActivate
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 67bbf04775ed9a548bb0ad92d8832ea1, type: 3}
@@ -2725,42 +2720,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
-        type: 3}
-      propertyPath: completeTextPieces.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
-        type: 3}
-      propertyPath: completeTextPieces.Array.data[0]
-      value: 'Beware of lasers! '
-      objectReference: {fileID: 0}
-    - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
-        type: 3}
-      propertyPath: completeTextPieces.Array.data[1]
-      value: They will teleport you where I want to.
-      objectReference: {fileID: 0}
-    - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
-        type: 3}
-      propertyPath: fadeTime
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
-        type: 3}
-      propertyPath: duration
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
-        type: 3}
-      propertyPath: deactivateByTrigger
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
-        type: 3}
-      propertyPath: completeText
-      value: "In this level I wanna test your elasticity. I know it may seem scary,
-        but I\u2019m pretty sure it won\u2019t hurt you."
-      objectReference: {fileID: 0}
     - target: {fileID: 8358367531903826271, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2866,9 +2825,41 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 25.88
       objectReference: {fileID: 0}
-    - target: {fileID: 7847180, guid: ad9e8bf70f33ad04db8be7a2f3c3c835, type: 3}
-      propertyPath: m_Enabled
+    - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
+        type: 3}
+      propertyPath: completeTextPieces.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
+        type: 3}
+      propertyPath: completeTextPieces.Array.data[0]
+      value: 'Beware of lasers! '
+      objectReference: {fileID: 0}
+    - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
+        type: 3}
+      propertyPath: completeTextPieces.Array.data[1]
+      value: They will teleport you where I want to.
+      objectReference: {fileID: 0}
+    - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
+        type: 3}
+      propertyPath: fadeTime
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
+        type: 3}
+      propertyPath: duration
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
+        type: 3}
+      propertyPath: deactivateByTrigger
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
+        type: 3}
+      propertyPath: completeText
+      value: "In this level I wanna test your elasticity. I know it may seem scary,
+        but I\u2019m pretty sure it won\u2019t hurt you."
       objectReference: {fileID: 0}
     - target: {fileID: 8358367530877241013, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
         type: 3}
@@ -2879,6 +2870,10 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -32
+      objectReference: {fileID: 0}
+    - target: {fileID: 7847180, guid: ad9e8bf70f33ad04db8be7a2f3c3c835, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7847179, guid: ad9e8bf70f33ad04db8be7a2f3c3c835, type: 3}
       propertyPath: m_Enabled
