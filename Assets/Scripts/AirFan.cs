@@ -7,6 +7,7 @@ public class AirFan : MonoBehaviour, I_Activable {
 	public float fanSpeed;
 	public float force = 4;
 	public float splashForce = 0.85f;
+	public Vector3 direction = Vector3.up;
 	//public float hight = 1;
 	bool activable = true;
 	float surface;
@@ -15,10 +16,10 @@ public class AirFan : MonoBehaviour, I_Activable {
 	List<Rigidbody> objectsinAir;
 	ParticleSystem particleSystem;
 	StateManager flapperState;
-    public Rigidbody specialSpinObject;
-    public float specialSpinForce;
-    public float specialSpinOffset;
-    bool flapperSolid = false;
+	public Rigidbody specialSpinObject;
+	public float specialSpinForce;
+	public float specialSpinOffset;
+	bool flapperSolid = false;
 
 	void Awake() {
 		audioSource = GetComponent<AudioSource>();
@@ -44,37 +45,31 @@ public class AirFan : MonoBehaviour, I_Activable {
 
 	void Update() {
 		if (active) {
-            if (flapperState.state == FlapperState.solid && objectsinAir.Contains(flapperState.GetComponent<Rigidbody>()))
-            {
-                objectsinAir.Remove(flapperState.GetComponent<Rigidbody>());
-                flapperSolid = true;
-                flapperState.GetComponent<Rigidbody>().useGravity = true;
-
-            }
-
-            fan.Rotate(fan.transform.up, fanSpeed * Time.deltaTime);
-			foreach (Rigidbody r in objectsinAir) {
-                if (r)
-                {
-                    r.useGravity = false;
-                    if(specialSpinObject&&specialSpinObject==r) r.transform.position = Vector3.Lerp(r.transform.position, new Vector3(r.transform.position.x, transform.position.y + surface+specialSpinOffset, r.transform.position.z), Time.deltaTime * specialSpinForce);
-                    else r.transform.position = Vector3.Lerp(r.transform.position, new Vector3(r.transform.position.x, transform.position.y + surface, r.transform.position.z), Time.deltaTime * force);
-                }
+			if (flapperState.state == FlapperState.solid && objectsinAir.Contains(flapperState.GetComponent<Rigidbody>())) {
+				objectsinAir.Remove(flapperState.GetComponent<Rigidbody>());
+				flapperSolid = true;
+				flapperState.GetComponent<Rigidbody>().useGravity = true;
 			}
 
-            
+			fan.Rotate(direction, fanSpeed * Time.deltaTime);
+			foreach (Rigidbody r in objectsinAir) {
+				if (r) {
+					r.useGravity = false;
+					if (specialSpinObject && specialSpinObject == r) {
+						r.transform.position = Vector3.Lerp(r.transform.position, new Vector3(r.transform.position.x + (surface + specialSpinOffset) * direction.x, transform.position.y + (surface + specialSpinOffset) * direction.y, r.transform.position.z + (surface + specialSpinOffset) * direction.z), Time.deltaTime * specialSpinForce);
+					} else {
+						r.transform.position = Vector3.Lerp(r.transform.position, new Vector3(r.transform.position.x + surface * direction.x, transform.position.y + surface * direction.y, r.transform.position.z + surface * direction.z), Time.deltaTime * force);
+					}
+				}
+			}
+		} else {
+			foreach (Rigidbody o in objectsinAir) {
+				if (o) {
+					o.useGravity = true;
+					objectsinAir.Remove(o);
+				}
+			}
 		}
-        else
-        {
-            foreach (Rigidbody o in objectsinAir)
-            {
-                if (o)
-                {
-                    o.useGravity = true;
-                    objectsinAir.Remove(o);
-                }
-            }
-        }
 		fan.localPosition = Vector3.zero;
 	}
 
@@ -88,30 +83,28 @@ public class AirFan : MonoBehaviour, I_Activable {
          ma alla fine proverei così per usare anche i pushable e far levitare solo il core: */
 
 		if (active && CheckOther(other)) {
-            Debug.Log("enter " + other.gameObject.name);
+			Debug.Log("enter " + other.gameObject.name);
 
-            Rigidbody r = other.GetComponent<Rigidbody>();
-			if(!objectsinAir.Contains(r))objectsinAir.Add(r);
+			Rigidbody r = other.GetComponent<Rigidbody>();
+			if (!objectsinAir.Contains(r)) objectsinAir.Add(r);
 			//da non pochi problemi:
 			//r.AddForce(transform.up * -r.velocity.y * splashForce, ForceMode.VelocityChange);
 		}
 	}
-    private void OnTriggerStay(Collider other)
-    {
-        if (active && other.GetComponent<StateManager>()&&other.GetComponent<StateManager>().state == FlapperState.jelly&&flapperSolid==true)
-        {
-            Debug.Log("inStay");
-            if (!objectsinAir.Contains(other.GetComponent<Rigidbody>())) objectsinAir.Add(other.GetComponent<Rigidbody>());
-            flapperSolid = false;
-        }
-    }
-    private void OnTriggerExit(Collider other) {
+	private void OnTriggerStay(Collider other) {
+		if (active && other.GetComponent<StateManager>() && other.GetComponent<StateManager>().state == FlapperState.jelly && flapperSolid == true) {
+			Debug.Log("inStay");
+			if (!objectsinAir.Contains(other.GetComponent<Rigidbody>())) objectsinAir.Add(other.GetComponent<Rigidbody>());
+			flapperSolid = false;
+		}
+	}
+	private void OnTriggerExit(Collider other) {
 		if (CheckOther(other)) {
-            Debug.Log("exit " + other.gameObject.name);
+			Debug.Log("exit " + other.gameObject.name);
 			other.GetComponent<Rigidbody>().useGravity = true;
 			objectsinAir.Remove(other.GetComponent<Rigidbody>());
-            if(other.GetComponent<StateManager>()) flapperSolid = false;
-        }
+			if (other.GetComponent<StateManager>()) flapperSolid = false;
+		}
 	}
 
 	bool CheckOther(Collider other) {
