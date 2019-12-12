@@ -13,12 +13,17 @@ public class NextLevel : MonoBehaviour, I_Activable {
 	bool activable = true;
 
 	Light light;
+	ParticleSystem particleSystem;
 
 	float logTimer = 0;
 
 	void Awake() {
 		light = GetComponentInChildren<Light>();
 		light.enabled = isActive;
+		particleSystem = GetComponentInChildren<ParticleSystem>();
+		if (!isActive) {
+			particleSystem.Stop();
+		}
 	}
 
 	void Update() {
@@ -34,19 +39,20 @@ public class NextLevel : MonoBehaviour, I_Activable {
 	IEnumerator LoadLevel() {
 		System.IO.File.AppendAllText(FlapperCore.logFile, logTimer.ToString());
 
+		activable = false;
 		yield return new WaitForSeconds(delayToStopFlapper);
 		GetComponent<AudioSource>().Play();
 		foreach (PlayerMove p in FindObjectsOfType<PlayerMove>()) {
 			p.canMove = false;
 		}
-		
+
 		if (activateComic) {
 			activateComic.Activate();
 			yield return new WaitForSeconds(delayToLoadLevel);
 		} else {
 			yield return new WaitForSeconds(0.6f);
 		}
-		
+
 		if (SceneManager.GetActiveScene().buildIndex == 0) {
 			SceneManager.LoadScene(nextLevel + 1);
 		} else {
@@ -58,12 +64,20 @@ public class NextLevel : MonoBehaviour, I_Activable {
 		if (activable) {
 			isActive = true;
 			light.enabled = isActive;
+			if (isActive) {
+				particleSystem.Play();
+			} else {
+				particleSystem.Stop();
+			}
 		}
 	}
 
 	public void Deactivate() {
-		isActive = false;
-		light.enabled = isActive;
+		if (activable) {
+			isActive = false;
+			light.enabled = isActive;
+			particleSystem.Stop();
+		}
 	}
 
 	public void canActivate(bool enabled) {
