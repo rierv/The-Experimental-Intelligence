@@ -79,7 +79,7 @@ Light:
   m_RenderMode: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 515127
   m_RenderingLayerMask: 1
   m_Lightmapping: 4
   m_LightShadowCasterMode: 0
@@ -183,7 +183,7 @@ Light:
   m_RenderMode: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 515127
   m_RenderingLayerMask: 1
   m_Lightmapping: 4
   m_LightShadowCasterMode: 0
@@ -299,11 +299,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6382738780424299008}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: c33cb42f6c1a10042bb35b39b55a3dd9,
-        type: 3}
-      propertyPath: m_Name
-      value: tubo futuro U
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: c33cb42f6c1a10042bb35b39b55a3dd9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -358,6 +353,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: c33cb42f6c1a10042bb35b39b55a3dd9,
+        type: 3}
+      propertyPath: m_Name
+      value: tubo futuro U
       objectReference: {fileID: 0}
     - target: {fileID: -1504981713932161579, guid: c33cb42f6c1a10042bb35b39b55a3dd9,
         type: 3}
