@@ -17,7 +17,6 @@ public class Transparency : MonoBehaviour {
 
 	void Update() {
 		float opacity = Mathf.Clamp(-(flapper.position.z - transform.position.z) / decrease + offset, 0, 1) * baseOpacity;
-		Debug.Log(opacity);
 		material.SetColor("_BaseColor", new Color(1, 1, 1, opacity));
 	}
 }
