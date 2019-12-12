@@ -87,9 +87,10 @@ public class PlayerMove : MonoBehaviour {
 				} else if (stateManager.state == FlapperState.solid) {
 					StartCoroutine(JumpCoroutine());
 				}
+			} else {
+				shrinking = false;
 			}
 		}
-
 	}
 
 	void Shrink() {

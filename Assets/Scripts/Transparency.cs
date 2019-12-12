@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Transparency : MonoBehaviour {
-	public float offset = 1;
-	public float decrease = 10;
+	public float offset = 2;
+	public float decrease = 1.5f;
 	float baseOpacity;
 	Material material;
 	Transform flapper;
