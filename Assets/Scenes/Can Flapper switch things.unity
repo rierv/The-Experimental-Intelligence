@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4366757, g: 0.48427194, b: 0.5645252, a: 1}
+  m_IndirectSpecularColor: {r: 0.43667546, g: 0.48427135, b: 0.5645225, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -659,6 +659,42 @@ PrefabInstance:
       propertyPath: m_Name
       value: Comic (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
+        type: 3}
+      propertyPath: completeTextPieces.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
+        type: 3}
+      propertyPath: completeTextPieces.Array.data[0]
+      value: "that\u2019s my greatest invention!"
+      objectReference: {fileID: 0}
+    - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
+        type: 3}
+      propertyPath: completeTextPieces.Array.data[2]
+      value: Jump on it to use it and jump again to leave it!
+      objectReference: {fileID: 0}
+    - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
+        type: 3}
+      propertyPath: completeTextPieces.Array.data[1]
+      value: " I\u2019ll call it: Flapper-Switch-Stuff! "
+      objectReference: {fileID: 0}
+    - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
+        type: 3}
+      propertyPath: completeText
+      value: Great job, Flapper! But this is just the very beginning of the huge labyrinth
+        I built to test you!
+      objectReference: {fileID: 0}
+    - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
+        type: 3}
+      propertyPath: deactivateAfter
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
+        type: 3}
+      propertyPath: activateAfter
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 8358367531903826271, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -763,42 +799,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
-        type: 3}
-      propertyPath: completeTextPieces.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
-        type: 3}
-      propertyPath: completeTextPieces.Array.data[0]
-      value: "that\u2019s my greatest invention!"
-      objectReference: {fileID: 0}
-    - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
-        type: 3}
-      propertyPath: completeTextPieces.Array.data[2]
-      value: Jump on it to use it and jump again to leave it!
-      objectReference: {fileID: 0}
-    - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
-        type: 3}
-      propertyPath: completeTextPieces.Array.data[1]
-      value: " I\u2019ll call it: Flapper-Switch-Stuff! "
-      objectReference: {fileID: 0}
-    - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
-        type: 3}
-      propertyPath: completeText
-      value: Great job, Flapper! But this is just the very beginning of the huge labyrinth
-        I built to test you!
-      objectReference: {fileID: 0}
-    - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
-        type: 3}
-      propertyPath: deactivateAfter
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
-        type: 3}
-      propertyPath: activateAfter
-      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 8358367530804960191, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
         type: 3}
@@ -1651,7 +1651,7 @@ PrefabInstance:
     - target: {fileID: 6382738780424299008, guid: 0cb33893142e69f49a52db8b0619b17c,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.18
+      value: -0.44
       objectReference: {fileID: 0}
     - target: {fileID: 6382738780424299008, guid: 0cb33893142e69f49a52db8b0619b17c,
         type: 3}
@@ -1816,7 +1816,7 @@ PrefabInstance:
     - target: {fileID: 7507627030180559864, guid: 67bbf04775ed9a548bb0ad92d8832ea1,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -6.89
       objectReference: {fileID: 0}
     - target: {fileID: 7507627030180559864, guid: 67bbf04775ed9a548bb0ad92d8832ea1,
         type: 3}
@@ -2009,6 +2009,32 @@ PrefabInstance:
       propertyPath: m_Name
       value: Comic
       objectReference: {fileID: 0}
+    - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
+        type: 3}
+      propertyPath: completeTextPieces.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
+        type: 3}
+      propertyPath: completeTextPieces.Array.data[0]
+      value: "that\u2019s my greatest invention!"
+      objectReference: {fileID: 0}
+    - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
+        type: 3}
+      propertyPath: completeTextPieces.Array.data[2]
+      value: Jump on it to use it and jump again to leave it!
+      objectReference: {fileID: 0}
+    - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
+        type: 3}
+      propertyPath: completeTextPieces.Array.data[1]
+      value: " I\u2019ll call it: Flapper-Switch-Stuff! "
+      objectReference: {fileID: 0}
+    - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
+        type: 3}
+      propertyPath: completeText
+      value: "Ok, Flapper, let\u2019s see if you can use a switch. Your body can be
+        quite sticky, so you may need to jump away to get off that switch."
+      objectReference: {fileID: 0}
     - target: {fileID: 8358367531903826271, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2113,32 +2139,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
-        type: 3}
-      propertyPath: completeTextPieces.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
-        type: 3}
-      propertyPath: completeTextPieces.Array.data[0]
-      value: "that\u2019s my greatest invention!"
-      objectReference: {fileID: 0}
-    - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
-        type: 3}
-      propertyPath: completeTextPieces.Array.data[2]
-      value: Jump on it to use it and jump again to leave it!
-      objectReference: {fileID: 0}
-    - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
-        type: 3}
-      propertyPath: completeTextPieces.Array.data[1]
-      value: " I\u2019ll call it: Flapper-Switch-Stuff! "
-      objectReference: {fileID: 0}
-    - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
-        type: 3}
-      propertyPath: completeText
-      value: "Ok, Flapper, let\u2019s see if you can use a switch. Your body can be
-        quite sticky, so you may need to jump away to get off that switch."
       objectReference: {fileID: 0}
     - target: {fileID: 7847181, guid: ad9e8bf70f33ad04db8be7a2f3c3c835, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2668,7 +2668,7 @@ PrefabInstance:
     - target: {fileID: 5644578860465571024, guid: c39906902d65db149ab891f5ae0ee76f,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -6.89
       objectReference: {fileID: 0}
     - target: {fileID: 5644578860465571024, guid: c39906902d65db149ab891f5ae0ee76f,
         type: 3}
