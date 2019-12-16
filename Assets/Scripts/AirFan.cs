@@ -5,7 +5,8 @@ using UnityEngine;
 public class AirFan : MonoBehaviour, I_Activable {
 	public Transform fan;
 	public float fanSpeed;
-	public float force = 4;
+	public float horizontalForce = 8;
+	public float verticalForce = 6;
 	public float splashForce = 0.85f;
 	public Vector3 direction = Vector3.up;
 	//public float hight = 1;
@@ -51,14 +52,17 @@ public class AirFan : MonoBehaviour, I_Activable {
 				flapperState.GetComponent<Rigidbody>().useGravity = true;
 			}
 
-			fan.Rotate(direction, fanSpeed * Time.deltaTime);
+			fan.Rotate(Vector3.up, fanSpeed * Time.deltaTime);
 			foreach (Rigidbody r in objectsinAir) {
 				if (r) {
-					r.useGravity = false;
+					if (direction == Vector3.up) {
+						r.useGravity = false;
+					}
 					if (specialSpinObject && specialSpinObject == r) {
+						// non ho modificato questo pezzo, ma solo quello sotto (Davide)
 						r.transform.position = Vector3.Lerp(r.transform.position, new Vector3(r.transform.position.x + (surface + specialSpinOffset) * direction.x, transform.position.y + (surface + specialSpinOffset) * direction.y, r.transform.position.z + (surface + specialSpinOffset) * direction.z), Time.deltaTime * specialSpinForce);
 					} else {
-						r.transform.position = Vector3.Lerp(r.transform.position, new Vector3(r.transform.position.x + surface * direction.x, transform.position.y + surface * direction.y, r.transform.position.z + surface * direction.z), Time.deltaTime * force);
+						r.transform.position = Vector3.Lerp(r.transform.position, new Vector3(r.transform.position.x + horizontalForce * direction.x, r.transform.position.y + verticalForce * direction.y, r.transform.position.z + horizontalForce * direction.z), Time.deltaTime);
 					}
 				}
 			}
@@ -70,7 +74,7 @@ public class AirFan : MonoBehaviour, I_Activable {
 				}
 			}
 		}
-		fan.localPosition = Vector3.zero;
+		//fan.localPosition = Vector3.zero;
 	}
 
 	private void OnTriggerEnter(Collider other) {
@@ -88,7 +92,9 @@ public class AirFan : MonoBehaviour, I_Activable {
 			Rigidbody r = other.GetComponent<Rigidbody>();
 			if (!objectsinAir.Contains(r)) objectsinAir.Add(r);
 			//da non pochi problemi:
-			//r.AddForce(transform.up * -r.velocity.y * splashForce, ForceMode.VelocityChange);
+			/*if (direction == Vector3.up) {
+				r.AddForce(transform.up * -r.velocity.y * splashForce, ForceMode.VelocityChange);
+			}*/
 		}
 	}
 	private void OnTriggerStay(Collider other) {
