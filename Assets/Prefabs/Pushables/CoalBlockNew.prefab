@@ -32,7 +32,7 @@ Transform:
   m_Children:
   - {fileID: 8484467498526657453}
   - {fileID: 6336807373759886589}
-  m_Father: {fileID: 7965543596163128956}
+  m_Father: {fileID: 5131793917591050217}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4499173282995456681
@@ -189,7 +189,6 @@ MonoBehaviour:
   nonActiveMaterial: {fileID: 2100000, guid: 1d4813cc860a2dd4089b69f43f8af2c5, type: 2}
   active: 1
   invertTrueFalse: 0
-  illuminationSource: {fileID: 0}
 --- !u!114 &2751497049694036843
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4970,39 +4969,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 7965543596163128956}
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &7965543596163128957
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7965543596163128956}
-  m_Layer: 13
-  m_Name: Pushable (light) (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7965543596163128956
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7965543596163128957}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
   - {fileID: 6766304411262961239}
-  m_Father: {fileID: 5131793917591050217}
+  m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8484467498526657454
