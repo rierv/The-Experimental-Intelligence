@@ -9,19 +9,23 @@ public class NextLevel : MonoBehaviour, I_Activable {
 	public ActivateComic activateComic;
 	public float delayToStopFlapper = 0.1f;
 	public float delayToLoadLevel = 0.3f;
+	public MeshRenderer mesh;
+	public Material activeMaterial;
+	public Material nonActiveMaterial;
 	public bool isActive = true;
 	bool activable = true;
 
-	Light light;
+	//Light light;
 	ParticleSystem particleSystem;
 
 	float logTimer = 0;
 
 	void Awake() {
-		light = GetComponentInChildren<Light>();
-		light.enabled = isActive;
+		//light = GetComponentInChildren<Light>();
+		//light.enabled = isActive;
 		particleSystem = GetComponentInChildren<ParticleSystem>();
 		if (!isActive) {
+			mesh.material = nonActiveMaterial;
 			particleSystem.Stop();
 		}
 	}
@@ -63,10 +67,12 @@ public class NextLevel : MonoBehaviour, I_Activable {
 	public void Activate(bool type = true) {
 		if (activable) {
 			isActive = true;
-			light.enabled = isActive;
+			//light.enabled = isActive;
 			if (isActive) {
+				mesh.material = activeMaterial;
 				particleSystem.Play();
 			} else {
+				mesh.material = nonActiveMaterial;
 				particleSystem.Stop();
 			}
 		}
@@ -75,7 +81,8 @@ public class NextLevel : MonoBehaviour, I_Activable {
 	public void Deactivate() {
 		if (activable) {
 			isActive = false;
-			light.enabled = isActive;
+			//light.enabled = isActive;
+			mesh.material = nonActiveMaterial;
 			particleSystem.Stop();
 		}
 	}

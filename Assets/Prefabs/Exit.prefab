@@ -4827,6 +4827,9 @@ MonoBehaviour:
   activateComic: {fileID: 0}
   delayToStopFlapper: 0.1
   delayToLoadLevel: 6.5
+  mesh: {fileID: 6807027077599155038}
+  activeMaterial: {fileID: 2100000, guid: 3ff4c6e8ab0db304ca4d20ce7e1172a7, type: 2}
+  nonActiveMaterial: {fileID: 2100000, guid: 6d8eb5011e62b314c9669b165bcb0536, type: 2}
   isActive: 1
 --- !u!82 &2036831071307840691
 AudioSource:
@@ -4982,7 +4985,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2379d31c4fd88564ea174d971fda87c7, type: 2}
+  - {fileID: 2100000, guid: 3ff4c6e8ab0db304ca4d20ce7e1172a7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

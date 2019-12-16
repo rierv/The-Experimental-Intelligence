@@ -11,21 +11,20 @@ public class TemperatureSource : MonoBehaviour, I_Activable {
 	[Header("Activable")]
 	public bool active = true;
 	public bool invertTrueFalse;
-    bool activable = true;
-    public GameObject illuminationSource = null;
-    private List<Light> illumination=null;
+	bool activable = true;
+	// public GameObject illuminationSource = null;
+	//private List<Light> illumination=null;
 	private void Start() {
 		myColor = transform.GetComponentInChildren<MeshRenderer>();
 		if (!active) Deactivate();
-        if (illuminationSource)
-        {
-            illumination = new List<Light>();
-            foreach (Light l in illuminationSource.GetComponentsInChildren<Light>()) illumination.Add(l);
-        }
+		/* if (illuminationSource)
+		 {
+			 illumination = new List<Light>();
+			 foreach (Light l in illuminationSource.GetComponentsInChildren<Light>()) illumination.Add(l);
+		 }*/
 	}
-    private void Update()
-    {
-        if (illumination!=null)
+	private void Update() {
+		/*if (illumination!=null)
         {
             if (active)
                 foreach (Light l in illumination) l.intensity = Mathf.Lerp(l.intensity, 20, Time.deltaTime * 2);
@@ -34,11 +33,11 @@ public class TemperatureSource : MonoBehaviour, I_Activable {
                 foreach (Light l in illumination) l.intensity = Mathf.Lerp(l.intensity, 0, Time.deltaTime * 2);
 
 
-        }
-    
-    }
-    public void Activate(bool type) {
-		if (activable&&(type && !invertTrueFalse || !type && invertTrueFalse)) {
+        }*/
+
+	}
+	public void Activate(bool type) {
+		if (activable && (type && !invertTrueFalse || !type && invertTrueFalse)) {
 			active = true;
 			myColor.material = activeMaterial;
 		} else {
@@ -58,8 +57,7 @@ public class TemperatureSource : MonoBehaviour, I_Activable {
 		}
 	}
 
-    public void canActivate(bool enabled)
-    {
-        activable = enabled;
-    }
+	public void canActivate(bool enabled) {
+		activable = enabled;
+	}
 }
