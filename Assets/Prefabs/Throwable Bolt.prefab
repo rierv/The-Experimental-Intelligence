@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 2712457685021374206}
   - component: {fileID: -3104475251640506485}
   m_Layer: 12
-  m_Name: ThrowableBox
+  m_Name: Throwable Bolt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -195,7 +195,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100008, guid: 1ca16f2a31fb6a548ad8954bed1d321f, type: 3}
       propertyPath: m_Name
-      value: CableElectricity1
+      value: Particles
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 1ca16f2a31fb6a548ad8954bed1d321f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -245,14 +245,6 @@ PrefabInstance:
       propertyPath: InitialModule.startSize.scalar
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 19800004, guid: 1ca16f2a31fb6a548ad8954bed1d321f, type: 3}
-      propertyPath: InitialModule.startSize.scalar
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 19800006, guid: 1ca16f2a31fb6a548ad8954bed1d321f, type: 3}
-      propertyPath: InitialModule.startSize.scalar
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 19800000, guid: 1ca16f2a31fb6a548ad8954bed1d321f, type: 3}
       propertyPath: InitialModule.startSize.minScalar
       value: 0.6
@@ -261,7 +253,16 @@ PrefabInstance:
       propertyPath: InitialModule.startSize.scalar
       value: 1.2
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 19800004, guid: 1ca16f2a31fb6a548ad8954bed1d321f, type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800006, guid: 1ca16f2a31fb6a548ad8954bed1d321f, type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 2
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 11400000, guid: 1ca16f2a31fb6a548ad8954bed1d321f, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 1ca16f2a31fb6a548ad8954bed1d321f, type: 3}
 --- !u!4 &7904754842104688439 stripped
 Transform:

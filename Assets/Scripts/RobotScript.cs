@@ -27,12 +27,14 @@ public class RobotScript : MonoBehaviour {
 	private FlapperState state;
 	private bool collidingWithSolid;
 	public bool zAxis_xAxis = true;
+	ParticleSystem[] particles;
 	#endregion
 
 	private void Start() {
 		collidingWithSolid = false;
 		flapper = GameObject.Find("CORE").GetComponent<Transform>();
 		state = GameObject.Find("Flapper model").GetComponent<JellyBone>().state;
+		particles = GetComponentsInChildren<ParticleSystem>();
 		robot = gameObject.transform;
 		currentRotationScale = rotationScale;
 		currentSpeed = speed;
@@ -69,14 +71,17 @@ public class RobotScript : MonoBehaviour {
 			stop = true;
 			light.enabled = false;
 			stunTimeTemp = stunnTime;
-			//StartCoroutine(RobotStop());
-		} else if (collision.gameObject.layer == 9) {
-			state = GameObject.Find("Flapper model").GetComponent<JellyBone>().state;
-			if (state == FlapperState.solid) {
-				collidingWithSolid = true;
-				currentSpeed = speedSolid;
-				currentRotationScale = rotationScaleSolid;
+			foreach (ParticleSystem p in particles) {
+				p.Play();
 			}
+			//StartCoroutine(RobotStop());
+			/*} else if (collision.gameObject.layer == 9) {
+				state = GameObject.Find("Flapper model").GetComponent<JellyBone>().state;
+				if (state == FlapperState.solid) {
+					collidingWithSolid = true;
+					currentSpeed = speedSolid;
+					currentRotationScale = rotationScaleSolid;
+				}*/
 		}
 	}
 
