@@ -4,16 +4,18 @@ using UnityEngine;
 
 public class PushableHeavy : MonoBehaviour {
 	Rigidbody rigidbody;
+	RigidbodyConstraints constraints;
 
 	void Awake() {
 		rigidbody = GetComponent<Rigidbody>();
+		constraints = rigidbody.constraints;
 	}
 
 	private void OnTriggerStay(Collider other) {
 		StateManager flapper = other.GetComponent<StateManager>();
 		if (flapper) {
 			if (flapper.state == FlapperState.solid) {
-				rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
+				rigidbody.constraints = constraints;
 			} else {
 				rigidbody.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ;
 			}
@@ -22,7 +24,12 @@ public class PushableHeavy : MonoBehaviour {
 
 	private void OnTriggerExit(Collider other) {
 		if (other.GetComponent<StateManager>()) {
-			rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
+			StartCoroutine(ReleaseDelay());
 		}
+	}
+
+	IEnumerator ReleaseDelay() {
+		yield return new WaitForSeconds(0.35f);
+		rigidbody.constraints = constraints;
 	}
 }
