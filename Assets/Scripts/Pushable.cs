@@ -3,50 +3,35 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Pushable : MonoBehaviour {
-	public bool heavy = false;
-	[Tooltip("False = move on X")]
-	public bool moveOnZ = false;
+	public bool solidOnly;
 
 	Rigidbody rigidbody;
+	RigidbodyConstraints constraints;
 
 	void Awake() {
-		rigidbody = GetComponentInParent<Rigidbody>();
+		rigidbody = GetComponent<Rigidbody>();
+		constraints = rigidbody.constraints;
 	}
 
 	private void OnTriggerStay(Collider other) {
-		if (!other.isTrigger) {
-			StateManager flapper = other.GetComponent<StateManager>();
-			if (flapper) {
-				if (!heavy && flapper.state != FlapperState.gaseous || heavy && flapper.state == FlapperState.solid) {
-					if (moveOnZ) {
-						rigidbody.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionX;
-						flapper.GetComponent<PlayerMove>().canMoveX = Mathf.Abs(Input.GetAxis("Vertical")) < 0.5f;
-					} else {
-						rigidbody.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionZ;
-						flapper.GetComponent<PlayerMove>().canMoveZ = Mathf.Abs(Input.GetAxis("Horizontal")) < 0.5f;
-					}
-				} else {
-					rigidbody.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ;
-				}
+		StateManager flapper = other.GetComponent<StateManager>();
+		if (flapper) {
+			if (flapper.state == FlapperState.solid || !solidOnly && flapper.state == FlapperState.jelly) {
+				rigidbody.constraints = constraints;
 			} else {
-				Pushable pushable = other.GetComponent<Pushable>();
-				if (pushable) {
-					if (!heavy) {
-						rigidbody.constraints = pushable.rigidbody.constraints;
-					}
-				}
+				rigidbody.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ;
 			}
 		}
 	}
 
 	private void OnTriggerExit(Collider other) {
-		if (!other.isTrigger && (other.GetComponent<StateManager>() || other.GetComponent<Pushable>())) {
-			rigidbody.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ;
-			PlayerMove playerMove = other.GetComponent<PlayerMove>();
-			if (playerMove) {
-				playerMove.canMoveX = true;
-				playerMove.canMoveZ = true;
-			}
+		if (other.GetComponent<StateManager>()) {
+			StartCoroutine(ReleaseDelay());
 		}
+	}
+
+	IEnumerator ReleaseDelay() {
+		yield return new WaitForSeconds(0.35f);
+		rigidbody.constraints = constraints;
 	}
 }

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class SwitchOnOff : MonoBehaviour {
 	public Transform pushableBlock;
-	public Collider solidOnlyCollider;
 	public float speed;
 	public bool solidOnly;
 	public GameObject[] triggeredObjects;
@@ -16,7 +15,7 @@ public class SwitchOnOff : MonoBehaviour {
 	void Awake() {
 		pushableBlockY = pushableBlock.localPosition.y;
 		targetX = pushableBlock.localPosition.x;
-		solidOnlyCollider.enabled = solidOnly;
+		GetComponentInChildren<Pushable>().solidOnly = solidOnly;
 	}
 
 	void Start() {
