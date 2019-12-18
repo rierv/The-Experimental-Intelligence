@@ -17,11 +17,12 @@ public class StateManager : MonoBehaviour {
 	public float gaseousMass = 0.5f;
 	[Space]
 	public GameObject mesh;
-	public Material jelly;
-	public Material gas;
-	public Material solid;
+	public Color jelly;
+	public Color gas;
+	public Color solid;
 	public GameObject[] gasParticles;
 	public ParticleSystem gasParticle;
+	public ParticleSystemRenderer gasParticleRenderer;
 	public float jellySpeed = 7;
 	public float solidSpeed = 6f;
 	public float gaseousSpeed = 4f;
@@ -58,11 +59,17 @@ public class StateManager : MonoBehaviour {
 		}
 		if (temperature > 0) {
 			temperature = Mathf.Clamp(temperature - Time.deltaTime / hotTemperatureChangeDuration, 0, float.MaxValue);
+			if (temperature < 0.5f) {
+				gasParticleRenderer.material.SetColor("_BaseColor", Color.Lerp(jelly, gas, temperature * 2));
+			}
 			if (temperature <= 0) {
 				SetState(FlapperState.jelly);
 			}
 		} else if (temperature < 0) {
 			temperature = Mathf.Clamp(temperature + Time.deltaTime / coldTemperatureChangeDuration, float.MinValue, 0);
+			if (temperature > -0.5f) {
+				meshRenderer.material.SetColor("_BaseColor", Color.Lerp(jelly, solid, -temperature * 2));
+			}
 			if (temperature >= 0) {
 				SetState(FlapperState.jelly);
 			}
@@ -70,6 +77,17 @@ public class StateManager : MonoBehaviour {
 	}
 
 	public void SetState(FlapperState newState) {
+		switch (newState) {
+			case FlapperState.gaseous:
+				gasParticleRenderer.material.SetColor("_BaseColor", gas);
+				break;
+			case FlapperState.jelly:
+				meshRenderer.material.SetColor("_BaseColor", jelly);
+				break;
+			case FlapperState.solid:
+				meshRenderer.material.SetColor("_BaseColor", solid);
+				break;
+		}
 		if (newState == state) {
 			return;
 		}
@@ -89,7 +107,7 @@ public class StateManager : MonoBehaviour {
 				go.SetActive(true);
 			}*/
 			gasParticle.Play();
-			meshRenderer.material = gas;
+			meshRenderer.enabled = false;
 			audioSource.PlayOneShot(gasTransition);
 		} else {
 			rigidbody.mass = defaultMass;
@@ -98,12 +116,11 @@ public class StateManager : MonoBehaviour {
 				go.SetActive(false);
 			}*/
 			gasParticle.Stop();
+			meshRenderer.enabled = true;
 			if (state == FlapperState.solid) {
-				meshRenderer.material = solid;
 				pm.speed = solidSpeed;
 				audioSource.PlayOneShot(solidTransition);
 			} else {
-				meshRenderer.material = jelly;
 				pm.speed = jellySpeed;
 				audioSource.PlayOneShot(jellyTransition);
 			}
