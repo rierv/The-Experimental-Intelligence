@@ -39,10 +39,10 @@ public class FollowPlayer : MonoBehaviour {
 			if (jellyCore.canJump || stateManager.state == FlapperState.gaseous) {
 				y = jellyCore.transform.position.y + offsetY;
 			}
-			transform.position = Vector3.Lerp(transform.position, new Vector3(jellyCore.transform.position.x, y, jellyCore.transform.position.z + offsetZ), speed * Time.fixedDeltaTime);
+			transform.position = Vector3.Lerp(transform.position, new Vector3(jellyCore.transform.position.x, y, jellyCore.transform.position.z + offsetZ), speed * Time.deltaTime);
 			transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
 		} else {
-			transform.position = Vector3.Lerp(transform.position, initPosition, speed * Time.fixedDeltaTime);
+			transform.position = Vector3.Lerp(transform.position, initPosition, speed * Time.deltaTime);
 			transform.rotation = Quaternion.Lerp(transform.rotation, initRotation, rotationSpeed * Time.deltaTime);
 		}
 	}
