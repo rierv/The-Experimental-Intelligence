@@ -17,13 +17,15 @@ public class NextLevel : MonoBehaviour, I_Activable {
 
 	//Light light;
 	ParticleSystem particleSystem;
+	PlayerMove p;
 
-	float logTimer = 0;
+	//float logTimer = 0;
 
 	void Awake() {
 		//light = GetComponentInChildren<Light>();
 		//light.enabled = isActive;
 		particleSystem = GetComponentInChildren<ParticleSystem>();
+		p = FindObjectOfType<PlayerMove>();
 		if (!isActive) {
 			mesh.material = nonActiveMaterial;
 			particleSystem.Stop();
@@ -31,7 +33,7 @@ public class NextLevel : MonoBehaviour, I_Activable {
 	}
 
 	void Update() {
-		logTimer += Time.deltaTime;
+		//logTimer += Time.deltaTime;
 	}
 
 	private void OnTriggerEnter(Collider other) {
@@ -41,14 +43,14 @@ public class NextLevel : MonoBehaviour, I_Activable {
 	}
 
 	IEnumerator LoadLevel() {
-		System.IO.File.AppendAllText(FlapperCore.logFile, logTimer.ToString());
+		//System.IO.File.AppendAllText(FlapperCore.logFile, logTimer.ToString());
 
 		activable = false;
 		yield return new WaitForSeconds(delayToStopFlapper);
 		GetComponent<AudioSource>().Play();
-		foreach (PlayerMove p in FindObjectsOfType<PlayerMove>()) {
-			p.canMove = false;
-		}
+		//foreach (PlayerMove p in FindObjectsOfType<PlayerMove>()) {
+		p.canMove = false;
+		//}
 
 		if (activateComic) {
 			activateComic.Activate();
