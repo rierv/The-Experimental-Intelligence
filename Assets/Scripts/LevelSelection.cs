@@ -8,6 +8,7 @@ public class LevelSelection : MonoBehaviour, I_Activable {
 	public NextLevel teleport;
 	//public List<Object> levels;
 	public float selectionSpeed = 2;
+	public SpriteRenderer spriteRenderer;
 
 	bool active = false;
 	float counter = 0;
@@ -70,6 +71,9 @@ public class LevelSelection : MonoBehaviour, I_Activable {
 	void setLevel() {
 		teleport.nextLevel = currentLevel;
 		levelName.text = "Play level " + (currentLevel + 1) + ":\n" + Levels.names[currentLevel];
+		if (spriteRenderer) {
+			spriteRenderer.sprite = Resources.Load<Sprite>("Levels/" + Levels.names[currentLevel].Replace("?", ""));
+		}
 		counter = 0;
 	}
 }
