@@ -49,7 +49,7 @@ public class PlayerMove : MonoBehaviour {
 		shrinking = false;
 	}
 
-	void FixedUpdate() {
+	/*void FixedUpdate() {
 		if (canMove) {
 			Vector3 right = Input.GetAxis("Horizontal") * Vector3.right * (canMoveX ? 1 : perpendicularMoveOnPush);
 			Vector3 forward = Input.GetAxis("Vertical") * Vector3.forward * (canMoveZ ? 1 : perpendicularMoveOnPush);
@@ -59,9 +59,19 @@ public class PlayerMove : MonoBehaviour {
 				transform.position = Vector3.Lerp(transform.position, transform.position + (right + forward), speed * Time.fixedDeltaTime);
 			}
 		}
-	}
+	}*/
 
 	void Update() {
+		if (canMove) {
+			Vector3 right = Input.GetAxis("Horizontal") * Vector3.right * (canMoveX ? 1 : perpendicularMoveOnPush);
+			Vector3 forward = Input.GetAxis("Vertical") * Vector3.forward * (canMoveZ ? 1 : perpendicularMoveOnPush);
+			if (Input.GetAxis("Horizontal") != 0 && Input.GetAxis("Vertical") != 0) {
+				transform.position = Vector3.Lerp(transform.position, transform.position + (right + forward) / 1.3f, speed * Time.deltaTime);
+			} else {
+				transform.position = Vector3.Lerp(transform.position, transform.position + (right + forward), speed * Time.deltaTime);
+			}
+		}
+
 		if (shrinking) {
 			updateShrink();
 		}

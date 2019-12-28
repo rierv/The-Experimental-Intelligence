@@ -1365,6 +1365,7 @@ GameObject:
   - component: {fileID: 8258779137104765888}
   - component: {fileID: 8258779137104765903}
   - component: {fileID: 5223081687395563604}
+  - component: {fileID: 2290488457949125454}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -1425,6 +1426,18 @@ MonoBehaviour:
   resumeButton: {fileID: 8781247622934241446}
   restartButton: {fileID: 8781247624109673531}
   exitButton: {fileID: 8781247622840441275}
+--- !u!114 &2290488457949125454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8258779137104765889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c668a1c645db1c4e8a2de73b7c6a8a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8781247622840441273
 GameObject:
   m_ObjectHideFlags: 0
