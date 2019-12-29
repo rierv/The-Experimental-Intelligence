@@ -37,6 +37,7 @@ public class PlayerMove : MonoBehaviour {
 	public SphereCollider collider;
 	StateManager stateManager;
 	float shrinkage = 1;
+	Transform camera;
 
 	[Space]
 	public AudioSource audioSource;
@@ -47,31 +48,23 @@ public class PlayerMove : MonoBehaviour {
 		stateManager = GetComponent<StateManager>();
 		jumping = false;
 		shrinking = false;
+		camera = FindObjectOfType<Camera>().transform;
 	}
 
-	/*void FixedUpdate() {
+	void FixedUpdate() {
 		if (canMove) {
-			Vector3 right = Input.GetAxis("Horizontal") * Vector3.right * (canMoveX ? 1 : perpendicularMoveOnPush);
-			Vector3 forward = Input.GetAxis("Vertical") * Vector3.forward * (canMoveZ ? 1 : perpendicularMoveOnPush);
+			transform.rotation = Quaternion.Euler(new Vector3(0, camera.rotation.eulerAngles.y, 0));
+			Vector3 right = Input.GetAxis("Horizontal") * transform.right * (canMoveX ? 1 : perpendicularMoveOnPush);
+			Vector3 forward = Input.GetAxis("Vertical") * transform.forward * (canMoveZ ? 1 : perpendicularMoveOnPush);
 			if (Input.GetAxis("Horizontal") != 0 && Input.GetAxis("Vertical") != 0) {
 				transform.position = Vector3.Lerp(transform.position, transform.position + (right + forward) / 1.3f, speed * Time.fixedDeltaTime);
 			} else {
 				transform.position = Vector3.Lerp(transform.position, transform.position + (right + forward), speed * Time.fixedDeltaTime);
 			}
 		}
-	}*/
+	}
 
 	void Update() {
-		if (canMove) {
-			Vector3 right = Input.GetAxis("Horizontal") * Vector3.right * (canMoveX ? 1 : perpendicularMoveOnPush);
-			Vector3 forward = Input.GetAxis("Vertical") * Vector3.forward * (canMoveZ ? 1 : perpendicularMoveOnPush);
-			if (Input.GetAxis("Horizontal") != 0 && Input.GetAxis("Vertical") != 0) {
-				transform.position = Vector3.Lerp(transform.position, transform.position + (right + forward) / 1.3f, speed * Time.deltaTime);
-			} else {
-				transform.position = Vector3.Lerp(transform.position, transform.position + (right + forward), speed * Time.deltaTime);
-			}
-		}
-
 		if (shrinking) {
 			updateShrink();
 		}
