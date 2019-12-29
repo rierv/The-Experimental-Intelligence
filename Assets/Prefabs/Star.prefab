@@ -45,7 +45,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 1.5, y: 1.5, z: 1.5}
   m_Center: {x: 0, y: 1, z: 0}
 --- !u!114 &8339162734676280961
 MonoBehaviour:
@@ -59,7 +59,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86277191bcab5b3458de9b4a68787c25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sound: {fileID: 8300000, guid: 309d26dd49855f745afb14c39b425b40, type: 3}
   rotationAngle: 1
 --- !u!82 &6666929696998076615
 AudioSource:
