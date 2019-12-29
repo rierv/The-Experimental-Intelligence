@@ -127,7 +127,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcb7dab465b93a6438ec47b2945b422c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraSpeed: 6
+  cameraSpeed: 0.5
+  maxSpeed: 50
+  cameraRotationSpeed: 10
   pointer: {fileID: 7457115346130469300}
   secondTarget: {fileID: 0}
   allowLookAtTarget: 1
