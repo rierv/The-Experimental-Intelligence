@@ -16,9 +16,11 @@ public class ButtonScript : MonoBehaviour {
 	float timer = 0;
 	bool waiting;
 	public GameObject body;
+	AudioSource audioSource;
 	#endregion
 
 	private void Start() {
+		audioSource = GetComponent<AudioSource>();
 		foreach (GameObject go in triggeredObjects) {
 			activables.Add(go.GetComponent<I_Activable>());
 		}
@@ -69,7 +71,7 @@ public class ButtonScript : MonoBehaviour {
 	bool canPlayClip = true;
 	void PlayClip() {
 		if (canPlayClip) {
-			GetComponent<AudioSource>().Play();
+			audioSource.Play();
 			canPlayClip = false;
 		}
 	}

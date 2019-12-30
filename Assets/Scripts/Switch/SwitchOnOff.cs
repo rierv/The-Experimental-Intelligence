@@ -8,11 +8,13 @@ public class SwitchOnOff : MonoBehaviour {
 	public bool solidOnly;
 	public GameObject[] triggeredObjects;
 
+	AudioSource audioSource;
 	List<I_Activable> activables = new List<I_Activable>();
 	float pushableBlockY;
 	float targetX;
 
 	void Awake() {
+		audioSource = GetComponent<AudioSource>();
 		pushableBlockY = pushableBlock.localPosition.y;
 		targetX = pushableBlock.localPosition.x;
 		GetComponentInChildren<Pushable>().solidOnly = solidOnly;
@@ -55,10 +57,12 @@ public class SwitchOnOff : MonoBehaviour {
 			if (pushableBlock.localPosition.x > 0) {
 				foreach (I_Activable ac in activables) {
 					ac.Activate();
+					audioSource.Play();
 				}
 			} else {
 				foreach (I_Activable ac in activables) {
 					ac.Deactivate();
+					audioSource.Play();
 				}
 			}
 		}
