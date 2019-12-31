@@ -5,7 +5,8 @@ using UnityEngine;
 public class CameraController : MonoBehaviour {
 	public float cameraSpeed = 0.3f;
 	public float maxSpeed = 50;
-	public float cameraRotationSpeed = 6;
+	public float rotationSpeed = 8;
+	public float rotationSpeedZoomOut = 1.5f;
 	[Space]
 	public Transform pointer;
 	private Transform target;
@@ -33,6 +34,7 @@ public class CameraController : MonoBehaviour {
 	public float initialDelay = 3;
 
 	bool lookAtFlapper;
+	bool onFlapper;
 	Vector3 initPosition;
 	Quaternion initRotation;
 	//Vector3 initOffset;
@@ -58,6 +60,9 @@ public class CameraController : MonoBehaviour {
 	void Update() {
 		if (Input.GetKeyDown(KeyCode.Tab) || Input.GetKeyDown("joystick button 2")) { // xbox button X
 			lookAtFlapper = !lookAtFlapper;
+			if (!lookAtFlapper) {
+				onFlapper = false;
+			}
 		}
 		if (lookAtFlapper) {
 			Vector3 newPosition = new Vector3(Mathf.Clamp(target.transform.position.x, minX, maxX) + xOffset, Mathf.Clamp(target.transform.position.y, minY, maxY) + yOffset, Mathf.Clamp(target.transform.position.z, minZ, maxZ) + zOffset);
@@ -67,13 +72,20 @@ public class CameraController : MonoBehaviour {
 				if (secondTarget != null) directionOnSecondTarget = secondTarget.position - target.transform.position;
 				pointer.transform.LookAt(target.transform.position + directionOnSecondTarget + secondTargetOffset);
 				//transform.rotation = Quaternion.Lerp(transform.rotation, pointer.rotation, cameraRotationSpeed * Time.deltaTime);
-				transform.rotation = Quaternion.RotateTowards(transform.rotation, pointer.rotation, cameraRotationSpeed * Time.deltaTime * Quaternion.Angle(transform.rotation, pointer.rotation));
+				if (onFlapper) {
+					transform.rotation = pointer.rotation;
+				} else {
+					transform.rotation = Quaternion.RotateTowards(transform.rotation, pointer.rotation, rotationSpeed * Time.deltaTime * Quaternion.Angle(transform.rotation, pointer.rotation));
+					if (Quaternion.Angle(transform.rotation, pointer.rotation) < 1) {
+						onFlapper = true;
+					}
+				}
 			}
 		} else {
 			//transform.position = Vector3.Lerp(transform.position, initPosition, cameraSpeed * Time.deltaTime);
 			transform.position = Vector3.SmoothDamp(transform.position, initPosition, ref velocity, cameraSpeed, maxSpeed);
 			//transform.rotation = Quaternion.Lerp(transform.rotation, initRotation, cameraRotationSpeed * Time.deltaTime);
-			transform.rotation = Quaternion.RotateTowards(transform.rotation, initRotation, cameraRotationSpeed * Time.deltaTime * Quaternion.Angle(transform.rotation, initRotation));
+			transform.rotation = Quaternion.RotateTowards(transform.rotation, initRotation, rotationSpeedZoomOut * Time.deltaTime * Quaternion.Angle(transform.rotation, initRotation));
 		}
 	}
 
