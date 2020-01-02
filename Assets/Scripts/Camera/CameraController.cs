@@ -37,7 +37,8 @@ public class CameraController : MonoBehaviour {
 	public float initialDelay = 3;
 
 	bool lookAtFlapper;
-	bool positionOnFlapper;
+	[HideInInspector]
+	public bool positionOnFlapper;
 	bool rotationOnFlapper;
 	Vector3 initPosition;
 	Quaternion initRotation;

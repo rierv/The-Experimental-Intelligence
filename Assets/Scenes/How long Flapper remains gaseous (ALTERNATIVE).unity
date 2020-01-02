@@ -672,8 +672,7 @@ PrefabInstance:
     - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
         type: 3}
       propertyPath: completeText
-      value: Amazing! You are even smarter than I expect! Mmh, I think I should give
-        you a name.
+      value: That's very clever, Flapper. Well done!
       objectReference: {fileID: 0}
     - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
         type: 3}
@@ -2713,13 +2712,9 @@ PrefabInstance:
       value: "Ok, little one, you can move and you are also very smart. Let\u2019s
         try something more complex."
       objectReference: {fileID: 0}
-    - target: {fileID: 7847180, guid: ad9e8bf70f33ad04db8be7a2f3c3c835, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7847179, guid: ad9e8bf70f33ad04db8be7a2f3c3c835, type: 3}
-      propertyPath: m_Enabled
-      value: 1
+    - target: {fileID: 7847178, guid: ad9e8bf70f33ad04db8be7a2f3c3c835, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8358367530877241013, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
         type: 3}
@@ -2734,9 +2729,13 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 7847178, guid: ad9e8bf70f33ad04db8be7a2f3c3c835, type: 3}
-      propertyPath: m_IsActive
-      value: 0
+    - target: {fileID: 7847180, guid: ad9e8bf70f33ad04db8be7a2f3c3c835, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7847179, guid: ad9e8bf70f33ad04db8be7a2f3c3c835, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ad9e8bf70f33ad04db8be7a2f3c3c835, type: 3}

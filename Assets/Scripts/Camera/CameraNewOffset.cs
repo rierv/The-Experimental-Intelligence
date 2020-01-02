@@ -24,6 +24,7 @@ public class CameraNewOffset : MonoBehaviour {
 				cameraController.yOffset = offset.y;
 			if (overwriteZ)
 				cameraController.zOffset = offset.z;
+			cameraController.positionOnFlapper = false;
 		}
 	}
 
@@ -35,6 +36,7 @@ public class CameraNewOffset : MonoBehaviour {
 				cameraController.yOffset = previousOffset.y;
 			if (overwriteZ)
 				cameraController.zOffset = previousOffset.z;
+			cameraController.positionOnFlapper = false;
 		}
 	}
 }
