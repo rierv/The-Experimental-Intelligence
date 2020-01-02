@@ -47,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   settings:
     passTag: Soba
-    Event: 1000
+    Event: 450
     filterSettings:
       RenderQueueType: 0
       LayerMask:
@@ -70,4 +70,4 @@ MonoBehaviour:
       overrideCamera: 0
       restoreCamera: 1
       offset: {x: 0, y: 0, z: 0, w: 0}
-      cameraFieldOfView: 60
+      cameraFieldOfView: 23

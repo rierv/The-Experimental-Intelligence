@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class ActivateComic : MonoBehaviour, I_Activable {
 	#region Attributes
-	public TextMeshProUGUI textMesh;
+	public TextMeshPro textMesh;
 	public float fadeInTime;
 	public float fadeOutTime;
 	public float charWaitTime;
@@ -166,7 +166,7 @@ public class ActivateComic : MonoBehaviour, I_Activable {
 				go.GetComponent<I_Activable>().Activate();
 			}
 		}
-        Deactivate();
+		Deactivate();
 	}
 
 	/*private void Disappear() {
