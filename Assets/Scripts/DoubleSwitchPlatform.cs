@@ -72,13 +72,13 @@ public class DoubleSwitchPlatform : MonoBehaviour, I_Activable {
 				}
 			}
 		}
-		/*foreach (Transform platform in platforms)
+		foreach (Transform platform in platforms)
         {
             if (Vector3.Distance(platform.transform.position, obstacle.transform.position) > 2)
                 platform.GetComponent<MeshRenderer>().material = activeMaterial;
 
             else platform.GetComponent<MeshRenderer>().material = notActiveMaterial;
-        }*/
+        }
 	}
 
 	private void FixDirection(Transform platform) {
