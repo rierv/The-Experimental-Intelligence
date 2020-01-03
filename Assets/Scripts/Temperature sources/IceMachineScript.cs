@@ -118,7 +118,8 @@ public class IceMachineScript : MonoBehaviour, I_Activable {
 	}
 
 	public void Deactivate() {
-		//StopAllCoroutines();
+        //StopAllCoroutines();
+        foreach (Transform cube in cubeQueue) Destroy(cube.gameObject);
 		active = false;
 		topIcon.material = topIconMaterialOff;
 		door.material = doorMaterialOff;
