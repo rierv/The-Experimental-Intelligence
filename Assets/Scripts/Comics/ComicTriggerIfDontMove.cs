@@ -6,6 +6,10 @@ public class ComicTriggerIfDontMove : MonoBehaviour, I_Activable {
 	public ActivateComic activateComic;
 	public float activateAfter;
 
+	void Awake() {
+		gameObject.layer = 14;
+	}
+
 	public void canActivate(bool enabled) {
 	}
 

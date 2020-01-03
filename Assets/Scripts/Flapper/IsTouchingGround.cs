@@ -17,14 +17,14 @@ public class IsTouchingGround : MonoBehaviour {
 	}
 
 	private void OnTriggerEnter(Collider other) {
-		if (other.gameObject.layer != gameObject.layer) {
+		if (other.gameObject.layer != gameObject.layer && other.gameObject.layer != 14) {
 			colliderCount++;
 			ApplyChanges();
 		}
 	}
 
 	private void OnTriggerExit(Collider other) {
-		if (other.gameObject.layer != gameObject.layer) {
+		if (other.gameObject.layer != gameObject.layer && other.gameObject.layer != 14) {
 			colliderCount--;
 			ApplyChanges();
 		}
