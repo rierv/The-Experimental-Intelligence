@@ -658,8 +658,8 @@ MonoBehaviour:
   gaseousPush: 0
   gaseousMass: 0.5
   mesh: {fileID: 9091541795451801898}
-  jelly: {r: 0.16300285, g: 0.8340244, b: 0.9339623, a: 1}
-  gas: {r: 0.7971698, g: 1, b: 1, a: 1}
+  jelly: {r: 0.47209862, g: 0.90797365, b: 0.9716981, a: 1}
+  gas: {r: 0.3679245, g: 0.3679245, b: 0.3679245, a: 1}
   solid: {r: 0, g: 0.3121109, b: 1, a: 1}
   shadow: {fileID: 7064754474177481845}
   gasParticle: {fileID: 1837976439}
@@ -1823,7 +1823,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 120
+      scalar: 90
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -1876,7 +1876,7 @@ ParticleSystem:
     rateOverDistance:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 10
+      scalar: 5
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -5684,7 +5684,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9a91647fe54dd1b4f9e09355dee9816b, type: 2}
+  - {fileID: 2100000, guid: a10951ebd5eb1ba4cb56ad3cf31845d1, type: 2}
   - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -5830,7 +5830,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 9a91647fe54dd1b4f9e09355dee9816b, type: 2}
+      objectReference: {fileID: 2100000, guid: a10951ebd5eb1ba4cb56ad3cf31845d1, type: 2}
     - target: {fileID: 4381454792350094727, guid: d5c85d381fb2c7a48a6fbf1c97a8b987,
         type: 3}
       propertyPath: m_Quality
