@@ -1,19 +1,16 @@
 fileFormatVersion: 2
-guid: a04435f9ada73694f8be8d89ded6cd2c
+guid: 017f2b00673d601489f8782025152b0c
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1455497176339721363
-    second: Thermometer_0
+      213: 3743711531503577021
+    second: Thermometer New edit_0
   - first:
-      213: 4845675846428638152
-    second: Thermometer_1
+      213: -2256310381704789994
+    second: Thermometer New edit_1
   - first:
-      213: -3070650586153317467
-    second: Thermometer_2
-  - first:
-      213: -9034972142491016757
-    second: Thermometer_3
+      213: 6722483434351838446
+    second: Thermometer New edit_2
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -44,7 +41,7 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: -1
-    aniso: -1
+    aniso: 1
     mipBias: -100
     wrapU: 1
     wrapV: 1
@@ -98,13 +95,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Thermometer_0
+      name: Thermometer New edit_0
       rect:
         serializedVersion: 2
-        x: 405
-        y: 623
-        width: 1080
-        height: 106
+        x: 2166
+        y: 2713
+        width: 4152
+        height: 683
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -112,20 +109,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a113585ec2cdba7498c644a951859532
-      internalID: 1455497176339721363
+      spriteID: 9dba80fd17d45f14eabd28127b85b36c
+      internalID: 3743711531503577021
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Thermometer_1
+      name: Thermometer New edit_1
       rect:
         serializedVersion: 2
-        x: 424
-        y: 421
-        width: 1013
-        height: 68
+        x: 2240
+        y: 1854
+        width: 4000
+        height: 613
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -133,8 +130,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e221e13a3c4238d448428d6f4e95a5d8
-      internalID: 4845675846428638152
+      spriteID: 2f6b64aa8cb0f32478d1d85a0f68e8b1
+      internalID: -2256310381704789994
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thermometer New edit_2
+      rect:
+        serializedVersion: 2
+        x: 2525
+        y: 1232
+        width: 3414
+        height: 289
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9a096e143a85d474780dfecb236ef8d2
+      internalID: 6722483434351838446
       vertices: []
       indices: 
       edges: []
@@ -142,7 +160,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: d393da87b14c7a0489301ddc4604bc57
+    spriteID: 90919df5ab734774886a641d75113a6d
     internalID: 0
     vertices: []
     indices: 
