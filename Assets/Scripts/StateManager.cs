@@ -20,7 +20,8 @@ public class StateManager : MonoBehaviour {
 	public Color jelly;
 	public Color gas;
 	public Color solid;
-	public GameObject[] gasParticles;
+	//public GameObject[] gasParticles;
+	public GameObject shadow;
 	public ParticleSystem gasParticle;
 	public ParticleSystemRenderer gasParticleRenderer;
 	public float jellySpeed = 7;
@@ -106,6 +107,7 @@ public class StateManager : MonoBehaviour {
 			/*foreach (GameObject go in gasParticles) {
 				go.SetActive(true);
 			}*/
+			shadow.SetActive(false);
 			gasParticle.Play();
 			meshRenderer.enabled = false;
 			audioSource.PlayOneShot(gasTransition);
@@ -115,6 +117,7 @@ public class StateManager : MonoBehaviour {
 			/*foreach (GameObject go in gasParticles) {
 				go.SetActive(false);
 			}*/
+			shadow.SetActive(true);
 			gasParticle.Stop();
 			meshRenderer.enabled = true;
 			if (state == FlapperState.solid) {
