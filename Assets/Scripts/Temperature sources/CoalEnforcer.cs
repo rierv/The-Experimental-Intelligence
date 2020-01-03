@@ -5,14 +5,15 @@ using UnityEngine;
 public class CoalEnforcer : MonoBehaviour
 {
     bool active = false;
-    Light light;
+    ParticleSystem light;
     private void Start()
     {
-        light = GetComponentInChildren<Light>();
+        light = GetComponentInChildren<ParticleSystem>();
+        light.Pause();
     }
     private void Update()
     {
-        if (active) light.intensity = Mathf.Lerp(light.intensity, 20, Time.deltaTime/2);
+        if (active) light.Play();
     }
     private void OnTriggerEnter(Collider other)
     {
