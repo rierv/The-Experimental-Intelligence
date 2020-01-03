@@ -8,7 +8,7 @@ public class LevelSelection : MonoBehaviour, I_Activable {
 	public NextLevel teleport;
 	//public List<Object> levels;
 	public float selectionSpeed = 2;
-	public SpriteRenderer spriteRenderer;
+	public Image spriteRenderer;
 
 	bool active = false;
 	float counter = 0;
