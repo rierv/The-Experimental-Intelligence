@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Pushable : MonoBehaviour {
 	public bool solidOnly;
+	public bool spawnedByMachine;
 
 	Rigidbody rigidbody;
 	RigidbodyConstraints constraints;
@@ -13,7 +14,8 @@ public class Pushable : MonoBehaviour {
 		rigidbody = GetComponent<Rigidbody>();
 		constraints = rigidbody.constraints;
 		locked = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ;
-		rigidbody.constraints = locked;
+		if (!spawnedByMachine)
+			rigidbody.constraints = locked;
 	}
 
 	private void OnTriggerStay(Collider other) {
