@@ -61,8 +61,9 @@ public class StateManager : MonoBehaviour {
 		if (temperature > 0) {
 			temperature = Mathf.Clamp(temperature - Time.deltaTime / hotTemperatureChangeDuration, 0, float.MaxValue);
 			if (temperature < 0.5f) {
-				gasParticleRenderer.material.SetColor("_BaseColor", Color.Lerp(jelly, gas, temperature * 2));
-				gasParticleRenderer.material.SetColor("_EmissionColor", Color.Lerp(jelly, gas, temperature * 2));
+				//gasParticleRenderer.material.SetColor("_BaseColor", Color.Lerp(jelly, gas, temperature * 2));
+				//gasParticleRenderer.material.SetColor("_EmissionColor", Color.Lerp(jelly, gas, temperature * 2));
+				gasParticle.startColor = Color.Lerp(jelly, gas, temperature * 2);
 			}
 			if (temperature <= 0) {
 				SetState(FlapperState.jelly);
@@ -82,8 +83,9 @@ public class StateManager : MonoBehaviour {
 	public void SetState(FlapperState newState) {
 		switch (newState) {
 			case FlapperState.gaseous:
-				gasParticleRenderer.material.SetColor("_BaseColor", gas);
-				gasParticleRenderer.material.SetColor("_EmissionColor", gas);
+				//gasParticleRenderer.material.SetColor("_BaseColor", gas);
+				//gasParticleRenderer.material.SetColor("_EmissionColor", gas);
+				gasParticle.startColor = gas;
 				break;
 			case FlapperState.jelly:
 				meshRenderer.material.SetColor("_BaseColor", jelly);
