@@ -19,7 +19,10 @@ public class CoalEnforcer : MonoBehaviour
     {
         if (other.gameObject.tag == "Coal"|| other.gameObject.tag == "Ice")
         {
+            other.transform.GetChild(0).gameObject.active=true;
+            other.transform.GetChild(0).gameObject.GetComponent<ParticleSystem>().Play();
             other.GetComponent<TemperatureBlock>().enabled = false;
+
             active = true;
         }
     }

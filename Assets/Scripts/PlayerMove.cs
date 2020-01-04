@@ -6,9 +6,9 @@ using UnityEngine;
 public class PlayerMove : MonoBehaviour {
 	public Transform flapperModel;
     float speed=0;
-    float timer = -.5f;
+    float timer = -.45f;
     public float velocity = 7f;
-    float acceleration=4f;
+    float acceleration=4.5f;
     [Space]
 	public float jumpForce = 1;
 	public float doubleJumpMultiplier = 1.5f;

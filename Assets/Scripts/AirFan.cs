@@ -29,7 +29,8 @@ public class AirFan : MonoBehaviour, I_Activable {
 			audioSource.Stop();
 			particleSystem.Stop();
 		}
-	}
+        if (active) Activate();
+    }
 
 	private void Start() {
 		objectsinAir = new List<Rigidbody>();
@@ -42,6 +43,7 @@ public class AirFan : MonoBehaviour, I_Activable {
 		//transform.position = new Vector3 (transform.position.x, transform.position.y + (hight/2), transform.position.z);
 		surface = transform.localScale.y * airCollider.size.y;
 		flapperState = GameObject.Find("CORE").GetComponent<StateManager>();
+        
 	}
 
 	void Update() {
