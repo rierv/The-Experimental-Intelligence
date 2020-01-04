@@ -665,8 +665,8 @@ MonoBehaviour:
   gasParticle: {fileID: 7777213514480896956}
   gasParticleRenderer: {fileID: 7776598632079510696}
   jellySpeed: 6
-  solidSpeed: 4
-  gaseousSpeed: 3
+  solidSpeed: 5
+  gaseousSpeed: 4
   gasTransition: {fileID: 8300000, guid: df6e447024bd02541b0ea3cb8f48efcb, type: 3}
   jellyTransition: {fileID: 8300000, guid: 748398f5ab9f27940acaff0f0a9ec9a2, type: 3}
   solidTransition: {fileID: 8300000, guid: 8672b5d3a29d5e34abc65d9ce8a559e3, type: 3}
@@ -997,6 +997,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2748446495231617775}
     m_Modifications:
+    - target: {fileID: 9209573415611409348, guid: 6319fe6ddb7af4448b70db45071af33f,
+        type: 3}
+      propertyPath: m_Name
+      value: Smoke
+      objectReference: {fileID: 0}
     - target: {fileID: 9207095498682056310, guid: 6319fe6ddb7af4448b70db45071af33f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1052,19 +1057,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9209573415611409348, guid: 6319fe6ddb7af4448b70db45071af33f,
+    - target: {fileID: 9010425339211664414, guid: 6319fe6ddb7af4448b70db45071af33f,
         type: 3}
-      propertyPath: m_Name
-      value: Smoke
+      propertyPath: m_UseCustomVertexStreams
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9009810765749734154, guid: 6319fe6ddb7af4448b70db45071af33f,
         type: 3}
       propertyPath: playOnAwake
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9010425339211664414, guid: 6319fe6ddb7af4448b70db45071af33f,
-        type: 3}
-      propertyPath: m_UseCustomVertexStreams
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
