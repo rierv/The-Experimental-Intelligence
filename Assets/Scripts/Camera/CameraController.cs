@@ -62,6 +62,7 @@ public class CameraController : MonoBehaviour {
 	IEnumerator InitialCoroutine() {
 		yield return new WaitForSeconds(initialDelay);
 		lookAtFlapper = true;
+        if (secondTarget!=null||secondTargetOffset!=Vector3.zero) rotateToFlapper = true;
 	}
 
 	IEnumerator AllowRotateToFlapper() {
@@ -77,7 +78,7 @@ public class CameraController : MonoBehaviour {
 				rotationOnFlapper = false;
 				rotateToFlapper = false;
 			} else {
-				StartCoroutine(AllowRotateToFlapper());
+                StartCoroutine(AllowRotateToFlapper());
 			}
 		}
 		if (lookAtFlapper) {
