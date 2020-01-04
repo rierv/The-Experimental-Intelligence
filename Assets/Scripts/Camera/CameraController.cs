@@ -7,6 +7,7 @@ public class CameraController : MonoBehaviour {
 	public float maxSpeed = 50;
 	public float rotationSpeed = 8;
 	public float rotationSpeedZoomOut = 1.5f;
+	public float lookAtFlapperDelay = 1;
 	[Space]
 	public float positionOnFlapperMargin = 0.05f;
 	public float rotationOnFlapperMargin = 1;
@@ -37,6 +38,7 @@ public class CameraController : MonoBehaviour {
 	public float initialDelay = 3;
 
 	bool lookAtFlapper;
+	bool rotateToFlapper;
 	[HideInInspector]
 	public bool positionOnFlapper;
 	bool rotationOnFlapper;
@@ -62,12 +64,20 @@ public class CameraController : MonoBehaviour {
 		lookAtFlapper = true;
 	}
 
+	IEnumerator AllowRotateToFlapper() {
+		yield return new WaitForSeconds(lookAtFlapperDelay);
+		rotateToFlapper = true;
+	}
+
 	void Update() {
 		if (Input.GetKeyDown(KeyCode.Tab) || Input.GetKeyDown("joystick button 2")) { // xbox button X
 			lookAtFlapper = !lookAtFlapper;
 			if (!lookAtFlapper) {
 				positionOnFlapper = false;
 				rotationOnFlapper = false;
+				rotateToFlapper = false;
+			} else {
+				StartCoroutine(AllowRotateToFlapper());
 			}
 		}
 		if (lookAtFlapper) {
@@ -81,14 +91,14 @@ public class CameraController : MonoBehaviour {
 					positionOnFlapper = true;
 				}
 			}
-			if (allowLookAtTarget) {
+			if (allowLookAtTarget && rotateToFlapper) {
 				if (secondTarget != null) directionOnSecondTarget = secondTarget.position - target.transform.position;
 				pointer.transform.LookAt(target.transform.position + directionOnSecondTarget + secondTargetOffset);
 				//transform.rotation = Quaternion.Lerp(transform.rotation, pointer.rotation, cameraRotationSpeed * Time.deltaTime);
 				if (rotationOnFlapper) {
 					transform.rotation = pointer.rotation;
 				} else {
-					transform.rotation = Quaternion.RotateTowards(transform.rotation, pointer.rotation, rotationSpeed * Time.deltaTime * Quaternion.Angle(transform.rotation, pointer.rotation));
+					transform.rotation = Quaternion.RotateTowards(transform.rotation, pointer.rotation, rotationSpeed * Time.deltaTime);
 					if (Quaternion.Angle(transform.rotation, pointer.rotation) < rotationOnFlapperMargin) {
 						rotationOnFlapper = true;
 					}
@@ -98,7 +108,7 @@ public class CameraController : MonoBehaviour {
 			//transform.position = Vector3.Lerp(transform.position, initPosition, cameraSpeed * Time.deltaTime);
 			transform.position = Vector3.SmoothDamp(transform.position, initPosition, ref velocity, cameraSpeed, maxSpeed);
 			//transform.rotation = Quaternion.Lerp(transform.rotation, initRotation, cameraRotationSpeed * Time.deltaTime);
-			transform.rotation = Quaternion.RotateTowards(transform.rotation, initRotation, rotationSpeedZoomOut * Time.deltaTime * Quaternion.Angle(transform.rotation, initRotation));
+			transform.rotation = Quaternion.RotateTowards(transform.rotation, initRotation, rotationSpeedZoomOut * Time.deltaTime);
 		}
 	}
 
