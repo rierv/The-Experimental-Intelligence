@@ -52,7 +52,6 @@ public class PlayerMove : MonoBehaviour {
 		jumping = false;
 		shrinking = false;
 		camera = FindObjectOfType<Camera>().transform;
-
 	}
 
 	void FixedUpdate() {
@@ -86,6 +85,7 @@ public class PlayerMove : MonoBehaviour {
 				timer = -.5f;
 				speed = 0;
 			}
+			//rigidbody.AddForce((right + forward) * velocity, ForceMode.VelocityChange);
 		}
 	}
 

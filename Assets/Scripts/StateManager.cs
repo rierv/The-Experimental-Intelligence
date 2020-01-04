@@ -86,14 +86,17 @@ public class StateManager : MonoBehaviour {
 				//gasParticleRenderer.material.SetColor("_BaseColor", gas);
 				//gasParticleRenderer.material.SetColor("_EmissionColor", gas);
 				gasParticle.startColor = gas;
+				pm.velocity = gaseousSpeed;
 				break;
 			case FlapperState.jelly:
 				meshRenderer.material.SetColor("_BaseColor", jelly);
 				meshRenderer.material.SetColor("_EmissionColor", jelly);
+				pm.velocity = jellySpeed;
 				break;
 			case FlapperState.solid:
 				meshRenderer.material.SetColor("_BaseColor", solid);
 				meshRenderer.material.SetColor("_EmissionColor", solid);
+				pm.velocity = solidSpeed;
 				break;
 		}
 		if (newState == state) {
@@ -106,7 +109,7 @@ public class StateManager : MonoBehaviour {
 		}
 		if (state == FlapperState.gaseous) {
 			rigidbody.AddForce(Vector3.up * gaseousPush, ForceMode.Impulse);
-			pm.velocity = gaseousSpeed;
+			//pm.velocity = gaseousSpeed;
 			/*foreach (JellyBone bone in bones) {
 				bone.GetComponent<Rigidbody>().AddForce(Vector3.up * gaseousPush, ForceMode.Impulse);
 			}*/
@@ -128,10 +131,10 @@ public class StateManager : MonoBehaviour {
 			gasParticle.Stop();
 			meshRenderer.enabled = true;
 			if (state == FlapperState.solid) {
-				pm.velocity = solidSpeed;
+				//pm.velocity = solidSpeed;
 				audioSource.PlayOneShot(solidTransition);
 			} else {
-				pm.velocity = jellySpeed;
+				//pm.velocity = jellySpeed;
 				audioSource.PlayOneShot(jellyTransition);
 			}
 		}
