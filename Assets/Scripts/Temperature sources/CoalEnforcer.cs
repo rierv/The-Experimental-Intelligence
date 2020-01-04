@@ -5,20 +5,24 @@ using UnityEngine;
 public class CoalEnforcer : MonoBehaviour
 {
     bool active = false;
-    Light light;
+    ParticleSystem light;
     private void Start()
     {
-        light = GetComponentInChildren<Light>();
+        light = GetComponentInChildren<ParticleSystem>();
+        light.Pause();
     }
     private void Update()
     {
-        if (active) light.intensity = Mathf.Lerp(light.intensity, 20, Time.deltaTime/2);
+        if (active) light.Play();
     }
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Coal"|| other.gameObject.tag == "Ice")
         {
+            other.transform.GetChild(0).gameObject.active=true;
+            other.transform.GetChild(0).gameObject.GetComponent<ParticleSystem>().Play();
             other.GetComponent<TemperatureBlock>().enabled = false;
+
             active = true;
         }
     }

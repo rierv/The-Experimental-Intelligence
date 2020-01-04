@@ -8,49 +8,48 @@ public class BarScript : MonoBehaviour
     #region Attributes
     private float fillAmount;
     private Image temperatureBar;
-    private GameObject[] thermometers;
-    private Image[] thermometersImages;
+    //private Image thermometerContainer;
     private StateManager flapperStateManager;
     //private FlapperState currentState;
     private float minTemperature = -1.0f;
     private float maxTemperature = 1.0f;
-    private float minFillAmount = 0.4f;
+    private float minFillAmount = 0.07f;
     private float maxFillAmount = 1.0f;
     private Color flapperColor = new Color(0.6470588f, 0.9529412f, 0.9568628f, 1);
     private Color iceColor = new Color(0f, 0.5f, 1f, 1f);
     private Color fireColor = new Color(1f, 0.2f, 0f, 1f);
-    private Color tmpColor;
-    private float visibleModelThreshold = 0.5f;
-    private float lastTemperature;
+    //private Color tmpColor;
+    //private float visibleModelThreshold = 0.5f;
+    //private float lastTemperature;
     private float currTemperature;
-    private bool routineRunning;
+    //private bool routineRunning;
     #endregion
 
     private void Awake()
     {
-        thermometers = new GameObject[3];
-        thermometersImages = new Image[3];
-        thermometers[0] = GameObject.Find("JellyThermometer");
+        //thermometers = new GameObject[3];
+        //thermometerContainer = GameObject.Find("ThermometerContainer").GetComponent<Image>();
+        /*thermometers[0] = GameObject.Find("JellyThermometer");
         thermometers[1] = GameObject.Find("SolidThermometer");
         thermometers[2] = GameObject.Find("GaseousThermometer");
         for (int i = 0; i < thermometers.Length; i++)
         {
             thermometers[i].SetActive(true);
             thermometersImages[i] = thermometers[i].GetComponent<Image>();
-        }
-        tmpColor = thermometersImages[0].color;
+        }*/
+        //tmpColor = thermometersImages[0].color;
         temperatureBar = gameObject.GetComponent<Image>();
         flapperStateManager = GameObject.Find("CORE").GetComponent<StateManager>();
         //currentState = flapperStateManager.state;
         //HandleModels();
-        routineRunning = false;
+        //routineRunning = false;
         HandleThermometer();
 
     }
 
     private void Update()
     {
-        lastTemperature = currTemperature;
+        //lastTemperature = currTemperature;
         currTemperature = flapperStateManager.temperature;
         HandleThermometer();
     }
@@ -64,13 +63,13 @@ public class BarScript : MonoBehaviour
         {
             temperatureBar.fillAmount = Mathf.Lerp(temperatureBar.fillAmount, fillAmount, 0.03f);
 
-            if (!routineRunning)
+           /*if (!routineRunning)
             {
                 if (Mathf.Abs(currTemperature - lastTemperature) > 0.2f)
                     LerpToNewState();
-                else
+                else*/
                     ThermometerLerp();
-            }
+          //}
         }
 
     }
@@ -81,7 +80,7 @@ public class BarScript : MonoBehaviour
     }
 
 
-    private void LerpToNewState()
+    /*private void LerpToNewState()
     {
         routineRunning = true;
         int previous;
@@ -120,7 +119,7 @@ public class BarScript : MonoBehaviour
         }
         routineRunning = false;
         StopAllCoroutines();
-    }
+    }*/
 
     private void ThermometerLerp()
     {
@@ -128,7 +127,8 @@ public class BarScript : MonoBehaviour
         if (flapperStateManager.temperature < 0)
         {
             temperatureBar.color = Color.Lerp(flapperColor, iceColor, absTemp);
-            if(absTemp > visibleModelThreshold)
+            //thermometerContainer.color = Color.Lerp(flapperColor, iceColor, absTemp);
+            /*if(absTemp > visibleModelThreshold)
             {
                 tmpColor.a = 0;
                 thermometersImages[0].color = tmpColor;
@@ -144,12 +144,13 @@ public class BarScript : MonoBehaviour
                 thermometersImages[1].color = tmpColor;
             }
             tmpColor.a = 0;
-            thermometersImages[2].color = tmpColor;
+            thermometersImages[2].color = tmpColor;*/
         }
         else if (flapperStateManager.temperature > 0)
         {
             temperatureBar.color = Color.Lerp(flapperColor, fireColor, absTemp);
-            if (absTemp > visibleModelThreshold)
+            //thermometerContainer.color = Color.Lerp(flapperColor, fireColor, absTemp);
+            /*if (absTemp > visibleModelThreshold)
             {
                 tmpColor.a = 0;
                 thermometersImages[0].color = tmpColor;
@@ -165,16 +166,17 @@ public class BarScript : MonoBehaviour
                 thermometersImages[2].color = tmpColor;
             }
             tmpColor.a = 0;
-            thermometersImages[1].color = tmpColor;
+            thermometersImages[1].color = tmpColor;*/
         }
         else
         {
             temperatureBar.color = flapperColor;
-            tmpColor.a = 0;
+            //thermometerContainer.color = flapperColor;
+            /*tmpColor.a = 0;
             thermometersImages[1].color = tmpColor;
             thermometersImages[2].color = tmpColor;
             tmpColor.a = 1;
-            thermometersImages[0].color = tmpColor;
+            thermometersImages[0].color = tmpColor;*/
         }
     }
 }

@@ -5,6 +5,7 @@ using UnityEngine;
 public class LaserMoveAndRotate : MonoBehaviour
 {
     #region Attributes
+    private Transform laserObject;
     public bool translateFlag;
     public bool rotateFlag;
     //public int translateAxis;
@@ -23,8 +24,9 @@ public class LaserMoveAndRotate : MonoBehaviour
 
     private void Start()
     {
-        currPos = transform.position;
-        currEulerAngles = transform.eulerAngles;
+        laserObject = transform.parent;
+        currPos = laserObject.position;
+        currEulerAngles = laserObject.eulerAngles;
 
         if (Vector3.Distance(currPos, maxTranslation) < Vector3.Distance(currPos, minTranslation))
             translationDirection = true;
@@ -39,18 +41,18 @@ public class LaserMoveAndRotate : MonoBehaviour
     {
         if(translateFlag)
         {
-            currPos = transform.position;
+            currPos = laserObject.position;
 
             if (translationDirection)
             {
-                transform.position = Vector3.MoveTowards(currPos, maxTranslation, Time.fixedDeltaTime * translationSpeed);
-                if (Vector3.Distance(transform.position, maxTranslation) < (Time.fixedDeltaTime * translationSpeed))
+                laserObject.position = Vector3.MoveTowards(currPos, maxTranslation, Time.fixedDeltaTime * translationSpeed);
+                if (Vector3.Distance(laserObject.position, maxTranslation) < (Time.fixedDeltaTime * translationSpeed))
                     translationDirection = !translationDirection;
             } 
             else
             {
-                transform.position = Vector3.MoveTowards(currPos, minTranslation, Time.fixedDeltaTime * translationSpeed);
-                if (Vector3.Distance(transform.position, minTranslation) < (Time.fixedDeltaTime * translationSpeed))
+                laserObject.position = Vector3.MoveTowards(currPos, minTranslation, Time.fixedDeltaTime * translationSpeed);
+                if (Vector3.Distance(laserObject.position, minTranslation) < (Time.fixedDeltaTime * translationSpeed))
                     translationDirection = !translationDirection;
             }
 
@@ -60,14 +62,14 @@ public class LaserMoveAndRotate : MonoBehaviour
         {
             if (rotationDirection)
             {
-                transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(maxRotation), Time.fixedDeltaTime * rotationSpeed);
-                if (Vector3.Distance(transform.eulerAngles, maxRotation) < (Time.fixedDeltaTime * rotationSpeed))
+                laserObject.rotation = Quaternion.RotateTowards(laserObject.rotation, Quaternion.Euler(maxRotation), Time.fixedDeltaTime * rotationSpeed);
+                if (Vector3.Distance(laserObject.eulerAngles, maxRotation) < (Time.fixedDeltaTime * rotationSpeed))
                     rotationDirection = !rotationDirection;
             } 
             else
             {
-                transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(minRotation), Time.fixedDeltaTime * rotationSpeed);
-                if (Vector3.Distance(transform.eulerAngles, minRotation) < (Time.fixedDeltaTime * rotationSpeed))
+                laserObject.rotation = Quaternion.RotateTowards(laserObject.rotation, Quaternion.Euler(minRotation), Time.fixedDeltaTime * rotationSpeed);
+                if (Vector3.Distance(laserObject.eulerAngles, minRotation) < (Time.fixedDeltaTime * rotationSpeed))
                     rotationDirection = !rotationDirection;
             }
         }

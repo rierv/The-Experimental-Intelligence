@@ -12,7 +12,6 @@ public class StarCollector : MonoBehaviour
 
     private void Awake()
     {
-        GameObject.Find("ClockHand").SetActive(false);
         allStarsEffect = GameObject.Find("AllStarsEffect");
         allStarsEffect.SetActive(false);
         clockStars = new GameObject[3];

@@ -5,8 +5,11 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour {
 	public Transform flapperModel;
-	public float speed = 5;
-	[Space]
+    float speed=0;
+    float timer = -.45f;
+    public float velocity = 7f;
+    float acceleration=4.5f;
+    [Space]
 	public float jumpForce = 1;
 	public float doubleJumpMultiplier = 1.5f;
 	public float solidJumpForce = 1;
@@ -49,19 +52,46 @@ public class PlayerMove : MonoBehaviour {
 		jumping = false;
 		shrinking = false;
 		camera = FindObjectOfType<Camera>().transform;
-	}
 
-	void FixedUpdate() {
+    }
+
+    void FixedUpdate() {
 		if (canMove) {
 			transform.rotation = Quaternion.Euler(new Vector3(0, camera.rotation.eulerAngles.y, 0));
 			Vector3 right = Input.GetAxis("Horizontal") * transform.right * (canMoveX ? 1 : perpendicularMoveOnPush);
 			Vector3 forward = Input.GetAxis("Vertical") * transform.forward * (canMoveZ ? 1 : perpendicularMoveOnPush);
-			if (Input.GetAxis("Horizontal") != 0 && Input.GetAxis("Vertical") != 0) {
+            /*if (Input.GetAxis("Horizontal") != 0 && Input.GetAxis("Vertical") != 0) {
 				transform.position = Vector3.Lerp(transform.position, transform.position + (right + forward) / 1.3f, speed * Time.fixedDeltaTime);
-			} else {
+                if(speed < startingSpeed*2.5f) speed += .05f;
+			} else if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
+            {
 				transform.position = Vector3.Lerp(transform.position, transform.position + (right + forward), speed * Time.fixedDeltaTime);
-			}
-		}
+                if (speed < startingSpeed * 2.5f) speed += .05f;
+
+            }
+            else
+            {
+                speed = startingSpeed;
+            }*/
+            if (Input.GetAxis("Horizontal") != 0 && Input.GetAxis("Vertical") != 0)
+            {
+                timer += Time.fixedDeltaTime*acceleration; 
+                speed = Mathf.Atan(timer) * velocity + 1;
+                transform.position = Vector3.Lerp(transform.position, transform.position + (right + forward) * speed / 1.3f, Time.fixedDeltaTime * speed/10);
+            }
+            else if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
+            {
+                timer += Time.fixedDeltaTime*acceleration;
+                speed = Mathf.Atan(timer) *velocity+1;
+                Debug.Log(speed);
+                transform.position = Vector3.Lerp(transform.position, transform.position + (right + forward) *speed , Time.fixedDeltaTime * speed / 10);
+            }
+            else
+            {
+                timer = -.5f;
+                speed = 0;
+            }
+        }
 	}
 
 	void Update() {
