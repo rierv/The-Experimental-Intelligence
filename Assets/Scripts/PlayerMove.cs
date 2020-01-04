@@ -82,7 +82,6 @@ public class PlayerMove : MonoBehaviour {
 				} else if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0) {
 					timer += Time.fixedDeltaTime * acceleration;
 					speed = Mathf.Atan(timer) * velocity + 1;
-					Debug.Log(speed);
 					transform.position = Vector3.Lerp(transform.position, transform.position + (right + forward) * speed, Time.fixedDeltaTime * speed / 10);
 				} else {
 					timer = -.5f;
