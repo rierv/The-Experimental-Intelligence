@@ -104,7 +104,7 @@ public class StateManager : MonoBehaviour {
 		}
 		if (state == FlapperState.gaseous) {
 			rigidbody.AddForce(Vector3.up * gaseousPush, ForceMode.Impulse);
-			pm.speed = gaseousSpeed;
+			pm.velocity = gaseousSpeed;
 			/*foreach (JellyBone bone in bones) {
 				bone.GetComponent<Rigidbody>().AddForce(Vector3.up * gaseousPush, ForceMode.Impulse);
 			}*/
@@ -126,10 +126,10 @@ public class StateManager : MonoBehaviour {
 			gasParticle.Stop();
 			meshRenderer.enabled = true;
 			if (state == FlapperState.solid) {
-				pm.speed = solidSpeed;
+				pm.velocity = solidSpeed;
 				audioSource.PlayOneShot(solidTransition);
 			} else {
-				pm.speed = jellySpeed;
+				pm.velocity = jellySpeed;
 				audioSource.PlayOneShot(jellyTransition);
 			}
 		}

@@ -43,7 +43,7 @@ public class ThrowObjects : MonoBehaviour {
 		}
 
 		yield return new WaitForSeconds(0.1f);
-		obj.layer = 12;
+		if(obj) obj.layer = 12;
 		obj = null;
 		ready = true;
 	}

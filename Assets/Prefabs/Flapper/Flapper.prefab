@@ -514,7 +514,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flapperModel: {fileID: 1650412427489319875}
-  speed: 7
+  velocity: 6
   jumpForce: 8
   doubleJumpMultiplier: 1.333
   solidJumpForce: 12
@@ -664,9 +664,9 @@ MonoBehaviour:
   shadow: {fileID: 7064754474177481845}
   gasParticle: {fileID: 1837976439}
   gasParticleRenderer: {fileID: 1837976438}
-  jellySpeed: 7
-  solidSpeed: 6
-  gaseousSpeed: 4
+  jellySpeed: 6
+  solidSpeed: 4
+  gaseousSpeed: 3
   gasTransition: {fileID: 8300000, guid: df6e447024bd02541b0ea3cb8f48efcb, type: 3}
   jellyTransition: {fileID: 8300000, guid: 748398f5ab9f27940acaff0f0a9ec9a2, type: 3}
   solidTransition: {fileID: 8300000, guid: 8672b5d3a29d5e34abc65d9ce8a559e3, type: 3}
