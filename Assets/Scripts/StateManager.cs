@@ -24,9 +24,14 @@ public class StateManager : MonoBehaviour {
 	public GameObject shadow;
 	public ParticleSystem gasParticle;
 	public ParticleSystemRenderer gasParticleRenderer;
+	[Header("Accelerate move type")]
 	public float jellySpeed = 7;
 	public float solidSpeed = 6f;
 	public float gaseousSpeed = 4f;
+	[Header("Rigidbody move type")]
+	public float jellySpeedRigidbody = 7;
+	public float solidSpeedRigidbody = 6f;
+	public float gaseousSpeedRigidbody = 4f;
 	public AudioClip gasTransition;
 	public AudioClip jellyTransition;
 	public AudioClip solidTransition;
@@ -86,17 +91,26 @@ public class StateManager : MonoBehaviour {
 				//gasParticleRenderer.material.SetColor("_BaseColor", gas);
 				//gasParticleRenderer.material.SetColor("_EmissionColor", gas);
 				gasParticle.startColor = gas;
-				pm.velocity = gaseousSpeed;
+				if (pm.moveType == MoveType.Rigidbody)
+					pm.velocity = gaseousSpeedRigidbody;
+				else
+					pm.velocity = gaseousSpeed;
 				break;
 			case FlapperState.jelly:
 				meshRenderer.material.SetColor("_BaseColor", jelly);
 				meshRenderer.material.SetColor("_EmissionColor", jelly);
-				pm.velocity = jellySpeed;
+				if (pm.moveType == MoveType.Rigidbody)
+					pm.velocity = jellySpeedRigidbody;
+				else
+					pm.velocity = jellySpeed;
 				break;
 			case FlapperState.solid:
 				meshRenderer.material.SetColor("_BaseColor", solid);
 				meshRenderer.material.SetColor("_EmissionColor", solid);
-				pm.velocity = solidSpeed;
+				if (pm.moveType == MoveType.Rigidbody)
+					pm.velocity = solidSpeedRigidbody;
+				else
+					pm.velocity = solidSpeed;
 				break;
 		}
 		if (newState == state) {
@@ -109,7 +123,6 @@ public class StateManager : MonoBehaviour {
 		}
 		if (state == FlapperState.gaseous) {
 			rigidbody.AddForce(Vector3.up * gaseousPush, ForceMode.Impulse);
-			//pm.velocity = gaseousSpeed;
 			/*foreach (JellyBone bone in bones) {
 				bone.GetComponent<Rigidbody>().AddForce(Vector3.up * gaseousPush, ForceMode.Impulse);
 			}*/
@@ -122,7 +135,7 @@ public class StateManager : MonoBehaviour {
 			meshRenderer.enabled = false;
 			audioSource.PlayOneShot(gasTransition);
 		} else {
-			rigidbody.mass = defaultMass;
+			//rigidbody.mass = defaultMass;
 			//mesh.SetActive(true);
 			/*foreach (GameObject go in gasParticles) {
 				go.SetActive(false);
@@ -131,10 +144,8 @@ public class StateManager : MonoBehaviour {
 			gasParticle.Stop();
 			meshRenderer.enabled = true;
 			if (state == FlapperState.solid) {
-				//pm.velocity = solidSpeed;
 				audioSource.PlayOneShot(solidTransition);
 			} else {
-				//pm.velocity = jellySpeed;
 				audioSource.PlayOneShot(jellyTransition);
 			}
 		}

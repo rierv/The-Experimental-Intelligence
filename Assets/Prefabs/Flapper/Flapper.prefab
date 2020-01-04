@@ -513,13 +513,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 966d7900b368a0f4b80b65eb3adf6fa0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useRigidbody: 0
+  moveType: 1
   rotateWithCamera: 0
   flapperModel: {fileID: 1650412427489319875}
+  speed: 8
   velocity: 6
   acceleration: 8
   jumpForce: 8
-  doubleJumpMultiplier: 1.333
   solidJumpForce: 12
   maxFallingSpeedForJumping: 0.5
   jumpingWait: 0.7
@@ -670,6 +670,9 @@ MonoBehaviour:
   jellySpeed: 6
   solidSpeed: 5
   gaseousSpeed: 4
+  jellySpeedRigidbody: 1.2
+  solidSpeedRigidbody: 1
+  gaseousSpeedRigidbody: 0.5
   gasTransition: {fileID: 8300000, guid: df6e447024bd02541b0ea3cb8f48efcb, type: 3}
   jellyTransition: {fileID: 8300000, guid: 748398f5ab9f27940acaff0f0a9ec9a2, type: 3}
   solidTransition: {fileID: 8300000, guid: 8672b5d3a29d5e34abc65d9ce8a559e3, type: 3}

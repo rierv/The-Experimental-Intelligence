@@ -2,18 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum MoveType {
+	Old,
+	Accelerate,
+	Rigidbody
+}
 
 public class PlayerMove : MonoBehaviour {
-	public bool useRigidbody;
+	public MoveType moveType;
 	public bool rotateWithCamera = true;
 	public Transform flapperModel;
-	float speed = 0;
+	public float speed = 7;
 	float timer = -.45f;
 	public float velocity = 7f;
 	public float acceleration = 4.5f;
 	[Space]
 	public float jumpForce = 1;
-	public float doubleJumpMultiplier = 1.5f;
 	public float solidJumpForce = 1;
 	public float maxFallingSpeedForJumping = 0.5f;
 	public float jumpingWait = 2f;
@@ -62,20 +66,13 @@ public class PlayerMove : MonoBehaviour {
 				transform.rotation = Quaternion.Euler(new Vector3(0, camera.rotation.eulerAngles.y, 0));
 			Vector3 right = Input.GetAxis("Horizontal") * transform.right * (canMoveX ? 1 : perpendicularMoveOnPush);
 			Vector3 forward = Input.GetAxis("Vertical") * transform.forward * (canMoveZ ? 1 : perpendicularMoveOnPush);
-			/*if (Input.GetAxis("Horizontal") != 0 && Input.GetAxis("Vertical") != 0) {
-				transform.position = Vector3.Lerp(transform.position, transform.position + (right + forward) / 1.3f, speed * Time.fixedDeltaTime);
-                if(speed < startingSpeed*2.5f) speed += .05f;
-			} else if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
-            {
-				transform.position = Vector3.Lerp(transform.position, transform.position + (right + forward), speed * Time.fixedDeltaTime);
-                if (speed < startingSpeed * 2.5f) speed += .05f;
-
-            }
-            else
-            {
-                speed = startingSpeed;
-            }*/
-			if (useRigidbody) {
+			if (moveType == MoveType.Old) {
+				if (Input.GetAxis("Horizontal") != 0 && Input.GetAxis("Vertical") != 0) {
+					transform.position = Vector3.Lerp(transform.position, transform.position + (right + forward) / 1.3f, speed * Time.fixedDeltaTime);
+				} else if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0) {
+					transform.position = Vector3.Lerp(transform.position, transform.position + (right + forward), speed * Time.fixedDeltaTime);
+				}
+			} else if (moveType == MoveType.Rigidbody) {
 				rigidbody.AddForce((right + forward) * velocity, ForceMode.VelocityChange);
 			} else {
 				if (Input.GetAxis("Horizontal") != 0 && Input.GetAxis("Vertical") != 0) {
@@ -101,7 +98,7 @@ public class PlayerMove : MonoBehaviour {
 		}
 
 		if (stateManager.state == FlapperState.gaseous) {
-			if (useRigidbody) {
+			if (moveType == MoveType.Rigidbody) {
 				if (Input.GetButton("Jump")) {
 					rigidbody.AddForce(Vector3.up * -0.45f, ForceMode.VelocityChange);
 				} else {
