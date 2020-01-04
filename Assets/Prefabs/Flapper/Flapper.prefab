@@ -513,6 +513,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 966d7900b368a0f4b80b65eb3adf6fa0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useRigidbody: 0
+  rotateWithCamera: 0
   flapperModel: {fileID: 1650412427489319875}
   velocity: 6
   acceleration: 8
