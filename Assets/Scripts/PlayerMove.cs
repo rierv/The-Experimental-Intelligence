@@ -4,6 +4,8 @@ using UnityEngine;
 
 
 public class PlayerMove : MonoBehaviour {
+	public bool useRigidbody;
+	public bool rotateWithCamera = true;
 	public Transform flapperModel;
 	float speed = 0;
 	float timer = -.45f;
@@ -56,7 +58,8 @@ public class PlayerMove : MonoBehaviour {
 
 	void FixedUpdate() {
 		if (canMove) {
-			transform.rotation = Quaternion.Euler(new Vector3(0, camera.rotation.eulerAngles.y, 0));
+			if (rotateWithCamera)
+				transform.rotation = Quaternion.Euler(new Vector3(0, camera.rotation.eulerAngles.y, 0));
 			Vector3 right = Input.GetAxis("Horizontal") * transform.right * (canMoveX ? 1 : perpendicularMoveOnPush);
 			Vector3 forward = Input.GetAxis("Vertical") * transform.forward * (canMoveZ ? 1 : perpendicularMoveOnPush);
 			/*if (Input.GetAxis("Horizontal") != 0 && Input.GetAxis("Vertical") != 0) {
@@ -72,20 +75,23 @@ public class PlayerMove : MonoBehaviour {
             {
                 speed = startingSpeed;
             }*/
-			if (Input.GetAxis("Horizontal") != 0 && Input.GetAxis("Vertical") != 0) {
-				timer += Time.fixedDeltaTime * acceleration;
-				speed = Mathf.Atan(timer) * velocity + 1;
-				transform.position = Vector3.Lerp(transform.position, transform.position + (right + forward) * speed / 1.3f, Time.fixedDeltaTime * speed / 10);
-			} else if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0) {
-				timer += Time.fixedDeltaTime * acceleration;
-				speed = Mathf.Atan(timer) * velocity + 1;
-				Debug.Log(speed);
-				transform.position = Vector3.Lerp(transform.position, transform.position + (right + forward) * speed, Time.fixedDeltaTime * speed / 10);
+			if (useRigidbody) {
+				rigidbody.AddForce((right + forward) * velocity, ForceMode.VelocityChange);
 			} else {
-				timer = -.5f;
-				speed = 0;
+				if (Input.GetAxis("Horizontal") != 0 && Input.GetAxis("Vertical") != 0) {
+					timer += Time.fixedDeltaTime * acceleration;
+					speed = Mathf.Atan(timer) * velocity + 1;
+					transform.position = Vector3.Lerp(transform.position, transform.position + (right + forward) * speed / 1.3f, Time.fixedDeltaTime * speed / 10);
+				} else if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0) {
+					timer += Time.fixedDeltaTime * acceleration;
+					speed = Mathf.Atan(timer) * velocity + 1;
+					Debug.Log(speed);
+					transform.position = Vector3.Lerp(transform.position, transform.position + (right + forward) * speed, Time.fixedDeltaTime * speed / 10);
+				} else {
+					timer = -.5f;
+					speed = 0;
+				}
 			}
-			//rigidbody.AddForce((right + forward) * velocity, ForceMode.VelocityChange);
 		}
 	}
 
@@ -95,13 +101,21 @@ public class PlayerMove : MonoBehaviour {
 		}
 
 		if (stateManager.state == FlapperState.gaseous) {
-			rigidbody.isKinematic = true;
-			if (Input.GetButton("Jump")) {
-				transform.position = Vector3.Lerp(transform.position, transform.position - Vector3.up * 10, gaseousShrinkDownForce / 10 * Time.deltaTime);
+			if (useRigidbody) {
+				if (Input.GetButton("Jump")) {
+					rigidbody.AddForce(Vector3.up * -0.45f, ForceMode.VelocityChange);
+				} else {
+					rigidbody.AddForce(Vector3.up * 0.3f, ForceMode.VelocityChange);
+				}
 			} else {
-				transform.position = Vector3.Lerp(transform.position, transform.position + Vector3.up, gaseousFloatUpForce * Time.deltaTime);
+				rigidbody.isKinematic = true;
+				if (Input.GetButton("Jump")) {
+					transform.position = Vector3.Lerp(transform.position, transform.position - Vector3.up * 10, gaseousShrinkDownForce / 10 * Time.deltaTime);
+				} else {
+					transform.position = Vector3.Lerp(transform.position, transform.position + Vector3.up, gaseousFloatUpForce * Time.deltaTime);
+				}
+				rigidbody.isKinematic = false;
 			}
-			rigidbody.isKinematic = false;
 		} else if (canMove) {
 			if (Input.GetButtonUp("Jump") && !jumping) {
 				StartCoroutine(JumpCoroutine());
