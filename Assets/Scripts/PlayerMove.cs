@@ -5,7 +5,8 @@ using UnityEngine;
 public enum MoveType {
 	Old,
 	Accelerate,
-	Rigidbody
+	Rigidbody,
+	SpeedVector
 }
 
 public class PlayerMove : MonoBehaviour {
@@ -16,12 +17,13 @@ public class PlayerMove : MonoBehaviour {
 	float timer = -.45f;
 	public float velocity = 7f;
 	public float acceleration = 4.5f;
+	public float speedVectorMultiplier = 1.5f;
+	public float accelerationSpeedVector = 0.5f;
 	[Space]
 	public float jumpForce = 1;
 	public float solidJumpForce = 1;
 	public float maxFallingSpeedForJumping = 0.5f;
 	public float jumpingWait = 2f;
-	//public float fallingBoost = 1;
 	[Space]
 	public float gaseousFloatUpForce = 1;
 	public float gaseousShrinkDownForce = 1;
@@ -48,6 +50,9 @@ public class PlayerMove : MonoBehaviour {
 	float shrinkage = 1;
 	Transform camera;
 
+	Vector3 speedVector;
+	Vector3 prevPos;
+
 	[Space]
 	public AudioSource audioSource;
 
@@ -58,6 +63,7 @@ public class PlayerMove : MonoBehaviour {
 		jumping = false;
 		shrinking = false;
 		camera = FindObjectOfType<Camera>().transform;
+		prevPos = transform.position;
 	}
 
 	void FixedUpdate() {
@@ -74,7 +80,7 @@ public class PlayerMove : MonoBehaviour {
 				}
 			} else if (moveType == MoveType.Rigidbody) {
 				rigidbody.AddForce((right + forward) * velocity, ForceMode.VelocityChange);
-			} else {
+			} else if (moveType == MoveType.Accelerate) {
 				if (Input.GetAxis("Horizontal") != 0 && Input.GetAxis("Vertical") != 0) {
 					timer += Time.fixedDeltaTime * acceleration;
 					speed = Mathf.Atan(timer) * velocity + 1;
@@ -86,6 +92,18 @@ public class PlayerMove : MonoBehaviour {
 				} else {
 					timer = -.5f;
 					speed = 0;
+				}
+			} else {
+				Debug.Log(transform.position + "-" + prevPos + " -> " + ((transform.position - prevPos) / Time.fixedDeltaTime).magnitude);
+				//Debug.Log(speedVector + " -> " + speedVector.magnitude);
+				speedVector = (transform.position - prevPos) / Time.fixedDeltaTime;
+				prevPos = transform.position;
+				if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0) {
+					speedVector = Vector3.MoveTowards(speedVector, (right + forward) * speed * speedVectorMultiplier, accelerationSpeedVector);
+					speedVector.y = 0;
+					transform.position += speedVector * Time.fixedDeltaTime;
+				} else {
+					speedVector = Vector3.MoveTowards(speedVector, Vector3.zero, acceleration);
 				}
 			}
 		}
