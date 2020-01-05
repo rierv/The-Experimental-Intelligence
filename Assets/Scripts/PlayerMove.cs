@@ -100,7 +100,7 @@ public class PlayerMove : MonoBehaviour {
 				speedVector = (transform.position - prevPos) / Time.fixedDeltaTime;
 				prevPos = transform.position;
 				if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0) {
-					speedVector = Vector3.MoveTowards(speedVector, (right + forward) * speed * speedVectorMultiplier, accelerationSpeedVector);
+					speedVector = Vector3.Lerp(speedVector, (right + forward) * speed * speedVectorMultiplier, accelerationSpeedVector);
 					speedVector.y = 0;
 					transform.position += speedVector * Time.fixedDeltaTime;
 				} else {
