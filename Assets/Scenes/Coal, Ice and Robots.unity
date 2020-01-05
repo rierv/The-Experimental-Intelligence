@@ -1051,6 +1051,11 @@ PrefabInstance:
       propertyPath: completeText
       value: This is a coal enforcer! If you bring some coal on it, it will last forever!
       objectReference: {fileID: 0}
+    - target: {fileID: 1639097164264343616, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 7847180, guid: ad9e8bf70f33ad04db8be7a2f3c3c835, type: 3}
       propertyPath: m_Size.x
       value: 3
@@ -1074,11 +1079,6 @@ PrefabInstance:
     - target: {fileID: 7847181, guid: ad9e8bf70f33ad04db8be7a2f3c3c835, type: 3}
       propertyPath: m_LocalPosition.x
       value: -218
-      objectReference: {fileID: 0}
-    - target: {fileID: 1639097164264343616, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ad9e8bf70f33ad04db8be7a2f3c3c835, type: 3}
@@ -1819,7 +1819,7 @@ PrefabInstance:
     - target: {fileID: 6138579372883086846, guid: 6b74d790aab572c46b5245ab387dcfec,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 7.69
+      value: 4.65
       objectReference: {fileID: 0}
     - target: {fileID: 6138579372883086846, guid: 6b74d790aab572c46b5245ab387dcfec,
         type: 3}
