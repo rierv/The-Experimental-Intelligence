@@ -5,7 +5,7 @@ using UnityEngine;
 public class ThrowObjects : MonoBehaviour {
 	public float strenght = 500f;
 	public AudioSource audioSource;
-
+    Quaternion rotation;
 	GameObject obj = null;
 	ThrowableObject th;
 	StateManager state;
@@ -14,6 +14,7 @@ public class ThrowObjects : MonoBehaviour {
 
 	void Start() {
 		state = GetComponent<StateManager>();
+        rotation = transform.rotation;
 	}
 
 	void Update() {
@@ -66,5 +67,8 @@ public class ThrowObjects : MonoBehaviour {
 			}
 		}
 	}
-
+    private void OnTriggerExit(Collider other)
+    {
+        transform.rotation = rotation;
+    }
 }
