@@ -72,6 +72,7 @@ public class PlayerMove : MonoBehaviour {
 				transform.rotation = Quaternion.Euler(new Vector3(0, camera.rotation.eulerAngles.y, 0));
 			Vector3 right = Input.GetAxis("Horizontal") * transform.right * (canMoveX ? 1 : perpendicularMoveOnPush);
 			Vector3 forward = Input.GetAxis("Vertical") * transform.forward * (canMoveZ ? 1 : perpendicularMoveOnPush);
+
 			if (moveType == MoveType.Old) {
 				if (Input.GetAxis("Horizontal") != 0 && Input.GetAxis("Vertical") != 0) {
 					transform.position = Vector3.Lerp(transform.position, transform.position + (right + forward) / 1.3f, speed * Time.fixedDeltaTime);

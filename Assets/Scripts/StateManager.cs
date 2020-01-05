@@ -24,14 +24,19 @@ public class StateManager : MonoBehaviour {
 	public GameObject shadow;
 	public ParticleSystem gasParticle;
 	public ParticleSystemRenderer gasParticleRenderer;
-	[Header("Accelerate move type")]
+	[Header("Old move type")]
 	public float jellySpeed = 7;
 	public float solidSpeed = 6f;
 	public float gaseousSpeed = 4f;
+	[Header("Accelerate move type")]
+	public float jellyAccelerate = 7;
+	public float solidAccelerate = 6f;
+	public float gaseousAccelerate = 4f;
 	[Header("Rigidbody move type")]
 	public float jellySpeedRigidbody = 7;
 	public float solidSpeedRigidbody = 6f;
 	public float gaseousSpeedRigidbody = 4f;
+	[Space]
 	public AudioClip gasTransition;
 	public AudioClip jellyTransition;
 	public AudioClip solidTransition;
@@ -93,24 +98,30 @@ public class StateManager : MonoBehaviour {
 				gasParticle.startColor = gas;
 				if (pm.moveType == MoveType.Rigidbody)
 					pm.velocity = gaseousSpeedRigidbody;
+				else if (pm.moveType == MoveType.Accelerate)
+					pm.velocity = gaseousAccelerate;
 				else
-					pm.velocity = gaseousSpeed;
+					pm.speed = gaseousSpeed;
 				break;
 			case FlapperState.jelly:
 				meshRenderer.material.SetColor("_BaseColor", jelly);
 				meshRenderer.material.SetColor("_EmissionColor", jelly);
 				if (pm.moveType == MoveType.Rigidbody)
 					pm.velocity = jellySpeedRigidbody;
+				else if (pm.moveType == MoveType.Accelerate)
+					pm.velocity = jellyAccelerate;
 				else
-					pm.velocity = jellySpeed;
+					pm.speed = jellySpeed;
 				break;
 			case FlapperState.solid:
 				meshRenderer.material.SetColor("_BaseColor", solid);
 				meshRenderer.material.SetColor("_EmissionColor", solid);
 				if (pm.moveType == MoveType.Rigidbody)
 					pm.velocity = solidSpeedRigidbody;
+				else if (pm.moveType == MoveType.Accelerate)
+					pm.velocity = solidAccelerate;
 				else
-					pm.velocity = solidSpeed;
+					pm.speed = solidSpeed;
 				break;
 		}
 		if (newState == state) {

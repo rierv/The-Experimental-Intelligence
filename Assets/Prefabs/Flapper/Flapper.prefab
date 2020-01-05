@@ -669,9 +669,12 @@ MonoBehaviour:
   shadow: {fileID: 7064754474177481845}
   gasParticle: {fileID: 7777213514480896956}
   gasParticleRenderer: {fileID: 7776598632079510696}
-  jellySpeed: 6
-  solidSpeed: 5
+  jellySpeed: 8
+  solidSpeed: 7
   gaseousSpeed: 4
+  jellyAccelerate: 6
+  solidAccelerate: 5
+  gaseousAccelerate: 4
   jellySpeedRigidbody: 1.2
   solidSpeedRigidbody: 1
   gaseousSpeedRigidbody: 0.5
