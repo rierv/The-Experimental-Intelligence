@@ -10,7 +10,7 @@ public class Screenshot : MonoBehaviour {
 			Time.timeScale = 0;
 			transform.GetChild(0).gameObject.SetActive(false);
 			ScreenCapture.CaptureScreenshot("Assets\\Resources\\Levels\\" + SceneManager.GetActiveScene().name + ".png");
-			Debug.Log("Screenshot Assets\\Resources\\Levels\\" + SceneManager.GetActiveScene().name + ".png");
+			Debug.Log("Screenshot: Assets\\Resources\\Levels\\" + SceneManager.GetActiveScene().name + ".png");
 		}
 #endif
 		if (Input.GetKeyDown(KeyCode.KeypadPlus)) {
