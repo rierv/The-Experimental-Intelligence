@@ -130,7 +130,7 @@ public class StateManager : MonoBehaviour {
 			/*foreach (GameObject go in gasParticles) {
 				go.SetActive(true);
 			}*/
-			shadow.SetActive(false);
+			//shadow.SetActive(false);
 			gasParticle.Play();
 			meshRenderer.enabled = false;
 			audioSource.PlayOneShot(gasTransition);
@@ -140,7 +140,7 @@ public class StateManager : MonoBehaviour {
 			/*foreach (GameObject go in gasParticles) {
 				go.SetActive(false);
 			}*/
-			shadow.SetActive(true);
+			//shadow.SetActive(true);
 			gasParticle.Stop();
 			meshRenderer.enabled = true;
 			if (state == FlapperState.solid) {

@@ -8,7 +8,7 @@ public class Levels {
 		"Can Flapper push stuff?",
 		"Resize and Ice",
 		"Can Flapper veer?",
-		"How long can Flapper remains gaseous?",
+		"How long Flapper remains gaseous?",
 		"Can Flapper switch things?",
 		"Can Flapper absorb and throw stuff?",
 		"Switch and Heat source",

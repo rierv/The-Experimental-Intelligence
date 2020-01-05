@@ -7,7 +7,7 @@ public class Star : MonoBehaviour {
 	public float rotationAngle = 1;
 
 	void Update() {
-		transform.Rotate(Vector3.up, rotationAngle, Space.Self);
+		transform.Rotate(Vector3.up, rotationAngle * Time.timeScale, Space.Self);
 	}
 
 	private void OnTriggerEnter(Collider other) {

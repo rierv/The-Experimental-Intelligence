@@ -2275,6 +2275,7 @@ GameObject:
   - component: {fileID: 8258779137104765903}
   - component: {fileID: 5223081687395563604}
   - component: {fileID: 2290488457949125454}
+  - component: {fileID: 2420369587153396451}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -2346,6 +2347,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7c668a1c645db1c4e8a2de73b7c6a8a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2420369587153396451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8258779137104765889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64830aee70f29a24c97ae8c14adaf001, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &8305691377911515478
@@ -3339,14 +3352,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 53166762234984910}
     m_Modifications:
-    - target: {fileID: 100006, guid: 8fc06027b01064e4f885fd8dd2929310, type: 3}
-      propertyPath: m_Name
-      value: StarPickupEffect
-      objectReference: {fileID: 0}
-    - target: {fileID: 100006, guid: 8fc06027b01064e4f885fd8dd2929310, type: 3}
-      propertyPath: m_Layer
-      value: 15
-      objectReference: {fileID: 0}
     - target: {fileID: 2843179025351178847, guid: 8fc06027b01064e4f885fd8dd2929310,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3451,6 +3456,14 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 100006, guid: 8fc06027b01064e4f885fd8dd2929310, type: 3}
+      propertyPath: m_Name
+      value: StarPickupEffect
+      objectReference: {fileID: 0}
+    - target: {fileID: 100006, guid: 8fc06027b01064e4f885fd8dd2929310, type: 3}
+      propertyPath: m_Layer
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 19900006, guid: 8fc06027b01064e4f885fd8dd2929310, type: 3}
       propertyPath: m_SortingOrder
@@ -3495,14 +3508,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4049139249983826898}
     m_Modifications:
-    - target: {fileID: 100006, guid: 8fc06027b01064e4f885fd8dd2929310, type: 3}
-      propertyPath: m_Name
-      value: StarPickupEffect
-      objectReference: {fileID: 0}
-    - target: {fileID: 100006, guid: 8fc06027b01064e4f885fd8dd2929310, type: 3}
-      propertyPath: m_Layer
-      value: 15
-      objectReference: {fileID: 0}
     - target: {fileID: 2843179025351178847, guid: 8fc06027b01064e4f885fd8dd2929310,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3607,6 +3612,14 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 100006, guid: 8fc06027b01064e4f885fd8dd2929310, type: 3}
+      propertyPath: m_Name
+      value: StarPickupEffect
+      objectReference: {fileID: 0}
+    - target: {fileID: 100006, guid: 8fc06027b01064e4f885fd8dd2929310, type: 3}
+      propertyPath: m_Layer
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 19900006, guid: 8fc06027b01064e4f885fd8dd2929310, type: 3}
       propertyPath: m_SortingOrder
@@ -3651,14 +3664,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3659674279440566743}
     m_Modifications:
-    - target: {fileID: 100006, guid: 8fc06027b01064e4f885fd8dd2929310, type: 3}
-      propertyPath: m_Name
-      value: StarPickupEffect
-      objectReference: {fileID: 0}
-    - target: {fileID: 100006, guid: 8fc06027b01064e4f885fd8dd2929310, type: 3}
-      propertyPath: m_Layer
-      value: 15
-      objectReference: {fileID: 0}
     - target: {fileID: 2843179025351178847, guid: 8fc06027b01064e4f885fd8dd2929310,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3763,6 +3768,14 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 100006, guid: 8fc06027b01064e4f885fd8dd2929310, type: 3}
+      propertyPath: m_Name
+      value: StarPickupEffect
+      objectReference: {fileID: 0}
+    - target: {fileID: 100006, guid: 8fc06027b01064e4f885fd8dd2929310, type: 3}
+      propertyPath: m_Layer
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 19900006, guid: 8fc06027b01064e4f885fd8dd2929310, type: 3}
       propertyPath: m_SortingOrder
@@ -3807,10 +3820,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2863447245871311893}
     m_Modifications:
-    - target: {fileID: 1844191813266838, guid: 968c924d2be019d4b9e67647551eec3e, type: 3}
-      propertyPath: m_Name
-      value: AllStarsEffect
-      objectReference: {fileID: 0}
     - target: {fileID: 8456262372930510232, guid: 968c924d2be019d4b9e67647551eec3e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3915,6 +3924,10 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1844191813266838, guid: 968c924d2be019d4b9e67647551eec3e, type: 3}
+      propertyPath: m_Name
+      value: AllStarsEffect
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 968c924d2be019d4b9e67647551eec3e, type: 3}
