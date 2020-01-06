@@ -11,6 +11,7 @@ public class ActivateComic : MonoBehaviour, I_Activable {
 	public float fadeOutTime;
 	public float charWaitTime;
 	//public float duration;
+	public Sprite profSprite;
 
 	GameObject comicCloud;
 	private Color color;
@@ -39,9 +40,11 @@ public class ActivateComic : MonoBehaviour, I_Activable {
 	/*public bool deactivateByTrigger = false;
 	public bool activateTriggerAnyTime = false;*/
 	private float stretchLerp = 0f;
+	GameManager gameManager;
 	#endregion
 
 	private void Start() {
+		gameManager = FindObjectOfType<GameManager>();
 		comicCloud = gameObject.transform.Find("ComicCloud").gameObject;
 		comicCloud.transform.localScale = standardScale;
 		color = comicCloud.GetComponent<SpriteRenderer>().color;
@@ -186,6 +189,7 @@ public class ActivateComic : MonoBehaviour, I_Activable {
 	public void Activate(bool type = true) {
 		if (!isActive && !isAnimationRunning) {
 			StopAllCoroutines();
+			gameManager.profSprite.sprite = profSprite;
 			comicCloud.SetActive(true);
 			comicCloud.GetComponent<SpriteRenderer>().color = color;
 			isActive = true;
@@ -214,6 +218,7 @@ public class ActivateComic : MonoBehaviour, I_Activable {
 		StopAllCoroutines();
 		activateAnimation = false;
 		deactivateAnimation = true;
+		gameManager.ResetProfSprite();
 		//}
 	}
 }

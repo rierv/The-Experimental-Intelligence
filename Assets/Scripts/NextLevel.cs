@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class NextLevel : MonoBehaviour, I_Activable {
 	[HideInInspector]
 	public int nextLevel;
+	public Sprite profSprite;
 	public ActivateComic activateComic;
 	public float delayToStopFlapper = 0.1f;
 	public float delayToLoadLevel = 0.3f;
@@ -18,10 +19,12 @@ public class NextLevel : MonoBehaviour, I_Activable {
 	//Light light;
 	ParticleSystem particleSystem;
 	PlayerMove p;
+	GameManager gameManager;
 
 	//float logTimer = 0;
 
 	void Awake() {
+		gameManager = FindObjectOfType<GameManager>();
 		//light = GetComponentInChildren<Light>();
 		//light.enabled = isActive;
 		particleSystem = GetComponentInChildren<ParticleSystem>();
@@ -54,6 +57,7 @@ public class NextLevel : MonoBehaviour, I_Activable {
 
 		if (activateComic) {
 			activateComic.Activate();
+			gameManager.profSprite.sprite = profSprite;
 			yield return new WaitForSeconds(delayToLoadLevel);
 		} else {
 			yield return new WaitForSeconds(0.6f);

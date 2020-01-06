@@ -1,7 +1,19 @@
 fileFormatVersion: 2
-guid: b652ed9aff4e17c41b7cd6e1260577ea
+guid: 82d54a7c2a2e52d43819f0c1fd602c66
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: 2148453181398815142
+    second: PROFF_0
+  - first:
+      213: 1567788352931724774
+    second: PROFF_1
+  - first:
+      213: 702123701142605544
+    second: PROFF_2
+  - first:
+      213: -6311922346868881462
+    second: PROFF_3
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -40,7 +52,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -84,7 +96,91 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: PROFF_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 462
+        height: 1080
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 138c338050e9f6d4db60cc5cce0f309b
+      internalID: 2148453181398815142
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PROFF_1
+      rect:
+        serializedVersion: 2
+        x: 464
+        y: 0
+        width: 510
+        height: 1080
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ec2e956b08cc6cd4aa702cfdd042359f
+      internalID: 1567788352931724774
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PROFF_2
+      rect:
+        serializedVersion: 2
+        x: 976
+        y: 0
+        width: 496
+        height: 1080
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5cb9277048ac134449e01777946a16a6
+      internalID: 702123701142605544
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PROFF_3
+      rect:
+        serializedVersion: 2
+        x: 1472
+        y: 0
+        width: 508
+        height: 1080
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5f3ac4be00bc6a141b9229d975e9bbec
+      internalID: -6311922346868881462
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
