@@ -5,14 +5,19 @@ using UnityEngine;
 public class SwitchControlledRotation : MonoBehaviour, I_Activable
 {
     #region Attributes
+    private Transform laserObject;
     private Vector3 forward;
-    private Vector3 up;
     private Quaternion myRot;
     public float speed;
     private bool isActive = false;
     bool activable = true;
 
     #endregion
+
+    private void Start()
+    {
+        laserObject = transform.parent;
+    }
 
     public void Activate(bool type = true)
     {
@@ -31,8 +36,8 @@ public class SwitchControlledRotation : MonoBehaviour, I_Activable
             forward = new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical"));
             if (forward != Vector3.zero)
             {
-                myRot = Quaternion.LookRotation(forward, transform.up);
-                transform.rotation = myRot;
+                myRot = Quaternion.LookRotation(forward, laserObject.up);
+                laserObject.rotation = myRot;
             }
         }
     }

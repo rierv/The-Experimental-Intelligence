@@ -8,6 +8,8 @@ public class LaserMoveAndRotate : MonoBehaviour
     private Transform laserObject;
     public bool translateFlag;
     public bool rotateFlag;
+    public bool initialTranslationDirection;
+    public bool initialRotationDirection;
     //public int translateAxis;
     //public int rotateAxis;
     public Vector3 maxTranslation;
@@ -17,7 +19,6 @@ public class LaserMoveAndRotate : MonoBehaviour
     public float translationSpeed;
     public float rotationSpeed;
     private Vector3 currPos;
-    private Vector3 currEulerAngles;
     private bool translationDirection = false;
     private bool rotationDirection = false;
     #endregion
@@ -26,15 +27,8 @@ public class LaserMoveAndRotate : MonoBehaviour
     {
         laserObject = transform.parent;
         currPos = laserObject.position;
-        currEulerAngles = laserObject.eulerAngles;
-
-        if (Vector3.Distance(currPos, maxTranslation) < Vector3.Distance(currPos, minTranslation))
-            translationDirection = true;
-
-        if (Vector3.Distance(currEulerAngles, maxRotation) < Vector3.Distance(currEulerAngles, minRotation))
-            rotationDirection = true;
-
-        
+        translationDirection = initialTranslationDirection;
+        rotationDirection = initialRotationDirection;
     }
 
     private void FixedUpdate()

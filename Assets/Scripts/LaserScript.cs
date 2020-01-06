@@ -18,6 +18,7 @@ public class LaserScript : MonoBehaviour
     private Vector3[] laserPositions;
     private Vector3 laserOrigin;
     private Vector3 positionOffset;
+    //private MeshCollider meshCollider;
 
 
     void Awake()
@@ -30,6 +31,7 @@ public class LaserScript : MonoBehaviour
         laser.endColor = endColor;
         positionOffset = Vector3.zero;
         laserOrigin = transform.position;
+        //meshCollider = gameObject.AddComponent<MeshCollider>();
     }
 
     void Update()
@@ -52,6 +54,9 @@ public class LaserScript : MonoBehaviour
             laserPositions[i] = positionOffset;
         }
         laser.SetPositions(laserPositions);
+        /*Mesh mesh = new Mesh();
+        laser.BakeMesh(mesh, true);
+        meshCollider.sharedMesh = mesh;*/
     }
 
     private void CalculateLength()
@@ -62,10 +67,15 @@ public class LaserScript : MonoBehaviour
         
         for (int i = 0; i < hit.Length; i++)
         {
-            if (!hit[i].collider.isTrigger)
+            if (!hit[i].collider.isTrigger || hit[i].collider.gameObject.layer == 10)
             {
                 if (hit[i].collider.gameObject.layer == 9)
                     SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                else if (hit[i].collider.gameObject.layer == 10)
+                {
+                    LaserActivatedButtonScript buttonScript = hit[i].collider.gameObject.GetComponent<LaserActivatedButtonScript>();
+                    buttonScript.ActivateButton();
+                }
                 laserLength = (int)Mathf.Round(hit[i].distance) + 2;
                 laserPositions = new Vector3[laserLength];
                 laser.positionCount = laserLength;
