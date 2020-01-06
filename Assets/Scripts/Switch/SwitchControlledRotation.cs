@@ -37,7 +37,7 @@ public class SwitchControlledRotation : MonoBehaviour, I_Activable
             if (forward != Vector3.zero)
             {
                 myRot = Quaternion.LookRotation(forward, laserObject.up);
-                laserObject.rotation = myRot;
+                laserObject.rotation = Quaternion.Lerp(laserObject.rotation, myRot, Time.fixedDeltaTime * speed);
             }
         }
     }
