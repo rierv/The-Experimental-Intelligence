@@ -57,7 +57,8 @@ public class NextLevel : MonoBehaviour, I_Activable {
 
 		if (activateComic) {
 			activateComic.Activate();
-			gameManager.profSprite.sprite = profSprite;
+			if (profSprite)
+				gameManager.profSprite.sprite = profSprite;
 			yield return new WaitForSeconds(delayToLoadLevel);
 		} else {
 			yield return new WaitForSeconds(0.6f);
