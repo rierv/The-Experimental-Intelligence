@@ -7,6 +7,7 @@ public class IsTouchingGround : MonoBehaviour {
 	int colliderCount = 0;
 	Vector3 offset;
     bool waitForLanding = false;
+    public float coyoteTime = 0.05f;
 
     void Awake() {
 		playerMove = GetComponentInParent<PlayerMove>();
@@ -32,18 +33,21 @@ public class IsTouchingGround : MonoBehaviour {
 	}
 
 	void ApplyChanges() {
-		if (colliderCount > 0 && !playerMove.canJump && !waitForLanding) {
+		if (colliderCount > 0) {
+           //Debug.Log("HERE");
 			playerMove.canJump = true;
 			playerMove.collider.material.frictionCombine = PhysicMaterialCombine.Average;
-		} else if (colliderCount <= 0 && playerMove.canJump && waitForLanding) {
-			playerMove.collider.material.frictionCombine = PhysicMaterialCombine.Minimum;
+            StopAllCoroutines();
+		} else {
+            //Debug.Log("HERE2");
+            playerMove.collider.material.frictionCombine = PhysicMaterialCombine.Minimum;
             StartCoroutine(StopJumping());
 		}
 	}
     IEnumerator StopJumping()
     {
         waitForLanding = true;
-        yield return new WaitForSeconds(.05f);
+        yield return new WaitForSeconds(coyoteTime);
         waitForLanding = false;
         playerMove.canJump = false;
     }
