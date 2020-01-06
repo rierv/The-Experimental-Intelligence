@@ -754,7 +754,7 @@ PrefabInstance:
     - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
         type: 3}
       propertyPath: completeText
-      value: Look at that! Your body can take any shape!
+      value: as a jelly, your body can take any shape!
       objectReference: {fileID: 0}
     - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
         type: 3}
@@ -2898,6 +2898,14 @@ PrefabInstance:
       propertyPath: Priority
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 563335559, guid: 7fd10ec0c1708c3458fb091fd7d1d232, type: 3}
+      propertyPath: m_Size.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 563335559, guid: 7fd10ec0c1708c3458fb091fd7d1d232, type: 3}
+      propertyPath: m_Center.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7fd10ec0c1708c3458fb091fd7d1d232, type: 3}
 --- !u!1 &35682360708743968
@@ -3352,7 +3360,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91f21fd789d43e24eabeedad4e621ce6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upperLockerY: 9.5
+  upperLockerY: 9.25
   lowerLockerY: 12.61
   doorOpenTime: 10
   goingUp: 0

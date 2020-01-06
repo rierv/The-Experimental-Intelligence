@@ -13,6 +13,7 @@ public class BoneResizer : MonoBehaviour, I_Activable
     List<Transform> bones;
     GameObject Root;
     GameObject Core;
+    GameObject Model;
     public float scaleVelocity = 5;
     bool transformation=true;
     bool starting = false;
@@ -23,6 +24,7 @@ public class BoneResizer : MonoBehaviour, I_Activable
     {
         Root = GameObject.Find("Root");
         Core = GameObject.Find("CORE");
+        Model = GameObject.Find("Flapper model");
         state = Core.GetComponent<StateManager>();
         oldScale = FlapperModel.transform.localScale;
         bones = new List<Transform>();
@@ -38,7 +40,11 @@ public class BoneResizer : MonoBehaviour, I_Activable
         //Flapper.transform.localPosition = Vector3.Lerp(Flapper.transform.localPosition, Core.transform.position, Time.deltaTime*100);
         //Core.transform.localPosition = Vector3.zero;
 
-        if ((activate&&active)||waitingForJellyState) FlapperModel.transform.localScale = Vector3.Lerp(FlapperModel.transform.localScale, newScale, Time.deltaTime * scaleVelocity);
+        if ((activate && active) || waitingForJellyState)
+        {
+            FlapperModel.transform.localScale = Vector3.Lerp(FlapperModel.transform.localScale, newScale, Time.deltaTime * scaleVelocity);
+            Model.transform.position = Core.transform.position;
+        }
         else if (FlapperModel.transform.localScale != oldScale) FlapperModel.transform.localScale = Vector3.Lerp(FlapperModel.transform.localScale, oldScale, Time.deltaTime * scaleVelocity);
         if (waitingForJellyState && (state.state == FlapperState.jelly|| state.state == FlapperState.gaseous)) waitingForJellyState = false;
         if (state.state == FlapperState.solid && transformation&&active)
