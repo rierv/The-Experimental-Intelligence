@@ -28,7 +28,7 @@ public class ButtonScript : MonoBehaviour {
 	}
 
 	private void OnTriggerEnter(Collider other) {
-		if (timer <= 0 && other.CompareTag("Player") || (other.gameObject.layer == 13 || other.gameObject.layer == 12) && !other.isTrigger) {
+		if (timer <= 0 && (other.GetComponent<StateManager>() && other.GetComponent<StateManager>().state != FlapperState.gaseous) || (other.gameObject.layer == 13 || other.gameObject.layer == 12) && !other.isTrigger) {
 			foreach (I_Activable ac in activables) {
 				ac.Activate();
 			}
@@ -39,8 +39,8 @@ public class ButtonScript : MonoBehaviour {
 	}
 
 	private void OnTriggerStay(Collider other) {
-		if (other.CompareTag("Player") || (other.gameObject.layer == 13 || other.gameObject.layer == 12) && !other.isTrigger) {
-			if (continousActivate) {
+		if ((other.GetComponent<StateManager>() && other.GetComponent<StateManager>().state != FlapperState.gaseous) || (other.gameObject.layer == 13 || other.gameObject.layer == 12) && !other.isTrigger) {
+			if (continousActivate || !waiting) {
 				foreach (I_Activable ac in activables) {
 					ac.Activate();
 				}
@@ -51,7 +51,7 @@ public class ButtonScript : MonoBehaviour {
 	}
 
 	private void OnTriggerExit(Collider other) {
-		if (other.CompareTag("Player") || (other.gameObject.layer == 13 || other.gameObject.layer == 12) && !other.isTrigger) {
+		if ((other.GetComponent<StateManager>() && other.GetComponent<StateManager>().state != FlapperState.gaseous) || (other.gameObject.layer == 13 || other.gameObject.layer == 12) && !other.isTrigger) {
 			waiting = false;
 		}
 	}
