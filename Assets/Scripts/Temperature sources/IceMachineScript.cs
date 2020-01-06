@@ -35,7 +35,7 @@ public class IceMachineScript : MonoBehaviour, I_Activable {
 	private bool isDoorOpen;
 	Vector3 throwForce;
 	Vector3 DoorStartpos;
-	bool newBlockNeeded = true;
+	public bool newBlockNeeded = true;
 	bool activable = true;
 
 	#endregion
@@ -84,7 +84,7 @@ public class IceMachineScript : MonoBehaviour, I_Activable {
 	}
 
 	public IEnumerator newBlockCoroutine() {
-		if (active) {
+		if (active && !isDoorOpen) {
 			if (instance != null) {
 				if (instance.GetComponentInChildren<TemperatureBlock>()) instance.GetComponentInChildren<TemperatureBlock>().fadeOut();
 
@@ -118,8 +118,8 @@ public class IceMachineScript : MonoBehaviour, I_Activable {
 	}
 
 	public void Deactivate() {
-        //StopAllCoroutines();
-        foreach (Transform cube in cubeQueue) Destroy(cube.gameObject);
+		//StopAllCoroutines();
+		foreach (Transform cube in cubeQueue) Destroy(cube.gameObject);
 		active = false;
 		topIcon.material = topIconMaterialOff;
 		door.material = doorMaterialOff;
