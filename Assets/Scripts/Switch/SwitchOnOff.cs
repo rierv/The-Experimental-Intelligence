@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SwitchOnOff : MonoBehaviour {
+public class SwitchOnOff : MonoBehaviour, I_Activable {
 	public Transform pushableBlock;
 	public float speed;
 	public bool solidOnly;
 	public GameObject[] triggeredObjects;
+
+	public bool invertTrueFalse;
+	public bool activable = true;
 
 	AudioSource audioSource;
 	List<I_Activable> activables = new List<I_Activable>();
@@ -65,6 +68,28 @@ public class SwitchOnOff : MonoBehaviour {
 					audioSource.Play();
 				}
 			}
+		}
+	}
+
+	public void canActivate(bool enabled) {
+		activable = enabled;
+	}
+
+	public void Activate(bool type = true) {
+		if (activable) {
+			if (invertTrueFalse) {
+				targetX = -0.5f;
+			} else {
+				targetX = 0.5f;
+			}
+		}
+	}
+
+	public void Deactivate() {
+		if (invertTrueFalse) {
+			targetX = 0.5f;
+		} else {
+			targetX = -0.5f;
 		}
 	}
 }

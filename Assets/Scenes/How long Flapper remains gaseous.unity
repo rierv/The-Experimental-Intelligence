@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -1890,12 +1890,17 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.083333336
       objectReference: {fileID: 0}
-    - target: {fileID: 7038534381160143811, guid: 67bbf04775ed9a548bb0ad92d8832ea1,
+    - target: {fileID: 1914303729810141623, guid: 67bbf04775ed9a548bb0ad92d8832ea1,
         type: 3}
-      propertyPath: m_CastShadows
-      value: 0
+      propertyPath: triggeredObject
+      value: 
+      objectReference: {fileID: 569972082}
+    - target: {fileID: 1914303729810141623, guid: 67bbf04775ed9a548bb0ad92d8832ea1,
+        type: 3}
+      propertyPath: maxY
+      value: 0.05
       objectReference: {fileID: 0}
-    - target: {fileID: 2099103607206767511, guid: 67bbf04775ed9a548bb0ad92d8832ea1,
+    - target: {fileID: 7038534381160143811, guid: 67bbf04775ed9a548bb0ad92d8832ea1,
         type: 3}
       propertyPath: m_CastShadows
       value: 0
@@ -1930,7 +1935,7 @@ PrefabInstance:
       propertyPath: triggeredObjects.Array.data[2]
       value: 
       objectReference: {fileID: 1358836455}
-    - target: {fileID: 4707193427259474354, guid: 67bbf04775ed9a548bb0ad92d8832ea1,
+    - target: {fileID: 2099103607206767511, guid: 67bbf04775ed9a548bb0ad92d8832ea1,
         type: 3}
       propertyPath: m_CastShadows
       value: 0
@@ -1945,15 +1950,10 @@ PrefabInstance:
       propertyPath: m_CastShadows
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1914303729810141623, guid: 67bbf04775ed9a548bb0ad92d8832ea1,
+    - target: {fileID: 4707193427259474354, guid: 67bbf04775ed9a548bb0ad92d8832ea1,
         type: 3}
-      propertyPath: triggeredObject
-      value: 
-      objectReference: {fileID: 569972082}
-    - target: {fileID: 1914303729810141623, guid: 67bbf04775ed9a548bb0ad92d8832ea1,
-        type: 3}
-      propertyPath: maxY
-      value: 0.05
+      propertyPath: m_CastShadows
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 67bbf04775ed9a548bb0ad92d8832ea1, type: 3}
@@ -2353,6 +2353,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1914303729810141623, guid: 67bbf04775ed9a548bb0ad92d8832ea1,
+        type: 3}
+      propertyPath: triggeredObject
+      value: 
+      objectReference: {fileID: 569972082}
+    - target: {fileID: 1914303729810141623, guid: 67bbf04775ed9a548bb0ad92d8832ea1,
+        type: 3}
+      propertyPath: maxY
+      value: 0.05
+      objectReference: {fileID: 0}
     - target: {fileID: 1773163765994516024, guid: 67bbf04775ed9a548bb0ad92d8832ea1,
         type: 3}
       propertyPath: triggeredObjects.Array.size
@@ -2377,16 +2387,6 @@ PrefabInstance:
         type: 3}
       propertyPath: triggeredObjects.Array.data[1]
       value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1914303729810141623, guid: 67bbf04775ed9a548bb0ad92d8832ea1,
-        type: 3}
-      propertyPath: triggeredObject
-      value: 
-      objectReference: {fileID: 569972082}
-    - target: {fileID: 1914303729810141623, guid: 67bbf04775ed9a548bb0ad92d8832ea1,
-        type: 3}
-      propertyPath: maxY
-      value: 0.05
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 67bbf04775ed9a548bb0ad92d8832ea1, type: 3}
@@ -3233,8 +3233,7 @@ PrefabInstance:
     - target: {fileID: 8358367531903826270, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
         type: 3}
       propertyPath: completeText
-      value: "Flapper, watch out for those lasers: if you touch them, you\u2019ll
-        be forced to start again from the very beginning!"
+      value: 'Flapper, watch out for those lasers: they will activate those air fans!'
       objectReference: {fileID: 0}
     - target: {fileID: 1639097164264343616, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
         type: 3}
@@ -5345,6 +5344,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1914303729810141623, guid: 67bbf04775ed9a548bb0ad92d8832ea1,
+        type: 3}
+      propertyPath: triggeredObject
+      value: 
+      objectReference: {fileID: 569972082}
+    - target: {fileID: 1914303729810141623, guid: 67bbf04775ed9a548bb0ad92d8832ea1,
+        type: 3}
+      propertyPath: maxY
+      value: 0.05
+      objectReference: {fileID: 0}
     - target: {fileID: 1773163765994516024, guid: 67bbf04775ed9a548bb0ad92d8832ea1,
         type: 3}
       propertyPath: triggeredObjects.Array.size
@@ -5385,15 +5394,5 @@ PrefabInstance:
       propertyPath: triggeredObjects.Array.data[4]
       value: 
       objectReference: {fileID: 1950647334}
-    - target: {fileID: 1914303729810141623, guid: 67bbf04775ed9a548bb0ad92d8832ea1,
-        type: 3}
-      propertyPath: triggeredObject
-      value: 
-      objectReference: {fileID: 569972082}
-    - target: {fileID: 1914303729810141623, guid: 67bbf04775ed9a548bb0ad92d8832ea1,
-        type: 3}
-      propertyPath: maxY
-      value: 0.05
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 67bbf04775ed9a548bb0ad92d8832ea1, type: 3}
