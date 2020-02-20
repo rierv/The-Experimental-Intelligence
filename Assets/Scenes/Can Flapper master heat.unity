@@ -423,8 +423,19 @@ PrefabInstance:
       propertyPath: triggeredObjects.Array.data[0]
       value: 
       objectReference: {fileID: 1737827123}
+    - target: {fileID: 720631329428860913, guid: b6d23a3a15586f54a9af1e7d6b066b9b,
+        type: 3}
+      propertyPath: activable
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b6d23a3a15586f54a9af1e7d6b066b9b, type: 3}
+--- !u!1 &611302078 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 720631329428860915, guid: b6d23a3a15586f54a9af1e7d6b066b9b,
+    type: 3}
+  m_PrefabInstance: {fileID: 611302077}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &612117348
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2415,9 +2426,15 @@ PrefabInstance:
       propertyPath: completeText
       value: Ok, Flapper, you've learned heat. Now it's time to master it!
       objectReference: {fileID: 0}
-    - target: {fileID: 7847180, guid: ad9e8bf70f33ad04db8be7a2f3c3c835, type: 3}
-      propertyPath: m_Enabled
-      value: 1
+    - target: {fileID: 1639097164264343616, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8358367530877241013, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7847181, guid: ad9e8bf70f33ad04db8be7a2f3c3c835, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2427,19 +2444,13 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 8358367530877241013, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1639097164264343616, guid: ad9e8bf70f33ad04db8be7a2f3c3c835,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 7847178, guid: ad9e8bf70f33ad04db8be7a2f3c3c835, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7847180, guid: ad9e8bf70f33ad04db8be7a2f3c3c835, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7847179, guid: ad9e8bf70f33ad04db8be7a2f3c3c835, type: 3}
       propertyPath: m_Enabled
@@ -2835,13 +2846,18 @@ PrefabInstance:
     - target: {fileID: 720631329428860913, guid: b6d23a3a15586f54a9af1e7d6b066b9b,
         type: 3}
       propertyPath: triggeredObjects.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 720631329428860913, guid: b6d23a3a15586f54a9af1e7d6b066b9b,
         type: 3}
       propertyPath: triggeredObjects.Array.data[0]
       value: 
       objectReference: {fileID: 1818015858}
+    - target: {fileID: 720631329428860913, guid: b6d23a3a15586f54a9af1e7d6b066b9b,
+        type: 3}
+      propertyPath: triggeredObjects.Array.data[1]
+      value: 
+      objectReference: {fileID: 611302078}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b6d23a3a15586f54a9af1e7d6b066b9b, type: 3}
 --- !u!1 &1818015858 stripped

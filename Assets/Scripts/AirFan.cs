@@ -29,8 +29,8 @@ public class AirFan : MonoBehaviour, I_Activable {
 			audioSource.Stop();
 			particleSystem.Stop();
 		}
-        if (active) Activate();
-    }
+		if (active) Activate();
+	}
 
 	private void Start() {
 		objectsinAir = new List<Rigidbody>();
@@ -43,7 +43,7 @@ public class AirFan : MonoBehaviour, I_Activable {
 		//transform.position = new Vector3 (transform.position.x, transform.position.y + (hight/2), transform.position.z);
 		surface = transform.localScale.y * airCollider.size.y;
 		flapperState = GameObject.Find("CORE").GetComponent<StateManager>();
-        
+
 	}
 
 	void Update() {
@@ -72,7 +72,7 @@ public class AirFan : MonoBehaviour, I_Activable {
 			foreach (Rigidbody o in objectsinAir) {
 				if (o) {
 					o.useGravity = true;
-					objectsinAir.Remove(o);
+					//objectsinAir.Remove(o);
 				}
 			}
 		}
@@ -88,7 +88,7 @@ public class AirFan : MonoBehaviour, I_Activable {
          * ((other.GetComponent<StateManager>() && other.GetComponent<StateManager>().state == FlapperState.jelly) || (other.GetComponent<JellyBone>() && other.GetComponent<JellyBone>().state == FlapperState.jelly))
          ma alla fine proverei così per usare anche i pushable e far levitare solo il core: */
 
-		if (active && CheckOther(other)) {
+		if (CheckOther(other)) {
 			Debug.Log("enter " + other.gameObject.name);
 
 			Rigidbody r = other.GetComponent<Rigidbody>();
@@ -100,7 +100,7 @@ public class AirFan : MonoBehaviour, I_Activable {
 		}
 	}
 	private void OnTriggerStay(Collider other) {
-		if (active && other.GetComponent<StateManager>() && other.GetComponent<StateManager>().state == FlapperState.jelly && flapperSolid == true) {
+		if (other.GetComponent<StateManager>() && other.GetComponent<StateManager>().state == FlapperState.jelly && flapperSolid == true) {
 			Debug.Log("inStay");
 			if (!objectsinAir.Contains(other.GetComponent<Rigidbody>())) objectsinAir.Add(other.GetComponent<Rigidbody>());
 			flapperSolid = false;
