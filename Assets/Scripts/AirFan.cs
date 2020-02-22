@@ -20,7 +20,7 @@ public class AirFan : MonoBehaviour, I_Activable {
 	public Rigidbody specialSpinObject;
 	public float specialSpinForce;
 	public float specialSpinOffset;
-	bool flapperSolid = false;
+	//bool flapperSolid = false;
 
 	void Awake() {
 		audioSource = GetComponent<AudioSource>();
@@ -50,7 +50,7 @@ public class AirFan : MonoBehaviour, I_Activable {
 		if (active) {
 			if (flapperState.state == FlapperState.solid && objectsinAir.Contains(flapperState.GetComponent<Rigidbody>())) {
 				objectsinAir.Remove(flapperState.GetComponent<Rigidbody>());
-				flapperSolid = true;
+				//flapperSolid = true;
 				flapperState.GetComponent<Rigidbody>().useGravity = true;
 			}
 
@@ -100,10 +100,11 @@ public class AirFan : MonoBehaviour, I_Activable {
 		}
 	}
 	private void OnTriggerStay(Collider other) {
-		if (other.GetComponent<StateManager>() && other.GetComponent<StateManager>().state == FlapperState.jelly && flapperSolid == true) {
+		if (other.GetComponent<StateManager>() && other.GetComponent<StateManager>().state == FlapperState.jelly /*&& flapperSolid == true*/) {
 			Debug.Log("inStay");
-			if (!objectsinAir.Contains(other.GetComponent<Rigidbody>())) objectsinAir.Add(other.GetComponent<Rigidbody>());
-			flapperSolid = false;
+			if (!objectsinAir.Contains(other.GetComponent<Rigidbody>()))
+				objectsinAir.Add(other.GetComponent<Rigidbody>());
+			//flapperSolid = false;
 		}
 	}
 	private void OnTriggerExit(Collider other) {
@@ -111,7 +112,7 @@ public class AirFan : MonoBehaviour, I_Activable {
 			Debug.Log("exit " + other.gameObject.name);
 			other.GetComponent<Rigidbody>().useGravity = true;
 			objectsinAir.Remove(other.GetComponent<Rigidbody>());
-			if (other.GetComponent<StateManager>()) flapperSolid = false;
+			//if (other.GetComponent<StateManager>()) flapperSolid = false;
 		}
 	}
 
