@@ -12,6 +12,8 @@ public class CameraController : MonoBehaviour {
 	public float positionOnFlapperMargin = 0.05f;
 	public float rotationOnFlapperMargin = 1;
 	[Space]
+	public bool lockYOnJump = true;
+	[Space]
 	public Transform pointer;
 	private Transform target;
 	public Transform secondTarget;
@@ -40,8 +42,8 @@ public class CameraController : MonoBehaviour {
 	bool lookAtFlapper;
 	bool rotateToFlapper;
 	[HideInInspector]
-	public bool positionOnFlapper;
-	bool rotationOnFlapper;
+	public bool positionOnFlapperX, positionOnFlapperY;
+	bool rotationOnFlapperX, rotationOnFlapperY;
 	Vector3 initPosition;
 	Quaternion initRotation;
 	//Vector3 initOffset;
@@ -62,7 +64,7 @@ public class CameraController : MonoBehaviour {
 	IEnumerator InitialCoroutine() {
 		yield return new WaitForSeconds(initialDelay);
 		lookAtFlapper = true;
-        if (secondTarget!=null||secondTargetOffset!=Vector3.zero) rotateToFlapper = true;
+		if (secondTarget != null || secondTargetOffset != Vector3.zero) rotateToFlapper = true;
 	}
 
 	IEnumerator AllowRotateToFlapper() {
@@ -70,39 +72,62 @@ public class CameraController : MonoBehaviour {
 		rotateToFlapper = true;
 	}
 
-	void Update() {
+	void FixedUpdate() {
 		if (Input.GetKeyDown(KeyCode.Tab) || Input.GetKeyDown("joystick button 2")) { // xbox button X
 			lookAtFlapper = !lookAtFlapper;
 			if (!lookAtFlapper) {
-				positionOnFlapper = false;
-				rotationOnFlapper = false;
+				positionOnFlapperX = false;
+				positionOnFlapperY = false;
+				rotationOnFlapperX = false;
+				rotationOnFlapperY = false;
 				rotateToFlapper = false;
 			} else {
-                StartCoroutine(AllowRotateToFlapper());
+				StartCoroutine(AllowRotateToFlapper());
 			}
 		}
 		if (lookAtFlapper) {
 			Vector3 newPosition = new Vector3(Mathf.Clamp(target.transform.position.x, minX, maxX) + xOffset, Mathf.Clamp(target.transform.position.y, minY, maxY) + yOffset, Mathf.Clamp(target.transform.position.z, minZ, maxZ) + zOffset);
-			//transform.position = Vector3.Lerp(transform.position, newPosition, Time.deltaTime * cameraSpeed);
-			if (positionOnFlapper) {
-				transform.position = newPosition;
-			} else {
-				transform.position = Vector3.SmoothDamp(transform.position, newPosition, ref velocity, cameraSpeed, maxSpeed);
-				if (Vector3.Distance(transform.position, newPosition) < positionOnFlapperMargin) {
-					positionOnFlapper = true;
-				}
+			if (lockYOnJump && (!target.GetComponent<PlayerMove>().canJump || target.GetComponent<PlayerMove>().jumping) && target.GetComponent<StateManager>().state != FlapperState.gaseous) {
+				newPosition.y = transform.position.y;
+				positionOnFlapperY = false;
 			}
+			if (positionOnFlapperX) {
+				transform.position = new Vector3(newPosition.x, transform.position.y, newPosition.z);
+			}
+			if (positionOnFlapperY) {
+				transform.position = new Vector3(transform.position.x, newPosition.y, transform.position.z);
+			}
+			transform.position = Vector3.SmoothDamp(transform.position, newPosition, ref velocity, cameraSpeed, maxSpeed);
+			if ((target.GetComponent<PlayerMove>().canJump && !target.GetComponent<PlayerMove>().jumping) && Vector3.Distance(transform.position, newPosition) < positionOnFlapperMargin) {
+				positionOnFlapperX = true;
+				positionOnFlapperY = true;
+			}
+
 			if (allowLookAtTarget && rotateToFlapper) {
 				if (secondTarget != null) directionOnSecondTarget = secondTarget.position - target.transform.position;
 				pointer.transform.LookAt(target.transform.position + directionOnSecondTarget + secondTargetOffset);
-				//transform.rotation = Quaternion.Lerp(transform.rotation, pointer.rotation, cameraRotationSpeed * Time.deltaTime);
-				if (rotationOnFlapper) {
-					transform.rotation = pointer.rotation;
-				} else {
+				if (lockYOnJump && (!target.GetComponent<PlayerMove>().canJump || target.GetComponent<PlayerMove>().jumping) && target.GetComponent<StateManager>().state != FlapperState.gaseous) {
+					Vector3 r = pointer.rotation.eulerAngles;
+					r.x = transform.rotation.eulerAngles.x;
+					pointer.rotation = Quaternion.Euler(r);
+					rotationOnFlapperY = false;
+				}
+				if (rotationOnFlapperX) {
+					Vector3 r = pointer.rotation.eulerAngles;
+					r.x = transform.rotation.eulerAngles.x;
+					transform.rotation = Quaternion.Euler(r);
+				}
+				if (rotationOnFlapperY) {
+					Vector3 r = transform.rotation.eulerAngles;
+					r.x = pointer.rotation.eulerAngles.x;
+					transform.rotation = Quaternion.Euler(r);
+				}
+				if (Quaternion.Angle(transform.rotation, pointer.rotation) >= rotationOnFlapperMargin) {
 					transform.rotation = Quaternion.RotateTowards(transform.rotation, pointer.rotation, rotationSpeed * Time.deltaTime);
-					if (Quaternion.Angle(transform.rotation, pointer.rotation) < rotationOnFlapperMargin) {
-						rotationOnFlapper = true;
-					}
+				}
+				if ((target.GetComponent<PlayerMove>().canJump && !target.GetComponent<PlayerMove>().jumping) && Quaternion.Angle(transform.rotation, pointer.rotation) < rotationOnFlapperMargin) {
+					rotationOnFlapperX = true;
+					rotationOnFlapperY = true;
 				}
 			}
 		} else {
