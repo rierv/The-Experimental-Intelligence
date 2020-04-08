@@ -108,13 +108,10 @@ public class PlayerMove : MonoBehaviour {
 				}
 			}
 		}
-	}
 
-	void Update() {
 		if (shrinking) {
 			updateShrink();
 		}
-
 		if (stateManager.state == FlapperState.gaseous) {
 			if (moveType == MoveType.Rigidbody) {
 				if (Input.GetButton("Jump")) {
@@ -131,7 +128,28 @@ public class PlayerMove : MonoBehaviour {
 				}
 				rigidbody.isKinematic = false;
 			}
-		} else if (canMove) {
+		} /*else if (canMove) {
+			if (Input.GetButtonUp("Jump") && !jumping) {
+				StartCoroutine(JumpCoroutine());
+			} else
+			if (Input.GetButton("Jump") && !jumping) {
+				if (!shrinking) {
+					shrinking = true;
+				}
+
+				if (stateManager.state == FlapperState.jelly && shrinkage <= max_shrinking) {
+					Shrink();
+				} else if (stateManager.state == FlapperState.solid) {
+					StartCoroutine(JumpCoroutine());
+				}
+			} else {
+				shrinking = false;
+			}
+		}*/
+	}
+
+	void Update() {
+		if (stateManager.state != FlapperState.gaseous && canMove) {
 			if (Input.GetButtonUp("Jump") && !jumping) {
 				StartCoroutine(JumpCoroutine());
 			} else if (Input.GetButton("Jump") && !jumping) {
