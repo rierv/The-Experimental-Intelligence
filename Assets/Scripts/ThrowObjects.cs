@@ -11,14 +11,19 @@ public class ThrowObjects : MonoBehaviour {
 	StateManager state;
 	bool ready = true;
 	bool release = false;
+    public VJHandler jsMovement;
+    JumpButtonScript Jump_Trigger;
 
-	void Start() {
-		state = GetComponent<StateManager>();
+    private void Start()
+    {
+        jsMovement = GameObject.Find("Joycon_container").GetComponent<VJHandler>();
+        Jump_Trigger = GameObject.Find("Jump_Button").GetComponent<JumpButtonScript>();
+        state = GetComponent<StateManager>();
         rotation = transform.rotation;
 	}
 
 	void Update() {
-		if (obj && state.state != FlapperState.solid && (Input.GetButtonDown("Jump") || state.state == FlapperState.gaseous)) {
+		if (obj && state.state != FlapperState.solid && (Jump_Trigger.jumpButtonHold || state.state == FlapperState.gaseous)) {
 			if (state.state == FlapperState.gaseous) {
 				release = true;
 			}
@@ -39,7 +44,7 @@ public class ThrowObjects : MonoBehaviour {
 			obj.layer = 18;
 			if (!release) {
 				audioSource.Play();
-				obj.GetComponent<Rigidbody>().AddForce((Vector3.up + (Input.GetAxis("Horizontal") * Vector3.right + Input.GetAxis("Vertical") * Vector3.forward)) * strenght, ForceMode.VelocityChange);
+				obj.GetComponent<Rigidbody>().AddForce((Vector3.up + (jsMovement.InputDirection.x * Vector3.right + jsMovement.InputDirection.y * Vector3.forward)) * strenght, ForceMode.VelocityChange);
 			}
 		}
 

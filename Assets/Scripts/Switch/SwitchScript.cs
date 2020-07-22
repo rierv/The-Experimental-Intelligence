@@ -28,17 +28,22 @@ public partial class SwitchScript : MonoBehaviour {
     FlapperCore Flapper;
     bool activateLeft = false;
     bool activateRight = false;
+    public VJHandler jsMovement;
 
-    //public AudioClip sound;
-    #endregion
+
+   
+        //public AudioClip sound;
+        #endregion
 
     private void Start() {
-        Flapper = GameObject.FindObjectOfType<FlapperCore>();
+    jsMovement = GameObject.Find("Joycon_container").GetComponent<VJHandler>();
 
-        bonesActive = true;
-		handle.GetComponent<ThrowableObject>().parentBodies.Add(handle.GetComponent<Rigidbody>());
+    Flapper = GameObject.FindObjectOfType<FlapperCore>();
 
-		if (camera) cameraPointer = camera.transform.GetChild(0).transform;
+    bonesActive = true;
+	handle.GetComponent<ThrowableObject>().parentBodies.Add(handle.GetComponent<Rigidbody>());
+
+	if (camera) cameraPointer = camera.transform.GetChild(0).transform;
 	}
 
 	private void Update() {
@@ -67,8 +72,8 @@ public partial class SwitchScript : MonoBehaviour {
 				cameraPointer.transform.LookAt(targetObject.transform);
 				camera.transform.rotation = Quaternion.Lerp(camera.transform.rotation, cameraPointer.transform.rotation, cameraRotationSpeed * Time.deltaTime);
 			}
-			float x = Input.GetAxis("Horizontal");
-			float y = Input.GetAxis("Vertical");
+			float x = jsMovement.InputDirection.x;
+			float y = jsMovement.InputDirection.x;
 
 
 

@@ -1,82 +1,224 @@
 fileFormatVersion: 2
 guid: d5c85d381fb2c7a48a6fbf1c97a8b987
 ModelImporter:
-  serializedVersion: 23
-  fileIDToRecycleName:
-    100000: Armature
-    100002: Back
-    100004: Back_end
-    100006: Down
-    100008: Down_end
-    100010: Front
-    100012: Front_end
-    100014: Left
-    100016: Left_end
-    100018: Right
-    100020: Right_end
-    100022: Root
-    100024: Sphere
-    100026: //RootNode
-    100028: Up
-    100030: Up_end
-    100032: Cube
-    100034: Back.001
-    100036: Back.001_end
-    100038: Down.001
-    100040: Down.001_end
-    100042: Front.001
-    100044: Front.001_end
-    100046: Left.001
-    100048: Left.001_end
-    100050: Right.001
-    100052: Right.001_end
-    100054: Up.001
-    100056: Up.001_end
-    100058: Left.002
-    100060: Left.002_end
-    400000: Armature
-    400002: Back
-    400004: Back_end
-    400006: Down
-    400008: Down_end
-    400010: Front
-    400012: Front_end
-    400014: Left
-    400016: Left_end
-    400018: Right
-    400020: Right_end
-    400022: Root
-    400024: Sphere
-    400026: //RootNode
-    400028: Up
-    400030: Up_end
-    400032: Cube
-    400034: Back.001
-    400036: Back.001_end
-    400038: Down.001
-    400040: Down.001_end
-    400042: Front.001
-    400044: Front.001_end
-    400046: Left.001
-    400048: Left.001_end
-    400050: Right.001
-    400052: Right.001_end
-    400054: Up.001
-    400056: Up.001_end
-    400058: Left.002
-    400060: Left.002_end
-    2100000: No Name
-    2300000: Sphere
-    3300000: Sphere
-    4300000: Sphere
-    4300002: Cube
-    9500000: //RootNode
-    13700000: Sphere
-    13700002: Cube
-    2186277476908879412: ImportLogs
+  serializedVersion: 19300
+  internalIDToNameTable:
+  - first:
+      1: 100000
+    second: Armature
+  - first:
+      1: 100002
+    second: Back
+  - first:
+      1: 100004
+    second: Back_end
+  - first:
+      1: 100006
+    second: Down
+  - first:
+      1: 100008
+    second: Down_end
+  - first:
+      1: 100010
+    second: Front
+  - first:
+      1: 100012
+    second: Front_end
+  - first:
+      1: 100014
+    second: Left
+  - first:
+      1: 100016
+    second: Left_end
+  - first:
+      1: 100018
+    second: Right
+  - first:
+      1: 100020
+    second: Right_end
+  - first:
+      1: 100022
+    second: Root
+  - first:
+      1: 100024
+    second: Sphere
+  - first:
+      1: 100026
+    second: //RootNode
+  - first:
+      1: 100028
+    second: Up
+  - first:
+      1: 100030
+    second: Up_end
+  - first:
+      1: 100032
+    second: Cube
+  - first:
+      1: 100034
+    second: Back.001
+  - first:
+      1: 100036
+    second: Back.001_end
+  - first:
+      1: 100038
+    second: Down.001
+  - first:
+      1: 100040
+    second: Down.001_end
+  - first:
+      1: 100042
+    second: Front.001
+  - first:
+      1: 100044
+    second: Front.001_end
+  - first:
+      1: 100046
+    second: Left.001
+  - first:
+      1: 100048
+    second: Left.001_end
+  - first:
+      1: 100050
+    second: Right.001
+  - first:
+      1: 100052
+    second: Right.001_end
+  - first:
+      1: 100054
+    second: Up.001
+  - first:
+      1: 100056
+    second: Up.001_end
+  - first:
+      1: 100058
+    second: Left.002
+  - first:
+      1: 100060
+    second: Left.002_end
+  - first:
+      4: 400000
+    second: Armature
+  - first:
+      4: 400002
+    second: Back
+  - first:
+      4: 400004
+    second: Back_end
+  - first:
+      4: 400006
+    second: Down
+  - first:
+      4: 400008
+    second: Down_end
+  - first:
+      4: 400010
+    second: Front
+  - first:
+      4: 400012
+    second: Front_end
+  - first:
+      4: 400014
+    second: Left
+  - first:
+      4: 400016
+    second: Left_end
+  - first:
+      4: 400018
+    second: Right
+  - first:
+      4: 400020
+    second: Right_end
+  - first:
+      4: 400022
+    second: Root
+  - first:
+      4: 400024
+    second: Sphere
+  - first:
+      4: 400026
+    second: //RootNode
+  - first:
+      4: 400028
+    second: Up
+  - first:
+      4: 400030
+    second: Up_end
+  - first:
+      4: 400032
+    second: Cube
+  - first:
+      4: 400034
+    second: Back.001
+  - first:
+      4: 400036
+    second: Back.001_end
+  - first:
+      4: 400038
+    second: Down.001
+  - first:
+      4: 400040
+    second: Down.001_end
+  - first:
+      4: 400042
+    second: Front.001
+  - first:
+      4: 400044
+    second: Front.001_end
+  - first:
+      4: 400046
+    second: Left.001
+  - first:
+      4: 400048
+    second: Left.001_end
+  - first:
+      4: 400050
+    second: Right.001
+  - first:
+      4: 400052
+    second: Right.001_end
+  - first:
+      4: 400054
+    second: Up.001
+  - first:
+      4: 400056
+    second: Up.001_end
+  - first:
+      4: 400058
+    second: Left.002
+  - first:
+      4: 400060
+    second: Left.002_end
+  - first:
+      21: 2100000
+    second: No Name
+  - first:
+      23: 2300000
+    second: Sphere
+  - first:
+      33: 3300000
+    second: Sphere
+  - first:
+      43: 4300000
+    second: Sphere
+  - first:
+      43: 4300002
+    second: Cube
+  - first:
+      95: 9500000
+    second: //RootNode
+  - first:
+      137: 13700000
+    second: Sphere
+  - first:
+      137: 13700002
+    second: Cube
+  - first:
+      41386430: 2186277476908879412
+    second: ImportLogs
   externalObjects: {}
   materials:
-    importMaterials: 1
+    materialImportMode: 1
     materialName: 0
     materialSearch: 1
     materialLocation: 1
@@ -109,6 +251,7 @@ ModelImporter:
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 0
@@ -116,30 +259,31 @@ ModelImporter:
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
-    optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
     preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
     indexFormat: 0
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 1
-    hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
-    normalSmoothAngle: 60
+    normalSmoothAngle: 120
     normalImportMode: 0
     tangentImportMode: 3
-    normalCalculationMode: 4
+    normalCalculationMode: 1
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
-    normalSmoothingSource: 0
+    normalSmoothingSource: 2
+  referencedClips: []
   importAnimation: 0
-  copyAvatar: 0
   humanDescription:
-    serializedVersion: 2
+    serializedVersion: 3
     human: []
     skeleton: []
     armTwist: 0.5
@@ -149,13 +293,16 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
+    globalScale: 100
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 1
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
+  avatarSetup: 1
   additionalBone: 0
   userData: 
   assetBundleName: 

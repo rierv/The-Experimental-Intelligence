@@ -12,6 +12,9 @@ public class ThrowableObject : MonoBehaviour
     public List<Rigidbody> parentBodies;
     public float handle_hight=1f;
     Vector3 startPos;
+    public VJHandler jsMovement;
+    
+       
     private void Awake()
     {
         parentBodies = new List<Rigidbody>();
@@ -19,6 +22,7 @@ public class ThrowableObject : MonoBehaviour
     }
     void Start()
     {
+        jsMovement = GameObject.Find("Joycon_container").GetComponent<VJHandler>();
         core = FindObjectOfType<JellyCore>();
         baseRotation = transform.rotation;
         startPos = transform.position;
@@ -43,7 +47,7 @@ public class ThrowableObject : MonoBehaviour
                 int counter = 1;
                 foreach (Rigidbody bone in parentBodies)
                 {
-                    bone.AddForce((Input.GetAxis("Horizontal") * Vector3.right + Input.GetAxis("Vertical") * Vector3.forward + Vector3.down / 2) * (SpineStrenght / ((core.transform.position - startPos).magnitude + 1)) * Time.deltaTime/counter);
+                    bone.AddForce((jsMovement.InputDirection.x * Vector3.right + jsMovement.InputDirection.y * Vector3.forward + Vector3.down / 2) * (SpineStrenght / ((core.transform.position - startPos).magnitude + 1)) * Time.deltaTime/counter);
 
 
                 }

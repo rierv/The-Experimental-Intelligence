@@ -26,8 +26,12 @@ public class DoubleSwitchPlatform : MonoBehaviour, I_Activable {
 
 	bool activable = true;
 
-	#endregion
-	private void Start() {
+    #endregion
+    public VJHandler jsMovement;
+
+    void Start()
+    {
+        jsMovement = GameObject.Find("Joycon_container").GetComponent<VJHandler>();
 		platforms = new List<Transform>();
 		foreach (Transform child in transform.GetComponentsInChildren<Transform>()) {
 			if (child.gameObject.tag == "Platform") platforms.Add(child);
@@ -51,18 +55,18 @@ public class DoubleSwitchPlatform : MonoBehaviour, I_Activable {
 					yLock = true;
 				if (yLock) {
 					if (!xLock && !zLock)
-						dir = new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical"));
+						dir = new Vector3(jsMovement.InputDirection.x, 0f, jsMovement.InputDirection.y);
 					else if (!xLock)
-						dir = new Vector3(Input.GetAxis("Horizontal"), 0f, 0f);
+						dir = new Vector3(jsMovement.InputDirection.x, 0f, 0f);
 					else if (!zLock)
-						dir = new Vector3(0f, 0f, Input.GetAxis("Vertical"));
+						dir = new Vector3(0f, 0f, jsMovement.InputDirection.y);
 				} else {
 					if (xLock && zLock)
-						dir = new Vector3(0f, Input.GetAxis("Horizontal") + Input.GetAxis("Vertical"), 0);
+						dir = new Vector3(0f, jsMovement.InputDirection.x + jsMovement.InputDirection.y, 0);
 					else if (!xLock)
-						dir = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0f);
+						dir = new Vector3(jsMovement.InputDirection.x, jsMovement.InputDirection.y, 0f);
 					else if (!zLock)
-						dir = new Vector3(0f, Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+						dir = new Vector3(0f, jsMovement.InputDirection.x, jsMovement.InputDirection.y);
 				}
 				dir = dir * velocities[i];
 				FixDirection(platform);

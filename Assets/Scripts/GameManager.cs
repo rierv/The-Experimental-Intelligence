@@ -8,18 +8,22 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour {
 	public static bool isGamePaused = false;
 	public GameObject pauseMenuUI;
-	public Button resumeButton;
+    public GameObject UI;
+
+    public Button resumeButton;
 	public Button restartButton;
 	public Button exitButton;
 	public SpriteRenderer profSprite;
 	Sprite profSpriteDefault;
+    JumpButtonScript Pause_Trigger;
 
-	void Start() {
+    void Start() {
 		profSpriteDefault = profSprite.sprite;
-	}
+        Pause_Trigger = GameObject.Find("Pause_Button").GetComponent<JumpButtonScript>();
+    }
 
 	void Update() {
-		if (Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown("joystick button 7")) {
+		if ((Pause_Trigger.jumpButtonHold&&!isGamePaused) || Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown("joystick button 7")) {
 			if (isGamePaused)
 				Resume();
 			else
@@ -33,9 +37,12 @@ public class GameManager : MonoBehaviour {
 
 	}
 
-	private void Pause() {
+	public void Pause() {
+        UI.SetActive(false);
 		pauseMenuUI.SetActive(true);
-		Time.timeScale = 0f;
+        Pause_Trigger.jumpButtonHold = false;
+
+        Time.timeScale = 0f;
 		isGamePaused = true;
 		EventSystem.current.SetSelectedGameObject(resumeButton.gameObject);
 		resumeButton.OnSelect(null);
@@ -45,7 +52,8 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void Resume() {
-		pauseMenuUI.SetActive(false);
+        UI.SetActive(true);
+        pauseMenuUI.SetActive(false);
 		Time.timeScale = 1f;
 		isGamePaused = false;
 	}
@@ -53,14 +61,16 @@ public class GameManager : MonoBehaviour {
 	public void Restart() {
 		SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 		Time.timeScale = 1f;
-	}
+        isGamePaused = false;
+    }
 
-	public void StageSelect() {
+    public void StageSelect() {
 		SceneManager.LoadScene(0); // Start
 		Time.timeScale = 1f;
-	}
+        isGamePaused = false;
+    }
 
-	public void ResetProfSprite() {
+    public void ResetProfSprite() {
 		profSprite.sprite = profSpriteDefault;
 	}
 }

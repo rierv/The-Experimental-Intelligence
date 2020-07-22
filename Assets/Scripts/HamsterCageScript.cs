@@ -12,10 +12,12 @@ public class HamsterCageScript : MonoBehaviour {
 	private bool isActive = false;
 	private float horizontalInput;
 	public GameObject bobine;
-	#endregion
+    #endregion
+    public VJHandler jsMovement;
 
-	private void Start() {
-		wheel = gameObject.GetComponentInParent<Rigidbody>();
+    private void Start() {
+        jsMovement = GameObject.Find("Joycon_container").GetComponent<VJHandler>();
+        wheel = gameObject.GetComponentInParent<Rigidbody>();
 		dynamo = bobine.GetComponentsInChildren<Transform>();
 		electricity = new GameObject[3];
 		electricity[0] = gameObject.transform.parent.parent.parent.Find("Battery").Find("BatteryElectricity").gameObject;
@@ -42,7 +44,7 @@ public class HamsterCageScript : MonoBehaviour {
 
 	private void Update() {
 		if (isActive) {
-			horizontalInput = Input.GetAxis("Horizontal");
+			horizontalInput = jsMovement.InputDirection.x;
 
 			if (horizontalInput != 0) {
 				wheel.transform.Rotate(new Vector3(0f, wheelSpeed * Time.deltaTime * -horizontalInput, 0f));

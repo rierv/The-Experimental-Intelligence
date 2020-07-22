@@ -47,7 +47,7 @@ public class JellyBone : MonoBehaviour {
 			/*if (state == FlapperState.gaseous) {
 				rigidbody.AddForce(Physics.gravity * -JellyCore.gaseousAntiGravity);
 			}*/
-			float acceleration = (coreRigidbody.velocity.y - lastCoreSpeedY) / Time.fixedDeltaTime;
+			float acceleration = ((coreRigidbody.velocity.y - lastCoreSpeedY) / Time.fixedDeltaTime)*3;
 			Vector3 force = (core.transform.position - transform.position + offset) * JellyCore.cohesion;
 			if (acceleration < -0.1f) {
 				// limit acceleration only when falling

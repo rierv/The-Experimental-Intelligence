@@ -9,8 +9,9 @@ public class LevelSelection : MonoBehaviour, I_Activable {
 	//public List<Object> levels;
 	public float selectionSpeed = 2;
 	public Image spriteRenderer;
+    public VJHandler jsMovement;
 
-	bool active = false;
+    bool active = false;
 	float counter = 0;
 	int currentLevel = 0;
 
@@ -32,10 +33,14 @@ public class LevelSelection : MonoBehaviour, I_Activable {
 		//WriteLevels( levels, "Assets/levelsNames.txt");
 
 	}
+    void Start()
+    {
+        jsMovement = GameObject.Find("Joycon_container").GetComponent<VJHandler>();
 
-	void Update() {
+    }
+    void Update() {
 		if (active) {
-			counter += Time.deltaTime * Input.GetAxis("Horizontal") * selectionSpeed;
+			counter += Time.deltaTime * jsMovement.InputDirection.x * selectionSpeed;
 			if (counter > 1 && currentLevel == Levels.names.Length - 1) {
 				currentLevel = 0;
 				setLevel();
