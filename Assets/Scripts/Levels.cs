@@ -16,5 +16,6 @@ public class Levels {
 		"Can Flapper use a rope?",
 		"Can Flapper be a hamster?",
 		"Can Flapper sink in a hurricane?",
+		"GameScenePerlin"
 	};
 }
