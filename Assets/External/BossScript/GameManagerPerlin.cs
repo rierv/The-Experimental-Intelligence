@@ -314,7 +314,7 @@ public class GameManagerPerlin : MonoBehaviour
                         {
                             RobotLight.color = Color.red;
                             lastEndPosition = matrix[xEnd, yEnd];
-                            if (currEndPosition == null || Vector3.Distance(getNodePosition(currEndPosition), getNodePosition(lastEndPosition))>2)
+                            if (currEndPosition == null || Vector3.Distance(getNodePosition(currEndPosition), getNodePosition(lastEndPosition))>1.5f)
                             {
                                 sawTheEnd = true;
                                 path = null;
@@ -347,6 +347,7 @@ public class GameManagerPerlin : MonoBehaviour
             else
             {
                 Node target;
+                if (currEndPosition != null) lastEndPosition = matrix[xEnd, yEnd];
                 currEndPosition = null;
                 target = bestNodeinSight();
                 //removeNodeFromBlockList(target);
@@ -532,6 +533,10 @@ public class GameManagerPerlin : MonoBehaviour
             }
             else seenList.Remove(n);
         }
+        foreach (Edge e in g.getConnections(currentNode))
+        {
+            if (!blockList.Contains(e.to) && !seenList.Contains(e.to)) seenList.Add(e.to);
+        }
         //seenGraph.setConnections();
         return newNodesFound;
     }
@@ -539,11 +544,14 @@ public class GameManagerPerlin : MonoBehaviour
     {
         Node candidate=null;
         nodeDiscover();
-        int near = 0, minNear=0;
         float maxDistance=0;
 
-        if (currentNode == lastEndPosition) lastEndPosition = null;
-        if (lastEndPosition != null)
+        if (currentNode == lastEndPosition)
+        {
+            lastEndPosition = null;
+            candidate = nearestAviablePosition(candidate);
+        }
+        else if (lastEndPosition != null)
         {
             candidate = lastEndPosition;
             lastEndPosition = null;
@@ -552,12 +560,8 @@ public class GameManagerPerlin : MonoBehaviour
         {
             foreach (Node n in seenList)
             {
-                near = 0;
-                foreach (Edge e in g.getConnections(n))
-                    if (!seenList.Contains(e.to)) near++;
-                if (near > minNear && Vector3.Distance(getNodePosition(n), getNodePosition(currentNode)) > maxDistance)
+                if (Vector3.Distance(getNodePosition(n), getNodePosition(currentNode)) > maxDistance)
                 {
-                    minNear = near;
                     maxDistance = Vector3.Distance(getNodePosition(n), getNodePosition(currentNode));
                     candidate = n;
                 }
@@ -620,10 +624,15 @@ public class GameManagerPerlin : MonoBehaviour
     Node nearestAviablePosition(Node candidate)
     {
         Node tmp = null;
+        float min = 0;
         if (blockList.Contains(candidate)) AddNodeConnections(candidate, matrix, blockList);
         foreach(Edge e in g.getConnections(candidate))
         {
-            if (!blockList.Contains(e.to)) tmp = e.to;
+            if (!blockList.Contains(e.to) && e.to.height > min)
+            {
+                min = e.to.height;
+                tmp = e.to;
+            }
         }
         if(blockList.Contains(candidate)) g.RemoveNodeConnections(candidate);
 
