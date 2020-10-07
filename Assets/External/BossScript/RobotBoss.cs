@@ -14,14 +14,14 @@ public class RobotBoss : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Vector3.Distance(transform.position, Core.transform.position) < 3)
+        if(Vector3.Distance(transform.position, Core.transform.position) < 2.5f)
         {
             if (Core.GetComponent<PlayerMove>().canMove == false)
             {
 
                 Core.GetComponent<ThrowObjects>().ThrowObject();
             }
-            Core.GetComponent<Rigidbody>().AddForce((Vector3.up-transform.forward-transform.up) * 11000);
+            Core.GetComponent<Rigidbody>().AddForce((Vector3.up-transform.forward-transform.up) * 13000);
         }
     }
     

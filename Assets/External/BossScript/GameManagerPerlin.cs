@@ -9,9 +9,7 @@ public class GameManagerPerlin : MonoBehaviour
 {
     public Terrain terrain;
     public int heightLevels = 3;
-    public GameObject EndButton;
     public GameObject Spawner, DisturbingSpawner;
-    public Text Score, Blocks;
     Node currentNode = null, previousNode=null;
     public enum Heuristics { Sight, Zero, Euclidian };
     public HeuristicFunction[] myHeuristics = { SightEstimator, ZeroEstimator, EuclideanEstimator };
@@ -19,7 +17,7 @@ public class GameManagerPerlin : MonoBehaviour
     public int x = 25, y = 25, speed = 25, blocks = 5, RandomSeed = 0;
     [Range(0f, 1f)] public float edgeProbability = 0.75f;
     public float delay = 0.3f, acceleration = 0f, timeElapsed=0;
-    public GameObject startMaterial = null, obstacleMaterial = null, endMaterial = null, boostMaterial = null, freezeMaterial = null, blockMaterial=null;
+    public GameObject startMaterial = null, obstacleMaterial = null, endMaterial = null, boostMaterial = null, freezeMaterial = null;
     // what to put on the scene, not really meaningful
     List<Edge> totalPath = new List<Edge>();
     protected Node[,] matrix;
@@ -60,31 +58,7 @@ public class GameManagerPerlin : MonoBehaviour
         RandomSeed = (int)System.DateTime.Now.Ticks;
         Random.InitState(RandomSeed);
         
-        if (Scenes.getParam("gridLenght") != "")
-        {
-            x = int.Parse(Scenes.getParam("gridLenght"));
-            y = int.Parse(Scenes.getParam("gridHeight"));
-            xStart = int.Parse(Scenes.getParam("xStart")) - 1;
-            yStart = int.Parse(Scenes.getParam("yStart")) - 1;
-            xEnd = int.Parse(Scenes.getParam("xEnd")) - 1;
-            yEnd = int.Parse(Scenes.getParam("yEnd")) - 1;
-            delay = 1f - float.Parse(Scenes.getParam("speed")) / 35;
-            blocks = int.Parse(Scenes.getParam("blocks"));
-            boostCount = int.Parse(Scenes.getParam("boost"));
-            freezeCount = int.Parse(Scenes.getParam("freeze"));
-            heightLevels = int.Parse(Scenes.getParam("DunesHeight"));
-            acceleration = float.Parse(Scenes.getParam("acceleration"))/10;
-            blockRegeneration = bool.Parse(Scenes.getParam("blockRegeneration"));
-            thirdPersonView = bool.Parse(Scenes.getParam("thirdPersonView"));
-            if (bool.Parse(Scenes.getParam("DisturbingF"))) DisturbingSpawner.SetActive(true);
-            if (bool.Parse(Scenes.getParam("DecorativeF"))) Spawner.SetActive(true);
-
-            if (heightLevels > 1) climbing = true;
-            if (boostCount > 0) boost = true;
-            if (freezeCount > 0) freeze = true;
-            if (!blockRegeneration) Blocks.text = "" + blocks;
-            else Blocks.text = "" + 5;
-        }
+        
 
         terrain.gameObject.SetActive(true);
         td = terrain.terrainData;
@@ -126,8 +100,6 @@ public class GameManagerPerlin : MonoBehaviour
         //endMaterial = Instantiate(endMaterial);
 
         endMaterial.transform.position = getNodePosition(matrix[xEnd, yEnd]);
-        blockMaterial = Instantiate(obstacleMaterial);
-        blockMaterial.transform.position = endMaterial.transform.position - Vector3.up;
 
         if (thirdPersonView)
         {
@@ -166,7 +138,6 @@ public class GameManagerPerlin : MonoBehaviour
             yEnd = nPosition.y;
             removeNodeFromBlockList(matrix[xEnd, yEnd]);
         }
-        if(lastBlockAllowedPosition!=null) blockMaterial.transform.position = Vector3.Lerp(blockMaterial.transform.position, getNodePosition(lastBlockAllowedPosition), Time.fixedDeltaTime);
         endMaterial.transform.position = Vector3.Lerp(endMaterial.transform.position, checkTerrainPosition(), Time.fixedDeltaTime);
         gyroPointer.transform.rotation = startRotGyro*Input.gyro.attitude;
         if(currentNode!=null) {
@@ -236,22 +207,16 @@ public class GameManagerPerlin : MonoBehaviour
         {
 
             StartCoroutine(AnimateSolution());
-            if (blockRegeneration) StartCoroutine(BlocksRecovery(10 / blocks));
             start = false;
             startRotGyro = Quaternion.Inverse(Input.gyro.attitude);
         }
         else if (Jump_Trigger.jumpButtonHold)
         {
-            Node n = g.FindNear(blockMaterial.transform.position.x, blockMaterial.transform.position.z, blockMaterial.transform.position.y, td.size.x/x, td.size.z/y, xEnd, yEnd);
-            if (n != null && !blockList.Contains(n) && n!=matrix[xEnd,yEnd] && n!=currentNode)
+            Node n = matrix[xEnd, yEnd];
+            if (n != null && n!=currentNode)
             { 
-                if ((!boost || !boostList.Contains(n)) && (!freeze || !freezeList.Contains(n)) && !blockList.Contains(n) && int.Parse(Blocks.text) > 0 && n != currentNode)
+                if ((!boost || !boostList.Contains(n)) && (!freeze || !freezeList.Contains(n)) && !blockList.Contains(n) && n != currentNode)
                 {
-                    Blocks.text = "" + (int.Parse(Blocks.text) - 1);
-                    if (int.Parse(Blocks.text) == 0) blockMaterial.SetActive(false);
-                    GameObject newgo = Instantiate(obstacleMaterial);
-                    newgo.transform.position = blockMaterial.transform.position;//new Vector3(n.x * (td.size.x / x), n.height + 1, n.y * (td.size.z / y));
-                    n.sceneObject = newgo;
                     g.RemoveNodeConnections(n);
                     blockList.Add(n);
                     if (seenList.Contains(n)) seenList.Remove(n);
@@ -266,15 +231,7 @@ public class GameManagerPerlin : MonoBehaviour
         
     }
 
-    private IEnumerator BlocksRecovery(float pause)
-    {
-        while (!done)
-        {
-            yield return new WaitForSeconds(pause);
-            Blocks.text = "" + (int.Parse(Blocks.text) + 1);
-            if (blockMaterial.activeInHierarchy == false) blockMaterial.SetActive(true);
-        }
-    }
+    
 
     private IEnumerator AnimateSolution()
     {
@@ -289,10 +246,17 @@ public class GameManagerPerlin : MonoBehaviour
                     /*EndButton.SetActive(true);
                     EndButton.GetComponentInChildren<Text>().text = "Sorry, No solution left\nScore: " + Score.text;
                     done = true;*/
-                    yield return new WaitForSeconds(1f);
-
-                    sawTheEnd = true;
-                    path = null;
+                    yield return new WaitForSeconds(.5f);
+                    if (currentNode != matrix[xEnd, yEnd])
+                    {
+                        Node target = bestNodeinSight();
+                        if(target!=null) path = AStarSolver.Solve(g, currentNode, target, myHeuristics[(int)Heuristics.Sight]);
+                    }
+                    else
+                    {
+                        sawTheEnd = true;
+                        path = null;
+                    }
                 }
                 else
                 {
@@ -326,7 +290,6 @@ public class GameManagerPerlin : MonoBehaviour
 
                     if (path!=null && !blockList.Contains(path[count].to))
                     {
-                        Score.text = "" + (int.Parse(Score.text) + 1);
                         totalPath.Add(path[count]);
                         previousNode = currentNode;
                         currentNode = path[count].to;
@@ -379,9 +342,10 @@ public class GameManagerPerlin : MonoBehaviour
                 if (currentNode != matrix[xEnd, yEnd])
                 {
                     target = bestNodeinSight();
-                    path = AStarSolver.Solve(g, currentNode, target, myHeuristics[(int)Heuristics.Sight]);
+                    if (target != null) path = AStarSolver.Solve(g, currentNode, target, myHeuristics[(int)Heuristics.Sight]);
                 }
                 else yield return new WaitForSeconds(1f);
+                yield return new WaitForSeconds(.1f);
                 count = 0;
             }
         }
@@ -657,9 +621,6 @@ public class GameManagerPerlin : MonoBehaviour
     {
         if (blockList.Contains(n))
         {
-            if (blockMaterial.activeInHierarchy==false) blockMaterial.SetActive(true);
-            Blocks.text = "" + (int.Parse(Blocks.text) + 1);
-            Destroy(n.sceneObject);
             AddNodeConnections(n, matrix, blockList);
             blockList.Remove(n);
         }
