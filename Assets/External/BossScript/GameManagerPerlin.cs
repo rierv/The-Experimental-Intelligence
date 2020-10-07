@@ -46,6 +46,7 @@ public class GameManagerPerlin : MonoBehaviour
     Node lastBlockAllowedPosition;
     JumpButtonScript Jump_Trigger;
     Light RobotLight;
+    public GameObject mySwitch;
     void Start()
     {
 
@@ -138,6 +139,18 @@ public class GameManagerPerlin : MonoBehaviour
         lastEndPosition = null;
         currEndPosition = null;
         lastBlockAllowedPosition = null;
+        float h = 0;
+        Node candidate=null;
+        foreach (Node n in g.getNodes())
+        {
+            if (n.x>0&&n.x<x-1 && n.y>0&& n.y<y-1 && n.height >= h)
+            {
+                h = n.height;
+                candidate = n;
+            }
+        }
+        mySwitch.transform.position = getNodePosition(candidate) - Vector3.up*1.2f;
+
     }
 
     void FixedUpdate()
@@ -145,7 +158,7 @@ public class GameManagerPerlin : MonoBehaviour
         startMaterial.transform.position = Vector3.Lerp(getNodePosition(previousNode) + Vector3.up * .5f, getNodePosition(currentNode)+ Vector3.up*.5f, (timeElapsed)/(delay));
         Spawner.transform.position = startMaterial.transform.position + Vector3.up;
         Node nPosition = g.FindNear(endMaterial.transform.position.x, endMaterial.transform.position.z, endMaterial.transform.position.y, td.size.x / x, td.size.z / y, xEnd, yEnd);
-        if (xEnd != nPosition.x || yEnd != nPosition.y)
+        if (nPosition!=null&&(xEnd != nPosition.x || yEnd != nPosition.y))
         {
             lastBlockAllowedPosition = matrix[xEnd, yEnd];
             //removeNodeFromBlockList(matrix[xEnd, yEnd]);
@@ -273,21 +286,31 @@ public class GameManagerPerlin : MonoBehaviour
             {
                 if (path.Length == 0)
                 {
-                    EndButton.SetActive(true);
+                    /*EndButton.SetActive(true);
                     EndButton.GetComponentInChildren<Text>().text = "Sorry, No solution left\nScore: " + Score.text;
-                    done = true;
+                    done = true;*/
+                    yield return new WaitForSeconds(1f);
+
+                    sawTheEnd = true;
+                    path = null;
                 }
                 else
                 {
 
-                    delay = ((startingDelay + ((path[count].weight - heightLevels + 1) / 2)) / (1 + acceleration))/1.5f;
+                    delay = startingDelay*((  ((path[count].weight - heightLevels + 1) / 2)) / (1 + acceleration))/1.5f;
                     acceleration *= 1.1f;
 
                     if (path[count].to == matrix[xEnd, yEnd])
                     {
+                        /*
                         EndButton.SetActive(true);
                         EndButton.GetComponentInChildren<Text>().text = "Sorry, End of the Run\nScore: " + Score.text;
                         done = true;
+                        */
+                        yield return new WaitForSeconds(1f);
+
+                        sawTheEnd = true;
+                        path = null;
                     }
                     
                     else if (boostList.Contains(path[count].to))
@@ -301,7 +324,7 @@ public class GameManagerPerlin : MonoBehaviour
                         freezeList.Remove(path[count].to);
                     }
 
-                    if (!blockList.Contains(path[count].to))
+                    if (path!=null && !blockList.Contains(path[count].to))
                     {
                         Score.text = "" + (int.Parse(Score.text) + 1);
                         totalPath.Add(path[count]);
@@ -339,7 +362,8 @@ public class GameManagerPerlin : MonoBehaviour
                 currEndPosition = matrix[xEnd, yEnd];
                 lastEndPosition = matrix[xEnd, yEnd];
                 sawTheEnd = false;
-                path = AStarSolver.Solve(g, currentNode, currEndPosition, myHeuristics[(int)Heuristics.Sight]);
+                if(currentNode!=currEndPosition) path = AStarSolver.Solve(g, currentNode, currEndPosition, myHeuristics[(int)Heuristics.Sight]);
+                else yield return new WaitForSeconds(1f);
                 RobotLight.color = Color.red;
                 count = 0;
                 Debug.DrawRay(getNodePosition(currentNode) +Vector3.up, getNodePosition(matrix[xEnd, yEnd]) - getNodePosition(currentNode), Color.white, 20);
@@ -349,11 +373,15 @@ public class GameManagerPerlin : MonoBehaviour
                 Node target;
                 if (currEndPosition != null) lastEndPosition = matrix[xEnd, yEnd];
                 currEndPosition = null;
-                target = bestNodeinSight();
                 //removeNodeFromBlockList(target);
                 //removeNodeFromBlockList(currentNode);
                 RobotLight.color = originaNpcColor;
-                path = AStarSolver.Solve(g, currentNode, target, myHeuristics[(int)Heuristics.Sight]);
+                if (currentNode != matrix[xEnd, yEnd])
+                {
+                    target = bestNodeinSight();
+                    path = AStarSolver.Solve(g, currentNode, target, myHeuristics[(int)Heuristics.Sight]);
+                }
+                else yield return new WaitForSeconds(1f);
                 count = 0;
             }
         }
@@ -546,12 +574,7 @@ public class GameManagerPerlin : MonoBehaviour
         nodeDiscover();
         float maxDistance=0;
 
-        if (currentNode == lastEndPosition)
-        {
-            lastEndPosition = null;
-            candidate = nearestAviablePosition(candidate);
-        }
-        else if (lastEndPosition != null)
+        if (lastEndPosition != null)
         {
             candidate = lastEndPosition;
             lastEndPosition = null;
@@ -579,7 +602,27 @@ public class GameManagerPerlin : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(startMaterial.transform.position, (endMaterial.transform.position -startMaterial.transform.position).normalized, out hit, Mathf.Infinity) && hit.collider != null)
         {
-            if(Vector3.Distance(hit.collider.gameObject.transform.position, endMaterial.transform.position)<2) return true;
+            if(Vector3.Distance(hit.collider.gameObject.transform.position, endMaterial.transform.position)<3) return true;
+        }
+        if (Physics.Raycast(startMaterial.transform.position + Vector3.up, (endMaterial.transform.position - startMaterial.transform.position).normalized, out hit, Mathf.Infinity) && hit.collider != null)
+        {
+            if (Vector3.Distance(hit.collider.gameObject.transform.position, endMaterial.transform.position) < 3) return true;
+        }
+        if (Physics.Raycast(startMaterial.transform.position + Vector3.up+Vector3.right, (endMaterial.transform.position - startMaterial.transform.position).normalized, out hit, Mathf.Infinity) && hit.collider != null)
+        {
+            if (Vector3.Distance(hit.collider.gameObject.transform.position, endMaterial.transform.position) < 3) return true;
+        }
+        if (Physics.Raycast(startMaterial.transform.position + Vector3.up + Vector3.forward, (endMaterial.transform.position - startMaterial.transform.position).normalized, out hit, Mathf.Infinity) && hit.collider != null)
+        {
+            if (Vector3.Distance(hit.collider.gameObject.transform.position, endMaterial.transform.position) < 3) return true;
+        }
+        if (Physics.Raycast(startMaterial.transform.position + Vector3.up - Vector3.right, (endMaterial.transform.position - startMaterial.transform.position).normalized, out hit, Mathf.Infinity) && hit.collider != null)
+        {
+            if (Vector3.Distance(hit.collider.gameObject.transform.position, endMaterial.transform.position) < 3) return true;
+        }
+        if (Physics.Raycast(startMaterial.transform.position + Vector3.up - Vector3.forward, (endMaterial.transform.position - startMaterial.transform.position).normalized, out hit, Mathf.Infinity) && hit.collider != null)
+        {
+            if (Vector3.Distance(hit.collider.gameObject.transform.position, endMaterial.transform.position) < 3) return true;
         }
         return false;
     }

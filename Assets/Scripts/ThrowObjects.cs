@@ -9,7 +9,7 @@ public class ThrowObjects : MonoBehaviour {
 	GameObject obj = null;
 	ThrowableObject th;
 	StateManager state;
-	bool ready = true;
+	public bool ready = true;
 	bool release = false;
     public VJHandler jsMovement;
     JumpButtonScript Jump_Trigger;
@@ -31,6 +31,10 @@ public class ThrowObjects : MonoBehaviour {
 
 		}
 	}
+	public void ThrowObject()
+    {
+		StartCoroutine(Throw());
+    }
 	IEnumerator Throw() {
 		obj.GetComponent<ThrowableObject>().enabled = false;
 		th.enabled = false;
@@ -51,6 +55,7 @@ public class ThrowObjects : MonoBehaviour {
 		yield return new WaitForSeconds(0.1f);
 		if(obj) obj.layer = 12;
 		obj = null;
+		th = null;
 		ready = true;
 	}
 
@@ -74,6 +79,9 @@ public class ThrowObjects : MonoBehaviour {
 	}
     private void OnTriggerExit(Collider other)
     {
-        transform.rotation = rotation;
+		//if(obj!=null) obj.GetComponent<ThrowableObject>().enabled = false;
+		//if(th!=null) th.enabled = false;
+		//ready = false;
+		transform.rotation = rotation;
     }
 }
