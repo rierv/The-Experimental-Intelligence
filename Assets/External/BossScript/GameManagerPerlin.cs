@@ -246,7 +246,7 @@ public class GameManagerPerlin : MonoBehaviour
                     /*EndButton.SetActive(true);
                     EndButton.GetComponentInChildren<Text>().text = "Sorry, No solution left\nScore: " + Score.text;
                     done = true;*/
-                    yield return new WaitForSeconds(.5f);
+                    yield return new WaitForSeconds(.1f);
                     if (currentNode != matrix[xEnd, yEnd])
                     {
                         Node target = bestNodeinSight();
@@ -344,7 +344,7 @@ public class GameManagerPerlin : MonoBehaviour
                     target = bestNodeinSight();
                     if (target != null) path = AStarSolver.Solve(g, currentNode, target, myHeuristics[(int)Heuristics.Sight]);
                 }
-                else yield return new WaitForSeconds(1f);
+                else yield return new WaitForSeconds(.1f);
                 yield return new WaitForSeconds(.1f);
                 count = 0;
             }

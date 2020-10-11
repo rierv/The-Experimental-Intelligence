@@ -15,15 +15,15 @@ public class GameManager : MonoBehaviour {
 	public Button exitButton;
 	public SpriteRenderer profSprite;
 	Sprite profSpriteDefault;
-    JumpButtonScript Pause_Trigger;
+    PauseTouchScript Pause_Trigger;
 
     void Start() {
 		profSpriteDefault = profSprite.sprite;
-        Pause_Trigger = GameObject.Find("Pause_Button").GetComponent<JumpButtonScript>();
+        Pause_Trigger = GameObject.Find("Pause_Button").GetComponent<PauseTouchScript>();
     }
 
 	void Update() {
-		if ((Pause_Trigger.jumpButtonHold&&!isGamePaused) || Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown("joystick button 7")) {
+		if ((Pause_Trigger.pauseButtonHold && !isGamePaused)||Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown("joystick button 7")) {
 			if (isGamePaused)
 				Resume();
 			else
@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour {
 	public void Pause() {
         UI.SetActive(false);
 		pauseMenuUI.SetActive(true);
-        Pause_Trigger.jumpButtonHold = false;
+        Pause_Trigger.pauseButtonHold = false;
 
         Time.timeScale = 0f;
 		isGamePaused = true;

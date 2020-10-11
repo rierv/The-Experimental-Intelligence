@@ -15,6 +15,10 @@ public class VJHandler : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointe
         InputDirection = Vector3.zero;
     }
 
+    private void Update()
+    {
+        InputDirection = Vector3.right * Input.GetAxis("Horizontal") + Vector3.up * Input.GetAxis("Vertical");
+    }
     public void OnDrag(PointerEventData ped)
     {
         Vector2 position = Vector2.zero;
