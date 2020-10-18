@@ -60,11 +60,11 @@ public class JellyBone : MonoBehaviour {
 			CheckCorePosition();
 
 			if (!isRoot) {
-				transform.localPosition = new Vector3(
+				transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3(
 					Mathf.Clamp(transform.localPosition.x, JellyCore.minShift, JellyCore.maxShift),
 					Mathf.Clamp(transform.localPosition.y, JellyCore.minDistance, JellyCore.maxDistance),
 					Mathf.Clamp(transform.localPosition.z, JellyCore.minShift, JellyCore.maxShift)
-					);
+					), Time.fixedDeltaTime * 2);
 			}
 		}
 

@@ -61,6 +61,10 @@ public class PlayerMove : MonoBehaviour {
     bool jump = false;
     bool startToJump = false;
     JumpButtonScript Jump_Trigger;
+
+
+
+
     void Awake() {
 		rigidbody = GetComponent<Rigidbody>();
 		collider = GetComponent<SphereCollider>();
@@ -73,6 +77,7 @@ public class PlayerMove : MonoBehaviour {
 
     void Start()
     {
+
         jsMovement = GameObject.Find("Joycon_container").GetComponent<VJHandler>();
 
         Jump_Trigger = GameObject.Find("Jump_Button").GetComponent<JumpButtonScript>();
@@ -81,18 +86,25 @@ public class PlayerMove : MonoBehaviour {
     
     void FixedUpdate() {
 		if (canMove) {
-			if (rotateWithCamera)
+            
+            if (rotateWithCamera)
 				transform.rotation = Quaternion.Euler(new Vector3(0, camera.rotation.eulerAngles.y, 0));
 			Vector3 right = jsMovement.InputDirection.x * transform.right * (canMoveX ? 1 : perpendicularMoveOnPush);
 			Vector3 forward = jsMovement.InputDirection.y * transform.forward * (canMoveZ ? 1 : perpendicularMoveOnPush);
 
 			if (moveType == MoveType.Old) {
-				if (jsMovement.InputDirection.x != 0 && jsMovement.InputDirection.y != 0) {
+                
+                
+                
+                if (jsMovement.InputDirection.x != 0 && jsMovement.InputDirection.y != 0) {
 					transform.position = Vector3.Lerp(transform.position, transform.position + (right + forward) / 1.3f, speed * Time.fixedDeltaTime);
 				} else if (jsMovement.InputDirection.x != 0 || jsMovement.InputDirection.y != 0) {
 					transform.position = Vector3.Lerp(transform.position, transform.position + (right + forward), speed * Time.fixedDeltaTime);
 				}
-			} else if (moveType == MoveType.Rigidbody) {
+                if(jumping) transform.position = Vector3.Lerp(transform.position, transform.position + Vector3.up,  shrinkage * 6.5f * Time.fixedDeltaTime);
+                else if (!canJump) transform.position = Vector3.Lerp(transform.position, transform.position - Vector3.up, 10*Time.fixedDeltaTime);
+            }
+            else if (moveType == MoveType.Rigidbody) {
 				rigidbody.AddForce((right + forward) * velocity, ForceMode.VelocityChange);
 			} else if (moveType == MoveType.Accelerate) {
 				if (jsMovement.InputDirection.x != 0 && jsMovement.InputDirection.y != 0) {
@@ -180,13 +192,13 @@ public class PlayerMove : MonoBehaviour {
 				}
 			} else {
 				shrinking = false;
-			}
-		}
+                //shrinkage = 1;
+            }
+        }
 	}
 
 	void Shrink() {
 		shrinkage += Time.deltaTime * shrink_velocity;
-
 	}
 
 	IEnumerator JumpCoroutine() {
@@ -195,17 +207,33 @@ public class PlayerMove : MonoBehaviour {
 			jumping = true;
 			shrinking = false;
 			yield return 0;
+
 			if (stateManager.state != FlapperState.gaseous) {
-				if (stateManager.state == FlapperState.solid) {
-					rigidbody.AddForce(Vector3.up * solidJumpForce, ForceMode.VelocityChange);
-				} else {
-					rigidbody.AddForce(Vector3.up * jumpForce * shrinkage, ForceMode.VelocityChange);
-				}
+                if (moveType == MoveType.Old)
+                {
+                    if (stateManager.state == FlapperState.solid)
+                    {
+                    }
+                    else
+                    {
+                    }
+                }
+                else
+                {
+                    if (stateManager.state == FlapperState.solid)
+                    {
+                        rigidbody.AddForce(Vector3.up * solidJumpForce, ForceMode.VelocityChange);
+                    }
+                    else
+                    {
+                        rigidbody.AddForce(Vector3.up * jumpForce * shrinkage, ForceMode.VelocityChange);
+                    }
+                }
 			}
-			shrinkage = 1;
 			audioSource.Play();
-			yield return new WaitForSeconds(jumpingWait);
-			jumping = false;
+			yield return new WaitForSeconds(jumpingWait*shrinkage/2);
+            shrinkage = 1;
+            jumping = false;
 		}
 	}
 

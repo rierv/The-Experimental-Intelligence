@@ -42,9 +42,9 @@ SphereCollider:
   m_GameObject: {fileID: 552512033}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.1
+  m_Radius: 0.33
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &552512035
 MonoBehaviour:
@@ -477,8 +477,8 @@ Rigidbody:
   m_GameObject: {fileID: 1650412428068302601}
   serializedVersion: 2
   m_Mass: 2
-  m_Drag: 1
-  m_AngularDrag: 0.05
+  m_Drag: 5
+  m_AngularDrag: 5
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -509,7 +509,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96ad848ceb0a33e418c9c69bea09fbbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cohesion: 90
+  _cohesion: 100
   _drag: 3
   _gaseousDrag: 0.6
   _minDistance: -0.5
@@ -539,13 +539,13 @@ MonoBehaviour:
   jumpForce: 8
   solidJumpForce: 12
   maxFallingSpeedForJumping: 0.5
-  jumpingWait: 0.7
+  jumpingWait: 0.3
   gaseousFloatUpForce: 2.4
   gaseousShrinkDownForce: 5
-  bonesForce: -5
+  bonesForce: -3
   bonesForceUp: 2
-  max_shrinking: 2
-  shrink_velocity: 3
+  max_shrinking: 2.5
+  shrink_velocity: 2.5
   Up: {fileID: 1650412426688054141}
   Down: {fileID: 1650412427280877092}
   Left: {fileID: 1650412428202199701}
@@ -809,6 +809,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   strenght: 40
   audioSource: {fileID: 9125205569142975015}
+  ready: 1
   jsMovement: {fileID: 0}
 --- !u!82 &9125205569142975015
 AudioSource:

@@ -14,7 +14,7 @@ public class GameManagerPerlin : MonoBehaviour
     public enum Heuristics { Sight, Zero, Euclidian };
     public HeuristicFunction[] myHeuristics = { SightEstimator, ZeroEstimator, EuclideanEstimator };
     public Heuristics heuristicToUse = Heuristics.Sight;
-    public int x = 25, y = 25, speed = 25, blocks = 5, RandomSeed = 0;
+    public int x = 100, y = 100, speed = 25, blocks = 5, RandomSeed = 0;
     [Range(0f, 1f)] public float edgeProbability = 0.75f;
     public float delay = 0.3f, acceleration = 0f, timeElapsed=0;
     public GameObject startMaterial = null, obstacleMaterial = null, endMaterial = null, boostMaterial = null, freezeMaterial = null;
@@ -22,8 +22,8 @@ public class GameManagerPerlin : MonoBehaviour
     List<Edge> totalPath = new List<Edge>();
     protected Node[,] matrix;
     public Graph g;
-    bool done = false, boost = false, freeze = false, start = false, blockRegeneration = true, climbing = false;
-    int boostCount = 0, freezeCount = 0;
+    bool done = false, boost = true, freeze = false, start = false, blockRegeneration = true, climbing = false;
+    int boostCount = 3, freezeCount = 0;
     private int xStart = 1, yStart = 1, xEnd = 8, yEnd = 8;
     List<Node> boostList = new List<Node>(), freezeList = new List<Node>(), blockList = new List<Node>(), seenList = new List<Node>();
     float startingDelay;
@@ -138,7 +138,7 @@ public class GameManagerPerlin : MonoBehaviour
             yEnd = nPosition.y;
             removeNodeFromBlockList(matrix[xEnd, yEnd]);
         }
-        endMaterial.transform.position = Vector3.Lerp(endMaterial.transform.position, checkTerrainPosition(), Time.fixedDeltaTime);
+        endMaterial.transform.position = Vector3.Lerp(endMaterial.transform.position, checkTerrainPosition()+Vector3.up, Time.fixedDeltaTime*5);
         gyroPointer.transform.rotation = startRotGyro*Input.gyro.attitude;
         if(currentNode!=null) {
             Vector3 aimedPos = getNodePosition(currentNode);
@@ -217,6 +217,7 @@ public class GameManagerPerlin : MonoBehaviour
             { 
                 if ((!boost || !boostList.Contains(n)) && (!freeze || !freezeList.Contains(n)) && !blockList.Contains(n) && n != currentNode)
                 {
+                    endMaterial.transform.position = Vector3.Lerp(endMaterial.transform.position, checkTerrainPosition() + Vector3.up*2, Time.fixedDeltaTime * 5);
                     g.RemoveNodeConnections(n);
                     blockList.Add(n);
                     if (seenList.Contains(n)) seenList.Remove(n);
@@ -427,7 +428,7 @@ public class GameManagerPerlin : MonoBehaviour
                         {
                             GameObject newgo = Instantiate(go);
                             newgo.transform.position = new Vector3(i * (td.size.x / x), matrix[i, j].height, j * (td.size.z / y));
-                            matrix[i, j].height = height;
+                            //matrix[i, j].height = height;
                             blockCount--;
                             specialList.Add(matrix[i, j]);
                             g.changeWeight(matrix[i, j].description, weight);

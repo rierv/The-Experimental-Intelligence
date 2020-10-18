@@ -48,7 +48,7 @@ public class IsTouchingGround : MonoBehaviour {
     {
         waitForLanding = true;
         yield return new WaitForSeconds(coyoteTime);
-        waitForLanding = false;
         playerMove.canJump = false;
+        waitForLanding = false;
     }
 }

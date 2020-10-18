@@ -17,6 +17,9 @@ public class CageRepulsion : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)                          
     {
-        if (collision.gameObject.name == "CORE") collision.gameObject.GetComponent<Rigidbody>().AddForce(collision.contacts[0].normal * 3000);
+        if (collision.gameObject.name == "CORE")
+        {
+            collision.gameObject.GetComponent<Rigidbody>().AddForce(-collision.contacts[0].normal * 4000);
+        }
     }
 }

@@ -21,7 +21,7 @@ public class RobotBoss : MonoBehaviour
 
                 Core.GetComponent<ThrowObjects>().ThrowObject();
             }
-            Core.GetComponent<Rigidbody>().AddForce((Vector3.up-transform.forward-transform.up) * 13000);
+            Core.GetComponent<Rigidbody>().AddForce((Vector3.up-transform.forward*.5f-transform.up*.5f) * 8000);
         }
     }
     
