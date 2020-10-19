@@ -13,7 +13,7 @@ public class JumpButtonScript : EventTrigger
         {
             jumpButtonHold = true;
         }
-        else
+        else if (Input.GetKeyUp(KeyCode.K))
         {
             jumpButtonHold = false;
             jumpButtonRelease = true;
