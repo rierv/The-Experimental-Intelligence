@@ -722,7 +722,7 @@ PrefabInstance:
     - target: {fileID: 7457115346133579095, guid: f5546f701e6c54342b4be58165b8616b,
         type: 3}
       propertyPath: cameraSpeed
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7457115346133579095, guid: f5546f701e6c54342b4be58165b8616b,
         type: 3}
@@ -1209,12 +1209,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1176924864}
   m_CullTransparentMesh: 0
---- !u!1 &1214062212 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7457115346133579096, guid: f5546f701e6c54342b4be58165b8616b,
-    type: 3}
-  m_PrefabInstance: {fileID: 851373517}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1243894587
 GameObject:
   m_ObjectHideFlags: 0
@@ -1887,7 +1881,7 @@ PrefabInstance:
         type: 3}
       propertyPath: camera
       value: 
-      objectReference: {fileID: 1214062212}
+      objectReference: {fileID: 0}
     - target: {fileID: 8846522830043967124, guid: 585d496de35445d459cbc01e977ab8d6,
         type: 3}
       propertyPath: xCameraOffset

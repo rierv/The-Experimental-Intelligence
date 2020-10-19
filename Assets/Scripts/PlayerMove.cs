@@ -101,8 +101,8 @@ public class PlayerMove : MonoBehaviour {
 				} else if (jsMovement.InputDirection.x != 0 || jsMovement.InputDirection.y != 0) {
 					transform.position = Vector3.Lerp(transform.position, transform.position + (right + forward), speed * Time.fixedDeltaTime);
 				}
-                if(jumping) transform.position = Vector3.Lerp(transform.position, transform.position + Vector3.up,  shrinkage * 6.5f * Time.fixedDeltaTime);
-                else if (!canJump) transform.position = Vector3.Lerp(transform.position, transform.position - Vector3.up, 10*Time.fixedDeltaTime);
+                if(jumping && stateManager.state != FlapperState.gaseous) transform.position = Vector3.Lerp(transform.position, transform.position + Vector3.up,  shrinkage * 8 * Time.fixedDeltaTime);
+                if (!canJump && stateManager.state != FlapperState.gaseous) transform.position = Vector3.Lerp(transform.position, transform.position - Vector3.up, 10*Time.fixedDeltaTime);
             }
             else if (moveType == MoveType.Rigidbody) {
 				rigidbody.AddForce((right + forward) * velocity, ForceMode.VelocityChange);
@@ -213,6 +213,7 @@ public class PlayerMove : MonoBehaviour {
                 {
                     if (stateManager.state == FlapperState.solid)
                     {
+                        shrinkage = 2f;
                     }
                     else
                     {
@@ -231,7 +232,7 @@ public class PlayerMove : MonoBehaviour {
                 }
 			}
 			audioSource.Play();
-			yield return new WaitForSeconds(jumpingWait*shrinkage/2);
+			yield return new WaitForSeconds(jumpingWait*shrinkage);
             shrinkage = 1;
             jumping = false;
 		}
