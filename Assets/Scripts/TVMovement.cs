@@ -18,6 +18,6 @@ public class TVMovement : MonoBehaviour
     void Update()
     {
         this.transform.position = Vector3.Lerp(this.transform.position, new Vector3(transform.position.x, transform.position .y+ Mathf.Sin(Time.time/aplitude), transform.position.z), speed*Time.deltaTime);
-        this.transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.EulerAngles(0, -core.transform.position.x*.05f, 0), Time.deltaTime);
+        this.transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.EulerAngles(0, -(core.transform.position.x - core.transform.parent.transform.position.x)*3, 0), Time.deltaTime);
     }
 }

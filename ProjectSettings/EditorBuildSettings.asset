@@ -8,52 +8,54 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Start.unity
     guid: c78bd397cdf5e4e46a8fedc4f3976293
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Can Flapper move.unity
     guid: d1767fbd3b91efe4e97bc5d287074ad2
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/What if Flapper overheats.unity
     guid: e51c41d6a50d4b3439ccd7b04493a609
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/What if Flapper cools down.unity
     guid: dfde82da92e6bcb45856c4d55f881f8e
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Can Flapper fly.unity
     guid: 8a34a2c40da17194daf3c6df3200843b
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Can Flapper push stuff.unity
     guid: 4b7407b37291e4a45bd4220c08f30653
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/What if Flapper gets pressed.unity
     guid: 4e166eec9406baf45a9f5ce82657bee1
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Can Flapper veer.unity
     guid: 90887f5cc1b96e9449ee7dae4e320fb4
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/How long Flapper remains gaseous.unity
     guid: 924ce9923f23a614987740aca6407654
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Can Flapper switch things.unity
     guid: 98cac3db808f8624eb7e2716722a88a8
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Can Flapper absorb and throw stuff.unity
     guid: 3058c623a485b634eb33a0658e52d518
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Can Flapper master heat.unity
     guid: b8cf9370bba2dec489c4dea0e3dc852f
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Can Flapper make it on time.unity
     guid: bd69c9ea46d48374a9b5937b8ef7ec84
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Can Flapper use a rope.unity
     guid: a589a0e51d98eef42b3c785a0c3a31de
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Can Flapper be a Hamster.unity
     guid: 9905fbd6aa1b632449c0e8df322b8d8d
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Can Flapper sink in a hurricane.unity
     guid: 8af4d8bf1ffbd3d44ad9b7f92e13bbcd
-  - enabled: 1
+  - enabled: 0
     path: Assets/External/BossScene/GameScenePerlin.unity
     guid: 11effc05387f890438b9a1eca3378096
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: b7db2dcf3d8eef2409f76e87c5c5633b,
+      type: 2}

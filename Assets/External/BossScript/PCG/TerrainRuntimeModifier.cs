@@ -11,37 +11,63 @@ public class TerrainRuntimeModifier : MonoBehaviour
     int posXInTerrain; // position of the game object in terrain width (x axis)
     int posYInTerrain; // position of the game object in terrain height (z axis)
 
-    int size = 14; // the diameter of terrain portion that will raise under the game object
-    float desiredHeight = .5f; // the height we want that portion of terrain to be
+    int size = 5; // the diameter of terrain portion that will raise under the game object
+    float desiredHeight = .4f; // the height we want that portion of terrain to be
     float[,] startingHeights;
 
-    float angle = 160;
-    float speed = 1;// (2 * Mathf.PI); //2*PI in degress is 360, so you get 5 seconds to complete a circle
-    float radius = 1f;
-    float x, y;
     bool firstTouch = true, ready = true;
     JumpButtonScript jumpTrigger;
     PlayerMove player;
+
+    int circleRadius = 12;
+    int innerCircleRadius = 7;
+    public float paintWeight = 0.001f;
+    public float rayTimeInterval = 0.1f;
+    public float scaleFactor = 1f;
+    public float maxHight = 1f;
+    Vector2 userInput = Vector2.up;
+    private float rayTimer = 0;
+
+    private TerrainData terrainData;
+    private Vector3 terrainSize;
+
     void Start()
     {
 
         terr = Terrain.activeTerrain;
         hmWidth = terr.terrainData.heightmapResolution;
         hmHeight = terr.terrainData.heightmapResolution;
+        terrainData = terr.terrainData;
+        terrainSize = terr.terrainData.size;
         startingHeights = terr.GetComponent<PerlinTerrain>().GetH();
         jumpTrigger = GameObject.Find("Jump_Button").GetComponent<JumpButtonScript>();
         player = GetComponentInParent<PlayerMove>();
+
     }
 
     void FixedUpdate()
     {
+        rayTimer += Time.fixedDeltaTime;
+
+        if (rayTimer < rayTimeInterval)
+            return;
+
+        rayTimer = 0;
+        
+
         if (!player.jumping)
-        {
+            EditCircle();
+    }
+
+    void EditCircle() {
+        
             int offset = size / 2;
+            circleRadius = offset;
+            innerCircleRadius = (int)(circleRadius / 1.5f);
             float[,] heights = null;
             if (jumpTrigger.jumpButtonHold && !firstTouch)
             {
-                player.gameObject.transform.position = Vector3.Lerp(player.gameObject.transform.position, player.gameObject.transform.position+ Vector3.up*2f, Time.fixedDeltaTime);
+                player.gameObject.transform.position = Vector3.Lerp(player.gameObject.transform.position, player.gameObject.transform.position + Vector3.up * .1f, Time.fixedDeltaTime);
 
                 Vector3 tempCoord = (transform.position - terr.gameObject.transform.position);
                 Vector3 coord;
@@ -50,81 +76,51 @@ public class TerrainRuntimeModifier : MonoBehaviour
                 coord.z = tempCoord.z / terr.terrainData.size.z;
 
                 // get the position of the terrain heightmap where this game object is
-                posXInTerrain = (int)(coord.x * hmWidth);
-                posYInTerrain = (int)(coord.z * hmHeight);
+                posXInTerrain = Mathf.RoundToInt(coord.x * hmWidth);
+                posYInTerrain = Mathf.RoundToInt(coord.z * hmHeight);
 
                 if (startingHeights == null) startingHeights = terr.GetComponent<PerlinTerrain>().GetH();
 
                 heights = terr.terrainData.GetHeights(posXInTerrain - offset, posYInTerrain - offset, size, size);
 
+                userInput = player.jsMovement.InputDirection;
 
-                for (int i = 0; i < size; i++)
-                    for (int j = 0; j < size; j++)
+                for (int i = -circleRadius; i < circleRadius; i++)
+                    for (int j = -circleRadius; j < circleRadius; j++)
                     {
+                        Vector2 calc = new Vector2(i, j);
+                        if ((Vector2.Distance(calc, userInput * circleRadius) > scaleFactor && Vector2.Distance(calc, -userInput * circleRadius) > scaleFactor && userInput.x!=0&&userInput.y!=0)||
+                        (Vector2.Distance(calc, new Vector2(userInput.y, userInput.x) * circleRadius) > scaleFactor && Vector2.Distance(calc, -new Vector2(userInput.y, userInput.x) * circleRadius) > scaleFactor && (userInput.x == 0 || userInput.y == 0))
+                        ||( userInput.x == 0 && userInput.y == 0))
+                        {
+                            // for a circle, calcualate a relative Vector2
+                            // check if the magnitude is within the circle radius
+                            if (calc.magnitude <= circleRadius && calc.magnitude > innerCircleRadius)
+                            {
+
+                                if (heights[i + circleRadius, j + circleRadius] < startingHeights[posYInTerrain + i, posXInTerrain + j] + maxHight)
+                                    heights[i + circleRadius, j + circleRadius] += paintWeight;
+                                        //heights[i + circleRadius, j + circleRadius] = startingHeights[posYInTerrain - offset + i, posXInTerrain - offset + j] + paintWeight;
+
+                                    //heights[i, j] = startingHeights[posYInTerrain - offset + i, posXInTerrain - offset + j] + 1;
+                            }
+                            else if (heights[i + circleRadius, j + circleRadius] > startingHeights[posYInTerrain + i, posXInTerrain + j])
+                                heights[i + circleRadius, j + circleRadius] -= paintWeight;
+                        }
                         //if (j > size - 3 || j < 3 || i < 3 || i > size - 3)
-                        heights[i, j] = startingHeights[posYInTerrain - offset + i, posXInTerrain - offset + j] + 0.08f;
                         //else heights[i, j] = startingHeights[posYInTerrain - offset + i, posXInTerrain - offset + j];
                     }
 
 
-
-
-
-                terr.terrainData.SetHeights(posXInTerrain - offset, posYInTerrain - offset, heights);
+                terrainData.SetHeights(posXInTerrain - offset, posYInTerrain - offset, heights);
 
 
             }
             else if (jumpTrigger.jumpButtonHold && firstTouch && ready)
             {
-                player.gameObject.transform.position = Vector3.Lerp(player.gameObject.transform.position, player.gameObject.transform.position + Vector3.up * 5f, Time.fixedDeltaTime*10);
+                player.gameObject.transform.position = Vector3.Lerp(player.gameObject.transform.position, player.gameObject.transform.position + Vector3.up * .5f, Time.fixedDeltaTime * 5);
                 StartCoroutine(firstTouchToFalse());
-                /*angle = 0; //if you want to switch direction, use -= instead of +=
-                x = Mathf.Cos(angle) * radius;
-                y = Mathf.Sin(angle) * radius;
-                transform.localPosition = new Vector3(x, transform.localPosition.y, y);
-                while (angle < 360)
-                {
-                    angle += speed * Time.deltaTime; //if you want to switch direction, use -= instead of +=
-                    x = Mathf.Cos(angle) * radius;
-                    y = Mathf.Sin(angle) * radius;
-                    transform.localPosition = new Vector3(x, transform.localPosition.y, y);
-                    // get the normalized position of this game object relative to the terrain
-                    Vector3 tempCoord = (transform.position - terr.gameObject.transform.position);
-                    Vector3 coord;
-                    coord.x = tempCoord.x / terr.terrainData.size.x;
-                    coord.y = tempCoord.y / terr.terrainData.size.y;
-                    coord.z = tempCoord.z / terr.terrainData.size.z;
 
-                    // get the position of the terrain heightmap where this game object is
-                    posXInTerrain = (int)(coord.x * hmWidth);
-                    posYInTerrain = (int)(coord.z * hmHeight);
-
-                    // we set an offset so that all the raising terrain is under this game object
-                    startingHeights = terr.GetComponent<PerlinTerrain>().GetH();
-
-                    transform.position = new Vector3(transform.position.x, startingHeights[posYInTerrain, posXInTerrain] * terr.terrainData.size.y, transform.position.z);
-
-                    // get the heights of the terrain under this game object
-                    heights = terr.terrainData.GetHeights(posXInTerrain - offset, posYInTerrain - offset, size, size);
-
-                    // we set each sample of the terrain in the size to the desired height
-
-                    for (int i = 0; i < size; i++)
-                        for (int j = 0; j < size; j++)
-                            heights[i, j] = transform.position.y / terr.terrainData.size.y + 0.06f;
-
-                    // go raising the terrain slowly
-                    Debug.Log(desiredHeight + " " + transform.position.y);
-                    if (desiredHeight < transform.position.y / terr.terrainData.size.y + 0.03f)
-                        desiredHeight += Time.fixedDeltaTime / 2;
-                    else if (desiredHeight > transform.position.y / terr.terrainData.size.y + 0.05f)
-                        desiredHeight -= Time.fixedDeltaTime / 2;
-
-                    // set the new height     
-                    terr.terrainData.SetHeights(posXInTerrain - offset, posYInTerrain - offset, heights);
-
-
-                } */
 
             }
             else if (!jumpTrigger.jumpButtonHold)
@@ -144,23 +140,29 @@ public class TerrainRuntimeModifier : MonoBehaviour
 
                 heights = terr.terrainData.GetHeights(posXInTerrain - offset, posYInTerrain - offset, size, size);
 
+            userInput = player.jsMovement.InputDirection;
 
-                for (int i = 0; i < size; i++)
-                    for (int j = 0; j < size; j++)
-                    {
-                        heights[i, j] = startingHeights[posYInTerrain - offset + i, posXInTerrain - offset + j];
-                    }
+            for (int i = -circleRadius; i < circleRadius; i++)
+                for (int j = -circleRadius; j < circleRadius; j++)
+                {
+                    Vector2 calc = new Vector2(i, j);
+                    
+                    
+                        // for a circle, calcualate a relative Vector2
+                        // check if the magnitude is within the circle radius
+                        if (calc.magnitude < circleRadius && heights[i + circleRadius, j + circleRadius] > startingHeights[posYInTerrain + i, posXInTerrain + j])
+                                heights[i + circleRadius, j + circleRadius] -= paintWeight;
+                    //if (j > size - 3 || j < 3 || i < 3 || i > size - 3)
+                    //else heights[i, j] = startingHeights[posYInTerrain - offset + i, posXInTerrain - offset + j];
+                }
 
-
-
-
-
-                terr.terrainData.SetHeights(posXInTerrain - offset, posYInTerrain - offset, heights);
+            terr.terrainData.SetHeights(posXInTerrain - offset, posYInTerrain - offset, heights);
 
             }
-        }
+        
 
     }
+
     IEnumerator firstTouchToFalse()
     {
         ready = false;

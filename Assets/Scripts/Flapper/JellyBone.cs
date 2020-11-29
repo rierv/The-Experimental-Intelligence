@@ -21,7 +21,7 @@ public class JellyBone : MonoBehaviour {
 	bool notReached = false;
 
 	void Awake() {
-		core = GetComponentInParent<FlapperCore>().GetComponentInChildren<JellyCore>();
+		core = GetComponentInParent<JellyCore>();
 		coreRigidbody = core.GetComponent<Rigidbody>();
 		rigidbody = GetComponent<Rigidbody>();
 		collider = GetComponent<SphereCollider>();

@@ -29,13 +29,13 @@ public class HamsterCageScript : MonoBehaviour {
 	private void OnTriggerStay(Collider other) {
 		if (other.CompareTag("Player")) {
 			isActive = true;
-			other.GetComponent<Rigidbody>().drag = 4;
+			//other.GetComponent<Rigidbody>().drag = 4;
 		}
 	}
 
 	private void OnTriggerExit(Collider other) {
 		isActive = false;
-		if(other.GetComponent<Rigidbody>())other.GetComponent<Rigidbody>().drag = 1;
+		//if(other.GetComponent<Rigidbody>())other.GetComponent<Rigidbody>().drag = 1;
         targetObject.GetComponent<I_Activable>().Deactivate();
 
         foreach (GameObject e in electricity)
@@ -62,11 +62,11 @@ public class HamsterCageScript : MonoBehaviour {
 					targetObject.GetComponent<I_Activable>().Deactivate();
 					targetObject.GetComponent<I_Activable>().Activate(false);
 				}
-			} else {
+			} /*else {
 				foreach (GameObject e in electricity)
 					e.SetActive(false);
 				targetObject.GetComponent<I_Activable>().Deactivate();
-			}
+			}*/ // love sergio
 		}
 	}
 }

@@ -4,8 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class NextLevel : MonoBehaviour, I_Activable {
-	[HideInInspector]
-	public int nextLevel;
+    public int nextLevel;
+    [HideInInspector]
 	public Sprite profSprite;
 	public ActivateComic activateComic;
 	public float delayToStopFlapper = 0.1f;
@@ -15,7 +15,6 @@ public class NextLevel : MonoBehaviour, I_Activable {
 	public Material nonActiveMaterial;
 	public bool isActive = true;
 	bool activable = true;
-
 	//Light light;
 	ParticleSystem particleSystem;
 	PlayerMove p;
@@ -41,7 +40,7 @@ public class NextLevel : MonoBehaviour, I_Activable {
 
 	private void OnTriggerEnter(Collider other) {
 		if (isActive && other.GetComponent<JellyCore>()) {
-			StartCoroutine(LoadLevel());
+            StartCoroutine(LoadLevel());
 		}
 	}
 
@@ -63,7 +62,9 @@ public class NextLevel : MonoBehaviour, I_Activable {
 		} else {
 			yield return new WaitForSeconds(0.6f);
 		}
-
+        FindObjectOfType<LevelManager>().LoadNextLevel(nextLevel);
+        Destroy(this.gameObject);
+        /*
 		if (SceneManager.GetActiveScene().buildIndex == 0) {
 			SceneManager.LoadScene(nextLevel + 1);
 		} else if(SceneManager.GetActiveScene().buildIndex < SceneManager.sceneCountInBuildSettings-1) {
@@ -71,7 +72,7 @@ public class NextLevel : MonoBehaviour, I_Activable {
 		} else
         {
             SceneManager.LoadScene(0);
-        }
+        }*/
     }
 
 	public void Activate(bool type = true) {

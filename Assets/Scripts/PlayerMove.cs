@@ -97,12 +97,12 @@ public class PlayerMove : MonoBehaviour {
                 
                 
                 if (jsMovement.InputDirection.x != 0 && jsMovement.InputDirection.y != 0) {
-					transform.position = Vector3.Lerp(transform.position, transform.position + (right + forward) / 1.3f, speed * Time.fixedDeltaTime);
+					transform.position = Vector3.Lerp(transform.position, transform.position + (right + forward) / 1.3f / 20, speed /3 * Time.fixedDeltaTime);
 				} else if (jsMovement.InputDirection.x != 0 || jsMovement.InputDirection.y != 0) {
-					transform.position = Vector3.Lerp(transform.position, transform.position + (right + forward), speed * Time.fixedDeltaTime);
+					transform.position = Vector3.Lerp(transform.position, transform.position + (right + forward) / 20, speed/3 * Time.fixedDeltaTime);
 				}
-                if(jumping && stateManager.state != FlapperState.gaseous) transform.position = Vector3.Lerp(transform.position, transform.position + Vector3.up,  shrinkage * 8 * Time.fixedDeltaTime);
-                if (!canJump && stateManager.state != FlapperState.gaseous) transform.position = Vector3.Lerp(transform.position, transform.position - Vector3.up, 10*Time.fixedDeltaTime);
+                if(jumping && stateManager.state != FlapperState.gaseous) transform.position = Vector3.Lerp(transform.position, transform.position + Vector3.up/4,  jumpForce * shrinkage/3 * Time.fixedDeltaTime);
+                transform.position = Vector3.Lerp(transform.position, transform.position - Vector3.up/4, Time.fixedDeltaTime/2);
             }
             else if (moveType == MoveType.Rigidbody) {
 				rigidbody.AddForce((right + forward) * velocity, ForceMode.VelocityChange);
@@ -140,9 +140,9 @@ public class PlayerMove : MonoBehaviour {
 		if (stateManager.state == FlapperState.gaseous) {
 			if (moveType == MoveType.Rigidbody) {
 				if (Jump_Trigger.jumpButtonHold) {
-					rigidbody.AddForce(Vector3.up * -0.45f, ForceMode.VelocityChange);
+					rigidbody.AddForce(Vector3.up * -gaseousShrinkDownForce, ForceMode.VelocityChange);
 				} else {
-					rigidbody.AddForce(Vector3.up * 0.3f, ForceMode.VelocityChange);
+					rigidbody.AddForce(Vector3.up * gaseousFloatUpForce, ForceMode.VelocityChange);
 				}
 			} else {
 				rigidbody.isKinematic = true;
@@ -202,8 +202,9 @@ public class PlayerMove : MonoBehaviour {
 	}
 
 	IEnumerator JumpCoroutine() {
-		//Debug.Log(shrinking + " " + jumping);
-		if (shrinking && !jumping && canJump) {
+        //Debug.Log(shrinking + " " + jumping);
+        if (shrinkage > max_shrinking - .2f)//shrinking && !jumping && canJump) 
+            {
 			jumping = true;
 			shrinking = false;
 			yield return 0;
