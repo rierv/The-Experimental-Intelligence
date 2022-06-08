@@ -21,22 +21,23 @@ public class VJHandler : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointe
     private void Update()
     {
 
-        pointer.transform.rotation = startingRotation * camera.transform.rotation;
-        if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
+        pointer.transform.rotation = Camera.main.transform.rotation;
+        OnGUI();
+        /*if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
         {
-            InputDirection = Vector3.right * Input.GetAxis("Horizontal") + Vector3.up * Input.GetAxis("Vertical");
+            InputDirection = Camera.main.transform.right * Input.GetAxis("Horizontal") + Camera.main.transform.forward * Input.GetAxis("Vertical");
             
             Debug.Log("ZIMBAWUE");
-        }
+        }*/
     }
     
     void OnGUI()
     {
         //Output the rotation rate, attitude and the enabled state of the gyroscope as a Label
-        GUI.Label(new Rect(500, 350, 200, 40), "pointer  transform right " + pointer.transform.right);
-        GUI.Label(new Rect(500, 400, 200, 40), "pointer  transform forward " + pointer.transform.forward);
+        GUI.Label(new Rect(500, 350, 200, 60), "pointer  transform right " + pointer.transform.right);
+        GUI.Label(new Rect(500, 400, 200, 60), "pointer  transform forward " + pointer.transform.forward);
 
-        GUI.Label(new Rect(500, 450, 200, 40), "starting rotation   " + startingRotation);
+        GUI.Label(new Rect(500, 450, 200, 60), "starting rotation   " + startingRotation);
     }
 
     internal void setRotation(Quaternion quaternion)
@@ -60,10 +61,10 @@ public class VJHandler : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointe
 
         //float x = (jsContainer.rectTransform.pivot.x == 1f) ? position.x * 2 + 1 : position.x * 2 - 1;
         //float y = (jsContainer.rectTransform.pivot.y == 1f) ? position.y * 2 + 1 : position.y * 2 - 1;
-
+        
         Vector3 Direction = pointer.transform.right * position.x  + pointer.transform.forward * position.y;
         InputDirection = (new Vector2 (Direction.x, Direction.z)*10).normalized;
-
+        
         //InputDirection = (InputDirection.magnitude > 1) ? InputDirection.normalized : InputDirection;
 
         //to define the area in which joystick can move around

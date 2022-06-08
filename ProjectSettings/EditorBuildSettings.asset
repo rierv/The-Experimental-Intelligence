@@ -5,7 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Start.unity
     guid: c78bd397cdf5e4e46a8fedc4f3976293
   - enabled: 0
@@ -56,6 +56,11 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/External/BossScene/GameScenePerlin.unity
     guid: 11effc05387f890438b9a1eca3378096
+  - enabled: 1
+    path: Assets/Scenes/AR/ARScene.unity
+    guid: 3bfc0000976808e47af23718e415da64
   m_configObjects:
+    UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: 9c76e19db407c5043bc95453e6552c4b,
+      type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: b7db2dcf3d8eef2409f76e87c5c5633b,
       type: 2}
