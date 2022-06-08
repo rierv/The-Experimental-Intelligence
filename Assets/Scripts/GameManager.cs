@@ -9,8 +9,7 @@ public class GameManager : MonoBehaviour {
 	public static bool isGamePaused = false;
 	public GameObject pauseMenuUI;
     public GameObject UI;
-
-    public Button resumeButton;
+	public Button resumeButton;
 	public Button restartButton;
 	public Button exitButton;
 	public SpriteRenderer profSprite;
@@ -62,7 +61,7 @@ public class GameManager : MonoBehaviour {
 		SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 		Time.timeScale = 1f;
         isGamePaused = false;
-    }
+	}
 
     public void StageSelect() {
 		SceneManager.LoadScene(0); // Start

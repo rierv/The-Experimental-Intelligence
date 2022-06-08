@@ -62,7 +62,7 @@ public class VJHandler : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointe
         //float x = (jsContainer.rectTransform.pivot.x == 1f) ? position.x * 2 + 1 : position.x * 2 - 1;
         //float y = (jsContainer.rectTransform.pivot.y == 1f) ? position.y * 2 + 1 : position.y * 2 - 1;
         
-        Vector3 Direction = pointer.transform.right * position.x  + pointer.transform.forward * position.y;
+        Vector3 Direction = pointer.transform.right * position.x  + pointer.transform.forward * position.y + pointer.transform.up*position.y;
         InputDirection = (new Vector2 (Direction.x, Direction.z)*10).normalized;
         
         //InputDirection = (InputDirection.magnitude > 1) ? InputDirection.normalized : InputDirection;

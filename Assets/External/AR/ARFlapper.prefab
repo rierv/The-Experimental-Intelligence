@@ -907,7 +907,7 @@ Rigidbody:
   m_GameObject: {fileID: 3815583566328668063}
   serializedVersion: 2
   m_Mass: 2
-  m_Drag: 3
+  m_Drag: 2
   m_AngularDrag: 5
   m_UseGravity: 1
   m_IsKinematic: 0
@@ -939,13 +939,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96ad848ceb0a33e418c9c69bea09fbbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cohesion: 150
+  _cohesion: 100
   _drag: 0.5
   _gaseousDrag: 0.6
-  _minDistance: -0.1
-  _maxDistance: 0.1
-  _minShift: -0.1
-  _maxShift: 0.1
+  _minDistance: -0.2
+  _maxDistance: 0.2
+  _minShift: -0.2
+  _maxShift: 0.2
 --- !u!114 &3815583566328668032
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -961,8 +961,8 @@ MonoBehaviour:
   moveType: 2
   rotateWithCamera: 0
   flapperModel: {fileID: 3815583565816802133}
-  speed: 0.03
-  velocity: 0.03
+  speed: 0.01
+  velocity: 0.005
   acceleration: 0.01
   speedVectorMultiplier: 0.5
   accelerationSpeedVector: 0.01
@@ -972,7 +972,7 @@ MonoBehaviour:
   jumpingWait: 0.2
   gaseousFloatUpForce: 0.01
   gaseousShrinkDownForce: 0.01
-  bonesForce: -0.02
+  bonesForce: -0.1
   bonesForceUp: 0.02
   max_shrinking: 2.5
   shrink_velocity: 2.5
@@ -1121,7 +1121,7 @@ MonoBehaviour:
   jellyAccelerate: 6
   solidAccelerate: 5
   gaseousAccelerate: 4
-  jellySpeedRigidbody: 0.025
+  jellySpeedRigidbody: 0.0125
   solidSpeedRigidbody: 0.015
   gaseousSpeedRigidbody: 0.015
   gasTransition: {fileID: 8300000, guid: df6e447024bd02541b0ea3cb8f48efcb, type: 3}

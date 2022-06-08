@@ -102,7 +102,8 @@ public class PlayerMove : MonoBehaviour {
 					transform.position = Vector3.Lerp(transform.position, transform.position + (right + forward) / 20, speed/3 * Time.fixedDeltaTime);
 				}
                 if(jumping && stateManager.state != FlapperState.gaseous) transform.position = Vector3.Lerp(transform.position, transform.position + Vector3.up/4,  jumpForce * shrinkage/3 * Time.fixedDeltaTime);
-                transform.position = Vector3.Lerp(transform.position, transform.position - Vector3.up/4, Time.fixedDeltaTime/2);
+                else if (jumping && stateManager.state == FlapperState.gaseous) transform.position = Vector3.Lerp(transform.position, transform.position - Vector3.up/4, Time.fixedDeltaTime/2);
+
             }
             else if (moveType == MoveType.Rigidbody) {
 				rigidbody.AddForce((right + forward) * velocity, ForceMode.VelocityChange);
@@ -251,4 +252,8 @@ public class PlayerMove : MonoBehaviour {
 		Front.MovePosition(Front.position + Vector3.forward * force * Time.deltaTime);
 		Back.MovePosition(Back.position + Vector3.back * force * Time.deltaTime);
 	}
+    private void OnCollisionEnter(Collision collision)
+    {
+		if (collision.gameObject.tag == "Platform") transform.parent.parent = collision.gameObject.transform;
+    }
 }
