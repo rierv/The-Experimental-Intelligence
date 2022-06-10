@@ -133,8 +133,8 @@ GameObject:
   m_Component:
   - component: {fileID: 533833287}
   - component: {fileID: 533833286}
-  - component: {fileID: 533833285}
   - component: {fileID: 533833284}
+  - component: {fileID: 533833285}
   m_Layer: 0
   m_Name: AR Session Origin
   m_TagString: Untagged
@@ -156,8 +156,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Prefabs:
   - {fileID: 6459003689433547372, guid: b8dcc02299f01f84187418e10cccb5ec, type: 3}
-  - {fileID: 6459003689433547372, guid: 8973e5b729daa09488e26d8577d429a0, type: 3}
-  - {fileID: 6459003689433547372, guid: 30308f4928f3a3f4a82808e9af977517, type: 3}
+  - {fileID: 6459003689433547372, guid: 122bd167753f6c54ca37babb16793ff1, type: 3}
+  - {fileID: 948108380654130301, guid: 2eb76909f3e1872448d0991b18a6240f, type: 3}
+  - {fileID: 6459003689433547372, guid: a0ab82aae5640da42b6e79c4cda6d52d, type: 3}
+  - {fileID: 6459003689433547372, guid: bd1f52e78763806409afb2bf2ae488b7, type: 3}
+  - {fileID: 6459003689433547372, guid: 45120fa79d0d01048829fd5811b1773d, type: 3}
+  - {fileID: 6459003689433547372, guid: 6009350cf9bb2c14aa3208a88cb24e63, type: 3}
   Flapper: {fileID: 3815583567049748545, guid: 07877b913f7f89948bfcc5002004fe1d, type: 3}
   trackables: {fileID: 1580496365}
 --- !u!114 &533833285
@@ -174,7 +178,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_SerializedLibrary: {fileID: 11400000, guid: a60af330052c69243a8417c12f0080c6,
     type: 2}
-  m_MaxNumberOfMovingImages: 10
+  m_MaxNumberOfMovingImages: 7
   m_TrackedImagePrefab: {fileID: 0}
 --- !u!114 &533833286
 MonoBehaviour:
@@ -464,17 +468,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 773137180123842737, guid: 1ed9a826e558f2144a2eea601cc52b2d,
-        type: 3}
+      objectReference: {fileID: 533833284}
     - target: {fileID: 4259247478964911326, guid: 1ed9a826e558f2144a2eea601cc52b2d,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Restart
+      value: Reset
       objectReference: {fileID: 0}
     - target: {fileID: 4259247478964911326, guid: 1ed9a826e558f2144a2eea601cc52b2d,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: GameManager, Assembly-CSharp
+      value: ImageTracking, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4259247480971422044, guid: 1ed9a826e558f2144a2eea601cc52b2d,
         type: 3}

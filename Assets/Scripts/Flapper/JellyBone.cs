@@ -48,7 +48,7 @@ public class JellyBone : MonoBehaviour {
 				rigidbody.AddForce(Physics.gravity * -JellyCore.gaseousAntiGravity);
 			}*/
 			float acceleration = ((coreRigidbody.velocity.y - lastCoreSpeedY) / Time.fixedDeltaTime)*3;
-			Vector3 force = (core.transform.position - transform.position + offset) * JellyCore.cohesion;
+			Vector3 force = ((core.transform.position - transform.position) + offset) * JellyCore.cohesion;
 			if (acceleration < -0.1f) {
 				// limit acceleration only when falling
 				force.y = Mathf.Clamp(force.y, acceleration, float.MaxValue);
@@ -57,14 +57,23 @@ public class JellyBone : MonoBehaviour {
 			lastCoreSpeedY = coreRigidbody.velocity.y;
 
 			rigidbody.MoveRotation(baseRotation);
-			CheckCorePosition();
+			//CheckCorePosition();
 
 			if (!isRoot) {
+				if ((core.transform.position - transform.position).magnitude > .05f)
+				{
+					if (core.transform.position.y > transform.position.y) rigidbody.AddForce(Vector3.up * 2);
+					if (core.transform.position.z > transform.position.z) rigidbody.AddForce(Vector3.forward * 2);
+					if (core.transform.position.z < transform.position.z) rigidbody.AddForce(-Vector3.forward * 2);
+					if (core.transform.position.x > transform.position.x) rigidbody.AddForce(Vector3.right * 2);
+					if (core.transform.position.x > transform.position.x) rigidbody.AddForce(-Vector3.right * 2);
+
+				}
 				transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3(
 					Mathf.Clamp(transform.localPosition.x, JellyCore.minShift, JellyCore.maxShift),
 					Mathf.Clamp(transform.localPosition.y, JellyCore.minDistance, JellyCore.maxDistance),
 					Mathf.Clamp(transform.localPosition.z, JellyCore.minShift, JellyCore.maxShift)
-					), Time.fixedDeltaTime * 2);
+					), Time.fixedDeltaTime * 2 * (core.transform.position - transform.position).magnitude);
 			}
 		}
 

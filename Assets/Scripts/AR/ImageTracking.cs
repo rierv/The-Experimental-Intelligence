@@ -16,20 +16,7 @@ public class ImageTracking : MonoBehaviour
 
     private void Awake()
     {
-        foreach(GameObject o in Prefabs)
-        {
-            GameObject newPrefab = Instantiate(o, Vector3.zero, Quaternion.identity);
-            newPrefab.name = o.name;
-            placedPrefabs.Add(o.name, newPrefab);
-            newPrefab.transform.parent = trackables.transform;
-            if (newPrefab.name == "Start")
-            {
-                Flapper = Instantiate(Flapper, Vector3.up / 2, Quaternion.identity);
-                Flapper.transform.parent = newPrefab.transform;
-            }
-            newPrefab.SetActive(false);
-
-        }
+        spawnObjects();
 
         trackedImageManager = FindObjectOfType<ARTrackedImageManager>();
 
@@ -44,6 +31,23 @@ public class ImageTracking : MonoBehaviour
         trackedImageManager.trackedImagesChanged -= ImageChanged;
     }
 
+    private void spawnObjects()
+    {
+        foreach(GameObject o in Prefabs)
+        {
+            GameObject newPrefab = Instantiate(o, Vector3.zero, Quaternion.identity);
+            newPrefab.name = o.name;
+            placedPrefabs.Add(o.name, newPrefab);
+            newPrefab.transform.parent = trackables.transform;
+            if (newPrefab.name == "Start")
+            {
+                Flapper = Instantiate(Flapper, Vector3.up / 2, Quaternion.identity);
+                Flapper.transform.parent = newPrefab.transform;
+            }
+            newPrefab.SetActive(false);
+
+        }
+    }
     private void ImageChanged (ARTrackedImagesChangedEventArgs eventArgs)
     {
         foreach(ARTrackedImage trackedImage in eventArgs.added)
@@ -66,20 +70,24 @@ public class ImageTracking : MonoBehaviour
 
     private void UpdateObject(ARTrackedImage trackedImage)
     {
-        placedPrefabs[trackedImage.referenceImage.name].SetActive(true);
-        placedPrefabs[trackedImage.referenceImage.name].transform.SetPositionAndRotation(trackedImage.transform.position, Quaternion.identity);
-    }
-    private void Reset()
-    {
-        foreach(KeyValuePair<string, GameObject> o in placedPrefabs)
+        if (trackedImage.trackingState == UnityEngine.XR.ARSubsystems.TrackingState.Tracking)
         {
-            if (o.Key == "Start")
-            {
-                Flapper.transform.position = o.Value.transform.position + Vector3.up / 2;
-                Flapper.transform.parent = o.Value.transform;
-            }
-            o.Value.SetActive(false);
+            placedPrefabs[trackedImage.referenceImage.name].SetActive(true);
+            placedPrefabs[trackedImage.referenceImage.name].transform.SetPositionAndRotation(trackedImage.transform.position, Quaternion.identity);
         }
-        
+    }
+    public void Reset()
+    {
+        foreach(GameObject o in Prefabs)
+        {
+            Destroy(placedPrefabs[o.name]);
+        }
+        placedPrefabs = new Dictionary<string, GameObject>();
+        spawnObjects();
+        Flapper.transform.parent = placedPrefabs["Start"].transform;
+        Flapper.gameObject.SetActive(true);
+        Flapper.transform.localPosition = Vector3.up / 2;
+        Time.timeScale = 1f;
+        GameManager.isGamePaused = false;
     }
 }

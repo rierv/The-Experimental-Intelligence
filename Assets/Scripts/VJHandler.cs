@@ -22,7 +22,6 @@ public class VJHandler : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointe
     {
 
         pointer.transform.rotation = Camera.main.transform.rotation;
-        OnGUI();
         /*if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
         {
             InputDirection = Camera.main.transform.right * Input.GetAxis("Horizontal") + Camera.main.transform.forward * Input.GetAxis("Vertical");

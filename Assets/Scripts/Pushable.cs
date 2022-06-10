@@ -39,4 +39,12 @@ public class Pushable : MonoBehaviour {
 		yield return new WaitForSeconds(0.35f);
 		rigidbody.constraints = locked;
 	}
+	private void OnCollisionEnter(Collision collision)
+	{
+		if (collision.gameObject.tag == "Platform") transform.parent.parent = collision.gameObject.transform;
+	}
+	private void OnCollisionExit(Collision collision)
+	{
+		if (collision.gameObject.tag == "Platform") transform.parent.parent = collision.gameObject.transform.parent;
+	}
 }

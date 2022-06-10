@@ -13,7 +13,7 @@ public class MovingPlatformKinematic : MonoBehaviour, I_Activable {
 	private bool direction; //true is forward, false is backward
 	private bool isPlatformMoving;
 	private float platformTimer;
-	private float platformStopTime = 1.5f;
+	private float platformStopTime = 1f;
 	public bool active = true;
 	bool activable = true;
 

@@ -5,6 +5,7 @@ using UnityEngine;
 public class RobotScript : MonoBehaviour {
 
 	#region Attributes
+	public Transform pointer;
 	private Transform robot;
 	private Transform flapper;
 	public Transform body;
@@ -24,33 +25,23 @@ public class RobotScript : MonoBehaviour {
 	bool stop = false;
 	private float currentSpeed;
 	private float currentRotationScale;
-	private FlapperState state;
-	private bool collidingWithSolid;
 	public bool zAxis_xAxis = true;
 	ParticleSystem[] particles;
 	#endregion
 
 	private void Start() {
-		collidingWithSolid = false;
 		flapper = GameObject.Find("CORE").GetComponent<Transform>();
-		state = GameObject.Find("Flapper model").GetComponent<JellyBone>().state;
 		particles = GetComponentsInChildren<ParticleSystem>();
 		robot = gameObject.transform;
 		currentRotationScale = rotationScale;
 		currentSpeed = speed;
-		currPos = robot.position;
+		currPos = robot.localPosition;
 		ManageRobotPosition();
 	}
 
 	private void Update() {
-		if (collidingWithSolid) {
-			state = GameObject.Find("Flapper model").GetComponent<JellyBone>().state;
-			if (state != FlapperState.solid) {
-				collidingWithSolid = false;
-				currentSpeed = speed;
-				currentRotationScale = rotationScale;
-			}
-		}
+		
+		
 
 		if (stop) {
 			stunTimeTemp -= Time.deltaTime;
@@ -59,7 +50,11 @@ public class RobotScript : MonoBehaviour {
 				light.enabled = true;
 			}
 		} else {
-			ManageRobotPosition();
+            if (flapper) ManageRobotPosition();
+			else
+            {
+				flapper = GameObject.Find("CORE").GetComponent<Transform>();
+			}
 		}
 	}
 
@@ -91,34 +86,29 @@ public class RobotScript : MonoBehaviour {
 		light.enabled = true;
 	}*/
 	private void ManageRobotPosition() {
-		tmp = robot.position;
+		tmp = robot.localPosition;
 		if (zAxis_xAxis) {
-			if (collidingWithSolid) {
-				if (Mathf.Abs(tmp.z - minLockerZ) < Mathf.Abs(tmp.z - maxLockerZ))
-					currPos.z = minLockerZ;
-				else
-					currPos.z = maxLockerZ;
-			} else {
-				currPos.z = Mathf.Clamp(flapper.position.z, minLockerZ, maxLockerZ);
-			}
-			robot.position = Vector3.Lerp(tmp, currPos, Time.deltaTime * currentSpeed);
-			tmp = currPos - tmp;
-			wheel.Rotate(0f, 0f, currentRotationScale * tmp.z, Space.Self);
+			float oldDistance = Vector3.Distance(robot.position, flapper.position);
 
+			pointer.localPosition = robot.localPosition+Vector3.forward/80;
+			if(Vector3.Distance(pointer.position, flapper.position)>oldDistance)
+				pointer.localPosition = robot.localPosition - Vector3.forward / 40;
+			if (Vector3.Distance(pointer.position, flapper.position) < oldDistance)
+			{
+				currPos.z = Mathf.Clamp(pointer.localPosition.z, minLockerZ, maxLockerZ);
+				robot.localPosition = Vector3.Lerp(tmp, currPos, Time.deltaTime * currentSpeed);
+				tmp = currPos - tmp;
+				wheel.Rotate(0f, 0f, currentRotationScale * tmp.z, Space.Self);
+			}
 			if (flapper.position.x < transform.position.x) {
 				body.localRotation = Quaternion.Euler(new Vector3(0, 0, Mathf.Lerp(body.localRotation.eulerAngles.z, 0, rotationSpeed * Time.deltaTime)));
 			} else {
 				body.localRotation = Quaternion.Euler(new Vector3(0, 0, Mathf.Lerp(body.localRotation.eulerAngles.z, 180, rotationSpeed * Time.deltaTime)));
 			}
 		} else {
-			if (collidingWithSolid) {
-				if (Mathf.Abs(tmp.x - minLockerZ) < Mathf.Abs(tmp.x - maxLockerZ))
-					currPos.x = minLockerZ;
-				else
-					currPos.x = maxLockerZ;
-			} else {
-				currPos.x = Mathf.Clamp(flapper.position.x, minLockerZ, maxLockerZ);
-			}
+			
+			currPos.x = Mathf.Clamp(flapper.position.x, minLockerZ, maxLockerZ);
+			
 			robot.position = Vector3.Lerp(tmp, currPos, Time.deltaTime * currentSpeed);
 			tmp = currPos - tmp;
 			wheel.Rotate(0f, 0f, currentRotationScale * tmp.z, Space.Self);

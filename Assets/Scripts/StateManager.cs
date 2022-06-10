@@ -95,6 +95,7 @@ public class StateManager : MonoBehaviour {
 			case FlapperState.gaseous:
 				//gasParticleRenderer.material.SetColor("_BaseColor", gas);
 				//gasParticleRenderer.material.SetColor("_EmissionColor", gas);
+				rigidbody.velocity = Vector3.up / 20;
 				gasParticle.startColor = gas;
 				if (pm.moveType == MoveType.Rigidbody)
 					pm.velocity = gaseousSpeedRigidbody;

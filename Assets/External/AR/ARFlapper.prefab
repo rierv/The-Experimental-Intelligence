@@ -114,9 +114,9 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3815583565816772449}
   serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 1.31
-  m_AngularDrag: 0.05
+  m_Mass: 0.2
+  m_Drag: 0
+  m_AngularDrag: 0
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -222,9 +222,9 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3815583565816772453}
   serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 1.31
-  m_AngularDrag: 0.05
+  m_Mass: 0.2
+  m_Drag: 0
+  m_AngularDrag: 0
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -330,9 +330,9 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3815583565816772457}
   serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 1.31
-  m_AngularDrag: 0.05
+  m_Mass: 0.2
+  m_Drag: 0
+  m_AngularDrag: 0
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -438,9 +438,9 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3815583565816772461}
   serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 1.31
-  m_AngularDrag: 0.05
+  m_Mass: 0.2
+  m_Drag: 0
+  m_AngularDrag: 0
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -578,8 +578,8 @@ Rigidbody:
   m_GameObject: {fileID: 3815583565816772467}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 1.31
-  m_AngularDrag: 0.05
+  m_Drag: 0.6
+  m_AngularDrag: 0.6
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -786,9 +786,9 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3815583565816772477}
   serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 1.31
-  m_AngularDrag: 0.05
+  m_Mass: 0.2
+  m_Drag: 0
+  m_AngularDrag: 0
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -871,7 +871,6 @@ GameObject:
   - component: {fileID: 2356472711227965533}
   - component: {fileID: 6681057389902224049}
   - component: {fileID: 2455829943240876305}
-  - component: {fileID: 4578854695619905960}
   - component: {fileID: 1520926913990193434}
   - component: {fileID: 8365860732537151730}
   m_Layer: 9
@@ -907,7 +906,7 @@ Rigidbody:
   m_GameObject: {fileID: 3815583566328668063}
   serializedVersion: 2
   m_Mass: 2
-  m_Drag: 2
+  m_Drag: 4
   m_AngularDrag: 5
   m_UseGravity: 1
   m_IsKinematic: 0
@@ -939,8 +938,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96ad848ceb0a33e418c9c69bea09fbbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cohesion: 100
-  _drag: 0.5
+  _cohesion: 200
+  _drag: 0.6
   _gaseousDrag: 0.6
   _minDistance: -0.2
   _maxDistance: 0.2
@@ -970,9 +969,9 @@ MonoBehaviour:
   solidJumpForce: 0.03
   maxFallingSpeedForJumping: 0.5
   jumpingWait: 0.2
-  gaseousFloatUpForce: 0.01
-  gaseousShrinkDownForce: 0.01
-  bonesForce: -0.1
+  gaseousFloatUpForce: 0.00075
+  gaseousShrinkDownForce: 0.0015
+  bonesForce: 0.25
   bonesForceUp: 0.02
   max_shrinking: 2.5
   shrink_velocity: 2.5
@@ -1006,7 +1005,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 2695412821d9805458282477980d0433, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -1121,9 +1120,9 @@ MonoBehaviour:
   jellyAccelerate: 6
   solidAccelerate: 5
   gaseousAccelerate: 4
-  jellySpeedRigidbody: 0.0125
+  jellySpeedRigidbody: 0.01
   solidSpeedRigidbody: 0.015
-  gaseousSpeedRigidbody: 0.015
+  gaseousSpeedRigidbody: 0.005
   gasTransition: {fileID: 8300000, guid: df6e447024bd02541b0ea3cb8f48efcb, type: 3}
   jellyTransition: {fileID: 8300000, guid: 748398f5ab9f27940acaff0f0a9ec9a2, type: 3}
   solidTransition: {fileID: 8300000, guid: 8672b5d3a29d5e34abc65d9ce8a559e3, type: 3}
@@ -1351,20 +1350,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.5, y: 1.5, z: 1.5}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4578854695619905960
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3815583566328668063}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 383be4574bb57aa4394790f59a653fa5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fallingBoost: 30
-  forceUp: 0
 --- !u!81 &1520926913990193434
 AudioListener:
   m_ObjectHideFlags: 0
@@ -1414,7 +1399,7 @@ Transform:
   m_GameObject: {fileID: 3815583567049748545}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
+  m_LocalScale: {x: 0.0125, y: 0.0125, z: 0.0125}
   m_Children:
   - {fileID: 3815583566328668035}
   m_Father: {fileID: 0}
@@ -1628,8 +1613,8 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 1
-      minScalar: 0.4
+      scalar: 2
+      minScalar: 1
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -2378,7 +2363,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 10
+      scalar: 40
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -6284,7 +6269,6 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: df0a9d4a1d2f26c4eb697a71ac5b82d6, type: 2}
-  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

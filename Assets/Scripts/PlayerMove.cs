@@ -11,6 +11,7 @@ public enum MoveType {
 }
 
 public class PlayerMove : MonoBehaviour {
+	private ImageTracking IM;
 	public MoveType moveType;
 	public bool rotateWithCamera = true;
 	public Transform flapperModel;
@@ -66,6 +67,7 @@ public class PlayerMove : MonoBehaviour {
 
 
     void Awake() {
+		IM = FindObjectOfType<ImageTracking>();
 		rigidbody = GetComponent<Rigidbody>();
 		collider = GetComponent<SphereCollider>();
 		stateManager = GetComponent<StateManager>();
@@ -91,7 +93,10 @@ public class PlayerMove : MonoBehaviour {
 				transform.rotation = Quaternion.Euler(new Vector3(0, camera.rotation.eulerAngles.y, 0));
 			Vector3 right = jsMovement.InputDirection.x * transform.right * (canMoveX ? 1 : perpendicularMoveOnPush);
 			Vector3 forward = jsMovement.InputDirection.y * transform.forward * (canMoveZ ? 1 : perpendicularMoveOnPush);
-
+			if (jsMovement.InputDirection.x == 0 && jsMovement.InputDirection.y == 0)
+            {
+				rigidbody.velocity = Vector3.Lerp(rigidbody.velocity, Vector3.zero, Time.fixedDeltaTime);
+            }
 			if (moveType == MoveType.Old) {
                 
                 
@@ -255,5 +260,13 @@ public class PlayerMove : MonoBehaviour {
     private void OnCollisionEnter(Collision collision)
     {
 		if (collision.gameObject.tag == "Platform") transform.parent.parent = collision.gameObject.transform;
-    }
+		if (collision.gameObject.tag == "Laser")
+		{
+			stateManager.temperature = 1;
+		}
+	}
+    private void OnCollisionExit(Collision collision)
+    {
+		if (collision.gameObject.tag == "Platform") transform.parent.parent = collision.gameObject.transform.parent;
+	}
 }

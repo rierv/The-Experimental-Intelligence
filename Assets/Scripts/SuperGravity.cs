@@ -10,12 +10,11 @@ public class SuperGravity : MonoBehaviour {
     public bool forceUp = true;
 	void Awake() {
 		rigidbody = GetComponent<Rigidbody>();
-        player = GetComponent<PlayerMove>();
 
     }
 
     void Update() {
-		if (forceUp&& player.moveType==MoveType.Rigidbody && rigidbody.useGravity && rigidbody.velocity.y > -.1f && force) {
+		if (forceUp && rigidbody.useGravity && rigidbody.velocity.y > -.1f && force) {
 			rigidbody.AddForce(Vector3.up*1.5f * fallingBoost, ForceMode.Acceleration);
 		}
 	}
