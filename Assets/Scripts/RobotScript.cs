@@ -36,7 +36,6 @@ public class RobotScript : MonoBehaviour {
 		currentRotationScale = rotationScale;
 		currentSpeed = speed;
 		currPos = robot.localPosition;
-		ManageRobotPosition();
 	}
 
 	private void Update() {
@@ -53,7 +52,7 @@ public class RobotScript : MonoBehaviour {
             if (flapper) ManageRobotPosition();
 			else
             {
-				flapper = GameObject.Find("CORE").GetComponent<Transform>();
+				flapper = GameObject.Find("CORE")?.GetComponent<Transform>();
 			}
 		}
 	}

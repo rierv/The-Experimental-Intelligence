@@ -18,17 +18,19 @@ public class ThrowableObject : MonoBehaviour
     private void Awake()
     {
         parentBodies = new List<Rigidbody>();
-
+        this.enabled=false;
     }
     void Start()
     {
         jsMovement = GameObject.Find("Joycon_container").GetComponent<VJHandler>();
-        core = FindObjectOfType<JellyCore>();
         baseRotation = transform.rotation;
         startPos = transform.position;
+    }
+    private void OnEnable()
+    {
+        core = FindObjectOfType<JellyCore>();
         state = core.GetComponent<StateManager>();
     }
-
     void Update()
     {
         if (state.state == FlapperState.solid)

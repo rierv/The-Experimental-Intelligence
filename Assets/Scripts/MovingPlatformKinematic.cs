@@ -7,25 +7,23 @@ public class MovingPlatformKinematic : MonoBehaviour, I_Activable {
 	public float speed = 5;
 	public Vector3[] targets; //Constraint: targets.Length >= 2
 
-	Rigidbody platform;
 	private int targetsLength;
 	private int targetsIndex;
-	private bool direction; //true is forward, false is backward
 	private bool isPlatformMoving;
 	private float platformTimer;
-	private float platformStopTime = 1f;
-	public bool active = true;
+	private float platformStopTime = .2f;
+	public bool boltActive = false;
+	private bool active = true;
 	bool activable = true;
-
+	float timeElapsed = 0;
 	#endregion
 
 	private void Start() {
-		direction = true;
+		if (boltActive) active = false;
 		platformTimer = platformStopTime;
 		isPlatformMoving = false;
 		targetsLength = targets.Length;
 		targetsIndex = 1;
-		platform = GetComponent<Rigidbody>();
 	}
 
 	private void FixedUpdate() {
@@ -36,38 +34,28 @@ public class MovingPlatformKinematic : MonoBehaviour, I_Activable {
 					platformTimer -= Time.fixedDeltaTime;
 				} else {
 					isPlatformMoving = true;
-					if (direction) {
-						targetsIndex = 1;
-						platform.MovePosition(Vector3.MoveTowards(platform.transform.position, targets[targetsIndex], Time.fixedDeltaTime * speed));
-					} else {
-						targetsIndex = targetsLength - 2;
-						platform.MovePosition(Vector3.MoveTowards(platform.transform.position, targets[targetsIndex], Time.fixedDeltaTime * speed));
-					}
 				}
 			} else //The platform is moving, you may have to slow down or speed up
 			  {
-
+				timeElapsed = timeElapsed + Time.fixedDeltaTime;
 				//Get closer to the current target
-				platform.MovePosition(Vector3.MoveTowards(platform.transform.position, targets[targetsIndex], Time.fixedDeltaTime * speed));
+				transform.localPosition = Vector3.Lerp(transform.localPosition, targets[targetsIndex], timeElapsed* speed);
 
 				//Check if you have to change the current target
-				if (Vector3.Distance(platform.transform.position, targets[targetsIndex]) < Time.fixedDeltaTime * speed) {
+				if (Vector3.Distance(transform.localPosition, targets[targetsIndex]) < .001f) {
 					//Update the current target and if necessary change the direction (forward/backward route)
-					if (direction && (targetsIndex < (targetsLength - 1))) {
-						targetsIndex++;
-					} else if (!direction && (targetsIndex > 0)) {
-						targetsIndex--;
-					} else
-						ChangeDirection();
+					ChangeDirection();
 				}
 			}
 		}
 	}
 
 	private void ChangeDirection() {
-		direction = !direction;
 		isPlatformMoving = false;
 		platformTimer = platformStopTime;
+		timeElapsed = 0;
+		if (targetsIndex == 0) targetsIndex = 1;
+		else targetsIndex = 0; // (targetsIndex + 1) % targets.Length;
 	}
 
 	private void OnDrawGizmos() {
@@ -88,5 +76,14 @@ public class MovingPlatformKinematic : MonoBehaviour, I_Activable {
 
 	public void canActivate(bool enabled) {
 		activable = enabled;
+	}
+
+    private void OnCollisionEnter(Collision collision)
+    {
+		if (collision.gameObject.GetComponent<ThrowableObject>()) active = true;
+    }
+    private void OnCollisionExit(Collision collision)
+    {
+		if (collision.gameObject.GetComponent<ThrowableObject>() && boltActive) active = false;
 	}
 }
