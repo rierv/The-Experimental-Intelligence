@@ -100,7 +100,7 @@ Transform:
   m_GameObject: {fileID: 3815583565816772449}
   m_LocalRotation: {x: -0.5, y: 0.5, z: 0.49999997, w: 0.50000006}
   m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 0.99999994, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3815583565816802143}
   m_Father: {fileID: 3815583565816802137}
@@ -772,7 +772,7 @@ Transform:
   m_GameObject: {fileID: 3815583565816772477}
   m_LocalRotation: {x: -0.5, y: -0.5, z: -0.49999997, w: 0.50000006}
   m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 0.99999994, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3815583565816802139}
   m_Father: {fileID: 3815583565816802137}
@@ -905,8 +905,8 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3815583566328668063}
   serializedVersion: 2
-  m_Mass: 2
-  m_Drag: 4
+  m_Mass: 3
+  m_Drag: 5
   m_AngularDrag: 5
   m_UseGravity: 1
   m_IsKinematic: 0
@@ -938,13 +938,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96ad848ceb0a33e418c9c69bea09fbbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cohesion: 200
-  _drag: 0.6
+  _cohesion: 150
+  _drag: 0.4
   _gaseousDrag: 0.6
-  _minDistance: -0.2
-  _maxDistance: 0.2
-  _minShift: -0.2
-  _maxShift: 0.2
+  _minDistance: -0.05
+  _maxDistance: 0.05
+  _minShift: -0.05
+  _maxShift: 0.05
 --- !u!114 &3815583566328668032
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -971,10 +971,10 @@ MonoBehaviour:
   jumpingWait: 0.2
   gaseousFloatUpForce: 0.00075
   gaseousShrinkDownForce: 0.0015
-  bonesForce: 0.25
-  bonesForceUp: 0.02
+  bonesForce: 2
+  bonesForceUp: 2
   max_shrinking: 2.5
-  shrink_velocity: 2.5
+  shrink_velocity: 2
   Up: {fileID: 3815583567163028459}
   Down: {fileID: 3815583567753754290}
   Left: {fileID: 3815583566462581251}
@@ -1238,6 +1238,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   strenght: 0.25
   audioSource: {fileID: 6681057389902224049}
+  th: {fileID: 0}
   ready: 1
   jsMovement: {fileID: 0}
 --- !u!82 &6681057389902224049

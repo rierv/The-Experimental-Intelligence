@@ -63,7 +63,7 @@ public class PlayerMove : MonoBehaviour {
     bool startToJump = false;
     JumpButtonScript Jump_Trigger;
 
-
+	private ThrowObjects readyToThrow;
 
 
     void Awake() {
@@ -83,7 +83,10 @@ public class PlayerMove : MonoBehaviour {
         jsMovement = GameObject.Find("Joycon_container").GetComponent<VJHandler>();
 
         Jump_Trigger = GameObject.Find("Jump_Button").GetComponent<JumpButtonScript>();
-    }
+
+		readyToThrow = GetComponent<ThrowObjects>();
+
+	}
     
     
     void FixedUpdate() {
@@ -140,9 +143,7 @@ public class PlayerMove : MonoBehaviour {
 			}
 		}
 
-		if (shrinking) {
-			updateShrink();
-		}
+		
 		if (stateManager.state == FlapperState.gaseous) {
 			if (moveType == MoveType.Rigidbody) {
 				if (Jump_Trigger.jumpButtonHold) {
@@ -182,21 +183,11 @@ public class PlayerMove : MonoBehaviour {
 	void Update() {
 		if (stateManager.state != FlapperState.gaseous && canMove) {
 
-            if (Jump_Trigger.jumpButtonRelease && !jumping) {
+            if (Jump_Trigger.jumpButtonHold && !readyToThrow.th && !jumping) {
 				StartCoroutine(JumpCoroutine());
                 Jump_Trigger.jumpButtonRelease = false;
             }
-            else if (Jump_Trigger.jumpButtonHold && !jumping) {
-				if (!shrinking) {
-					shrinking = true;
-				}
-
-				if (stateManager.state == FlapperState.jelly && shrinkage <= max_shrinking) {
-					Shrink();
-				} else if (stateManager.state == FlapperState.solid) {
-					StartCoroutine(JumpCoroutine());
-				}
-			} else {
+            else {
 				shrinking = false;
                 //shrinkage = 1;
             }
@@ -204,58 +195,58 @@ public class PlayerMove : MonoBehaviour {
 	}
 
 	void Shrink() {
-		shrinkage += Time.deltaTime * shrink_velocity;
+		shrinkage += shrink_velocity;
 	}
 
 	IEnumerator JumpCoroutine() {
-        //Debug.Log(shrinking + " " + jumping);
-        if (shrinkage > max_shrinking - .2f)//shrinking && !jumping && canJump) 
-            {
-			jumping = true;
-			shrinking = false;
-			yield return 0;
+		//Debug.Log(shrinking + " " + jumping);
+		Shrink();
+		updateShrink();
+		jumping = true;
+		shrinking = false;
+		yield return new WaitForSeconds(.1f);
 
-			if (stateManager.state != FlapperState.gaseous) {
-                if (moveType == MoveType.Old)
+		if (stateManager.state != FlapperState.gaseous) {
+            if (moveType == MoveType.Old)
+            {
+                if (stateManager.state == FlapperState.solid)
                 {
-                    if (stateManager.state == FlapperState.solid)
-                    {
-                        shrinkage = 2f;
-                    }
-                    else
-                    {
-                    }
+                    shrinkage = 2f;
                 }
                 else
                 {
-                    if (stateManager.state == FlapperState.solid)
-                    {
-                        rigidbody.AddForce(Vector3.up * solidJumpForce, ForceMode.VelocityChange);
-                    }
-                    else
-                    {
-                        rigidbody.AddForce(Vector3.up * jumpForce * shrinkage, ForceMode.VelocityChange);
-                    }
                 }
-			}
-			audioSource.Play();
-			yield return new WaitForSeconds(jumpingWait*shrinkage);
-            shrinkage = 1;
-            jumping = false;
+            }
+            else
+            {
+                if (stateManager.state == FlapperState.solid)
+                {
+                    rigidbody.AddForce(Vector3.up * solidJumpForce, ForceMode.VelocityChange);
+                }
+                else
+                {
+                    rigidbody.AddForce(Vector3.up * jumpForce * shrinkage, ForceMode.VelocityChange);
+                }
+            }
 		}
+		audioSource.Play();
+		yield return new WaitForSeconds(.8f);
+		shrinkage = 1;
+        jumping = false;
+		
 	}
 
 	public void updateShrink() {
 		//AudioManager.singleton.PlayClip(shrink);
-		float force = bonesForce * shrinkage;
+		float force = bonesForce * shrinkage/2;
 		float forceUp = bonesForceUp * shrinkage;
 
 		//Down.MovePosition(Down.position + Vector3.down * shrinkage * -high * Time.deltaTime);
-		Up.MovePosition(Up.position + Vector3.up * forceUp * Time.deltaTime);
-		Left.MovePosition(Left.position + Vector3.left * force * Time.deltaTime);
-		Right.MovePosition(Right.position + Vector3.right * force * Time.deltaTime);
-		Front.MovePosition(Front.position + Vector3.forward * force * Time.deltaTime);
-		Back.MovePosition(Back.position + Vector3.back * force * Time.deltaTime);
+		Up.AddForce( Vector3.up * forceUp);
+		Left.AddForce(Vector3.left * force);
+		Right.AddForce(Vector3.right * force);
+		Front.AddForce(Vector3.forward * force);
+		Back.AddForce(Vector3.back * force);
 	}
     private void OnCollisionEnter(Collision collision)
     {

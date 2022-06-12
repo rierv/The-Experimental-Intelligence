@@ -61,19 +61,22 @@ public class ImageTracking : MonoBehaviour
     }
 
     private void AddObject(ARTrackedImage trackedImage)
-    {
-
+    {   
         placedPrefabs[trackedImage.referenceImage.name].SetActive(true);
         placedPrefabs[trackedImage.referenceImage.name].transform.SetPositionAndRotation(trackedImage.transform.position+Vector3.up/2, Quaternion.identity);
-        
+        placedPrefabs[trackedImage.referenceImage.name].transform.eulerAngles = new Vector3(0, trackedImage.transform.eulerAngles.y, 0);
+
+
     }
 
     private void UpdateObject(ARTrackedImage trackedImage)
     {
-        if (trackedImage.trackingState == UnityEngine.XR.ARSubsystems.TrackingState.Tracking)
+        GameObject obj = placedPrefabs[trackedImage.referenceImage.name];
+        if (trackedImage.trackingState == UnityEngine.XR.ARSubsystems.TrackingState.Tracking )
         {
-            placedPrefabs[trackedImage.referenceImage.name].SetActive(true);
-            placedPrefabs[trackedImage.referenceImage.name].transform.SetPositionAndRotation(trackedImage.transform.position, Quaternion.identity);
+            if(obj.activeInHierarchy == false) obj.SetActive(true);
+            obj.transform.SetPositionAndRotation(trackedImage.transform.position, Quaternion.identity);
+            obj.transform.eulerAngles = new Vector3(0, trackedImage.transform.eulerAngles.y, 0);
         }
     }
     public void Reset()

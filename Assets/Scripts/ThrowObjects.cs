@@ -7,7 +7,9 @@ public class ThrowObjects : MonoBehaviour {
 	public AudioSource audioSource;
     Quaternion rotation;
 	GameObject obj = null;
-	ThrowableObject th;
+	[HideInInspector]
+	public ThrowableObject th;
+
 	StateManager state;
 	public bool ready = true;
 	bool release = false;

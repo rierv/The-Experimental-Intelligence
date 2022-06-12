@@ -73,7 +73,7 @@ public class JellyBone : MonoBehaviour {
 					Mathf.Clamp(transform.localPosition.x, JellyCore.minShift, JellyCore.maxShift),
 					Mathf.Clamp(transform.localPosition.y, JellyCore.minDistance, JellyCore.maxDistance),
 					Mathf.Clamp(transform.localPosition.z, JellyCore.minShift, JellyCore.maxShift)
-					), Time.fixedDeltaTime * 2 * (core.transform.position - transform.position).magnitude);
+					), Time.fixedDeltaTime * 2 * (core.transform.position - transform.position).magnitude * JellyCore.cohesion);
 			}
 		}
 
