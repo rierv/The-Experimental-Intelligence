@@ -47,11 +47,13 @@ public class ThrowObjects : MonoBehaviour {
 			GetComponent<PlayerMove>().canMove = true;
 		} else {
 			obj.transform.parent = null;
-			obj.layer = 18;
+			
 			if (!release) {
 				audioSource.Play();
 				obj.GetComponent<Rigidbody>().AddForce((Vector3.up + (jsMovement.InputDirection.x * Vector3.right + jsMovement.InputDirection.y * Vector3.forward)) * strenght, ForceMode.VelocityChange);
 			}
+			yield return new WaitForSeconds(.02f);
+			obj.layer = 18;
 		}
 
 		yield return new WaitForSeconds(0.1f);
