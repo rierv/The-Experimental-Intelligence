@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using TMPro;
+
 public enum MoveType {
 	Old,
 	Accelerate,
@@ -260,4 +262,9 @@ public class PlayerMove : MonoBehaviour {
     {
 		if (collision.gameObject.tag == "Platform") transform.parent.parent = collision.gameObject.transform.parent;
 	}
+
+	public void SetJumpText(string text)
+    {
+		Jump_Trigger.gameObject.GetComponentInChildren<TextMeshProUGUI>().text = text;
+    }
 }

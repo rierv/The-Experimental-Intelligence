@@ -93,6 +93,7 @@ public class StateManager : MonoBehaviour {
 	public void SetState(FlapperState newState) {
 		switch (newState) {
 			case FlapperState.gaseous:
+				GetComponent<PlayerMove>().SetJumpText("Glide");
 				//gasParticleRenderer.material.SetColor("_BaseColor", gas);
 				//gasParticleRenderer.material.SetColor("_EmissionColor", gas);
 				rigidbody.velocity = Vector3.up / 20;
@@ -105,6 +106,7 @@ public class StateManager : MonoBehaviour {
 					pm.speed = gaseousSpeed;
 				break;
 			case FlapperState.jelly:
+				GetComponent<PlayerMove>().SetJumpText("Jump");
 				meshRenderer.material.SetColor("_BaseColor", jelly);
 				meshRenderer.material.SetColor("_EmissionColor", jelly);
 				if (pm.moveType == MoveType.Rigidbody)

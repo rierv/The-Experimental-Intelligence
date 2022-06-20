@@ -41,7 +41,6 @@ public class ThrowObjects : MonoBehaviour {
 		obj.GetComponent<ThrowableObject>().enabled = false;
 		th.enabled = false;
 		ready = false;
-
 		if (th.isHandle) {
 			transform.parent.SetParent(null);
 			GetComponent<PlayerMove>().canMove = true;
@@ -49,8 +48,9 @@ public class ThrowObjects : MonoBehaviour {
 			obj.transform.parent = null;
 			
 			if (!release) {
+				GetComponent<PlayerMove>().SetJumpText("Jump");
 				audioSource.Play();
-				obj.GetComponent<Rigidbody>().AddForce((Vector3.up + (jsMovement.InputDirection.x * Vector3.right + jsMovement.InputDirection.y * Vector3.forward)) * strenght, ForceMode.VelocityChange);
+				obj.GetComponent<Rigidbody>().AddForce((Vector3.up + GetComponent<Rigidbody>().velocity.normalized) * strenght, ForceMode.Force);
 			}
 			yield return new WaitForSeconds(.02f);
 			obj.layer = 18;
@@ -65,6 +65,7 @@ public class ThrowObjects : MonoBehaviour {
 
 	private void OnTriggerEnter(Collider other) {
 		if (ready && other.gameObject.layer == 14 && obj == null && state.state == FlapperState.jelly) {
+			GetComponent<PlayerMove>().SetJumpText("Throw");
 			th = other.transform.parent.gameObject.GetComponent<ThrowableObject>();
 			th.enabled = true;
 			obj = other.transform.parent.gameObject;
