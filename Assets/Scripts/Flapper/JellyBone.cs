@@ -84,7 +84,7 @@ public class JellyBone : MonoBehaviour {
 	public void SetState(FlapperState newState) {
 		state = newState;
 		if (state != FlapperState.solid) {
-			rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
+			//rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
 			if (coreCollider) {
 				coreCollider.enabled = false;
 			}
