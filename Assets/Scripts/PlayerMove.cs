@@ -94,8 +94,8 @@ public class PlayerMove : MonoBehaviour {
             
             if (rotateWithCamera)
 				transform.rotation = Quaternion.Euler(new Vector3(0, camera.rotation.eulerAngles.y, 0));
-			Vector3 right = jsMovement.InputDirection.x * transform.right * (canMoveX ? 1 : perpendicularMoveOnPush);
-			Vector3 forward = jsMovement.InputDirection.y * transform.forward * (canMoveZ ? 1 : perpendicularMoveOnPush);
+			Vector3 right = jsMovement.InputDirection.x * Vector3.right * (canMoveX ? 1 : perpendicularMoveOnPush);
+			Vector3 forward = jsMovement.InputDirection.y * Vector3.forward * (canMoveZ ? 1 : perpendicularMoveOnPush);
 			if (jsMovement.InputDirection.x == 0 && jsMovement.InputDirection.y == 0)
             {
 				rigidbody.velocity = Vector3.Lerp(rigidbody.velocity, Vector3.zero, Time.fixedDeltaTime);
@@ -114,7 +114,7 @@ public class PlayerMove : MonoBehaviour {
 
             }
             else if (moveType == MoveType.Rigidbody) {
-				rigidbody.AddForce((right + forward) * velocity, ForceMode.VelocityChange);
+				rigidbody.AddForce((right+forward)  * velocity, ForceMode.VelocityChange);
 			} else if (moveType == MoveType.Accelerate) {
 				if (jsMovement.InputDirection.x != 0 && jsMovement.InputDirection.y != 0) {
 					timer += Time.fixedDeltaTime * acceleration;
