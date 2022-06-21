@@ -41,7 +41,7 @@ public class ImageTracking : MonoBehaviour
             newPrefab.transform.parent = trackables.transform;
             if (newPrefab.name == "Start")
             {
-                Flapper = Instantiate(Flapper, Vector3.up / 2, Quaternion.identity);
+                Flapper = Instantiate(Flapper, newPrefab.transform.position + Vector3.up / 5, Quaternion.identity);
                 Flapper.transform.parent = newPrefab.transform;
             }
             newPrefab.SetActive(false);
@@ -81,16 +81,21 @@ public class ImageTracking : MonoBehaviour
     }
     public void Reset()
     {
-        foreach(GameObject o in Prefabs)
+        /*foreach(GameObject o in Prefabs)
         {
             Destroy(placedPrefabs[o.name]);
         }
         placedPrefabs = new Dictionary<string, GameObject>();
         spawnObjects();
+        */
+        //Flapper.GetComponentInChildren<Rigidbody>().velocity = Vector3.zero;
+        foreach (Transform t in Flapper.GetComponentsInChildren<Transform>())
+        {
+            t.localPosition = Vector3.zero;
+            
+        }
+        Flapper.GetComponentInChildren<Rigidbody>().velocity = Vector3.zero;
+        Flapper.transform.position = placedPrefabs["Start"].transform.position + Vector3.up / 5;
         Flapper.transform.parent = placedPrefabs["Start"].transform;
-        Flapper.gameObject.SetActive(true);
-        Flapper.transform.localPosition = Vector3.up / 2;
-        Time.timeScale = 1f;
-        GameManager.isGamePaused = false;
     }
 }

@@ -15607,7 +15607,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: JUMP
+  m_text: Jump
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -31101,6 +31101,7 @@ MonoBehaviour:
   restartButton: {fileID: 1292261474}
   exitButton: {fileID: 1579652782}
   profSprite: {fileID: 1452286633}
+  IT: {fileID: 533833284}
 --- !u!114 &902701877
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42180,9 +42181,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 533833284}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ImageTracking, Assembly-CSharp
-        m_MethodName: Reset
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

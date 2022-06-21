@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour {
 	Sprite profSpriteDefault;
     PauseTouchScript Pause_Trigger;
 
+	public ImageTracking IT;
     void Start() {
 		profSpriteDefault = profSprite.sprite;
         Pause_Trigger = GameObject.Find("Pause_Button").GetComponent<PauseTouchScript>();
@@ -58,9 +59,14 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void Restart() {
-		SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+		
+		pauseMenuUI.SetActive(false);
 		Time.timeScale = 1f;
-        isGamePaused = false;
+		isGamePaused = false;
+		IT.Reset();
+		UI.SetActive(true);
+		//SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
 	}
 
     public void StageSelect() {

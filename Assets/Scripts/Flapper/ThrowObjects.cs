@@ -25,7 +25,7 @@ public class ThrowObjects : MonoBehaviour {
 	}
 
 	void Update() {
-		if (obj && state.state != FlapperState.solid && (Jump_Trigger.jumpButtonHold || state.state == FlapperState.gaseous)) {
+		if (ready && obj && state.state != FlapperState.solid && (Jump_Trigger.jumpButtonHold || state.state == FlapperState.gaseous)) {
 			if (state.state == FlapperState.gaseous) {
 				release = true;
 			}
@@ -50,13 +50,13 @@ public class ThrowObjects : MonoBehaviour {
 			if (!release) {
 				GetComponent<PlayerMove>().SetJumpText("Jump");
 				audioSource.Play();
-				obj.GetComponent<Rigidbody>().AddForce((Vector3.up + GetComponent<Rigidbody>().velocity.normalized) * strenght, ForceMode.Force);
+				obj.GetComponent<Rigidbody>().AddForce((Vector3.up + GetComponent<Rigidbody>().velocity.normalized) * strenght, ForceMode.VelocityChange);
 			}
 			yield return new WaitForSeconds(.02f);
 			obj.layer = 18;
 		}
 
-		yield return new WaitForSeconds(0.1f);
+		yield return new WaitForSeconds(0.06f);
 		if(obj) obj.layer = 12;
 		obj = null;
 		th = null;
