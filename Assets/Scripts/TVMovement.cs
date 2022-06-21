@@ -10,7 +10,7 @@ public class TVMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        core = GameObject.Find("CORE");
+        //core = GameObject.Find("CORE");
         Debug.Log(transform.rotation.eulerAngles);
     }
 
@@ -18,6 +18,6 @@ public class TVMovement : MonoBehaviour
     void Update()
     {
         this.transform.position = Vector3.Lerp(this.transform.position, new Vector3(transform.position.x, transform.position .y+ Mathf.Sin(Time.time/aplitude), transform.position.z), speed*Time.deltaTime);
-        this.transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.EulerAngles(0, -(core.transform.position.x - core.transform.parent.transform.position.x)*3, 0), Time.deltaTime);
+        //this.transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.EulerAngles(0, -(core.transform.position.x - core.transform.parent.transform.position.x)*3, 0), Time.deltaTime);
     }
 }
