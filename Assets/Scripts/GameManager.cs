@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour {
 
 	public ImageTracking IT;
     void Start() {
+		Screen.sleepTimeout = SleepTimeout.NeverSleep;
 		profSpriteDefault = profSprite.sprite;
         Pause_Trigger = GameObject.Find("Pause_Button").GetComponent<PauseTouchScript>();
     }
