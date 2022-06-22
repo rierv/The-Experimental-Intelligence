@@ -21,22 +21,24 @@ public class VJHandler : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointe
     {
 
         pointer.transform.rotation = Camera.main.transform.rotation;
-        pointer.transform.LookAt(new Vector3(pointer.transform.forward.x, pointer.transform.position.y, pointer.transform.forward.z));
-        /*if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
-        {
-            InputDirection = Camera.main.transform.right * Input.GetAxis("Horizontal") + Camera.main.transform.forward * Input.GetAxis("Vertical");
-            
-            Debug.Log("ZIMBAWUE");
-        }*/
+
+        //pointer.transform.LookAt(new Vector3(pointer.transform.forward.x, pointer.transform.position.y, pointer.transform.forward.z));
+        if (pointer.transform.up.y > .5f)
+            pointer.transform.rotation = Quaternion.LookRotation(new Vector3(pointer.transform.forward.x, pointer.transform.position.y, pointer.transform.forward.z));
+        else if (pointer.transform.up.y < .5f && Mathf.Abs(pointer.transform.right.y)<.5f)
+            pointer.transform.rotation = Quaternion.LookRotation(new Vector3(pointer.transform.position.x, pointer.transform.forward.y, pointer.transform.position.z), pointer.transform.up);
+        else
+            pointer.transform.rotation = Quaternion.LookRotation(new Vector3(pointer.transform.up.x, pointer.transform.position.y, pointer.transform.up.z));
+
+
     }
 
     void OnGUI()
     {
         //Output the rotation rate, attitude and the enabled state of the gyroscope as a Label
-        GUI.Label(new Rect(700, 350, 500, 150), "pointer  transform right " + pointer.transform.right);
-        GUI.Label(new Rect(700, 400, 500, 150), "pointer  transform forward " + pointer.transform.forward);
+        //GUI.Label(new Rect(700, 350, 500, 150), "pointer  transform right " + pointer.transform.right);
+        //GUI.Label(new Rect(700, 400, 500, 150), "pointer  transform forward " + pointer.transform.forward);
 
-        GUI.Label(new Rect(700, 450, 500, 150), "input direction   " + InputDirection.x +"   "+ InputDirection.y);
     }
 
     internal void setRotation(Quaternion quaternion)
@@ -62,11 +64,10 @@ public class VJHandler : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointe
         //float y = (jsContainer.rectTransform.pivot.y == 1f) ? position.y * 2 + 1 : position.y * 2 - 1;
 
         Vector3 Direction;
-
-        if(pointer.transform.up.y<.5f)
-            Direction = pointer.transform.up * position.y;
+        if (pointer.transform.up.y < .5f && Mathf.Abs(pointer.transform.right.y) < .5f)
+            Direction = pointer.transform.up  * position.y;
         else
-            Direction = pointer.transform.forward  * position.y;
+            Direction = pointer.transform.forward * position.y;
 
         Direction += pointer.transform.right * position.x ;
 
