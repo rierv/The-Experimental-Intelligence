@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR;
 using UnityEngine.XR.ARFoundation;
+using UnityEngine.XR.ARSubsystems;
 
 [RequireComponent(typeof(ARTrackedImageManager))]
 
@@ -14,9 +15,14 @@ public class ImageTracking : MonoBehaviour
     public GameObject Flapper, trackables;
     private ARTrackedImageManager trackedImageManager;
 
+    ARRaycastManager m_RaycastManager;
+
+    List<ARRaycastHit> s_Hits = new List<ARRaycastHit>();
+
     private void Awake()
     {
         spawnObjects();
+        m_RaycastManager = GetComponent<ARRaycastManager>();
 
         trackedImageManager = FindObjectOfType<ARTrackedImageManager>();
 
@@ -52,7 +58,7 @@ public class ImageTracking : MonoBehaviour
     {
         foreach(ARTrackedImage trackedImage in eventArgs.added)
         {
-            AddObject(trackedImage);
+            UpdateObject(trackedImage);
         }
         foreach (ARTrackedImage trackedImage in eventArgs.updated)
         {
@@ -72,11 +78,31 @@ public class ImageTracking : MonoBehaviour
     private void UpdateObject(ARTrackedImage trackedImage)
     {
         GameObject obj = placedPrefabs[trackedImage.referenceImage.name];
-        if (trackedImage.trackingState == UnityEngine.XR.ARSubsystems.TrackingState.Tracking )
+        if (trackedImage.trackingState == TrackingState.Tracking)
         {
-            if(obj.activeInHierarchy == false) obj.SetActive(true);
-            obj.transform.SetPositionAndRotation(trackedImage.transform.position, Quaternion.identity);
-            obj.transform.eulerAngles = new Vector3(0, trackedImage.transform.eulerAngles.y, 0);
+            
+            //obj.transform.parent = trackables.transform;
+            Vector3 posOnScreen = Camera.main.WorldToScreenPoint(trackedImage.transform.position);
+            if (posOnScreen.x > 0
+                && posOnScreen.y > 0
+                && posOnScreen.x < Camera.main.pixelWidth
+                && posOnScreen.y < Camera.main.pixelHeight)
+            {
+                if (obj.activeInHierarchy == false) obj.SetActive(true);
+                obj.transform.eulerAngles = new Vector3(0, trackedImage.transform.eulerAngles.y, 0);
+                obj.transform.position = trackedImage.transform.position;
+                posOnScreen = Camera.main.WorldToScreenPoint(trackedImage.transform.position);
+
+                if (m_RaycastManager.Raycast(posOnScreen, s_Hits, TrackableType.PlaneWithinPolygon))
+                {
+                    if (Vector3.Distance(trackedImage.transform.position, s_Hits[0].pose.position) < .02f && obj.transform.parent != s_Hits[0].trackable.transform)
+                        obj.transform.parent = s_Hits[0].trackable.transform;
+                    
+                    else if (Vector3.Distance(trackedImage.transform.position, s_Hits[0].pose.position) >= .02f && obj.transform.parent != trackables.transform)
+                        obj.transform.parent = trackables.transform;
+                }
+            }
+            
         }
     }
     public void Reset()
@@ -99,3 +125,4 @@ public class ImageTracking : MonoBehaviour
         Flapper.transform.parent = placedPrefabs["Start"].transform;
     }
 }
+
