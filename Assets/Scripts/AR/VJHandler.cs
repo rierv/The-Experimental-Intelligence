@@ -8,7 +8,6 @@ public class VJHandler : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointe
     private Image jsContainer;
     private Image joystick;
     public Vector2 InputDirection;
-    public GameObject camera;
     Quaternion startingRotation;
     public GameObject pointer;
     private void Awake()

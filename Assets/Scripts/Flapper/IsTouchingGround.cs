@@ -11,11 +11,6 @@ public class IsTouchingGround : MonoBehaviour {
 
     void Awake() {
 		playerMove = GetComponentInParent<PlayerMove>();
-		offset = transform.localPosition;
-	}
-
-	private void Update() {
-		transform.position = transform.parent.position + offset;
 	}
 
 	private void OnTriggerEnter(Collider other) {
@@ -47,8 +42,8 @@ public class IsTouchingGround : MonoBehaviour {
     IEnumerator StopJumping()
     {
         waitForLanding = true;
-        yield return new WaitForSeconds(coyoteTime);
-        playerMove.canJump = false;
+		playerMove.canJump = false;
+		yield return new WaitForSeconds(coyoteTime);
         waitForLanding = false;
     }
 }

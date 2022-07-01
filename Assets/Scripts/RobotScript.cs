@@ -5,7 +5,7 @@ using UnityEngine;
 public class RobotScript : MonoBehaviour {
 
 	#region Attributes
-	public Transform pointer;
+	Transform pointer;
 	private Transform robot;
 	private Transform flapper;
 	public Transform body;
@@ -28,9 +28,14 @@ public class RobotScript : MonoBehaviour {
 	ParticleSystem[] particles;
 	bool rotate = false;
 	float timer = 0;
+	public bool moveOnXAxis = false;
+	Vector3 StartPos;
 	#endregion
 
 	private void Start() {
+		pointer = new GameObject("pointer").transform;
+		pointer.parent = this.transform.parent;
+		pointer.position = transform.position;
 		GameObject o = GameObject.Find("CORE");
 		if (o != null) flapper = o.GetComponent<Transform>();
 		particles = GetComponentsInChildren<ParticleSystem>();
@@ -38,6 +43,7 @@ public class RobotScript : MonoBehaviour {
 		currentRotationScale = rotationScale;
 		currentSpeed = speed;
 		currPos = robot.localPosition;
+		StartPos = transform.localPosition;
 	}
 
 	private void Update() {
@@ -59,15 +65,31 @@ public class RobotScript : MonoBehaviour {
 				{
 					flapper = o.GetComponent<Transform>();
 					pointer.position = flapper.position;
-					if (pointer.localPosition.z < 0)
+					if (!moveOnXAxis)
 					{
-						rotate = false;
-						body.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
+						if (pointer.localPosition.z < StartPos.z)
+						{
+							rotate = false;
+							body.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
+						}
+						else if (pointer.localPosition.z > StartPos.z)
+						{
+							rotate = true;
+							body.localRotation = Quaternion.Euler(new Vector3(0, 0, 180));
+						}
 					}
-					else if (pointer.localPosition.z > 0)
-					{
-						rotate = true;
-						body.localRotation = Quaternion.Euler(new Vector3(0, 0, 180));
+                    else
+                    {
+						if (pointer.localPosition.x < StartPos.x)
+						{
+							rotate = false;
+							body.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
+						}
+						else if (pointer.localPosition.x > StartPos.x)
+						{
+							rotate = true;
+							body.localRotation = Quaternion.Euler(new Vector3(0, 0, 180));
+						}
 					}
 				}
 			}
@@ -103,42 +125,76 @@ public class RobotScript : MonoBehaviour {
 	}*/
 	private void ManageRobotPosition() {
 		tmp = robot.localPosition;
-		
-
 		float oldDistance = Vector3.Distance(robot.position, flapper.position);
 
-		pointer.localPosition = robot.localPosition + Vector3.right / 80;
-		if (Vector3.Distance(pointer.position, flapper.position) > oldDistance)
-			pointer.localPosition = robot.localPosition - Vector3.right / 40;
-		if (Vector3.Distance(pointer.position, flapper.position) < oldDistance)
+		if (!moveOnXAxis)
 		{
-			currPos.x = Mathf.Clamp(pointer.localPosition.x, minLockerZ, maxLockerZ);
-			robot.localPosition = Vector3.Lerp(tmp, currPos, Time.deltaTime * currentSpeed);
-			tmp = currPos - tmp;
-			wheel.Rotate(currentRotationScale * tmp.x, 0f, 0f, Space.Self);
-		}
-		pointer.position = flapper.position;
-		if (pointer.localPosition.z < 0 && rotate)
-		{
-			timer += Time.deltaTime;
-			body.localRotation = Quaternion.Euler(new Vector3(0, 0, Mathf.Lerp(180, 0, timer*rotationSpeed)));
-            if (body.localRotation.eulerAngles.z == 0)
-            {
-				rotate = false;
-				timer = 0;
+			pointer.localPosition = robot.localPosition + Vector3.right / 80;
+			if (Vector3.Distance(pointer.position, flapper.position) > oldDistance)
+				pointer.localPosition = robot.localPosition - Vector3.right / 40;
+			if (Vector3.Distance(pointer.position, flapper.position) < oldDistance)
+			{
+				currPos.x = Mathf.Clamp(pointer.localPosition.x, minLockerZ, maxLockerZ);
+				robot.localPosition = Vector3.Lerp(tmp, currPos, Time.deltaTime * currentSpeed);
+				tmp = currPos - tmp;
+				wheel.Rotate(currentRotationScale * tmp.x, 0f, 0f, Space.Self);
+			}
+			pointer.position = flapper.position;
+			if (pointer.localPosition.z < StartPos.z && rotate)
+			{
+				timer += Time.deltaTime;
+				body.localRotation = Quaternion.Euler(new Vector3(0, 0, Mathf.Lerp(180, 0, timer * rotationSpeed)));
+				if (body.localRotation.eulerAngles.z == 0)
+				{
+					rotate = false;
+					timer = 0;
+				}
+			}
+			else if (pointer.localPosition.z > StartPos.z && !rotate)
+			{
+				timer += Time.deltaTime;
+				body.localRotation = Quaternion.Euler(new Vector3(0, 0, Mathf.Lerp(0, 180, timer * rotationSpeed)));
+				if (body.localRotation.eulerAngles.z == 180)
+				{
+					rotate = true;
+					timer = 0;
+				}
 			}
 		}
-		else if (pointer.localPosition.z > 0 && !rotate)
-		{
-			timer += Time.deltaTime;
-			body.localRotation = Quaternion.Euler(new Vector3(0, 0, Mathf.Lerp(0, 180, timer * rotationSpeed)));
-            if (body.localRotation.eulerAngles.z == 180)
-            {
-				rotate = true;
-				timer = 0;
+        else
+        {
+			pointer.localPosition = robot.localPosition + Vector3.forward / 80;
+			if (Vector3.Distance(pointer.position, flapper.position) > oldDistance)
+				pointer.localPosition = robot.localPosition - Vector3.forward / 40;
+			if (Vector3.Distance(pointer.position, flapper.position) < oldDistance)
+			{
+				currPos.z = Mathf.Clamp(pointer.localPosition.z, minLockerZ, maxLockerZ);
+				robot.localPosition = Vector3.Lerp(tmp, currPos, Time.deltaTime * currentSpeed);
+				tmp = currPos - tmp;
+				wheel.Rotate(currentRotationScale * tmp.z, 0f, 0f, Space.Self);
+			}
+			pointer.position = flapper.position;
+			if (pointer.localPosition.x < StartPos.x && rotate)
+			{
+				timer += Time.deltaTime;
+				body.localRotation = Quaternion.Euler(new Vector3(0, 0, Mathf.Lerp(180, 0, timer * rotationSpeed)));
+				if (body.localRotation.eulerAngles.z == 0)
+				{
+					rotate = false;
+					timer = 0;
+				}
+			}
+			else if (pointer.localPosition.x > StartPos.x && !rotate)
+			{
+				timer += Time.deltaTime;
+				body.localRotation = Quaternion.Euler(new Vector3(0, 0, Mathf.Lerp(0, 180, timer * rotationSpeed)));
+				if (body.localRotation.eulerAngles.z == 180)
+				{
+					rotate = true;
+					timer = 0;
+				}
 			}
 		}
-
 
 	}
 }

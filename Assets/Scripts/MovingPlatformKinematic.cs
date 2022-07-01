@@ -16,9 +16,11 @@ public class MovingPlatformKinematic : MonoBehaviour, I_Activable {
 	private bool active = true;
 	bool activable = true;
 	float timeElapsed = 0;
+	Vector3 startingPos;
 	#endregion
 
 	private void Start() {
+		startingPos = transform.localPosition;
 		if (boltActive) active = false;
 		platformTimer = platformStopTime;
 		isPlatformMoving = false;
@@ -39,10 +41,10 @@ public class MovingPlatformKinematic : MonoBehaviour, I_Activable {
 			  {
 				timeElapsed = timeElapsed + Time.fixedDeltaTime;
 				//Get closer to the current target
-				transform.localPosition = Vector3.Lerp(transform.localPosition, targets[targetsIndex], timeElapsed* speed);
+				transform.localPosition = Vector3.Lerp(transform.localPosition - startingPos, targets[targetsIndex], timeElapsed* speed)+startingPos;
 
 				//Check if you have to change the current target
-				if (Vector3.Distance(transform.localPosition, targets[targetsIndex]) < .001f) {
+				if (Vector3.Distance(transform.localPosition - startingPos, targets[targetsIndex]) < .001f) {
 					//Update the current target and if necessary change the direction (forward/backward route)
 					ChangeDirection();
 				}

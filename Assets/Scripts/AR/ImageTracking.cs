@@ -16,15 +16,22 @@ public class ImageTracking : MonoBehaviour
     private ARTrackedImageManager trackedImageManager;
 
     ARRaycastManager m_RaycastManager;
-
+    ARAnchorManager m_AnchorManager;
+    ARPlaneManager m_PlaneManager;
+    float CameraWMin, CameraHMin;
     List<ARRaycastHit> s_Hits = new List<ARRaycastHit>();
 
     private void Awake()
     {
         spawnObjects();
         m_RaycastManager = GetComponent<ARRaycastManager>();
+        m_PlaneManager = GetComponent<ARPlaneManager>();
+        m_AnchorManager = GetComponent<ARAnchorManager>();
 
         trackedImageManager = FindObjectOfType<ARTrackedImageManager>();
+
+        CameraWMin = 0;// Camera.main.pixelWidth / 3;
+        CameraHMin = 0;// Camera.main.pixelHeight / 3;
 
     }
 
@@ -83,24 +90,31 @@ public class ImageTracking : MonoBehaviour
             
             //obj.transform.parent = trackables.transform;
             Vector3 posOnScreen = Camera.main.WorldToScreenPoint(trackedImage.transform.position);
-            if (posOnScreen.x > 0
-                && posOnScreen.y > 0
-                && posOnScreen.x < Camera.main.pixelWidth
-                && posOnScreen.y < Camera.main.pixelHeight)
+            if (posOnScreen.x > CameraWMin
+                && posOnScreen.y > CameraHMin
+                && posOnScreen.x < Camera.main.pixelWidth - CameraWMin
+                && posOnScreen.y < Camera.main.pixelHeight - CameraHMin)
             {
                 if (obj.activeInHierarchy == false) obj.SetActive(true);
                 obj.transform.eulerAngles = new Vector3(0, trackedImage.transform.eulerAngles.y, 0);
-                obj.transform.position = trackedImage.transform.position;
-                posOnScreen = Camera.main.WorldToScreenPoint(trackedImage.transform.position);
 
                 if (m_RaycastManager.Raycast(posOnScreen, s_Hits, TrackableType.PlaneWithinPolygon))
                 {
-                    if (Vector3.Distance(trackedImage.transform.position, s_Hits[0].pose.position) < .02f && obj.transform.parent != s_Hits[0].trackable.transform)
-                        obj.transform.parent = s_Hits[0].trackable.transform;
-                    
-                    else if (Vector3.Distance(trackedImage.transform.position, s_Hits[0].pose.position) >= .02f && obj.transform.parent != trackables.transform)
+                    if (Vector3.Distance(s_Hits[0].pose.position, obj.transform.parent.position)>.2f)
+                    {
+                        GameObject tmp = obj.transform.parent.gameObject;
+                        obj.transform.parent = m_AnchorManager.AttachAnchor(m_PlaneManager.GetPlane(s_Hits[0].trackableId), s_Hits[0].pose).transform;
+                        if(tmp.GetComponent<ARAnchor>()) Destroy(tmp);
+                    }
+                    /*else if (Vector3.Distance(trackedImage.transform.position, s_Hits[0].pose.position) >= .04f && obj.transform.parent != trackables.transform)
+                    {
                         obj.transform.parent = trackables.transform;
+                        obj.transform.position = trackedImage.transform.position;
+                    }*/
+
                 }
+                
+                obj.transform.position = trackedImage.transform.position;
             }
             
         }
