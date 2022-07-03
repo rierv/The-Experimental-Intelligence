@@ -7,9 +7,15 @@ public class Star : MonoBehaviour {
 	public float rotationAngle = 1;
 	public Sprite profSprite;
 	public float resetSpriteDelay = 1;
+	StarCollector starCollector;
+	NextLevel nextLevel;
 
-	void Start() {
+    private void OnEnable()
+    {
+		starCollector = FindObjectOfType<StarCollector>();
+		nextLevel = FindObjectOfType<NextLevel>();
 	}
+    
 
 	void Update() {
 		transform.Rotate(Vector3.up, rotationAngle * Time.timeScale, Space.Self);
@@ -22,8 +28,8 @@ public class Star : MonoBehaviour {
 			GetComponent<AudioSource>().Play();
 
 			//FindObjectOfType<ClockManager>().AddStar();
-			FindObjectOfType<StarCollector>().AddStar();
-			FindObjectOfType<NextLevel>().Stars += 1;
+			starCollector.AddStar();
+			nextLevel.Stars += 1;
 		}
 	}
 

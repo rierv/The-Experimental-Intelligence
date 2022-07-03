@@ -12,7 +12,7 @@ public class LevelComplete : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        starCount = PlayerPrefs.GetInt("Level" + LevelSelectionManager.currentLevel + "Stars");
+        starCount = PlayerPrefs.GetInt("CurrentStars");
         for (int i = 0; i< starCount; i++)
         {
             Stars[i].SetActive(true);
@@ -24,12 +24,12 @@ public class LevelComplete : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (timer < 1)
+        if (timer < 2)
         {
             timer += Time.deltaTime;
             for (int i = 0; i < starCount; i++)
             {
-                StarsRT[i].localScale = Vector3.Lerp(Vector3.zero, Vector3.one, timer);
+                StarsRT[i].localScale = Vector3.Lerp(Vector3.zero, Vector3.one, timer/2);
             }
         }
     }

@@ -20,18 +20,18 @@ public class StarCollector : MonoBehaviour
             clockStars[i] = GameObject.Find("ClockStar" + (i + 1));
             clockStars[i].SetActive(false);
         }
-        allStarsEffect.transform.localScale = Vector3.one * 1200f;
-
     }
 
 
     public void AddStar()
     {
         clockStars[starCount].SetActive(true);
-        clockStars[starCount].transform.Find("StarPickupEffect").localScale = Vector3.one * 1000f;
+        
         starCount++;
         if (starCount == 3)
+        {
             allStarsEffect.SetActive(true);
+        }
     }
     public void Reset()
     {
@@ -40,7 +40,6 @@ public class StarCollector : MonoBehaviour
         {
             clockStars[i].SetActive(false);
         }
-        allStarsEffect.transform.localScale = Vector3.one * 1200f;
         starCount = 0;
     }
 }

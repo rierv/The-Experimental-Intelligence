@@ -282,6 +282,11 @@ PrefabInstance:
       propertyPath: pointer
       value: 
       objectReference: {fileID: 773327029}
+    - target: {fileID: 1664605092695991284, guid: 6d1510ece1368364581787961878e738,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1664605092839939848, guid: 6d1510ece1368364581787961878e738,
         type: 3}
       propertyPath: IT
@@ -346,6 +351,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: AR Game Manager
+      objectReference: {fileID: 0}
+    - target: {fileID: 1664605093011118539, guid: 6d1510ece1368364581787961878e738,
+        type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 500
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6d1510ece1368364581787961878e738, type: 3}

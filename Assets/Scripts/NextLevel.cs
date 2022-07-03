@@ -22,7 +22,7 @@ public class NextLevel : MonoBehaviour, I_Activable {
 	public int Stars = 0;
 	//float logTimer = 0;
 
-	void Awake() {
+	void Start() {
 		gameManager = FindObjectOfType<GameManager>();
 		//light = GetComponentInChildren<Light>();
 		//light.enabled = isActive;
@@ -50,6 +50,7 @@ public class NextLevel : MonoBehaviour, I_Activable {
 			PlayerPrefs.SetInt("Unlocked Levels", LevelSelectionManager.currentLevel+1);
 		PlayerPrefs.SetInt("Level" + LevelSelectionManager.currentLevel + "State", 0);
 		if(Stars> PlayerPrefs.GetInt("Level" + LevelSelectionManager.currentLevel + "Stars", 0)) PlayerPrefs.SetInt("Level" + LevelSelectionManager.currentLevel + "Stars", Stars);
+		PlayerPrefs.SetInt("CurrentStars", Stars);
 		Stars = 0;
 		activable = false;
 		yield return new WaitForSeconds(delayToStopFlapper);

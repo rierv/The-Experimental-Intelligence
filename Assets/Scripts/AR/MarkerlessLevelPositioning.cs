@@ -63,7 +63,6 @@ public class MarkerlessLevelPositioning : MonoBehaviour
         FindObjectOfType<NextLevel>().Stars =0;
         FindObjectOfType<StarCollector>().Reset();
         Destroy(Level);
-        Debug.Log("aiaiai");
         Level = Instantiate(LevelPrefabs[LevelSelectionManager.currentLevel]);
         Level.SetActive(false);
     }
