@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour {
     PauseTouchScript Pause_Trigger;
 
 	public ImageTracking IT;
+	public MarkerlessLevelPositioning MLP;
     void Start() {
 		Screen.sleepTimeout = SleepTimeout.NeverSleep;
 		profSpriteDefault = profSprite.sprite;
@@ -64,7 +65,8 @@ public class GameManager : MonoBehaviour {
 		pauseMenuUI.SetActive(false);
 		Time.timeScale = 1f;
 		isGamePaused = false;
-		IT.Reset();
+		if (IT) IT.Reset();
+		else if (MLP) MLP.Reset();
 		UI.SetActive(true);
 		//SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 

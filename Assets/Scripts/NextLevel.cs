@@ -19,7 +19,7 @@ public class NextLevel : MonoBehaviour, I_Activable {
 	ParticleSystem particleSystem;
 	PlayerMove p;
 	GameManager gameManager;
-
+	public int Stars = 0;
 	//float logTimer = 0;
 
 	void Awake() {
@@ -46,7 +46,11 @@ public class NextLevel : MonoBehaviour, I_Activable {
 
 	IEnumerator LoadLevel() {
 		//System.IO.File.AppendAllText(FlapperCore.logFile, logTimer.ToString());
-
+		if (LevelSelectionManager.currentLevel == PlayerPrefs.GetInt("Unlocked Levels", 0))
+			PlayerPrefs.SetInt("Unlocked Levels", LevelSelectionManager.currentLevel+1);
+		PlayerPrefs.SetInt("Level" + LevelSelectionManager.currentLevel + "State", 0);
+		if(Stars> PlayerPrefs.GetInt("Level" + LevelSelectionManager.currentLevel + "Stars", 0)) PlayerPrefs.SetInt("Level" + LevelSelectionManager.currentLevel + "Stars", Stars);
+		Stars = 0;
 		activable = false;
 		yield return new WaitForSeconds(delayToStopFlapper);
 		GetComponent<AudioSource>().Play();
@@ -62,17 +66,7 @@ public class NextLevel : MonoBehaviour, I_Activable {
 		} else {
 			yield return new WaitForSeconds(0.6f);
 		}
-        FindObjectOfType<LevelManager>().LoadNextLevel(nextLevel);
-        Destroy(this.gameObject);
-        /*
-		if (SceneManager.GetActiveScene().buildIndex == 0) {
-			SceneManager.LoadScene(nextLevel + 1);
-		} else if(SceneManager.GetActiveScene().buildIndex < SceneManager.sceneCountInBuildSettings-1) {
-			SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-		} else
-        {
-            SceneManager.LoadScene(0);
-        }*/
+		FindObjectOfType<MarkerlessLevelPositioning>().NextLevel();
     }
 
 	public void Activate(bool type = true) {

@@ -30,8 +30,8 @@ public class ImageTracking : MonoBehaviour
 
         trackedImageManager = FindObjectOfType<ARTrackedImageManager>();
 
-        CameraWMin = 0;// Camera.main.pixelWidth / 3;
-        CameraHMin = 0;// Camera.main.pixelHeight / 3;
+        CameraWMin = Camera.main.pixelWidth / 4;
+        CameraHMin = Camera.main.pixelHeight / 4;
 
     }
 
@@ -63,24 +63,13 @@ public class ImageTracking : MonoBehaviour
     }
     private void ImageChanged (ARTrackedImagesChangedEventArgs eventArgs)
     {
-        foreach(ARTrackedImage trackedImage in eventArgs.added)
-        {
-            UpdateObject(trackedImage);
-        }
+        
         foreach (ARTrackedImage trackedImage in eventArgs.updated)
         {
             UpdateObject(trackedImage);
         }
     }
 
-    private void AddObject(ARTrackedImage trackedImage)
-    {   
-        placedPrefabs[trackedImage.referenceImage.name].SetActive(true);
-        placedPrefabs[trackedImage.referenceImage.name].transform.SetPositionAndRotation(trackedImage.transform.position+Vector3.up/2, Quaternion.identity);
-        placedPrefabs[trackedImage.referenceImage.name].transform.eulerAngles = new Vector3(0, trackedImage.transform.eulerAngles.y, 0);
-
-
-    }
 
     private void UpdateObject(ARTrackedImage trackedImage)
     {
@@ -100,17 +89,17 @@ public class ImageTracking : MonoBehaviour
 
                 if (m_RaycastManager.Raycast(posOnScreen, s_Hits, TrackableType.PlaneWithinPolygon))
                 {
-                    if (Vector3.Distance(s_Hits[0].pose.position, obj.transform.parent.position)>.2f)
+                    GameObject tmp = obj.transform.parent.gameObject;
+
+                    if (!tmp.GetComponent<ARAnchor>())
                     {
-                        GameObject tmp = obj.transform.parent.gameObject;
                         obj.transform.parent = m_AnchorManager.AttachAnchor(m_PlaneManager.GetPlane(s_Hits[0].trackableId), s_Hits[0].pose).transform;
-                        if(tmp.GetComponent<ARAnchor>()) Destroy(tmp);
                     }
-                    /*else if (Vector3.Distance(trackedImage.transform.position, s_Hits[0].pose.position) >= .04f && obj.transform.parent != trackables.transform)
+                    else if(Vector3.Distance(s_Hits[0].pose.position, trackedImage.transform.position) < Vector3.Distance(obj.transform.parent.position, trackedImage.transform.position) /5)
                     {
-                        obj.transform.parent = trackables.transform;
-                        obj.transform.position = trackedImage.transform.position;
-                    }*/
+                        obj.transform.parent = m_AnchorManager.AttachAnchor(m_PlaneManager.GetPlane(s_Hits[0].trackableId), s_Hits[0].pose).transform;
+                        Destroy(tmp);
+                    }
 
                 }
                 

@@ -33,4 +33,14 @@ public class StarCollector : MonoBehaviour
         if (starCount == 3)
             allStarsEffect.SetActive(true);
     }
+    public void Reset()
+    {
+        allStarsEffect.SetActive(false);
+        for (int i = 0; i < clockStars.Length; i++)
+        {
+            clockStars[i].SetActive(false);
+        }
+        allStarsEffect.transform.localScale = Vector3.one * 1200f;
+        starCount = 0;
+    }
 }

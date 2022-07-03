@@ -21,11 +21,13 @@ public class LoadingAR : MonoBehaviour
     }
     IEnumerator LoadAsyncLevel()
     {
-        AsyncOperation loadLevel = SceneManager.LoadSceneAsync(2);
+        AsyncOperation loadLevel;
+        if(StartButton.playType==0) loadLevel = SceneManager.LoadSceneAsync(2);
+        else loadLevel = SceneManager.LoadSceneAsync(3);
         loadLevel.allowSceneActivation = false;
-        while (loadLevel.progress < .9f || timer < 2.5f)
+        while (loadLevel.progress < .9f || timer < 1f)
         {
-            progressBar.fillAmount = Mathf.Lerp(0, 1, timer/2.5f);
+            progressBar.fillAmount = Mathf.Lerp(0, 1, loadLevel.progress * timer);
             yield return new WaitForEndOfFrame();
         }
         loadLevel.allowSceneActivation = true;

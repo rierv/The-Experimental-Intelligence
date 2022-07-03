@@ -14,7 +14,6 @@ public enum MoveType {
 
 public class PlayerMove : MonoBehaviour {
 	private ImageTracking IM;
-	public MoveType moveType;
 	public bool rotateWithCamera = true;
 	public Transform flapperModel;
 	public float speed = 7;
@@ -100,86 +99,26 @@ public class PlayerMove : MonoBehaviour {
 			Vector3 forward = jsMovement.InputDirection.y * Vector3.forward * (canMoveZ ? 1 : perpendicularMoveOnPush);
 			if (jsMovement.InputDirection.x == 0 && jsMovement.InputDirection.y == 0)
             {
-				rigidbody.velocity = Vector3.Lerp(rigidbody.velocity, Vector3.zero, Time.fixedDeltaTime);
+				rigidbody.velocity = Vector3.Lerp(rigidbody.velocity, new Vector3 (0, rigidbody.velocity.y, 0), Time.fixedDeltaTime);
             }
-			if (moveType == MoveType.Old) {
-                
-                
-                
-                if (jsMovement.InputDirection.x != 0 && jsMovement.InputDirection.y != 0) {
-					transform.position = Vector3.Lerp(transform.position, transform.position + (right + forward) / 1.3f / 20, speed /3 * Time.fixedDeltaTime);
-				} else if (jsMovement.InputDirection.x != 0 || jsMovement.InputDirection.y != 0) {
-					transform.position = Vector3.Lerp(transform.position, transform.position + (right + forward) / 20, speed/3 * Time.fixedDeltaTime);
-				}
-                if(jumping && stateManager.state != FlapperState.gaseous) transform.position = Vector3.Lerp(transform.position, transform.position + Vector3.up/4,  jumpForce * shrinkage/3 * Time.fixedDeltaTime);
-                else if (jumping && stateManager.state == FlapperState.gaseous) transform.position = Vector3.Lerp(transform.position, transform.position - Vector3.up/4, Time.fixedDeltaTime/2);
 
-            }
-            else if (moveType == MoveType.Rigidbody) {
-				rigidbody.AddForce((right+forward)  * velocity, ForceMode.VelocityChange);
-			} else if (moveType == MoveType.Accelerate) {
-				if (jsMovement.InputDirection.x != 0 && jsMovement.InputDirection.y != 0) {
-					timer += Time.fixedDeltaTime * acceleration;
-					speed = Mathf.Atan(timer) * velocity + 1;
-					transform.position = Vector3.Lerp(transform.position, transform.position + (right + forward) * speed / 1.3f, Time.fixedDeltaTime * speed / 10);
-				} else if (jsMovement.InputDirection.x != 0 || jsMovement.InputDirection.y != 0) {
-					timer += Time.fixedDeltaTime * acceleration;
-					speed = Mathf.Atan(timer) * velocity + 1;
-					transform.position = Vector3.Lerp(transform.position, transform.position + (right + forward) * speed, Time.fixedDeltaTime * speed / 10);
-				} else {
-					timer = -.5f;
-					speed = 0;
-				}
-			} else {
-				Debug.Log(transform.position + "-" + prevPos + " -> " + ((transform.position - prevPos) / Time.fixedDeltaTime).magnitude);
-				//Debug.Log(speedVector + " -> " + speedVector.magnitude);
-				speedVector = (transform.position - prevPos) / Time.fixedDeltaTime;
-				prevPos = transform.position;
-				if (jsMovement.InputDirection.x != 0 || jsMovement.InputDirection.y != 0) {
-					speedVector = Vector3.Lerp(speedVector, (right + forward) * speed * speedVectorMultiplier, accelerationSpeedVector);
-					speedVector.y = 0;
-					transform.position += speedVector * Time.fixedDeltaTime;
-				} else {
-					speedVector = Vector3.MoveTowards(speedVector, Vector3.zero, acceleration);
-				}
-			}
+			rigidbody.AddForce((right+forward)  * velocity, ForceMode.VelocityChange);
+			rigidbody.velocity = new Vector3(Mathf.Clamp(rigidbody.velocity.x, -.11f, .11f), Mathf.Clamp(rigidbody.velocity.y, -.5f, 10f), Mathf.Clamp(rigidbody.velocity.z, -.11f, .11f));
+
 		}
 
-		
+
 		if (stateManager.state == FlapperState.gaseous) {
-			if (moveType == MoveType.Rigidbody) {
+			
 				if (Jump_Trigger.jumpButtonHold) {
+					if (rigidbody.velocity.y > 0) rigidbody.velocity= new Vector3 (rigidbody.velocity.x, 0, rigidbody.velocity.z);
 					rigidbody.AddForce(Vector3.up * -gaseousShrinkDownForce, ForceMode.VelocityChange);
 				} else {
+					if (rigidbody.velocity.y < 0) rigidbody.velocity = new Vector3(rigidbody.velocity.x, 0, rigidbody.velocity.z);
 					rigidbody.AddForce(Vector3.up * gaseousFloatUpForce, ForceMode.VelocityChange);
 				}
-			} else {
-				rigidbody.isKinematic = true;
-				if (Jump_Trigger.jumpButtonHold) {
-					transform.position = Vector3.Lerp(transform.position, transform.position - Vector3.up * 10, gaseousShrinkDownForce / 10 * Time.deltaTime);
-				} else {
-					transform.position = Vector3.Lerp(transform.position, transform.position + Vector3.up, gaseousFloatUpForce * Time.deltaTime);
-				}
-				rigidbody.isKinematic = false;
-			}
-		} /*else if (canMove) {
-			if (Input.GetButtonUp("Jump") && !jumping) {
-				StartCoroutine(JumpCoroutine());
-			} else
-			if (Input.GetButton("Jump") && !jumping) {
-				if (!shrinking) {
-					shrinking = true;
-				}
-
-				if (stateManager.state == FlapperState.jelly && shrinkage <= max_shrinking) {
-					Shrink();
-				} else if (stateManager.state == FlapperState.solid) {
-					StartCoroutine(JumpCoroutine());
-				}
-			} else {
-				shrinking = false;
-			}
-		}*/
+			
+		} 
 	}
 
 	void Update() {
@@ -189,6 +128,7 @@ public class PlayerMove : MonoBehaviour {
 				StartCoroutine(JumpCoroutine());
                 Jump_Trigger.jumpButtonRelease = false;
             }
+			
             else {
 				shrinking = false;
                 //shrinkage = 1;
@@ -206,35 +146,26 @@ public class PlayerMove : MonoBehaviour {
 		updateShrink();
 		jumping = true;
 		shrinking = false;
-		yield return new WaitForSeconds(.1f);
-
-		if (stateManager.state != FlapperState.gaseous) {
-            if (moveType == MoveType.Old)
-            {
-                if (stateManager.state == FlapperState.solid)
-                {
-                    shrinkage = 2f;
-                }
-                else
-                {
-                }
-            }
-            else
-            {
-                if (stateManager.state == FlapperState.solid)
-                {
-                    rigidbody.AddForce(Vector3.up * solidJumpForce, ForceMode.VelocityChange);
-                }
-                else
-                {
-                    rigidbody.AddForce(Vector3.up * jumpForce * shrinkage, ForceMode.VelocityChange);
-                }
-            }
-		}
+		yield return new WaitForSeconds(.06f);
+		
 		audioSource.Play();
+		if (stateManager.state != FlapperState.gaseous)
+		{
+
+			if (stateManager.state == FlapperState.solid)
+			{
+				rigidbody.AddForce(Vector3.up * solidJumpForce, ForceMode.VelocityChange);
+			}
+			else
+			{
+				rigidbody.AddForce(Vector3.up * jumpForce * shrinkage, ForceMode.VelocityChange);
+			}
+
+		}
+
 		yield return new WaitForSeconds(.8f);
+		jumping = false;
 		shrinkage = 1;
-        jumping = false;
 		
 	}
 
@@ -252,7 +183,10 @@ public class PlayerMove : MonoBehaviour {
 	}
     private void OnCollisionEnter(Collision collision)
     {
-		if (collision.gameObject.tag == "Platform") transform.parent.parent = collision.gameObject.transform;
+		if (collision.gameObject.tag == "Platform")
+		{
+			transform.parent.parent = collision.gameObject.transform;
+		}
 		if (collision.gameObject.tag == "Laser")
 		{
 			stateManager.temperature = 1;
@@ -260,7 +194,10 @@ public class PlayerMove : MonoBehaviour {
 	}
     private void OnCollisionExit(Collision collision)
     {
-		if (collision.gameObject.tag == "Platform") transform.parent.parent = collision.gameObject.transform.parent;
+		if (collision.gameObject.tag == "Platform")
+		{
+			transform.parent.parent = collision.gameObject.transform.parent;
+		}
 	}
 
 	public void SetJumpText(string text)

@@ -130,11 +130,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1664605092036744631, guid: 6d1510ece1368364581787961878e738,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1664605092587895112, guid: 6d1510ece1368364581787961878e738,
         type: 3}
       propertyPath: pointer
       value: 
       objectReference: {fileID: 9209267183760223963}
+    - target: {fileID: 1664605092839939848, guid: 6d1510ece1368364581787961878e738,
+        type: 3}
+      propertyPath: MLP
+      value: 
+      objectReference: {fileID: 9209267182934491182}
     - target: {fileID: 1664605092839939850, guid: 6d1510ece1368364581787961878e738,
         type: 3}
       propertyPath: m_RootOrder
@@ -194,6 +204,56 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: AR Game Manager
+      objectReference: {fileID: 0}
+    - target: {fileID: 1664605093207514080, guid: 6d1510ece1368364581787961878e738,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 2072.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1664605093207514080, guid: 6d1510ece1368364581787961878e738,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.02082572
+      objectReference: {fileID: 0}
+    - target: {fileID: 1664605093207514080, guid: 6d1510ece1368364581787961878e738,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.02082572
+      objectReference: {fileID: 0}
+    - target: {fileID: 1664605093902854898, guid: 6d1510ece1368364581787961878e738,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1664605093902854899, guid: 6d1510ece1368364581787961878e738,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1664605093902854899, guid: 6d1510ece1368364581787961878e738,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1664605093902854899, guid: 6d1510ece1368364581787961878e738,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1664605093902854899, guid: 6d1510ece1368364581787961878e738,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1664605093902854899, guid: 6d1510ece1368364581787961878e738,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1664605093902854899, guid: 6d1510ece1368364581787961878e738,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6d1510ece1368364581787961878e738, type: 3}
@@ -459,6 +519,7 @@ GameObject:
   - component: {fileID: 9209267182934491175}
   - component: {fileID: 9209267182934491174}
   - component: {fileID: 9209267182934491182}
+  - component: {fileID: 9209267182934491183}
   m_Layer: 0
   m_Name: AR Session Origin
   m_TagString: Untagged
@@ -478,8 +539,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f35c39df49eae8b498ca4c1459f21fd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Level: {fileID: 5214464691276106582, guid: 9727d706ebefb2a4589a42245c666baa, type: 3}
+  LevelPrefabs:
+  - {fileID: 5214464691276106582, guid: 9727d706ebefb2a4589a42245c666baa, type: 3}
+  - {fileID: 9091367868194129555, guid: c7b02f6324fe9c047859dded6f4b61f8, type: 3}
   Cursor: {fileID: 6459003689433547372, guid: b8dcc02299f01f84187418e10cccb5ec, type: 3}
+--- !u!114 &9209267182934491183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9209267182934491181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 728ad7fae8e460a4ba41265c7308d757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AnchorPrefab: {fileID: 0}
 --- !u!114 &9209267183358959786
 MonoBehaviour:
   m_ObjectHideFlags: 0
