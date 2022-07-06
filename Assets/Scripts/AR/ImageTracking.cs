@@ -20,7 +20,7 @@ public class ImageTracking : MonoBehaviour
     ARPlaneManager m_PlaneManager;
     float CameraWMin, CameraHMin;
     List<ARRaycastHit> s_Hits = new List<ARRaycastHit>();
-
+    
 
     private void Awake()
     {
@@ -111,7 +111,7 @@ public class ImageTracking : MonoBehaviour
 
 
                 }
-                obj.transform.position = trackedImage.transform.position;
+                obj.transform.position = trackedImage.transform.position + Vector3.up * 0.01f;
 
             }
 
@@ -135,6 +135,18 @@ public class ImageTracking : MonoBehaviour
         Flapper.GetComponentInChildren<Rigidbody>().velocity = Vector3.zero;
         Flapper.transform.position = placedPrefabs["Start"].transform.position + Vector3.up / 5;
         Flapper.transform.parent = placedPrefabs["Start"].transform;
+    }
+
+    bool restarting=false;
+    public IEnumerator ResetAfter(float time)
+    {
+        if (!restarting)
+        {
+            restarting = true;
+            yield return new WaitForSeconds(time);
+            Reset();
+            restarting = false;
+        }
     }
 }
 

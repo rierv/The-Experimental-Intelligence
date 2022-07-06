@@ -124,7 +124,7 @@ public class PlayerMove : MonoBehaviour {
 	void Update() {
 		if (stateManager.state != FlapperState.gaseous && canMove) {
 
-            if (Jump_Trigger.jumpButtonHold && !readyToThrow.th && !jumping) {
+            if (Jump_Trigger.jumpButtonHold && !readyToThrow.th && !jumping && canJump) {
 				StartCoroutine(JumpCoroutine());
                 Jump_Trigger.jumpButtonRelease = false;
             }
@@ -146,7 +146,7 @@ public class PlayerMove : MonoBehaviour {
 		updateShrink();
 		jumping = true;
 		shrinking = false;
-		yield return new WaitForSeconds(.06f);
+		yield return new WaitForSeconds(.04f);
 		
 		audioSource.Play();
 		if (stateManager.state != FlapperState.gaseous)
@@ -163,7 +163,7 @@ public class PlayerMove : MonoBehaviour {
 
 		}
 
-		yield return new WaitForSeconds(.8f);
+		yield return new WaitForSeconds(.6f);
 		jumping = false;
 		shrinkage = 1;
 		
@@ -181,15 +181,34 @@ public class PlayerMove : MonoBehaviour {
 		Front.AddForce(Vector3.forward * force);
 		Back.AddForce(Vector3.back * force);
 	}
+
+	bool cantRestart = false;
     private void OnCollisionEnter(Collision collision)
     {
 		if (collision.gameObject.tag == "Platform")
 		{
 			transform.parent.parent = collision.gameObject.transform;
+			canJump = true;
+			cantRestart = false;
 		}
 		if (collision.gameObject.tag == "Laser")
 		{
 			stateManager.temperature = 1;
+		}
+		if (collision.gameObject.tag == "Finish")
+		{
+			if (!cantRestart)
+			{
+				cantRestart = true;
+				shrinkage = 3f;
+				updateShrink();
+				shrinkage = 1f;
+			}
+			if (StartButton.playType==1)
+				StartCoroutine(FindObjectOfType<ImageTracking>().ResetAfter(.4f));
+			else
+				StartCoroutine(FindObjectOfType<MarkerlessLevelPositioning>().ResetAfter(.4f));
+
 		}
 	}
     private void OnCollisionExit(Collision collision)
@@ -197,6 +216,7 @@ public class PlayerMove : MonoBehaviour {
 		if (collision.gameObject.tag == "Platform")
 		{
 			transform.parent.parent = collision.gameObject.transform.parent;
+			canJump = false;
 		}
 	}
 

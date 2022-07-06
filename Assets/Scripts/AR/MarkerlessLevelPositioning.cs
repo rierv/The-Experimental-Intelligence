@@ -39,7 +39,7 @@ public class MarkerlessLevelPositioning : MonoBehaviour
         {
             if(Input.touchCount > 0 && Input.GetTouch(0).phase==TouchPhase.Began)
             {
-                Level.transform.SetPositionAndRotation(s_Hits[0].pose.position, s_Hits[0].pose.rotation);
+                Level.transform.SetPositionAndRotation(s_Hits[0].pose.position + Vector3.up*.01f, s_Hits[0].pose.rotation);
                 Level.transform.parent = m_AnchorManager.AttachAnchor(m_PlaneManager.GetPlane(s_Hits[0].trackableId), s_Hits[0].pose).transform;
                 Level.SetActive(true);
                 Cursor.SetActive(false);
@@ -60,11 +60,33 @@ public class MarkerlessLevelPositioning : MonoBehaviour
     }
     public void Reset()
     {
-        FindObjectOfType<NextLevel>().Stars =0;
+        /*FindObjectOfType<NextLevel>().Stars =0;
         FindObjectOfType<StarCollector>().Reset();
         Destroy(Level);
         Level = Instantiate(LevelPrefabs[LevelSelectionManager.currentLevel]);
-        Level.SetActive(false);
+        Level.SetActive(false);*/
+        FindObjectOfType<NextLevel>().Stars = 0;
+        FindObjectOfType<StarCollector>().Reset();
+        Transform tmp = Level.transform.parent;
+        Vector3 tmpPos = Level.transform.localPosition;
+        Quaternion tmpRot = Level.transform.rotation;
+        Destroy(Level);
+        Level = Instantiate(LevelPrefabs[LevelSelectionManager.currentLevel]);
+        Level.transform.parent = tmp;
+        Level.transform.localPosition = tmpPos;
+        Level.transform.rotation = tmpRot;
+    }
+
+    bool restarting = false;
+    public IEnumerator ResetAfter(float time)
+    {
+        if (!restarting)
+        {
+            restarting = true;
+            yield return new WaitForSeconds(time);
+            Reset();
+            restarting = false;
+        }
     }
 
     public void NextLevel()

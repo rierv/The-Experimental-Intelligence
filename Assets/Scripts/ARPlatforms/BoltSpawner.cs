@@ -4,25 +4,23 @@ using UnityEngine;
 
 public class BoltSpawner : MonoBehaviour
 {
-    public GameObject bolt;
+    Vector3 StartPos;
+    Transform parent;
     // Start is called before the first frame update
     void Start()
     {
-        bolt = Instantiate(bolt, transform.position + Vector3.up/20, Quaternion.identity);
-        bolt.transform.localScale = Vector3.one * 0.015f;
-        bolt.transform.parent = transform;
+        parent = transform.parent;
+        StartPos = transform.localPosition;
     }
 
-    // Update is called once per frame
-    void Update()
+    
+    private void OnCollisionEnter(Collision collision)
     {
-        if (Mathf.Abs(bolt.transform.position.y - transform.position.y) > 2f)
+        
+        if (collision.gameObject.tag == "Finish")
         {
-            Destroy(bolt);
-            bolt = Instantiate(bolt, transform.position + Vector3.up / 20, Quaternion.identity);
-            bolt.transform.localScale = Vector3.one * 0.015f;
-            bolt.transform.parent = transform;
+            transform.parent = parent;
+            transform.localPosition = StartPos;
         }
     }
-    
 }
