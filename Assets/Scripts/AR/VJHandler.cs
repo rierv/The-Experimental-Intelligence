@@ -22,9 +22,9 @@ public class VJHandler : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointe
         pointer.transform.rotation = Camera.main.transform.rotation;
 
         //pointer.transform.LookAt(new Vector3(pointer.transform.forward.x, pointer.transform.position.y, pointer.transform.forward.z));
-        if (pointer.transform.up.y > .5f)
+        if (pointer.transform.up.y > .7f)
             pointer.transform.rotation = Quaternion.LookRotation(new Vector3(pointer.transform.forward.x, pointer.transform.position.y, pointer.transform.forward.z));
-        else if (pointer.transform.up.y < .5f && Mathf.Abs(pointer.transform.right.y)<.5f)
+        else if (pointer.transform.up.y < .7f && Mathf.Abs(pointer.transform.right.y)<.7f)
             pointer.transform.rotation = Quaternion.LookRotation(new Vector3(pointer.transform.position.x, pointer.transform.forward.y, pointer.transform.position.z), pointer.transform.up);
         else
             pointer.transform.rotation = Quaternion.LookRotation(new Vector3(pointer.transform.up.x, pointer.transform.position.y, pointer.transform.up.z));
@@ -63,7 +63,7 @@ public class VJHandler : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointe
         //float y = (jsContainer.rectTransform.pivot.y == 1f) ? position.y * 2 + 1 : position.y * 2 - 1;
 
         Vector3 Direction;
-        if (pointer.transform.up.y < .5f && Mathf.Abs(pointer.transform.right.y) < .5f)
+        if (pointer.transform.up.y < .7f && Mathf.Abs(pointer.transform.right.y) < .7f)
             Direction = pointer.transform.up  * position.y;
         else
             Direction = pointer.transform.forward * position.y;
@@ -72,10 +72,11 @@ public class VJHandler : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointe
 
         Vector2 setDir = new Vector2(Direction.x, Direction.z);// new Vector2 (Direction.x, Direction.z);
 
-        if (setDir.magnitude>.04f && setDir.magnitude<.4f)
-            InputDirection = (setDir).normalized * setDir.magnitude*1.7f;
-        else if (setDir.magnitude>=.4f)
-            InputDirection = (setDir).normalized * .4f * 1.7f;
+        if (setDir.magnitude>.03f && setDir.magnitude<.3f)
+            InputDirection = (setDir).normalized * setDir.magnitude*2.2f;
+        else if (setDir.magnitude>=.3f)
+            InputDirection = (setDir).normalized * .3f * 2.2f;
+        
         //InputDirection = (InputDirection.magnitude > 1) ? InputDirection.normalized : InputDirection;
 
         //to define the area in which joystick can move around

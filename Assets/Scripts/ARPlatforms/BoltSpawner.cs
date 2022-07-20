@@ -19,8 +19,12 @@ public class BoltSpawner : MonoBehaviour
         
         if (collision.gameObject.tag == "Finish")
         {
-            transform.parent = parent;
-            transform.localPosition = StartPos;
+            Reset();
         }
+    }
+    public void Reset()
+    {
+        transform.parent = parent;
+        transform.localPosition = StartPos;
     }
 }

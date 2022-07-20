@@ -175,11 +175,11 @@ public class PlayerMove : MonoBehaviour {
 		float forceUp = bonesForceUp * shrinkage;
 
 		//Down.MovePosition(Down.position + Vector3.down * shrinkage * -high * Time.deltaTime);
-		Up.AddForce( Vector3.up * forceUp);
-		Left.AddForce(Vector3.left * force);
-		Right.AddForce(Vector3.right * force);
-		Front.AddForce(Vector3.forward * force);
-		Back.AddForce(Vector3.back * force);
+		Up.AddForce( transform.up * forceUp);
+		Left.AddForce(-transform.right * force);
+		Right.AddForce(transform.right * force);
+		Front.AddForce(transform.forward * force);
+		Back.AddForce(-transform.forward * force);
 	}
 
 	bool cantRestart = false;
@@ -187,15 +187,15 @@ public class PlayerMove : MonoBehaviour {
     {
 		if (collision.gameObject.tag == "Platform")
 		{
-			transform.parent.parent = collision.gameObject.transform;
+			if(transform.parent.parent!= collision.gameObject.transform) transform.parent.parent = collision.gameObject.transform;
 			canJump = true;
 			cantRestart = false;
 		}
-		if (collision.gameObject.tag == "Laser")
+		else if (collision.gameObject.tag == "Laser")
 		{
 			stateManager.temperature = 1;
 		}
-		if (collision.gameObject.tag == "Finish")
+		else if (collision.gameObject.tag == "Finish")
 		{
 			if (!cantRestart)
 			{
@@ -215,7 +215,7 @@ public class PlayerMove : MonoBehaviour {
     {
 		if (collision.gameObject.tag == "Platform")
 		{
-			transform.parent.parent = collision.gameObject.transform.parent;
+			if (transform.parent.parent != collision.gameObject.transform) transform.parent.parent = collision.gameObject.transform.parent;
 			canJump = false;
 		}
 	}

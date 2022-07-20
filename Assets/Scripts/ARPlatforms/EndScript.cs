@@ -6,6 +6,7 @@ public class EndScript : MonoBehaviour
 {
     public GameObject ps;
     AudioSource winAudio;
+    bool endStarted = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,21 +16,22 @@ public class EndScript : MonoBehaviour
     // Update is called once per frame
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.name == "CORE")
+        if (collision.gameObject.name == "CORE" && !endStarted)
         {
+            endStarted = true;
             winAudio.Play();
             ps.SetActive(true);
-            //StartCoroutine(LoadStartScene());
+            StartCoroutine(LoadStartScene());
         }
     }
-    private void OnCollisionExit(Collision collision)
+    /*private void OnCollisionExit(Collision collision)
     {
         if (collision.gameObject.name == "CORE")
         {
             ps.SetActive(false);
             //StartCoroutine(LoadStartScene());
         }
-    }
+    }*/
     IEnumerator LoadStartScene()
     {
         yield return new WaitForSeconds(5);

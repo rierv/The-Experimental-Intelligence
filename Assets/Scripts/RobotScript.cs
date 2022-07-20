@@ -126,7 +126,7 @@ public class RobotScript : MonoBehaviour {
 	private void ManageRobotPosition() {
 		tmp = robot.localPosition;
 		float oldDistance = Vector3.Distance(robot.position, flapper.position);
-
+		
 		if (!moveOnXAxis)
 		{
 			pointer.localPosition = robot.localPosition + Vector3.right / 80;

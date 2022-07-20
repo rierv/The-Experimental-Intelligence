@@ -20,7 +20,6 @@ public class ImageTracking : MonoBehaviour
     ARPlaneManager m_PlaneManager;
     float CameraWMin, CameraHMin;
     List<ARRaycastHit> s_Hits = new List<ARRaycastHit>();
-    
 
     private void Awake()
     {
@@ -80,38 +79,34 @@ public class ImageTracking : MonoBehaviour
         {
             //obj.transform.parent = trackables.transform;
             Vector3 posOnScreen = Camera.main.WorldToScreenPoint(trackedImage.transform.position);
-            if (Vector3.Distance(Camera.main.velocity, Vector3.zero) < .01f
-                /*&& posOnScreen.x > CameraWMin
+            
+            if (Vector3.Distance(Camera.main.velocity, Vector3.zero) < .01f && Vector3.Distance( Input.gyro.userAcceleration, Vector3.zero) <.01f &&
+                Vector3.Distance(Input.gyro.rotationRate, Vector3.zero)<.01f
+                && posOnScreen.x > CameraWMin
                 && posOnScreen.y > CameraHMin
                 && posOnScreen.x < Camera.main.pixelWidth - CameraWMin
-                && posOnScreen.y < Camera.main.pixelHeight - CameraHMin*/)
+                && posOnScreen.y < Camera.main.pixelHeight - CameraHMin)
             {
                 if (obj.activeInHierarchy == false) obj.SetActive(true);
                 obj.transform.eulerAngles = new Vector3(0, trackedImage.transform.eulerAngles.y, 0);
 
-                
+                GameObject CurrentParent = obj.transform.parent.gameObject;
+
                 if (m_RaycastManager.Raycast(posOnScreen, s_Hits, TrackableType.PlaneWithinPolygon))
                 {
-                    if (Vector3.Distance(s_Hits[0].pose.position, trackedImage.transform.position) < Vector3.Distance(obj.transform.parent.position, trackedImage.transform.position)/5)
+                    if (!CurrentParent.GetComponent<ARAnchor>())
+                    {
+                        obj.transform.parent = m_AnchorManager.AttachAnchor(m_PlaneManager.GetPlane(s_Hits[0].trackableId), s_Hits[0].pose).transform;
+                    }
+                    else if (Vector3.Distance(s_Hits[0].pose.position, trackedImage.transform.position) < Vector3.Distance(CurrentParent.transform.position, trackedImage.transform.position)/7)
 
                     {
-                        GameObject tmp = obj.transform.parent.gameObject;
-
-                        if (!tmp.GetComponent<ARAnchor>())
-                        {
-                            obj.transform.parent = m_AnchorManager.AttachAnchor(m_PlaneManager.GetPlane(s_Hits[0].trackableId), s_Hits[0].pose).transform;
-                        }
-
-                        else
-                        {
-                            obj.transform.parent = m_AnchorManager.AttachAnchor(m_PlaneManager.GetPlane(s_Hits[0].trackableId), s_Hits[0].pose).transform;
-                            Destroy(tmp);
-                        }
+                        obj.transform.parent = m_AnchorManager.AttachAnchor(m_PlaneManager.GetPlane(s_Hits[0].trackableId), s_Hits[0].pose).transform;
+                        Destroy(CurrentParent);
                     }
-
-
                 }
-                obj.transform.position = trackedImage.transform.position + Vector3.up * 0.01f;
+
+                obj.transform.position = trackedImage.transform.position;
 
             }
 
@@ -135,6 +130,8 @@ public class ImageTracking : MonoBehaviour
         Flapper.GetComponentInChildren<Rigidbody>().velocity = Vector3.zero;
         Flapper.transform.position = placedPrefabs["Start"].transform.position + Vector3.up / 5;
         Flapper.transform.parent = placedPrefabs["Start"].transform;
+        BoltSpawner bs = FindObjectOfType<BoltSpawner>();
+        if (bs) bs.Reset();
     }
 
     bool restarting=false;

@@ -141,7 +141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 728ad7fae8e460a4ba41265c7308d757, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AnchorPrefab: {fileID: 554516468}
+  m_AnchorPrefab: {fileID: 0}
 --- !u!114 &533833284 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2574173778438431155, guid: a53a38b2f741f2c45beeca67465d2b02,
@@ -154,12 +154,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e734ccfeb36e3c840a1f23fd8b53003c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &554516468 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1664605093207514087, guid: 6d1510ece1368364581787961878e738,
-    type: 3}
-  m_PrefabInstance: {fileID: 1664605092131241020}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &773327029 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2574173777604316994, guid: a53a38b2f741f2c45beeca67465d2b02,
@@ -421,6 +415,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2574173778438431154, guid: a53a38b2f741f2c45beeca67465d2b02,
+        type: 3}
+      propertyPath: m_MaxNumberOfMovingImages
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 2574173778438431156, guid: a53a38b2f741f2c45beeca67465d2b02,
         type: 3}
       propertyPath: m_Name
@@ -495,6 +494,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7681475116496115918, guid: 1b6b9a41086bbde4dba8c9e987756c78,
+        type: 3}
+      propertyPath: m_TrackingMode
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7681475116496115952, guid: 1b6b9a41086bbde4dba8c9e987756c78,
         type: 3}
