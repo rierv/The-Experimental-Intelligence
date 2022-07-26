@@ -20,7 +20,6 @@ public class MySynchronizationScript : MonoBehaviour, IPunObservable
     private float distance;
     private float angle;
 
-    private Transform trackables;
     private Transform startTransform;
 
     private void Awake()
@@ -30,8 +29,7 @@ public class MySynchronizationScript : MonoBehaviour, IPunObservable
 
         networkedPosition = new Vector3();
         networkedRotation = new Quaternion();
-        trackables = GameObject.Find("Trackables").transform;
-        startTransform = trackables.Find("Start").transform;
+        startTransform = GameObject.FindObjectOfType<ImageTrackingMultiplayer>().placedPrefabs["Start"].transform;
 
     }
 
