@@ -124,7 +124,7 @@ public class ImageTrackingMultiplayer : MonoBehaviour
                         object[] data = new object[]
                         {
 
-                            obj.transform.position- startTransform.position, obj.transform.rotation, _photonView.ViewID, obj.name
+                            obj.transform.position- startTransform.position, obj.transform.forward, obj.transform.up, _photonView.ViewID, obj.name
                         };
 
 

@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   synchronizeVelocity: 1
-  synchronizeAngularVelocity: 1
+  synchronizeAngularVelocity: 0
   isTeleportEnabled: 1
   teleportIfDistanceGreaterThan: 1
 --- !u!1001 &3280610116105086899
@@ -215,6 +215,16 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 9dd6d456e09a3864ea8b4c11b793e646, type: 2}
+    - target: {fileID: 1815072845888192992, guid: 07877b913f7f89948bfcc5002004fe1d,
+        type: 3}
+      propertyPath: ObservedComponents.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1815072845888192992, guid: 07877b913f7f89948bfcc5002004fe1d,
+        type: 3}
+      propertyPath: ObservedComponents.Array.data[0]
+      value: 
+      objectReference: {fileID: 9046127406719480180}
     - target: {fileID: 2455829942818953967, guid: 07877b913f7f89948bfcc5002004fe1d,
         type: 3}
       propertyPath: gas.b

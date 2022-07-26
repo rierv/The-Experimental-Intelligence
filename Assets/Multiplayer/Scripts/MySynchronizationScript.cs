@@ -10,7 +10,7 @@ public class MySynchronizationScript : MonoBehaviour, IPunObservable
     PhotonView photonView;
 
     Vector3 networkedPosition;
-    Quaternion networkedRotation;
+    //Quaternion networkedRotation;
 
     public bool synchronizeVelocity = true;
     public bool synchronizeAngularVelocity = true;
@@ -28,7 +28,7 @@ public class MySynchronizationScript : MonoBehaviour, IPunObservable
         photonView = GetComponentInParent<PhotonView>();
 
         networkedPosition = new Vector3();
-        networkedRotation = new Quaternion();
+        //networkedRotation = new Quaternion();
         startTransform = GameObject.FindObjectOfType<ImageTrackingMultiplayer>().placedPrefabs["Start"].transform;
 
     }
@@ -51,7 +51,7 @@ public class MySynchronizationScript : MonoBehaviour, IPunObservable
         if (!photonView.IsMine)
         {
             rb.position = Vector3.MoveTowards(rb.position, networkedPosition, distance * (1.0f / PhotonNetwork.SerializationRate));
-            rb.rotation = Quaternion.RotateTowards(rb.rotation, networkedRotation, angle * (1.0f / PhotonNetwork.SerializationRate));
+            //rb.rotation = Quaternion.RotateTowards(rb.rotation, networkedRotation, angle * (1.0f / PhotonNetwork.SerializationRate));
         }
 
     }
@@ -64,7 +64,7 @@ public class MySynchronizationScript : MonoBehaviour, IPunObservable
             //Then, photonView is mine and I am the one who controls this player.
             //should send position, velocity etc. data to the other players
             stream.SendNext(rb.position - startTransform.position);
-            stream.SendNext(rb.rotation);
+            //stream.SendNext(rb.rotation);
 
             if (synchronizeVelocity)
             {
@@ -82,7 +82,7 @@ public class MySynchronizationScript : MonoBehaviour, IPunObservable
             //Called on my player gameobject that exists in remote player's game
 
             networkedPosition = (Vector3)stream.ReceiveNext() + startTransform.position;
-            networkedRotation = (Quaternion)stream.ReceiveNext();
+            //networkedRotation = (Quaternion)stream.ReceiveNext();
 
             if (isTeleportEnabled)
             {
@@ -110,9 +110,9 @@ public class MySynchronizationScript : MonoBehaviour, IPunObservable
                 {
                     rb.angularVelocity = (Vector3)stream.ReceiveNext();
 
-                    networkedRotation = Quaternion.Euler(rb.angularVelocity * lag) * networkedRotation;
+                    //networkedRotation = Quaternion.Euler(rb.angularVelocity * lag) * networkedRotation;
 
-                    angle = Quaternion.Angle(rb.rotation, networkedRotation);
+                    //angle = Quaternion.Angle(rb.rotation, networkedRotation);
                 }
             }
         }
