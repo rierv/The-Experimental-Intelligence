@@ -21,11 +21,12 @@ public class GameManager : MonoBehaviour {
     void Start() {
 		Screen.sleepTimeout = SleepTimeout.NeverSleep;
 		profSpriteDefault = profSprite.sprite;
-        Pause_Trigger = GameObject.Find("Pause_Button").GetComponent<PauseTouchScript>();
-    }
+        GameObject tmp =GameObject.Find("Pause_Button");
+		if (tmp) Pause_Trigger = tmp.GetComponent<PauseTouchScript>();
+	}
 
 	void Update() {
-		if ((Pause_Trigger.pauseButtonHold && !isGamePaused)||Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown("joystick button 7")) {
+		if ((Pause_Trigger&& Pause_Trigger.pauseButtonHold && !isGamePaused)||Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown("joystick button 7")) {
 			if (isGamePaused)
 				Resume();
 			else

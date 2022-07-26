@@ -53,24 +53,36 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Can Flapper sink in a hurricane.unity
     guid: 8af4d8bf1ffbd3d44ad9b7f92e13bbcd
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/AR/StartScene.unity
     guid: 7de5efb76f7a21e4aba07f06cf5c6aec
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/AR/LevelSelection.unity
     guid: 82e02fe037cd8aa4d92accb532f82707
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/AR/MarkerlessScene.unity
     guid: bdc9cd1d197293848830eb6e0e660d85
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/AR/ARScene.unity
     guid: 3bfc0000976808e47af23718e415da64
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/AR/LoadingScene.unity
     guid: 016b73519ed180a48a91beaa4f040488
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/AR/LevelScore.unity
     guid: 8538b1b28b41e3e46b2850cf7d181732
+  - enabled: 1
+    path: Assets/Multiplayer/Scenes/Scene_Lobby.unity
+    guid: 440fab74dfb736d46908c287bf83005f
+  - enabled: 1
+    path: Assets/Multiplayer/Scenes/Scene_Gameplay.unity
+    guid: 4dbbe6e84ff2c514d92e5c90a30c23d4
+  - enabled: 1
+    path: Assets/Multiplayer/Scenes/Scene_Loading.unity
+    guid: 943f6139fa75e76479b37f37a963962e
+  - enabled: 1
+    path: Assets/Multiplayer/Scenes/Scene_PlayerSelection.unity
+    guid: ea015e6ac42fe3a4caeb69f71c131a7b
   m_configObjects:
     Unity.XR.WindowsMR.Settings: {fileID: 11400000, guid: 208af816bc2a6ec46a30b7e7e20226b9,
       type: 2}

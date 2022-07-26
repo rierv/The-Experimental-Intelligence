@@ -77,17 +77,15 @@ public class PlayerMove : MonoBehaviour {
 		camera = FindObjectOfType<Camera>().transform;
 		prevPos = transform.position;
 	}
-
-    void Start()
+    private void OnEnable()
     {
+		jsMovement = GameObject.Find("Joycon_container").GetComponent<VJHandler>();
 
-        jsMovement = GameObject.Find("Joycon_container").GetComponent<VJHandler>();
-
-        Jump_Trigger = GameObject.Find("Jump_Button").GetComponent<JumpButtonScript>();
+		Jump_Trigger = GameObject.Find("Jump_Button").GetComponent<JumpButtonScript>();
 
 		readyToThrow = GetComponent<ThrowObjects>();
-
 	}
+   
     
     
     void FixedUpdate() {
@@ -122,6 +120,7 @@ public class PlayerMove : MonoBehaviour {
 	}
 
 	void Update() {
+		Debug.Log("flapperpos" + transform.position);
 		if (stateManager.state != FlapperState.gaseous && canMove) {
 
             if (Jump_Trigger.jumpButtonHold && !readyToThrow.th && !jumping && canJump) {
@@ -206,8 +205,10 @@ public class PlayerMove : MonoBehaviour {
 			}
 			if (StartButton.playType==1)
 				StartCoroutine(FindObjectOfType<ImageTracking>().ResetAfter(.4f));
-			else
+			else if(StartButton.playType == 0)
 				StartCoroutine(FindObjectOfType<MarkerlessLevelPositioning>().ResetAfter(.4f));
+			else
+				FindObjectOfType<ImageTrackingMultiplayer>().Reset();
 
 		}
 	}
