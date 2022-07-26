@@ -44,7 +44,7 @@ public class SpawnManager : MonoBehaviourPunCallbacks
     {
         if (photonEvent.Code == (byte)RaiseEventCodes.PlayerSpawnEventCode)
         {
-            startPosition = trackables.Find("Start").transform.position;
+            startPosition = imageTracking.placedPrefabs["Start"].transform.position;
             object[] data = (object[])photonEvent.CustomData;
             Vector3 receivedPosition = (Vector3)data[0];
             Quaternion receivedRotation = (Quaternion)data[1];
@@ -58,7 +58,7 @@ public class SpawnManager : MonoBehaviourPunCallbacks
         }
         else if (photonEvent.Code == (byte)RaiseEventCodes.PlatformFoundEventCode)
         {
-            startPosition = trackables.Find("Start").transform.position;
+            startPosition = imageTracking.placedPrefabs["Start"].transform.position;
             object[] data = (object[])photonEvent.CustomData;
             Vector3 receivedPosition = (Vector3)data[0];
             Quaternion receivedRotation = (Quaternion)data[1];
@@ -110,9 +110,10 @@ public class SpawnManager : MonoBehaviourPunCallbacks
         if (PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue(MultiplayerARSpinnerTopGame.PLAYER_SELECTION_NUMBER, out playerSelectionNumber))
         {
             Debug.Log("Player selection number is " + (int)playerSelectionNumber);
-            Debug.Log(trackables.Find("Start"));
-
-            startPosition = trackables.Find("Start").transform.position;
+            Debug.Log(trackables.childCount+"figliii");
+            Debug.Log(GameObject.Find("Start"));
+            startPosition = imageTracking.placedPrefabs["Start"].transform.position;
+            //startPosition = trackables.Find("Start").transform.position;
             Debug.Log("spawnoPlayer");
 
             int randomSpawnPoint = Random.Range(0, spawnPositions.Length - 1);
@@ -127,7 +128,6 @@ public class SpawnManager : MonoBehaviourPunCallbacks
 
                 object[] data = new object[]
                 {
-
                     playerGameobject.transform.position- startPosition, playerGameobject.transform.rotation, _photonView.ViewID, playerSelectionNumber
                 };
 

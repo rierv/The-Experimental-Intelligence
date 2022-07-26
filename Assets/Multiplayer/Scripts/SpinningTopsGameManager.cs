@@ -77,7 +77,7 @@ public class SpinningTopsGameManager :MonoBehaviourPunCallbacks
         if (PhotonNetwork.CurrentRoom.PlayerCount == 1)
         {
             uI_InformText.text = "Joined to " + PhotonNetwork.CurrentRoom.Name + ". Waiting for other players...";
-
+            StartCoroutine(DeactivateAfterSeconds(uI_InformPanelGameobject, 2.0f));
 
         }
         else
@@ -121,6 +121,12 @@ public class SpinningTopsGameManager :MonoBehaviourPunCallbacks
         //Creatin the room
         PhotonNetwork.CreateRoom(randomRoomName,roomOptions);
 
+    }
+
+    public override void OnCreateRoomFailed(short returnCode, string message)
+    {
+        Debug.Log("non sono riuscito a creare la stanza");
+        base.OnCreateRoomFailed(returnCode, message);
     }
 
     IEnumerator DeactivateAfterSeconds(GameObject _gameObject, float _seconds)

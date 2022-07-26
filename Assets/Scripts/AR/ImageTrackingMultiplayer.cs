@@ -91,7 +91,7 @@ public class ImageTrackingMultiplayer : MonoBehaviour
                 {
                     if (obj.name == "Start")
                     {
-                        startTransform = trackables.transform.Find("Start").transform;
+                        startTransform = placedPrefabs["Start"].transform;
                         toStartMatchmaking.DisableARPlacementAndPlaneDetection();
                     }
                     if (startTransform != null) {
