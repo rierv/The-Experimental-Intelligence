@@ -124,7 +124,7 @@ public class ImageTrackingMultiplayer : MonoBehaviour
                     PhotonView _photonView = obj.GetComponent<PhotonView>();
                     object[] data = new object[]
                     {
-                        obj.transform.position- startTransform.position, obj.transform.localRotation, _photonView.ViewID, obj.name
+                        obj.transform.localPosition, obj.transform.localRotation, _photonView.ViewID, obj.name
                     };
 
 
@@ -154,9 +154,9 @@ public class ImageTrackingMultiplayer : MonoBehaviour
 
         }
     }
-    public void Reset()
+    public void Reset(Transform transform)
     {
-        
+        transform.position = placedPrefabs["Start"].transform.position + Vector3.up * .03f;
     }
 }
 

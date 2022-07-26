@@ -64,7 +64,9 @@ public class SpawnManager : MonoBehaviourPunCallbacks
             Quaternion receivedLocalRotation = (Quaternion)data[1];
             string receivedPlatformName = (string)data[3];
             GameObject platform = imageTracking.placedPrefabs[receivedPlatformName];
-            platform.transform.SetPositionAndRotation(receivedPosition + startPosition, receivedLocalRotation);
+            platform.transform.localPosition = receivedPosition;
+            platform.transform.localRotation = receivedLocalRotation;
+            //platform.transform.SetPositionAndRotation(receivedPosition + startPosition, receivedLocalRotation);
             PhotonView _photonView = platform.GetComponent<PhotonView>();
             _photonView.ViewID = (int)data[2];
             platform.SetActive(true);

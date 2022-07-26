@@ -203,12 +203,13 @@ public class PlayerMove : MonoBehaviour {
 				updateShrink();
 				shrinkage = 1f;
 			}
+			Debug.Log("game type 2?=" + StartButton.playType);
 			if (StartButton.playType==1)
 				StartCoroutine(FindObjectOfType<ImageTracking>().ResetAfter(.4f));
 			else if(StartButton.playType == 0)
 				StartCoroutine(FindObjectOfType<MarkerlessLevelPositioning>().ResetAfter(.4f));
 			else
-				FindObjectOfType<ImageTrackingMultiplayer>().Reset();
+				FindObjectOfType<ImageTrackingMultiplayer>().Reset(transform);
 
 		}
 	}
