@@ -46,11 +46,15 @@ public class SpawnManager : MonoBehaviourPunCallbacks
         {
             startPosition = imageTracking.placedPrefabs["Start"].transform.position;
             object[] data = (object[])photonEvent.CustomData;
-            Vector3 receivedPosition = (Vector3)data[0];
-            Quaternion receivedRotation = (Quaternion)data[1];
+            
             int receivedPlayerSelectionData = (int)data[3];
-
-            GameObject player = Instantiate(playerPrefabs[receivedPlayerSelectionData], receivedPosition + startPosition, receivedRotation);
+            Vector3 receivedPosition = (Vector3)data[0];
+            Quaternion receivedLocalRotation = (Quaternion)data[1];
+            
+            GameObject player = Instantiate(playerPrefabs[receivedPlayerSelectionData]);
+            player.transform.parent = imageTracking.placedPrefabs["Start"].transform;
+            player.transform.localPosition = receivedPosition;
+            player.transform.localRotation = receivedLocalRotation;
             PhotonView _photonView = player.GetComponent<PhotonView>();
             _photonView.ViewID = (int)data[2];
 
@@ -130,7 +134,7 @@ public class SpawnManager : MonoBehaviourPunCallbacks
 
                 object[] data = new object[]
                 {
-                    playerGameobject.transform.position- startPosition, playerGameobject.transform.rotation, _photonView.ViewID, playerSelectionNumber
+                    playerGameobject.transform.localPosition, playerGameobject.transform.localRotation, _photonView.ViewID, playerSelectionNumber
                 };
 
 
