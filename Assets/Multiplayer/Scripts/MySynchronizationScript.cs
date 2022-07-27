@@ -8,7 +8,7 @@ public class MySynchronizationScript : MonoBehaviour, IPunObservable
 
     Rigidbody rb;
     PhotonView photonView;
-
+    Transform oldParent;
     Vector3 networkedPosition;
     //Quaternion networkedRotation;
 
@@ -22,6 +22,10 @@ public class MySynchronizationScript : MonoBehaviour, IPunObservable
 
     private Transform startTransform;
     Dictionary<string, GameObject> placedPrefabs;
+
+    float currentTime = 0;
+    double currentPacketTime = 0;
+    double lastPacketTime = 0;
 
     private void Awake()
     {
@@ -44,7 +48,15 @@ public class MySynchronizationScript : MonoBehaviour, IPunObservable
     // Update is called once per frame
     void Update()
     {
+        if (!photonView.IsMine)
+        {
+            double timeToReachGoal = currentPacketTime - lastPacketTime;
+            currentTime += Time.deltaTime;
 
+            //Update remote player
+            transform.localPosition = Vector3.Lerp(rb.transform.localPosition, networkedPosition, (float)(currentTime / currentPacketTime)); //timeToReachGoal));
+            //transform.rotation = Quaternion.Lerp(rotationAtLastPacket, latestRot, (float)(currentTime / timeToReachGoal));
+        }
     }
 
     private void FixedUpdate()
@@ -53,9 +65,11 @@ public class MySynchronizationScript : MonoBehaviour, IPunObservable
         if (!photonView.IsMine)
         {
             //rb.transform.localPosition = Vector3.Lerp(rb.transform.localPosition, networkedPosition, distance * (10.0f / PhotonNetwork.SerializationRate));
-            rb.transform.localPosition = Vector3.MoveTowards(rb.transform.localPosition, networkedPosition, distance * (.1f / PhotonNetwork.SerializationRate));
+            //rb.transform.localPosition = Vector3.MoveTowards(rb.transform.localPosition, networkedPosition, distance * (.01f / PhotonNetwork.SerializationRate));
             //rb.rotation = Quaternion.RotateTowards(rb.rotation, networkedRotation, angle * (1.0f / PhotonNetwork.SerializationRate));
-        }
+
+            //Lag compensation
+            }
 
     }
 
@@ -67,7 +81,13 @@ public class MySynchronizationScript : MonoBehaviour, IPunObservable
             //Then, photonView is mine and I am the one who controls this player.
             //should send position, velocity etc. data to the other players
             stream.SendNext(rb.transform.localPosition);
-            stream.SendNext(rb.transform.parent.parent.name);
+            if (oldParent != rb.transform.parent.parent)
+            {
+                stream.SendNext(rb.transform.parent.parent.name);
+                oldParent = rb.transform.parent.parent;
+            }
+            else
+                stream.SendNext(null);
 
             if (synchronizeVelocity)
             {
@@ -85,7 +105,12 @@ public class MySynchronizationScript : MonoBehaviour, IPunObservable
             //Called on my player gameobject that exists in remote player's game
 
             networkedPosition = (Vector3)stream.ReceiveNext();
-            transform.parent.parent = placedPrefabs[(string)stream.ReceiveNext()].transform;
+            string newParentName = (string)stream.ReceiveNext();
+            if(newParentName!=null) transform.parent.parent = placedPrefabs[newParentName].transform;
+
+            currentTime = 0.0f;
+            lastPacketTime = currentPacketTime;
+            currentPacketTime = 1 / PhotonNetwork.SerializationRate;// info.SentServerTime;
 
             if (isTeleportEnabled)
             {
