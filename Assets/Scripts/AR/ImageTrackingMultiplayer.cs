@@ -88,6 +88,7 @@ public class ImageTrackingMultiplayer : MonoBehaviour
                 && posOnScreen.x < Camera.main.pixelWidth - CameraWMin
                 && posOnScreen.y < Camera.main.pixelHeight - CameraHMin)
             {
+
                 if (obj.activeInHierarchy == false)
                 {
                     if (obj.name == "Start")
@@ -101,53 +102,58 @@ public class ImageTrackingMultiplayer : MonoBehaviour
                         PhotonNetwork.AllocateViewID(_photonView);
                     }
                 }
-                obj.transform.eulerAngles = new Vector3(0, trackedImage.transform.eulerAngles.y, 0);
 
-                GameObject CurrentParent = obj.transform.parent.gameObject;
-
-                if (obj.name == "Start" && m_RaycastManager.Raycast(posOnScreen, s_Hits, TrackableType.PlaneWithinPolygon))
+                if (obj.activeInHierarchy == true)
                 {
 
-                    if (!CurrentParent.GetComponent<ARAnchor>())
-                    {
-                        obj.transform.parent = m_AnchorManager.AttachAnchor(m_PlaneManager.GetPlane(s_Hits[0].trackableId), s_Hits[0].pose).transform;
-                    }
-                    else if (Vector3.Distance(s_Hits[0].pose.position, trackedImage.transform.position) < Vector3.Distance(CurrentParent.transform.position, trackedImage.transform.position) / 7)
+                    obj.transform.position = trackedImage.transform.position;
 
+                    obj.transform.eulerAngles = new Vector3(0, trackedImage.transform.eulerAngles.y, 0);
+
+                    GameObject CurrentParent = obj.transform.parent.gameObject;
+
+                    if (obj.name == "Start" && m_RaycastManager.Raycast(posOnScreen, s_Hits, TrackableType.PlaneWithinPolygon))
                     {
-                        obj.transform.parent = m_AnchorManager.AttachAnchor(m_PlaneManager.GetPlane(s_Hits[0].trackableId), s_Hits[0].pose).transform;
-                        Destroy(CurrentParent);
+
+                        if (!CurrentParent.GetComponent<ARAnchor>())
+                        {
+                            obj.transform.parent = m_AnchorManager.AttachAnchor(m_PlaneManager.GetPlane(s_Hits[0].trackableId), s_Hits[0].pose).transform;
+                        }
+                        else if (Vector3.Distance(s_Hits[0].pose.position, trackedImage.transform.position) < Vector3.Distance(CurrentParent.transform.position, trackedImage.transform.position) / 7)
+
+                        {
+                            obj.transform.parent = m_AnchorManager.AttachAnchor(m_PlaneManager.GetPlane(s_Hits[0].trackableId), s_Hits[0].pose).transform;
+                            Destroy(CurrentParent);
+                        }
                     }
-                }
-                if (obj.name != "Start" && obj.transform.position != trackedImage.transform.position)
-                {
-                    PhotonView _photonView = obj.GetComponent<PhotonView>();
-                    object[] data = new object[]
+                    if (obj.name != "Start")
                     {
+                        PhotonView _photonView = obj.GetComponent<PhotonView>();
+                        object[] data = new object[]
+                        {
                         obj.transform.localPosition, obj.transform.localRotation, _photonView.ViewID, obj.name
-                    };
+                        };
 
 
-                    RaiseEventOptions raiseEventOptions = new RaiseEventOptions
-                    {
-                        Receivers = ReceiverGroup.Others,
-                        CachingOption = EventCaching.AddToRoomCache
+                        RaiseEventOptions raiseEventOptions = new RaiseEventOptions
+                        {
+                            Receivers = ReceiverGroup.Others,
+                            CachingOption = EventCaching.AddToRoomCache
 
-                    };
+                        };
 
 
-                    SendOptions sendOptions = new SendOptions
-                    {
-                        Reliability = true
-                    };
+                        SendOptions sendOptions = new SendOptions
+                        {
+                            Reliability = true
+                        };
 
-                    //Raise Events!
-                    PhotonNetwork.RaiseEvent((byte)RaiseEventCodes.PlatformFoundEventCode, data, raiseEventOptions, sendOptions);
-                        
+                        //Raise Events!
+                        PhotonNetwork.RaiseEvent((byte)RaiseEventCodes.PlatformFoundEventCode, data, raiseEventOptions, sendOptions);
+
+                    }
+
                 }
-                
-
-                obj.transform.position = trackedImage.transform.position;
                     
                 
             }

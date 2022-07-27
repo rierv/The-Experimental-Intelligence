@@ -52,9 +52,9 @@ public class SpawnManager : MonoBehaviourPunCallbacks
             Quaternion receivedLocalRotation = (Quaternion)data[1];
             
             GameObject player = Instantiate(playerPrefabs[receivedPlayerSelectionData]);
+            player.transform.rotation = imageTracking.placedPrefabs["Start"].transform.rotation;
             player.transform.parent = imageTracking.placedPrefabs["Start"].transform;
             player.transform.localPosition = receivedPosition;
-            player.transform.localRotation = receivedLocalRotation;
             PhotonView _photonView = player.GetComponent<PhotonView>();
             _photonView.ViewID = (int)data[2];
 
@@ -116,17 +116,15 @@ public class SpawnManager : MonoBehaviourPunCallbacks
         if (PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue(MultiplayerARSpinnerTopGame.PLAYER_SELECTION_NUMBER, out playerSelectionNumber))
         {
             Debug.Log("Player selection number is " + (int)playerSelectionNumber);
-            Debug.Log(trackables.childCount+"figliii");
-            Debug.Log(GameObject.Find("Start"));
+            
             startPosition = imageTracking.placedPrefabs["Start"].transform.position;
             //startPosition = trackables.Find("Start").transform.position;
-            Debug.Log("spawnoPlayer");
 
             int randomSpawnPoint = Random.Range(0, spawnPositions.Length - 1);
             Vector3 instantiatePosition = spawnPositions[randomSpawnPoint].localPosition;
 
-            GameObject playerGameobject = Instantiate(playerPrefabs[(int)playerSelectionNumber], instantiatePosition + startPosition, Quaternion.identity);
-
+            GameObject playerGameobject = Instantiate(playerPrefabs[(int)playerSelectionNumber], instantiatePosition + startPosition, imageTracking.placedPrefabs["Start"].transform.rotation);
+            playerGameobject.transform.parent = imageTracking.placedPrefabs["Start"].transform;
             PhotonView _photonView = playerGameobject.GetComponent<PhotonView>();
 
             if (PhotonNetwork.AllocateViewID(_photonView))
@@ -134,7 +132,7 @@ public class SpawnManager : MonoBehaviourPunCallbacks
 
                 object[] data = new object[]
                 {
-                    playerGameobject.transform.localPosition, playerGameobject.transform.localRotation, _photonView.ViewID, playerSelectionNumber
+                    playerGameobject.transform.localPosition, playerGameobject.transform.rotation, _photonView.ViewID, playerSelectionNumber
                 };
 
 

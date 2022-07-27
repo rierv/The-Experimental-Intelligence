@@ -21,6 +21,7 @@ public class MySynchronizationScript : MonoBehaviour, IPunObservable
     private float angle;
 
     private Transform startTransform;
+    Dictionary<string, GameObject> placedPrefabs;
 
     private void Awake()
     {
@@ -29,7 +30,8 @@ public class MySynchronizationScript : MonoBehaviour, IPunObservable
 
         networkedPosition = new Vector3();
         //networkedRotation = new Quaternion();
-        startTransform = GameObject.FindObjectOfType<ImageTrackingMultiplayer>().placedPrefabs["Start"].transform;
+        placedPrefabs = GameObject.FindObjectOfType<ImageTrackingMultiplayer>().placedPrefabs;
+        startTransform = placedPrefabs["Start"].transform;
 
     }
 
@@ -50,7 +52,8 @@ public class MySynchronizationScript : MonoBehaviour, IPunObservable
 
         if (!photonView.IsMine)
         {
-            rb.position = Vector3.MoveTowards(rb.position, networkedPosition, distance * (1.0f / PhotonNetwork.SerializationRate));
+            //rb.transform.localPosition = Vector3.Lerp(rb.transform.localPosition, networkedPosition, distance * (10.0f / PhotonNetwork.SerializationRate));
+            rb.transform.localPosition = Vector3.MoveTowards(rb.transform.localPosition, networkedPosition, distance * (.1f / PhotonNetwork.SerializationRate));
             //rb.rotation = Quaternion.RotateTowards(rb.rotation, networkedRotation, angle * (1.0f / PhotonNetwork.SerializationRate));
         }
 
@@ -63,8 +66,8 @@ public class MySynchronizationScript : MonoBehaviour, IPunObservable
         {
             //Then, photonView is mine and I am the one who controls this player.
             //should send position, velocity etc. data to the other players
-            stream.SendNext(rb.position - startTransform.position);
-            //stream.SendNext(rb.rotation);
+            stream.SendNext(rb.transform.localPosition);
+            stream.SendNext(rb.transform.parent.parent.name);
 
             if (synchronizeVelocity)
             {
@@ -81,14 +84,14 @@ public class MySynchronizationScript : MonoBehaviour, IPunObservable
 
             //Called on my player gameobject that exists in remote player's game
 
-            networkedPosition = (Vector3)stream.ReceiveNext() + startTransform.position;
-            //networkedRotation = (Quaternion)stream.ReceiveNext();
+            networkedPosition = (Vector3)stream.ReceiveNext();
+            transform.parent.parent = placedPrefabs[(string)stream.ReceiveNext()].transform;
 
             if (isTeleportEnabled)
             {
                 if (Vector3.Distance(rb.position, networkedPosition) > teleportIfDistanceGreaterThan)
                 {
-                    rb.position = networkedPosition;
+                    rb.transform.localPosition = networkedPosition;
 
                 }
             }
@@ -103,7 +106,7 @@ public class MySynchronizationScript : MonoBehaviour, IPunObservable
 
                     networkedPosition += rb.velocity * lag;
 
-                    distance = Vector3.Distance(rb.position, networkedPosition);
+                    distance = Vector3.Distance(rb.transform.localPosition, networkedPosition);
                 }
 
                 if (synchronizeAngularVelocity)

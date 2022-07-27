@@ -51,7 +51,7 @@ MonoBehaviour:
   synchronizeVelocity: 1
   synchronizeAngularVelocity: 0
   isTeleportEnabled: 1
-  teleportIfDistanceGreaterThan: 1
+  teleportIfDistanceGreaterThan: 0.05
 --- !u!1001 &5588178014231725557
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -243,7 +243,7 @@ PrefabInstance:
     - target: {fileID: 2455829942818953967, guid: 07877b913f7f89948bfcc5002004fe1d,
         type: 3}
       propertyPath: jelly.g
-      value: 0.6622825
+      value: 0.6144956
       objectReference: {fileID: 0}
     - target: {fileID: 2455829942818953967, guid: 07877b913f7f89948bfcc5002004fe1d,
         type: 3}
