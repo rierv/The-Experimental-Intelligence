@@ -2002,7 +2002,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1335473617}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b56d1810831cbbf49ac56b73c1aa1348, type: 3}
   m_Name: 
@@ -2245,6 +2245,11 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2455829942108534420, guid: 07877b913f7f89948bfcc5002004fe1d,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2455829942818953967, guid: 07877b913f7f89948bfcc5002004fe1d,
         type: 3}
       propertyPath: m_Enabled
@@ -2263,7 +2268,7 @@ PrefabInstance:
     - target: {fileID: 3815583565816772463, guid: 07877b913f7f89948bfcc5002004fe1d,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3815583566328668032, guid: 07877b913f7f89948bfcc5002004fe1d,
         type: 3}
@@ -2279,6 +2284,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Constraints
       value: 126
+      objectReference: {fileID: 0}
+    - target: {fileID: 3815583566328668034, guid: 07877b913f7f89948bfcc5002004fe1d,
+        type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3815583566328668060, guid: 07877b913f7f89948bfcc5002004fe1d,
+        type: 3}
+      propertyPath: _drag
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3815583566328668060, guid: 07877b913f7f89948bfcc5002004fe1d,
+        type: 3}
+      propertyPath: _cohesion
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3815583566328668061, guid: 07877b913f7f89948bfcc5002004fe1d,
         type: 3}
@@ -3498,10 +3518,10 @@ Light:
   serializedVersion: 10
   m_Type: 0
   m_Shape: 0
-  m_Color: {r: 1, g: 0.7466693, b: 0.28773582, a: 1}
-  m_Intensity: 20
+  m_Color: {r: 0.28627455, g: 0.3718623, b: 1, a: 1}
+  m_Intensity: 1
   m_Range: 41
-  m_SpotAngle: 150
+  m_SpotAngle: 120
   m_InnerSpotAngle: 1
   m_CookieSize: 10
   m_Shadows:
@@ -3557,7 +3577,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2080774245}
   m_LocalRotation: {x: 0.8925389, y: -0.15737867, z: 0.0733869, w: 0.4161978}
-  m_LocalPosition: {x: 222, y: 230, z: -1}
+  m_LocalPosition: {x: 222, y: 219, z: -10}
   m_LocalScale: {x: 13.758307, y: 13.758312, z: 13.758312}
   m_Children: []
   m_Father: {fileID: 1114892690}

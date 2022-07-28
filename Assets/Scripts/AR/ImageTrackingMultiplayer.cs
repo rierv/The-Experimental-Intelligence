@@ -100,6 +100,32 @@ public class ImageTrackingMultiplayer : MonoBehaviour
                         obj.SetActive(true);
                         PhotonView _photonView = obj.GetComponent<PhotonView>();
                         PhotonNetwork.AllocateViewID(_photonView);
+                        if (obj.name != "Start")
+                        {
+                            
+                            object[] data = new object[]
+                            {
+                                _photonView.ViewID, obj.name
+                            };
+
+
+                            RaiseEventOptions raiseEventOptions = new RaiseEventOptions
+                            {
+                                Receivers = ReceiverGroup.Others,
+                                CachingOption = EventCaching.AddToRoomCache
+
+                            };
+
+
+                            SendOptions sendOptions = new SendOptions
+                            {
+                                Reliability = true
+                            };
+
+                            //Raise Events!
+                            PhotonNetwork.RaiseEvent((byte)RaiseEventCodes.NewPlatformFoundEventCode, data, raiseEventOptions, sendOptions);
+
+                        }
                     }
                 }
 
@@ -128,10 +154,9 @@ public class ImageTrackingMultiplayer : MonoBehaviour
                     }
                     if (obj.name != "Start")
                     {
-                        PhotonView _photonView = obj.GetComponent<PhotonView>();
                         object[] data = new object[]
                         {
-                        obj.transform.localPosition, obj.transform.localRotation, _photonView.ViewID, obj.name
+                        obj.transform.localPosition, obj.transform.localRotation, obj.name
                         };
 
 

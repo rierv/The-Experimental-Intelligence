@@ -44,8 +44,8 @@ public class ARPlacementAndPlaneDetectionController : MonoBehaviour
 
         //scaleSlider.SetActive(false);
 
-        searchForGameButton.SetActive(true);
-
+        //searchForGameButton.SetActive(true);
+        FindObjectOfType<SpinningTopsGameManager>().JoinRandomRoom();
         informUIPanel_Text.text = "Great! You found the GO! marker.. Now, search for other players!";
 
 

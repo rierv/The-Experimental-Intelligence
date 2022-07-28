@@ -23,6 +23,11 @@ public class PlayerSetup : MonoBehaviourPun
 
             //The player is remote player
             transform.GetComponent<PlayerMove>().enabled = false;
+            //transform.GetComponent<SphereCollider>().enabled = false;
+            transform.GetComponent<ThrowObjects>().enabled = false;
+            transform.GetComponent<Rigidbody>().isKinematic = true;
+            transform.GetComponent<JellyCore>()._cohesion = 50;
+            transform.GetComponent<Rigidbody>().drag = 2f;
             //transform.GetComponent<MovementController>().joystick.gameObject.SetActive(false);
         }
         SetPlayerName();

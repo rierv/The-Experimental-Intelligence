@@ -1,6 +1,10 @@
-﻿using System.Collections;
+﻿using ExitGames.Client.Photon;
+using Photon.Pun;
+using Photon.Realtime;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static SpawnManager;
 
 public class ThrowObjects : MonoBehaviour {
 	public float strenght = 500f;
@@ -38,14 +42,17 @@ public class ThrowObjects : MonoBehaviour {
 		StartCoroutine(Throw());
     }
 	IEnumerator Throw() {
-		obj.GetComponent<ThrowableObject>().enabled = false;
-		th.enabled = false;
+		
 		ready = false;
 		if (th.isHandle) {
 			transform.parent.SetParent(null);
 			GetComponent<PlayerMove>().canMove = true;
+			obj.GetComponent<ThrowableObject>().enabled = false;
+			th.enabled = false;
 		} else {
-			obj.transform.parent = null;
+			obj.GetComponent<ThrowableObject>().enabled = false;
+			th.enabled = false;
+			obj.transform.parent = GameObject.Find("Bolt").transform;
 			
 			if (!release) {
 				GetComponent<PlayerMove>().SetJumpText("Jump");
@@ -56,18 +63,24 @@ public class ThrowObjects : MonoBehaviour {
 			obj.layer = 18;
 		}
 
-		yield return new WaitForSeconds(0.06f);
+		yield return new WaitForSeconds(0.1f);
 		if(obj) obj.layer = 12;
 		obj = null;
 		th = null;
 		ready = true;
 	}
 
+
+
+
+
 	private void OnTriggerEnter(Collider other) {
 		if (ready && other.gameObject.layer == 14 && obj == null && state.state == FlapperState.jelly) {
 			GetComponent<PlayerMove>().SetJumpText("Throw");
 			th = other.transform.parent.gameObject.GetComponent<ThrowableObject>();
 			th.enabled = true;
+			th.core = GetComponent<JellyCore>();
+			th.state = GetComponent<StateManager>();
 			obj = other.transform.parent.gameObject;
 
 			if (th.isHandle) {
@@ -80,6 +93,30 @@ public class ThrowObjects : MonoBehaviour {
 				release = false;
 				other.transform.parent.SetParent(transform);
 			}
+			/*
+			PhotonView _photonView = obj.GetComponent<PhotonView>();
+			object[] data = new object[]
+			{
+						_photonView.ViewID
+			};
+
+
+			RaiseEventOptions raiseEventOptions = new RaiseEventOptions
+			{
+				Receivers = ReceiverGroup.Others,
+				CachingOption = EventCaching.AddToRoomCache
+
+			};
+
+
+			SendOptions sendOptions = new SendOptions
+			{
+				Reliability = true
+			};
+
+			//Raise Events!
+			PhotonNetwork.RaiseEvent((byte)RaiseEventCodes.BoltOwner, data, raiseEventOptions, sendOptions);
+			*/
 		}
 	}
     private void OnTriggerExit(Collider other)

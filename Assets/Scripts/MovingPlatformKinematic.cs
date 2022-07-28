@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Photon.Pun;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,12 +21,17 @@ public class MovingPlatformKinematic : MonoBehaviour, I_Activable {
 	#endregion
 
 	private void Start() {
-		startingPos = transform.localPosition;
-		if (boltActive) active = false;
-		platformTimer = platformStopTime;
-		isPlatformMoving = false;
-		targetsLength = targets.Length;
-		targetsIndex = 1;
+		PhotonView photonView = GetComponentInParent<PhotonView>();
+		if (!photonView.IsMine) this.enabled = false;
+		else
+		{
+			startingPos = transform.localPosition;
+			if (boltActive) active = false;
+			platformTimer = platformStopTime;
+			isPlatformMoving = false;
+			targetsLength = targets.Length;
+			targetsIndex = 1;
+		}
 	}
 
 	private void FixedUpdate() {

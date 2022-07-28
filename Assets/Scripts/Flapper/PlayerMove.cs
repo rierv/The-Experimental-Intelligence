@@ -120,7 +120,6 @@ public class PlayerMove : MonoBehaviour {
 	}
 
 	void Update() {
-		Debug.Log("flapperpos" + transform.position);
 		if (stateManager.state != FlapperState.gaseous && canMove) {
 
             if (Jump_Trigger.jumpButtonHold && !readyToThrow.th && !jumping && canJump) {
@@ -186,7 +185,13 @@ public class PlayerMove : MonoBehaviour {
     {
 		if (collision.gameObject.tag == "Platform")
 		{
-			if(transform.parent.parent!= collision.gameObject.transform) transform.parent.parent = collision.gameObject.transform;
+			if (transform.parent.parent != collision.gameObject.transform)
+			{
+				if(collision.gameObject.GetComponent<MovingPlatformKinematic>())
+					transform.parent.parent = collision.gameObject.transform.parent;
+				else
+					transform.parent.parent = collision.gameObject.transform;
+			}
 			canJump = true;
 			cantRestart = false;
 		}
@@ -203,7 +208,6 @@ public class PlayerMove : MonoBehaviour {
 				updateShrink();
 				shrinkage = 1f;
 			}
-			Debug.Log("game type 2?=" + StartButton.playType);
 			if (StartButton.playType==1)
 				StartCoroutine(FindObjectOfType<ImageTracking>().ResetAfter(.4f));
 			else if(StartButton.playType == 0)

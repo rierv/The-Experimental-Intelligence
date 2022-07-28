@@ -15,7 +15,7 @@ MonoBehaviour:
   ObservedComponentsFoldoutOpen: 1
   Group: 0
   prefixField: -1
-  Synchronization: 3
+  Synchronization: 2
   OwnershipTransfer: 0
   observableSearch: 2
   ObservedComponents:
@@ -51,7 +51,23 @@ MonoBehaviour:
   synchronizeVelocity: 1
   synchronizeAngularVelocity: 0
   isTeleportEnabled: 1
-  teleportIfDistanceGreaterThan: 1
+  teleportIfDistanceGreaterThan: 15
+--- !u!114 &8878289090780909773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7037601977347509732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 0
+  m_SynchronizeScale: 0
+  m_UseLocal: 1
 --- !u!1001 &5588178014231725557
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -186,6 +202,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f4a62825a6346894b924cedbc83dc3d0, type: 3}
+--- !u!224 &6371142820077024660 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 1578488478651822177, guid: f4a62825a6346894b924cedbc83dc3d0,
+    type: 3}
+  m_PrefabInstance: {fileID: 5588178014231725557}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &6371142820077024661 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1578488478651822176, guid: f4a62825a6346894b924cedbc83dc3d0,
@@ -220,6 +242,11 @@ PrefabInstance:
       propertyPath: ObservedComponents.Array.data[0]
       value: 
       objectReference: {fileID: 3420425752541293049}
+    - target: {fileID: 2455829942108534420, guid: 07877b913f7f89948bfcc5002004fe1d,
+        type: 3}
+      propertyPath: ui
+      value: 
+      objectReference: {fileID: 6371142820077024660}
     - target: {fileID: 2455829942818953967, guid: 07877b913f7f89948bfcc5002004fe1d,
         type: 3}
       propertyPath: gas.b

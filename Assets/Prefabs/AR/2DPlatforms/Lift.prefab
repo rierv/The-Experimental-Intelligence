@@ -1,5 +1,21 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &5044389677052762167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3435493685740562369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4eca94221b8f8c4eb684882d695ebf2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  synchronizeVelocity: 0
+  synchronizeAngularVelocity: 0
+  isTeleportEnabled: 0
+  teleportIfDistanceGreaterThan: 1
 --- !u!1 &3997310939893962155
 GameObject:
   m_ObjectHideFlags: 0
@@ -50,7 +66,8 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 0}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -163,6 +180,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bf4f86dd3d4e0204ab2851a6785f0d34, type: 3}
+--- !u!1 &3435493685740562369 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6401255668430808795, guid: bf4f86dd3d4e0204ab2851a6785f0d34,
+    type: 3}
+  m_PrefabInstance: {fileID: 8608779480014504218}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3523848910365747683 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5161053406605912313, guid: bf4f86dd3d4e0204ab2851a6785f0d34,

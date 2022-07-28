@@ -16,7 +16,8 @@ public class SpawnManager : MonoBehaviourPunCallbacks
     public enum RaiseEventCodes
     {
         PlayerSpawnEventCode = 0,
-        PlatformFoundEventCode = 1
+        PlatformFoundEventCode = 1,
+        NewPlatformFoundEventCode = 2
     }
 
     // Start is called before the first frame update
@@ -66,14 +67,22 @@ public class SpawnManager : MonoBehaviourPunCallbacks
             object[] data = (object[])photonEvent.CustomData;
             Vector3 receivedPosition = (Vector3)data[0];
             Quaternion receivedLocalRotation = (Quaternion)data[1];
-            string receivedPlatformName = (string)data[3];
+            string receivedPlatformName = (string)data[2];
             GameObject platform = imageTracking.placedPrefabs[receivedPlatformName];
             platform.transform.localPosition = receivedPosition;
             platform.transform.localRotation = receivedLocalRotation;
             //platform.transform.SetPositionAndRotation(receivedPosition + startPosition, receivedLocalRotation);
-            PhotonView _photonView = platform.GetComponent<PhotonView>();
-            _photonView.ViewID = (int)data[2];
+            
             platform.SetActive(true);
+
+        }
+        else if (photonEvent.Code == (byte)RaiseEventCodes.NewPlatformFoundEventCode)
+        {
+            object[] data = (object[])photonEvent.CustomData;
+            string receivedPlatformName = (string)data[1];
+            GameObject platform = imageTracking.placedPrefabs[receivedPlatformName];
+            PhotonView _photonView = platform.GetComponent<PhotonView>();
+            _photonView.ViewID = (int)data[0];
 
         }
     }

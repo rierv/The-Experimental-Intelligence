@@ -147,4 +147,6 @@ public class StateManager : MonoBehaviour {
 		rigidbody.useGravity = state != FlapperState.gaseous;
 		collider.enabled = (state != FlapperState.solid);
 	}
-}
+
+	
+	}
