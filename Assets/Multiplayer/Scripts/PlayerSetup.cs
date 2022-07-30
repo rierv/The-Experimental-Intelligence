@@ -31,8 +31,9 @@ public class PlayerSetup : MonoBehaviourPun
             //transform.GetComponent<MovementController>().joystick.gameObject.SetActive(false);
         }
         SetPlayerName();
-    }
 
+    }
+    
     void SetPlayerName()
     {
 

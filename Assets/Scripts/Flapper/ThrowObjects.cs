@@ -19,17 +19,22 @@ public class ThrowObjects : MonoBehaviour {
 	bool release = false;
     public VJHandler jsMovement;
     JumpButtonScript Jump_Trigger;
-
-    private void Start()
+	PhotonView photonView;
+	private void Start()
     {
-        jsMovement = GameObject.Find("Joycon_container").GetComponent<VJHandler>();
-        Jump_Trigger = GameObject.Find("Jump_Button").GetComponent<JumpButtonScript>();
-        state = GetComponent<StateManager>();
-        rotation = transform.rotation;
+		photonView = GetComponentInParent<PhotonView>();
+
+		if (photonView.IsMine)
+		{
+			jsMovement = GameObject.Find("Joycon_container").GetComponent<VJHandler>();
+			Jump_Trigger = GameObject.Find("Jump_Button").GetComponent<JumpButtonScript>();
+			state = GetComponent<StateManager>();
+			rotation = transform.rotation;
+		}
 	}
 
 	void Update() {
-		if (ready && obj && state.state != FlapperState.solid && (Jump_Trigger.jumpButtonHold || state.state == FlapperState.gaseous)) {
+		if (photonView.IsMine && ready && obj && state.state != FlapperState.solid && (Jump_Trigger.jumpButtonHold || state.state == FlapperState.gaseous)) {
 			if (state.state == FlapperState.gaseous) {
 				release = true;
 			}
@@ -47,24 +52,48 @@ public class ThrowObjects : MonoBehaviour {
 		if (th.isHandle) {
 			transform.parent.SetParent(null);
 			GetComponent<PlayerMove>().canMove = true;
-			obj.GetComponent<ThrowableObject>().enabled = false;
-			th.enabled = false;
+			
 		} else {
-			obj.GetComponent<ThrowableObject>().enabled = false;
-			th.enabled = false;
-			obj.transform.parent = GameObject.Find("Bolt").transform;
+			
+			//obj.transform.parent = GameObject.Find("Bolt").transform;
 			
 			if (!release) {
 				GetComponent<PlayerMove>().SetJumpText("Jump");
 				audioSource.Play();
-				obj.GetComponent<Rigidbody>().AddForce((Vector3.up + GetComponent<Rigidbody>().velocity.normalized) * strenght, ForceMode.VelocityChange);
+				//obj.GetComponent<Rigidbody>().AddForce((Vector3.up + GetComponent<Rigidbody>().velocity.normalized) * strenght, ForceMode.VelocityChange);
 			}
-			yield return new WaitForSeconds(.02f);
 			obj.layer = 18;
+			object[] data = new object[]
+			{
+						GetComponent<Rigidbody>().velocity, GetComponentInParent<PhotonView>().ViewID
+
+			};
+
+
+			RaiseEventOptions raiseEventOptions = new RaiseEventOptions
+			{
+				Receivers = ReceiverGroup.Others,
+				CachingOption = EventCaching.AddToRoomCache
+
+			};
+
+
+			SendOptions sendOptions = new SendOptions
+			{
+				Reliability = true
+			};
+
+			//Raise Events!
+			PhotonNetwork.RaiseEvent((byte)RaiseEventCodes.BoltThrow, data, raiseEventOptions, sendOptions);
+
+			th.enabled = false;
+
 		}
 
-		yield return new WaitForSeconds(0.1f);
-		if(obj) obj.layer = 12;
+		yield return new WaitForSeconds(0.8f);
+		obj.layer = 12;
+		//gameObject.layer = 12;
+
 		obj = null;
 		th = null;
 		ready = true;
@@ -75,7 +104,7 @@ public class ThrowObjects : MonoBehaviour {
 
 
 	private void OnTriggerEnter(Collider other) {
-		if (ready && other.gameObject.layer == 14 && obj == null && state.state == FlapperState.jelly) {
+		if (photonView.IsMine && ready && other.gameObject.layer == 14 && obj == null && state.state == FlapperState.jelly) {
 			GetComponent<PlayerMove>().SetJumpText("Throw");
 			th = other.transform.parent.gameObject.GetComponent<ThrowableObject>();
 			th.enabled = true;
@@ -91,13 +120,12 @@ public class ThrowObjects : MonoBehaviour {
 
 			} else {
 				release = false;
-				other.transform.parent.SetParent(transform);
+				//other.transform.parent.SetParent(transform);
 			}
-			/*
-			PhotonView _photonView = obj.GetComponent<PhotonView>();
+			
 			object[] data = new object[]
 			{
-						_photonView.ViewID
+						GetComponentInParent<PhotonView>().ViewID
 			};
 
 
@@ -116,7 +144,7 @@ public class ThrowObjects : MonoBehaviour {
 
 			//Raise Events!
 			PhotonNetwork.RaiseEvent((byte)RaiseEventCodes.BoltOwner, data, raiseEventOptions, sendOptions);
-			*/
+			
 		}
 	}
     private void OnTriggerExit(Collider other)

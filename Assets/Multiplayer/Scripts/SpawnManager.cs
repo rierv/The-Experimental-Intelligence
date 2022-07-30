@@ -12,12 +12,15 @@ public class SpawnManager : MonoBehaviourPunCallbacks
     public Transform trackables;
     Vector3 startPosition;
     public ImageTrackingMultiplayer imageTracking;
+    public Dictionary<int, GameObject> placedPlayers = new Dictionary<int, GameObject>();
 
     public enum RaiseEventCodes
     {
         PlayerSpawnEventCode = 0,
         PlatformFoundEventCode = 1,
-        NewPlatformFoundEventCode = 2
+        NewPlatformFoundEventCode = 2,
+        BoltOwner = 3,
+        BoltThrow = 4
     }
 
     // Start is called before the first frame update
@@ -58,6 +61,7 @@ public class SpawnManager : MonoBehaviourPunCallbacks
             player.transform.localPosition = receivedPosition;
             PhotonView _photonView = player.GetComponent<PhotonView>();
             _photonView.ViewID = (int)data[2];
+            placedPlayers.Add(_photonView.ViewID, player);
 
 
         }
@@ -84,6 +88,29 @@ public class SpawnManager : MonoBehaviourPunCallbacks
             PhotonView _photonView = platform.GetComponent<PhotonView>();
             _photonView.ViewID = (int)data[0];
 
+        }
+        else if (photonEvent.Code == (byte)RaiseEventCodes.BoltOwner)
+        {
+            object[] data = (object[])photonEvent.CustomData;
+            int _playerphotonView;
+            _playerphotonView = (int)data[0];
+            GameObject platform = imageTracking.placedPrefabs["Bolt"];
+            ThrowableObject th = platform.GetComponentInChildren<ThrowableObject>();
+            th.enabled = true;
+            th.core = placedPlayers[_playerphotonView].GetComponentInChildren<JellyCore>();
+            th.state = placedPlayers[_playerphotonView].GetComponentInChildren<StateManager>();
+        }
+        else if (photonEvent.Code == (byte)RaiseEventCodes.BoltThrow)
+        {
+            object[] data = (object[])photonEvent.CustomData;
+            GameObject platform = imageTracking.placedPrefabs["Bolt"];
+            Vector3 _playerSpeed;
+            _playerSpeed = (Vector3)data[0];
+            ThrowableObject th = platform.GetComponentInChildren<ThrowableObject>();
+            int _playerphotonView;
+            _playerphotonView = (int)data[1];
+            placedPlayers[_playerphotonView].GetComponentInChildren<Rigidbody>().velocity = _playerSpeed; 
+            th.enabled = false;
         }
     }
 
@@ -128,7 +155,7 @@ public class SpawnManager : MonoBehaviourPunCallbacks
             
             startPosition = imageTracking.placedPrefabs["Start"].transform.position;
             //startPosition = trackables.Find("Start").transform.position;
-
+            
             int randomSpawnPoint = Random.Range(0, spawnPositions.Length - 1);
             Vector3 instantiatePosition = spawnPositions[randomSpawnPoint].localPosition;
 
@@ -138,7 +165,7 @@ public class SpawnManager : MonoBehaviourPunCallbacks
 
             if (PhotonNetwork.AllocateViewID(_photonView))
             {
-
+                placedPlayers.Add(_photonView.ViewID, playerGameobject);
                 object[] data = new object[]
                 {
                     playerGameobject.transform.localPosition, playerGameobject.transform.rotation, _photonView.ViewID, playerSelectionNumber

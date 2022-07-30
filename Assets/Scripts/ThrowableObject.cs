@@ -61,12 +61,17 @@ public class ThrowableObject : MonoBehaviour
                 else
                 {
 
-                    transform.localPosition = Vector3.Lerp(transform.localPosition, Vector3.zero, Vector3.Distance(core.transform.position, transform.position) * SpineStrenght * Time.deltaTime);
+                    transform.position = Vector3.Lerp(transform.position, core.transform.position, SpineStrenght * Time.deltaTime);
 
                     transform.rotation = Quaternion.Lerp(transform.rotation, baseRotation, Time.deltaTime);
                 }
             }
         }
     }
-    
+    private void OnDisable()
+    {
+        if(core) GetComponent<Rigidbody>().AddForce((Vector3.up + core.GetComponent<Rigidbody>().velocity.normalized) * .8f, ForceMode.VelocityChange);
+        core = null;
+        state = null;
+    }
 }
