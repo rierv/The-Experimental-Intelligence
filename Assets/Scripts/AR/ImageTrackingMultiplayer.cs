@@ -154,6 +154,7 @@ public class ImageTrackingMultiplayer : MonoBehaviour
                     }
                     if (obj.name != "Start")
                     {
+                        obj.transform.localPosition = new Vector3(obj.transform.localPosition.x, Mathf.Max(0, obj.transform.localPosition.y), obj.transform.localPosition.z);
                         object[] data = new object[]
                         {
                         obj.transform.localPosition, obj.transform.localRotation, obj.name

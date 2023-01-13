@@ -2298,7 +2298,7 @@ PrefabInstance:
     - target: {fileID: 3815583566328668060, guid: 07877b913f7f89948bfcc5002004fe1d,
         type: 3}
       propertyPath: _cohesion
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3815583566328668061, guid: 07877b913f7f89948bfcc5002004fe1d,
         type: 3}
@@ -2395,7 +2395,8 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7331582438354195104, guid: 07877b913f7f89948bfcc5002004fe1d, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 07877b913f7f89948bfcc5002004fe1d, type: 3}
 --- !u!1 &1563434015
 GameObject:

@@ -46,6 +46,6 @@ public class LevelSelectionManager : MonoBehaviour
     public void LoadLevel(int level)
     {
         currentLevel = level;
-        SceneManager.LoadScene(4);
+        SceneManager.LoadScene(2);
     }
 }

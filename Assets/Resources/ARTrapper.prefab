@@ -20,6 +20,7 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 260469704202816381}
+  - {fileID: 6981637688272602964}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -39,19 +40,6 @@ MonoBehaviour:
   synchronizeAngularVelocity: 0
   isTeleportEnabled: 1
   teleportIfDistanceGreaterThan: 15
---- !u!114 &8600407466366532974
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7037601977347509732}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b785ba22c79484949882cd8b383dd588, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerNameText: {fileID: 4817094924386478741}
 --- !u!114 &6981637688272602964
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68,6 +56,19 @@ MonoBehaviour:
   m_SynchronizeRotation: 0
   m_SynchronizeScale: 0
   m_UseLocal: 1
+--- !u!114 &8600407466366532974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7037601977347509732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b785ba22c79484949882cd8b383dd588, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerNameText: {fileID: 4817094924386478741}
 --- !u!1001 &6150009161350648443
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -200,7 +201,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7331582438354195104, guid: 07877b913f7f89948bfcc5002004fe1d, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 07877b913f7f89948bfcc5002004fe1d, type: 3}
 --- !u!1 &7037601978102669882 stripped
 GameObject:

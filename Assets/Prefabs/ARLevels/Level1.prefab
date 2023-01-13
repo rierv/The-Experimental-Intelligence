@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 839956366488814667}
   - component: {fileID: 9156043726417691860}
   - component: {fileID: 5425627784738599935}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Quad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -204,7 +204,7 @@ GameObject:
   - component: {fileID: 8325405581107608459}
   - component: {fileID: 8325405581107608458}
   - component: {fileID: 8325405581107608469}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Cube
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -1161,6 +1161,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: MovingPlatform
       objectReference: {fileID: 0}
+    - target: {fileID: 3958733752637443897, guid: e5ddb4fd0ee213145b1d207a467b4a1e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 3958733752637443898, guid: e5ddb4fd0ee213145b1d207a467b4a1e,
         type: 3}
       propertyPath: m_Mass
@@ -1285,7 +1290,7 @@ PrefabInstance:
     - target: {fileID: 2455829943227947703, guid: 07877b913f7f89948bfcc5002004fe1d,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3815583566328668034, guid: 07877b913f7f89948bfcc5002004fe1d,
         type: 3}

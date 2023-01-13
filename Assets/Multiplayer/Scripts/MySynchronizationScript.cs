@@ -35,15 +35,15 @@ public class MySynchronizationScript : MonoBehaviour, IPunObservable
 
         networkedPosition = new Vector3();
         //networkedRotation = new Quaternion();
-        placedPrefabs = GameObject.FindObjectOfType<ImageTrackingMultiplayer>().placedPrefabs;
-        startTransform = placedPrefabs["Start"].transform;
+        //placedPrefabs = GameObject.FindObjectOfType<ImageTrackingMultiplayer>().placedPrefabs;
 
     }
 
     // Start is called before the first frame update
     void Start()
     {
-
+        placedPrefabs = GameObject.FindObjectOfType<ImageTrackingMultiplayer>().placedPrefabs;
+        startTransform = placedPrefabs["Start"].transform;
     }
 
     // Update is called once per frame

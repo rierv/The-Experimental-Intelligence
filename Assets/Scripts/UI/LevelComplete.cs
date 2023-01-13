@@ -35,14 +35,14 @@ public class LevelComplete : MonoBehaviour
     }
     public void Restart()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(4);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(2);
 
     }
 
     public void NextLevel()
     {
         LevelSelectionManager.currentLevel += 1;
-        UnityEngine.SceneManagement.SceneManager.LoadScene(4);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(2);
     }
 
     public void StageSelect()

@@ -4,6 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using TMPro;
+using Photon.Realtime;
+using ExitGames.Client.Photon;
+using Photon.Pun;
+using static SpawnManager;
 
 public enum MoveType {
 	Old,
@@ -192,11 +196,31 @@ public class PlayerMove : MonoBehaviour {
 				else
 					transform.parent.parent = collision.gameObject.transform;
 			}
-			canJump = true;
 			cantRestart = false;
 		}
 		else if (collision.gameObject.tag == "Laser")
 		{
+			object[] data = new object[]
+			{
+						GetComponentInParent<PhotonView>().ViewID
+
+			};
+
+			RaiseEventOptions raiseEventOptions = new RaiseEventOptions
+			{
+				Receivers = ReceiverGroup.Others,
+				CachingOption = EventCaching.AddToRoomCache
+
+			};
+
+
+			SendOptions sendOptions = new SendOptions
+			{
+				Reliability = true
+			};
+
+			//Raise Events!
+			PhotonNetwork.RaiseEvent((byte)RaiseEventCodes.GaseousTransformation, data, raiseEventOptions, sendOptions);
 			stateManager.temperature = 1;
 		}
 		else if (collision.gameObject.tag == "Finish")
@@ -225,7 +249,13 @@ public class PlayerMove : MonoBehaviour {
 			canJump = false;
 		}
 	}
-
+    private void OnCollisionStay(Collision collision)
+    {
+		if (collision.gameObject.tag == "Platform")
+		{
+			canJump = true;
+		}
+	}
 	public void SetJumpText(string text)
     {
 		Jump_Trigger.gameObject.GetComponentInChildren<TextMeshProUGUI>().text = text;

@@ -40,7 +40,7 @@ public class MarkerlessLevelPositioning : MonoBehaviour
             if(Input.touchCount > 0 && Input.GetTouch(0).phase==TouchPhase.Began)
             {
                 Level.transform.SetPositionAndRotation(s_Hits[0].pose.position + Vector3.up*.01f, s_Hits[0].pose.rotation);
-                Level.transform.parent = m_AnchorManager.AttachAnchor(m_PlaneManager.GetPlane(s_Hits[0].trackableId), s_Hits[0].pose).transform;
+                Level.transform.parent = this.transform;//m_AnchorManager.AttachAnchor(m_PlaneManager.GetPlane(s_Hits[0].trackableId), s_Hits[0].pose).transform;
                 Level.SetActive(true);
                 Cursor.SetActive(false);
             }

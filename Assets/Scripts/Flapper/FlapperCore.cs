@@ -18,7 +18,7 @@ public class FlapperCore : MonoBehaviour {
     public bool deactivating = false;
     private void OnEnable()
     {
-        StartCoroutine(DeactivateAfterSeconds(3));
+        if(ui) StartCoroutine(DeactivateAfterSeconds(3));
     }
    
     private void Update()
@@ -38,7 +38,7 @@ public class FlapperCore : MonoBehaviour {
                 this.enabled = false;
             }
         }
-        else
+        else if (ui)
         {
             ui.rotation = Quaternion.LookRotation(Camera.main.transform.forward, Camera.main.transform.up);
         }

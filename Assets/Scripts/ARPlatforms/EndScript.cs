@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,7 +22,13 @@ public class EndScript : MonoBehaviour
             endStarted = true;
             winAudio.Play();
             ps.SetActive(true);
-            StartCoroutine(LoadStartScene());
+            /*if (PhotonNetwork.InRoom)
+            {
+                PhotonNetwork.LeaveRoom();
+
+            }
+            
+            StartCoroutine(LoadStartScene());*/
         }
     }
     /*private void OnCollisionExit(Collision collision)

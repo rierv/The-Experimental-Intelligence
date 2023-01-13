@@ -20,20 +20,21 @@ public class MovingPlatformKinematic : MonoBehaviour, I_Activable {
 	Vector3 startingPos;
 	#endregion
 
-	private void Start() {
-		PhotonView photonView = GetComponentInParent<PhotonView>();
-		if (!photonView.IsMine) this.enabled = false;
-		else
-		{
-			startingPos = transform.localPosition;
-			if (boltActive) active = false;
-			platformTimer = platformStopTime;
-			isPlatformMoving = false;
-			targetsLength = targets.Length;
-			targetsIndex = 1;
-		}
+	private void Awake() {
+		
+		startingPos = transform.localPosition;
+		if (boltActive) active = false;
+		platformTimer = platformStopTime;
+		isPlatformMoving = false;
+		targetsLength = targets.Length;
+		targetsIndex = 1;
+		
 	}
-
+    private void Start()
+    {
+		PhotonView photonView = GetComponentInParent<PhotonView>();
+		if (photonView && !photonView.IsMine) this.enabled = false;
+	}
 	private void FixedUpdate() {
 		if (active) {
 			if (!isPlatformMoving) //The platform is not moving, so you have to wait for a short time and then start moving

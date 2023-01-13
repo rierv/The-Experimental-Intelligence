@@ -19,7 +19,7 @@ public class StartButton : MonoBehaviour
 
     public void Multiplayer()
     {
-        playType = 2;
+        playType = 5;
         //UnityEngine.SceneManagement.SceneManager.LoadScene(5);
     }
     public void LinkToMarkers()

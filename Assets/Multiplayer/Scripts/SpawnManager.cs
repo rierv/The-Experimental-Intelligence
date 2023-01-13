@@ -20,7 +20,8 @@ public class SpawnManager : MonoBehaviourPunCallbacks
         PlatformFoundEventCode = 1,
         NewPlatformFoundEventCode = 2,
         BoltOwner = 3,
-        BoltThrow = 4
+        BoltThrow = 4,
+        GaseousTransformation = 5
     }
 
     // Start is called before the first frame update
@@ -111,6 +112,13 @@ public class SpawnManager : MonoBehaviourPunCallbacks
             _playerphotonView = (int)data[1];
             placedPlayers[_playerphotonView].GetComponentInChildren<Rigidbody>().velocity = _playerSpeed; 
             th.enabled = false;
+        }
+        else if (photonEvent.Code == (byte)RaiseEventCodes.GaseousTransformation)
+        {
+            object[] data = (object[])photonEvent.CustomData;
+            int _playerphotonView;
+            _playerphotonView = (int)data[0];
+            placedPlayers[_playerphotonView].GetComponentInChildren<StateManager>().temperature = 1;
         }
     }
 

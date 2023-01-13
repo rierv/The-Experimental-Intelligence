@@ -24,7 +24,7 @@ public class ThrowObjects : MonoBehaviour {
     {
 		photonView = GetComponentInParent<PhotonView>();
 
-		if (photonView.IsMine)
+		if (!photonView || photonView.IsMine)
 		{
 			jsMovement = GameObject.Find("Joycon_container").GetComponent<VJHandler>();
 			Jump_Trigger = GameObject.Find("Jump_Button").GetComponent<JumpButtonScript>();
@@ -34,7 +34,7 @@ public class ThrowObjects : MonoBehaviour {
 	}
 
 	void Update() {
-		if (photonView.IsMine && ready && obj && state.state != FlapperState.solid && (Jump_Trigger.jumpButtonHold || state.state == FlapperState.gaseous)) {
+		if ((!photonView|| photonView.IsMine) && ready && obj && state.state != FlapperState.solid && (Jump_Trigger.jumpButtonHold || state.state == FlapperState.gaseous)) {
 			if (state.state == FlapperState.gaseous) {
 				release = true;
 			}
@@ -63,29 +63,31 @@ public class ThrowObjects : MonoBehaviour {
 				//obj.GetComponent<Rigidbody>().AddForce((Vector3.up + GetComponent<Rigidbody>().velocity.normalized) * strenght, ForceMode.VelocityChange);
 			}
 			obj.layer = 18;
-			object[] data = new object[]
+			if (photonView)
 			{
+				object[] data = new object[]
+				{
 						GetComponent<Rigidbody>().velocity, GetComponentInParent<PhotonView>().ViewID
 
-			};
+				};
 
 
-			RaiseEventOptions raiseEventOptions = new RaiseEventOptions
-			{
-				Receivers = ReceiverGroup.Others,
-				CachingOption = EventCaching.AddToRoomCache
+				RaiseEventOptions raiseEventOptions = new RaiseEventOptions
+				{
+					Receivers = ReceiverGroup.Others,
+					CachingOption = EventCaching.AddToRoomCache
 
-			};
+				};
 
 
-			SendOptions sendOptions = new SendOptions
-			{
-				Reliability = true
-			};
+				SendOptions sendOptions = new SendOptions
+				{
+					Reliability = true
+				};
 
-			//Raise Events!
-			PhotonNetwork.RaiseEvent((byte)RaiseEventCodes.BoltThrow, data, raiseEventOptions, sendOptions);
-
+				//Raise Events!
+				PhotonNetwork.RaiseEvent((byte)RaiseEventCodes.BoltThrow, data, raiseEventOptions, sendOptions);
+			}
 			th.enabled = false;
 
 		}
@@ -104,7 +106,7 @@ public class ThrowObjects : MonoBehaviour {
 
 
 	private void OnTriggerEnter(Collider other) {
-		if (photonView.IsMine && ready && other.gameObject.layer == 14 && obj == null && state.state == FlapperState.jelly) {
+		if ((!photonView||photonView.IsMine) && ready && other.gameObject.layer == 14 && obj == null && state.state == FlapperState.jelly) {
 			GetComponent<PlayerMove>().SetJumpText("Throw");
 			th = other.transform.parent.gameObject.GetComponent<ThrowableObject>();
 			th.enabled = true;
@@ -122,29 +124,30 @@ public class ThrowObjects : MonoBehaviour {
 				release = false;
 				//other.transform.parent.SetParent(transform);
 			}
-			
-			object[] data = new object[]
+			if (photonView)
 			{
+				object[] data = new object[]
+				{
 						GetComponentInParent<PhotonView>().ViewID
-			};
+				};
 
 
-			RaiseEventOptions raiseEventOptions = new RaiseEventOptions
-			{
-				Receivers = ReceiverGroup.Others,
-				CachingOption = EventCaching.AddToRoomCache
+				RaiseEventOptions raiseEventOptions = new RaiseEventOptions
+				{
+					Receivers = ReceiverGroup.Others,
+					CachingOption = EventCaching.AddToRoomCache
 
-			};
+				};
 
 
-			SendOptions sendOptions = new SendOptions
-			{
-				Reliability = true
-			};
+				SendOptions sendOptions = new SendOptions
+				{
+					Reliability = true
+				};
 
-			//Raise Events!
-			PhotonNetwork.RaiseEvent((byte)RaiseEventCodes.BoltOwner, data, raiseEventOptions, sendOptions);
-			
+				//Raise Events!
+				PhotonNetwork.RaiseEvent((byte)RaiseEventCodes.BoltOwner, data, raiseEventOptions, sendOptions);
+			}
 		}
 	}
     private void OnTriggerExit(Collider other)
