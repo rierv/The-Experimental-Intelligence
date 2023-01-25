@@ -6,15 +6,11 @@ public class StartButton : MonoBehaviour
 {
     // Start is called before the first frame update
     public static int playType = 0;
-    public void LevelSelection()
-    {
-        playType = 0;
-        UnityEngine.SceneManagement.SceneManager.LoadScene(1);
-    }
+    
     public void MarkerGame()
     {
         playType = 1;
-        UnityEngine.SceneManagement.SceneManager.LoadScene(4);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(1);
     }
 
     public void Multiplayer()

@@ -232,12 +232,7 @@ public class PlayerMove : MonoBehaviour {
 				updateShrink();
 				shrinkage = 1f;
 			}
-			if (StartButton.playType==1)
-				StartCoroutine(FindObjectOfType<ImageTracking>().ResetAfter(.4f));
-			else if(StartButton.playType == 0)
-				StartCoroutine(FindObjectOfType<MarkerlessLevelPositioning>().ResetAfter(.4f));
-			else
-				FindObjectOfType<ImageTrackingMultiplayer>().Reset(transform);
+			FindObjectOfType<ImageTrackingMultiplayer>().Reset(transform);
 
 		}
 	}

@@ -22,8 +22,7 @@ public class LoadingAR : MonoBehaviour
     IEnumerator LoadAsyncLevel()
     {
         AsyncOperation loadLevel;
-        if(StartButton.playType==0) loadLevel = SceneManager.LoadSceneAsync(2);
-        else loadLevel = SceneManager.LoadSceneAsync(3);
+        loadLevel = SceneManager.LoadSceneAsync(3);
         loadLevel.allowSceneActivation = false;
         while (loadLevel.progress < .9f || timer < 1f)
         {
