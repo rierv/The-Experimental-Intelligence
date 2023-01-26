@@ -5,21 +5,12 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/StartScene.unity
-    guid: 7de5efb76f7a21e4aba07f06cf5c6aec
   - enabled: 1
-    path: Assets/Scenes/Scene_Lobby.unity
-    guid: 440fab74dfb736d46908c287bf83005f
+    path: Assets/LobbySystem/Scenes/MainMenu.unity
+    guid: 6dd6061534c12884db3794f10084161e
   - enabled: 1
-    path: Assets/Scenes/Scene_PlayerSelection.unity
-    guid: ea015e6ac42fe3a4caeb69f71c131a7b
-  - enabled: 1
-    path: Assets/Scenes/Scene_Gameplay.unity
+    path: Assets/Scenes/Casual_NoMod.unity
     guid: 4dbbe6e84ff2c514d92e5c90a30c23d4
-  - enabled: 1
-    path: Assets/Scenes/Scene_Loading.unity
-    guid: 943f6139fa75e76479b37f37a963962e
   m_configObjects:
     AR Foundation RemoteARFoundationRemoteLoaderSettings: {fileID: 11400000, guid: 1ef53f70be189354288d80928aa3967c,
       type: 2}
@@ -28,6 +19,4 @@ EditorBuildSettings:
     UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: 9c76e19db407c5043bc95453e6552c4b,
       type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: b7db2dcf3d8eef2409f76e87c5c5633b,
-      type: 2}
-    xr.sdk.mock-hmd.settings: {fileID: 11400000, guid: b57cdef77ec359b489378bc74fd2af2d,
       type: 2}

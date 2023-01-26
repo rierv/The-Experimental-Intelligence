@@ -315,6 +315,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   searchForGameButton: {fileID: 623289035}
+  PlayersThatFoundGoPlatform: 0
   informUIPanel_Text: {fileID: 243443568}
 --- !u!114 &99223319
 MonoBehaviour:
@@ -946,11 +947,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30bfe93f6acce06428b47bfa97f67a42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefabs:
-  - {fileID: 3815583567049748545, guid: 2fddf162365ff9b419365892944eb656, type: 3}
-  - {fileID: 7037601978102669882, guid: 54bcd1bd5d89f5244a620f43a5dc8cd0, type: 3}
-  - {fileID: 7037601978102669882, guid: 95ca0cfd5b5551943a256e4fd7267cf0, type: 3}
-  - {fileID: 7037601978102669882, guid: a9bd6da850e545c4aab4b118387cfcf3, type: 3}
+  playerPrefab: {fileID: 3815583567049748545, guid: 2fddf162365ff9b419365892944eb656,
+    type: 3}
   spawnPositions:
   - {fileID: 950113033}
   - {fileID: 931434789}
@@ -2468,7 +2466,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1522017325
 MonoBehaviour:
   m_ObjectHideFlags: 0

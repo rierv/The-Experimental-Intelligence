@@ -93,7 +93,24 @@ public class ImageTrackingMultiplayer : MonoBehaviour
                 {
                     if (obj.name == "Start")
                     {
+                        toStartMatchmaking.PlayersThatFoundGoPlatform++;
                         startTransform = placedPrefabs["Start"].transform;
+                        
+                        RaiseEventOptions raiseEventOptions = new RaiseEventOptions
+                        {
+                            Receivers = ReceiverGroup.Others,
+                            CachingOption = EventCaching.AddToRoomCache
+
+                        };
+
+
+                        SendOptions sendOptions = new SendOptions
+                        {
+                            Reliability = true
+                        };
+
+                        PhotonNetwork.RaiseEvent((byte)RaiseEventCodes.StartFound, null, raiseEventOptions, sendOptions);
+
                         toStartMatchmaking.DisableARPlacementAndPlaneDetection();
                     }
                     if (startTransform != null) {

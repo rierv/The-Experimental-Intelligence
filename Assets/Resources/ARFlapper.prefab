@@ -577,9 +577,9 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3815583565816772467}
   serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0.6
-  m_AngularDrag: 0.6
+  m_Mass: 0.2
+  m_Drag: 0
+  m_AngularDrag: 0
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -964,11 +964,11 @@ MonoBehaviour:
   rotateWithCamera: 0
   flapperModel: {fileID: 3815583565816802133}
   speed: 0.01
-  velocity: 0.005
+  velocity: 0.03
   acceleration: 0.01
   speedVectorMultiplier: 0.5
   accelerationSpeedVector: 0.01
-  jumpForce: 0.22
+  jumpForce: 0.15
   solidJumpForce: 0.03
   maxFallingSpeedForJumping: 0.5
   jumpingWait: 0.2
@@ -1117,7 +1117,7 @@ MonoBehaviour:
   shadow: {fileID: 4620641064842394851}
   gasParticle: {fileID: 5330830592960396074}
   gasParticleRenderer: {fileID: 5330251032365857854}
-  jellySpeedRigidbody: 0.0112
+  jellySpeedRigidbody: 0.03
   solidSpeedRigidbody: 0.015
   gaseousSpeedRigidbody: 0.005
   gasTransition: {fileID: 8300000, guid: df6e447024bd02541b0ea3cb8f48efcb, type: 3}
