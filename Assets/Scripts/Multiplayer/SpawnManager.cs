@@ -53,13 +53,12 @@ public class SpawnManager : MonoBehaviourPunCallbacks
             startPosition = imageTracking.placedPrefabs["Start"].transform.position;
             object[] data = (object[])photonEvent.CustomData;
             
-            int receivedPlayerSelectionData = (int)data[3];
             Vector3 receivedPosition = (Vector3)data[0];
             Quaternion receivedLocalRotation = (Quaternion)data[1];
-            //Material myColor = (Material)data[3];
+            Vector3 myVector3Color = (Vector3)data[3];
+            Color myColor = new Color(myVector3Color.x, myVector3Color.y, myVector3Color.z);
             GameObject player = Instantiate(playerPrefab);
-            
-            //player.GetComponentInChildren<Renderer>().material = myColor;
+            StartCoroutine(changeColor(player, myColor));
             player.transform.rotation = imageTracking.placedPrefabs["Start"].transform.rotation;
             player.transform.parent = imageTracking.placedPrefabs["Start"].transform;
             player.transform.localPosition = receivedPosition;
@@ -147,14 +146,15 @@ public class SpawnManager : MonoBehaviourPunCallbacks
         GameObject playerGameobject = Instantiate(playerPrefab, instantiatePosition + startPosition, imageTracking.placedPrefabs["Start"].transform.rotation);
         playerGameobject.transform.parent = imageTracking.placedPrefabs["Start"].transform;
         PhotonView _photonView = playerGameobject.GetComponent<PhotonView>();
-        //Material myColor = new Material(Shader.Find("Standard"));
-        //myColor.color = new Color(PlayerPrefs.GetInt("colorR"), PlayerPrefs.GetInt("colorG"), PlayerPrefs.GetInt("colorB"));
+        Color color = new Color(PlayerPrefs.GetFloat("colorR"), PlayerPrefs.GetFloat("colorG"), PlayerPrefs.GetFloat("colorB"));
+        StartCoroutine(changeColor(playerGameobject, color));
+        Debug.Log(playerGameobject.GetComponentInChildren<Renderer>().material);
         if (PhotonNetwork.AllocateViewID(_photonView))
         {
             placedPlayers.Add(_photonView.ViewID, playerGameobject);
             object[] data = new object[]
             {
-                playerGameobject.transform.localPosition, playerGameobject.transform.rotation, _photonView.ViewID, //myColor
+                playerGameobject.transform.localPosition, playerGameobject.transform.rotation, _photonView.ViewID, new Vector3 (PlayerPrefs.GetFloat("colorR"), PlayerPrefs.GetFloat("colorG"), PlayerPrefs.GetFloat("colorB"))
             };
 
 
@@ -192,7 +192,18 @@ public class SpawnManager : MonoBehaviourPunCallbacks
 
     #endregion
 
-
+    IEnumerator changeColor(GameObject o, Color color)
+    {
+        SkinnedMeshRenderer r = o.GetComponentInChildren<SkinnedMeshRenderer>();
+        
+        while (r.material.color != color) {
+            yield return new WaitForSeconds(0);
+            
+            r.material.SetColor("_EmissionColor", color);
+            Debug.Log(r.material.color);
+            
+        }
+    }
 
 
 }

@@ -12,7 +12,6 @@ public class TVMovement : MonoBehaviour
     void Start()
     {
         //core = GameObject.Find("CORE");
-        Debug.Log(transform.rotation.eulerAngles);
     }
 
     // Update is called once per frame

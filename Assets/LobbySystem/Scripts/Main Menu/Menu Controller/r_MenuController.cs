@@ -44,6 +44,7 @@ public class m_MenuItem
 
 public class r_MenuController : MonoBehaviour
 {
+    public GameObject FlapperMesh; 
     #region Variables
     [Header("Menu Panels")]
     public List<m_MenuItem> m_MenuPanels = new List<m_MenuItem>();
@@ -54,6 +55,10 @@ public class r_MenuController : MonoBehaviour
     [Header("Username UI")]
     public InputField m_UsernameInput;
     public Button m_ApplyUsernameButton;
+
+    [Header("Color UI")]
+    public FlexibleColorPicker m_colorPicker;
+    public Button m_ApplyColorButton;
     #endregion
 
     #region Unity Calls
@@ -87,6 +92,10 @@ public class r_MenuController : MonoBehaviour
             }
             else
                 m_UsernameInput.text = "Player" + Random.Range(1, 999);
+            if (PlayerPrefs.HasKey("colorR"))
+            {
+                FlapperMesh.GetComponent<Renderer>().material.SetColor("_EmissionColor", new Color(PlayerPrefs.GetFloat("colorR"), PlayerPrefs.GetFloat("colorG"), PlayerPrefs.GetFloat("colorB")));
+            }
         }
     }
 
@@ -96,6 +105,14 @@ public class r_MenuController : MonoBehaviour
 
         if (PhotonNetwork.IsConnected)
             PhotonNetwork.LocalPlayer.NickName = PlayerPrefs.GetString("username");
+    }
+
+    private void SaveColor(Color color)
+    {
+        PlayerPrefs.SetFloat("colorR", color.r);
+        PlayerPrefs.SetFloat("colorG", color.g);
+        PlayerPrefs.SetFloat("colorB", color.b);
+
     }
     #endregion
 
@@ -115,6 +132,7 @@ public class r_MenuController : MonoBehaviour
     private void HandleButtons()
     {
         m_ApplyUsernameButton.onClick.AddListener(delegate { if (!string.IsNullOrEmpty(m_UsernameInput.text)) SaveUsername(m_UsernameInput.text); r_AudioController.instance.PlayClickSound(); });
+        m_ApplyColorButton.onClick.AddListener(delegate { if (m_colorPicker.gameObject.activeInHierarchy) SaveColor(m_colorPicker.GetColor()); r_AudioController.instance.PlayClickSound(); m_colorPicker.gameObject.SetActive(false); });
 
         foreach (m_MenuItem _MenuItem in m_MenuPanels)
         {

@@ -20,9 +20,13 @@ public class FlapperCore : MonoBehaviour {
     {
         if(ui) StartCoroutine(DeactivateAfterSeconds(3));
     }
-   
+    private void Start() { 
+        
+
+    }
     private void Update()
     {
+        
         if (deactivating && Camera.main)
         {
             Quaternion finalRot = Quaternion.LookRotation(Camera.main.transform.up, -Camera.main.transform.forward);
