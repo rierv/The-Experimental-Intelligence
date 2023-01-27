@@ -105,7 +105,7 @@ public class PlayerMove : MonoBehaviour {
             }
 
 			rigidbody.AddForce((right+forward)  * velocity, ForceMode.VelocityChange);
-			rigidbody.velocity = new Vector3(Mathf.Clamp(rigidbody.velocity.x, -.11f, .11f), Mathf.Clamp(rigidbody.velocity.y, -.5f, 10f), Mathf.Clamp(rigidbody.velocity.z, -.11f, .11f));
+			rigidbody.velocity = new Vector3(Mathf.Clamp(rigidbody.velocity.x, -.8f, .8f), Mathf.Clamp(rigidbody.velocity.y, -.5f, 10f), Mathf.Clamp(rigidbody.velocity.z, -.8f, .8f));
 
 		}
 

@@ -11,7 +11,7 @@ using Hashtable = ExitGames.Client.Photon.Hashtable;
 public class r_LobbyController : MonoBehaviour
 {
     public static r_LobbyController instance;
-
+    public Button startButton;
     #region Variables
     [Header("PhotonView")]
     public PhotonView m_PhotonView;
@@ -105,14 +105,9 @@ public class r_LobbyController : MonoBehaviour
     #region Matchmaking
     public void HandleLobbySearching()
     {
-        if ((string)PhotonNetwork.CurrentRoom.CustomProperties["GameMode"] == "Casual")
-        {
-
-            if (PhotonNetwork.CurrentRoom.PlayerCount >= m_RequiredPlayers && !m_StartingGame)
-                StartCoroutine(StartGame());
-        }
-        else if (PhotonNetwork.CurrentRoom.PlayerCount >= m_RequiredPlayers + 1 && !m_StartingGame)
+        if (PhotonNetwork.CurrentRoom.PlayerCount >= m_RequiredPlayers && !m_StartingGame)
             StartCoroutine(StartGame());
+        
     }
 
     public bool InGameLobby()
@@ -200,6 +195,8 @@ public class r_LobbyController : MonoBehaviour
     [PunRPC]
     public void ListLobbyPlayersRPC()
     {
+        if (PhotonNetwork.LocalPlayer.IsMasterClient)
+            startButton.gameObject.SetActive(true);
         if (m_LobbyUI.m_PlayerListContent.childCount > 0)
         {
             foreach (Transform _PhotonPlayer in m_LobbyUI.m_PlayerListContent)

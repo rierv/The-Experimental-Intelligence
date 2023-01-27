@@ -47,13 +47,14 @@ public class ARPlacementAndPlaneDetectionController : MonoBehaviour
 
         //searchForGameButton.SetActive(true);
         //FindObjectOfType<MultiplayerGameManager>().JoinRandomRoom();
-        if (PhotonNetwork.CurrentRoom.PlayerCount < PlayersThatFoundGoPlatform)
+        if (PhotonNetwork.CurrentRoom.PlayerCount > PlayersThatFoundGoPlatform)
+        {
             informUIPanel_Text.text = "Great! You found the GO! marker.. Now wait for other players!";
+            StartCoroutine(WaitForOtherPlayersToFindGoPlatform());
+        }
         else
         {
-            StartCoroutine(WaitForOtherPlayersToFindGoPlatform());
-            
-
+            StartCoroutine(DeactivateAfterSeconds(informUIPanel_Text.transform.parent.gameObject, 2));
         }
 
     }
@@ -72,15 +73,18 @@ public class ARPlacementAndPlaneDetectionController : MonoBehaviour
     IEnumerator WaitForOtherPlayersToFindGoPlatform()
     {
         while (PhotonNetwork.CurrentRoom.PlayerCount < PlayersThatFoundGoPlatform)
+        {
             yield return new WaitForSeconds(.5f);
-        
+            Debug.Log("number of players that found platform" + PlayersThatFoundGoPlatform + " vs " + PhotonNetwork.CurrentRoom.PlayerCount + " tot");
+        }
+
         StartCoroutine(DeactivateAfterSeconds(informUIPanel_Text.transform.parent.gameObject, 2));
-        informUIPanel_Text.text = "Ready to start!";
         
     }
 
     IEnumerator DeactivateAfterSeconds(GameObject _gameObject, float _seconds)
     {
+        informUIPanel_Text.text = "Ready to start!";
         yield return new WaitForSeconds(_seconds);
         GameObject.FindObjectOfType<SpawnManager>().SpawnPlayer();
         _gameObject.SetActive(false);

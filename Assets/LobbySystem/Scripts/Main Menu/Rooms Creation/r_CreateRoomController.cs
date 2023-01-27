@@ -145,10 +145,19 @@ public class r_CreateRoomController : MonoBehaviour
             m_CurrentGameMode--;
             if (m_CurrentGameMode < 0) m_CurrentGameMode = m_GameModes.Length - 1;
         }
-
+        if (m_GameModes[m_CurrentGameMode] == "Casual") UpdatePlayerNumber(-1);
+        else UpdatePlayerNumber(1);
         UpdateUI();
     }
     #endregion
+
+    void UpdatePlayerNumber(int sum)
+    {
+        for (int i = 0; i< m_PlayerLimit.Length; i++)
+        {
+            m_PlayerLimit[i] += (byte)sum;
+        }
+    }
 
     #region Change Player Limit
     private void NextPlayerLimit(bool _Next)
