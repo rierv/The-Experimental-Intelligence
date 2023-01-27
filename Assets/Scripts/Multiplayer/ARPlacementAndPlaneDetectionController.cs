@@ -72,7 +72,7 @@ public class ARPlacementAndPlaneDetectionController : MonoBehaviour
 
     IEnumerator WaitForOtherPlayersToFindGoPlatform()
     {
-        while (PhotonNetwork.CurrentRoom.PlayerCount < PlayersThatFoundGoPlatform)
+        while (PhotonNetwork.CurrentRoom.PlayerCount > PlayersThatFoundGoPlatform)
         {
             yield return new WaitForSeconds(.5f);
             Debug.Log("number of players that found platform" + PlayersThatFoundGoPlatform + " vs " + PhotonNetwork.CurrentRoom.PlayerCount + " tot");

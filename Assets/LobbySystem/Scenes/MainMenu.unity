@@ -4162,6 +4162,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a627717b9b1d1d64f8f31a9475814813, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startButton: {fileID: 1530113870}
   m_PhotonView: {fileID: 1015145039}
   m_LobbyUI: {fileID: 1015145040}
   m_SearchGameTime: 5
@@ -7379,7 +7380,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1530113869
 RectTransform:
   m_ObjectHideFlags: 0

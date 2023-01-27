@@ -196,7 +196,7 @@ public class SpawnManager : MonoBehaviourPunCallbacks
     {
         SkinnedMeshRenderer r = o.GetComponentInChildren<SkinnedMeshRenderer>();
         
-        while (r.material.color != color) {
+        while (r.material.GetColor("_EmissionColor") != color) {
             yield return new WaitForSeconds(0);
             
             r.material.SetColor("_EmissionColor", color);
